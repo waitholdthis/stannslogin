@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Calendar - St. Ann Catholic School | Fayetteville, NC</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    /* ── Calendar Layout ─────────────────────────────────────── */
+    .calendar-section {
+        padding: 4rem 0 5rem;
+        background: var(--background);
+    }
+
+    .calendar-layout {
+        display: grid;
+        grid-template-columns: 1fr 280px;
+        gap: 2rem;
+        align-items: start;
+    }
+
+    /* ── Month navigation ────────────────────────────────────── */
+    .cal-nav {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+        flex-wrap: wrap;
+    }
+
+    .cal-nav-btn {
+        background: transparent;
+        border: 1.5px solid var(--border-color);
+        border-radius: 0.375rem;
+        color: var(--primary-color);
+        cursor: pointer;
+        font-family: 'Source Sans 3', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 600;
+        padding: 0.4rem 0.85rem;
+        transition: all 0.2s ease;
+    }
+
+    .cal-nav-btn:hover {
+        background: var(--primary-color);
+        border-color: var(--primary-color);
+        color: white;
+    }
+
+    .cal-nav-btn.today-btn {
+        border-color: var(--accent-color);
+        color: var(--accent-dark);
+    }
+
+    .cal-nav-btn.today-btn:hover {
+        background: var(--accent-color);
+        border-color: var(--accent-color);
+        color: white;
+    }
+
+    .cal-month-year {
+        flex: 1;
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        text-align: center;
+        margin: 0;
+    }
+
+    /* ── Day-of-week header row ──────────────────────────────── */
+    .cal-headers {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        background: var(--primary-color);
+        border-radius: 0.5rem 0.5rem 0 0;
+        text-align: center;
+    }
+
+    .cal-headers span {
+        color: var(--accent-color);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        padding: 0.6rem 0;
+        text-transform: uppercase;
+    }
+
+    /* ── Calendar grid ───────────────────────────────────────── */
+    .cal-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        border: 1px solid var(--border-color);
+        border-top: none;
+        border-radius: 0 0 0.5rem 0.5rem;
+        overflow: hidden;
+        background: var(--border-light);
+        gap: 1px;
+    }
+
+    .cal-cell {
+        background: white;
+        min-height: 90px;
+        padding: 0.4rem 0.45rem;
+        position: relative;
+        transition: background 0.15s ease;
+    }
+
+    .cal-cell.has-events {
+        cursor: pointer;
+    }
+
+    .cal-cell.has-events:hover {
+        background: #faf8f0;
+    }
+
+    .cal-cell.other-month {
+        background: var(--background-light);
+    }
+
+    .cal-cell.other-month .cal-day-num {
+        color: var(--text-light);
+    }
+
+    .cal-day-num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.6rem;
+        height: 1.6rem;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        border-radius: 50%;
+        margin-bottom: 3px;
+    }
+
+    .cal-cell.is-today .cal-day-num {
+        background: var(--secondary-color);
+        color: white;
+    }
+
+    /* Event chips (desktop) / dots (mobile) */
+    .cal-chips {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .cal-dot {
+        display: block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        margin: 1px 0;
+    }
+
+    .cal-chip {
+        display: none;
+        font-size: 0.67rem;
+        line-height: 1.35;
+        padding: 1px 5px;
+        border-radius: 3px;
+        border-left: 2px solid transparent;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: 600;
+    }
+
+    @media (min-width: 640px) {
+        .cal-dot  { display: none; }
+        .cal-chip { display: block; }
+    }
+
+    /* ── Day event panel (shown on click) ────────────────────── */
+    .cal-day-panel {
+        display: none;
+        margin-top: 1rem;
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.5rem;
+        padding: 1.25rem 1.5rem;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .cal-day-panel h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.85rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .day-event-item {
+        border-left: 3px solid;
+        border-radius: 0 0.375rem 0.375rem 0;
+        padding: 0.6rem 0.85rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .day-event-type {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 0.2rem;
+    }
+
+    .day-event-title {
+        font-weight: 600;
+        color: var(--text-primary);
+        font-size: 0.95rem;
+    }
+
+    .day-event-desc {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        margin-top: 0.2rem;
+        line-height: 1.5;
+    }
+
+    /* ── Legend ──────────────────────────────────────────────── */
+    .cal-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem 1.25rem;
+        margin-top: 1.25rem;
+        padding: 1rem 1.25rem;
+        background: white;
+        border: 1px solid var(--border-light);
+        border-radius: 0.5rem;
+    }
+
+    .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: 0.82rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+    }
+
+    .legend-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    /* ── Month event list ────────────────────────────────────── */
+    .cal-list-heading {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin: 1.75rem 0 0.85rem;
+    }
+
+    .cal-month-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .cal-list-item {
+        display: flex;
+        gap: 0.85rem;
+        align-items: flex-start;
+        background: white;
+        border: 1px solid var(--border-light);
+        border-radius: 0.5rem;
+        padding: 0.65rem 0.85rem;
+    }
+
+    .cal-list-date {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 2.2rem;
+        padding-top: 1px;
+    }
+
+    .cal-list-day {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.35rem;
+        font-weight: 700;
+        line-height: 1;
+    }
+
+    .cal-list-weekday {
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        opacity: 0.75;
+    }
+
+    .cal-list-info {
+        flex: 1;
+        border-left: 2px solid;
+        padding-left: 0.75rem;
+    }
+
+    .cal-list-tag {
+        display: inline-block;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        padding: 1px 6px;
+        border-radius: 3px;
+        margin-bottom: 0.2rem;
+    }
+
+    .cal-list-title {
+        display: block;
+        font-weight: 600;
+        color: var(--text-primary);
+        font-size: 0.9rem;
+    }
+
+    .cal-list-desc {
+        display: block;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        margin-top: 0.15rem;
+        line-height: 1.4;
+    }
+
+    .cal-no-events {
+        color: var(--text-light);
+        font-size: 0.9rem;
+        padding: 1rem 0;
+    }
+
+    /* ── Sidebar cards ───────────────────────────────────────── */
+    .cal-upcoming-item {
+        display: flex;
+        gap: 0.65rem;
+        align-items: flex-start;
+        padding: 0.6rem 0;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .cal-upcoming-item:last-child {
+        border-bottom: none;
+    }
+
+    .cal-upcoming-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        margin-top: 5px;
+    }
+
+    .cal-upcoming-info {
+        flex: 1;
+    }
+
+    .cal-upcoming-title {
+        display: block;
+        font-weight: 600;
+        font-size: 0.85rem;
+        color: var(--text-primary);
+        line-height: 1.3;
+    }
+
+    .cal-upcoming-date {
+        display: block;
+        font-size: 0.75rem;
+        color: var(--text-light);
+        margin-top: 1px;
+    }
+
+    /* ── Print button ────────────────────────────────────────── */
+    .cal-print-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        background: transparent;
+        border: 1px solid var(--border-color);
+        border-radius: 0.375rem;
+        padding: 0.35rem 0.75rem;
+        cursor: pointer;
+        font-family: 'Source Sans 3', sans-serif;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+
+    .cal-print-btn:hover {
+        background: var(--background-light);
+        color: var(--primary-color);
+    }
+
+    /* ── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 900px) {
+        .calendar-layout {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .cal-cell {
+            min-height: 52px;
+            padding: 0.3rem 0.25rem;
+        }
+
+        .cal-day-num {
+            width: 1.35rem;
+            height: 1.35rem;
+            font-size: 0.75rem;
+        }
+
+        .cal-month-year {
+            font-size: 1.25rem;
+        }
+    }
+
+    @media print {
+        .header, .footer, .cal-nav, .cal-sidebar, .cal-day-panel, .cal-legend { display: none !important; }
+        .calendar-layout { grid-template-columns: 1fr !important; }
+        .cal-cell { min-height: 60px; }
+        .cal-chip { display: block !important; }
+        .cal-dot  { display: none !important; }
+    }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="utility-bar">
+            <div class="nav-container">
+                <div class="utility-location">
+                    <i class="fas fa-location-dot"></i>
+                    <span>365 N Cool Spring Street, Fayetteville, NC</span>
+                </div>
+                <div class="utility-links">
+                    <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+                    <a href="calendar.html"><i class="fas fa-calendar-days"></i> Calendar</a>
+                    <a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener"><i class="fas fa-pencil-alt"></i> Apply</a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <div class="logo">
+                        <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                        <a href="index.html" style="text-decoration: none; color: inherit;">
+                            <span>St. Ann Catholic School</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="mission.html" class="nav-link">About <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="mission.html">Mission &amp; Vision</a></li>
+                                <li><a href="history.html">Our History</a></li>
+                                <li><a href="principal.html">Our Principal</a></li>
+                                <li><a href="faculty.html">Our Faculty</a></li>
+                                <li><a href="parish.html">Parish Connection</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="index.html#programs" class="nav-link">Academics <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.html#programs">Curriculum</a></li>
+                                <li><a href="index.html#programs">Pre-K through 8th Grade</a></li>
+                                <li><a href="index.html#programs">Art, Music, STEM &amp; Band</a></li>
+                                <li><a href="index.html#programs">Spanish Program</a></li>
+                                <li><a href="index.html#programs">Physical Education</a></li>
+                                <li><a href="calendar.html">Academic Calendar</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="contact.html" class="nav-link">Admissions <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener">Rolling Admissions</a></li>
+                                <li><a href="tuition.html">Tuition Information</a></li>
+                                <li><a href="uniforms.html">School Uniforms</a></li>
+                                <li><a href="opportunity-scholarship.html">NC Opportunity Scholarships</a></li>
+                                <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                                <li><a href="contact.html">Schedule a Tour</a></li>
+                                <li><a href="history.html">Military Families Welcome</a></li>
+                                <li><a href="supply-lists.html">School Supply Lists</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="newsletter.html" class="nav-link">Parents <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="newsletter.html">Newsletter</a></li>
+
+                                <li><a href="calendar.html">Calendar</a></li>
+                                <li><a href="uniforms.html">Uniforms</a></li>
+                                <li><a href="before-after-care.html">Before/After Care</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/Community-Opportunities" target="_blank" rel="noopener">Community Opportunities</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="activities.html" class="nav-link">Students <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="activities.html">Activities</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/School-Events" target="_blank" rel="noopener">School Events</a></li>
+                                <li><a href="say-something.html">Say Something</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="parish.html" class="nav-link">Community</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-actions">
+                    <div class="translate-widget" aria-label="Translate this site">
+                        <i class="fas fa-language"></i>
+                        <div class="gtranslate_wrapper"></div>
+                    </div>
+                    <button class="btn-secondary" onclick="openPortal()">
+                        <i class="fas fa-user"></i> Portal Login
+                    </button>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="page-hero-background">
+                <div class="page-hero-overlay"></div>
+            </div>
+            <div class="container">
+                <div class="page-hero-content">
+                    <h1 class="page-hero-title">Academic Calendar</h1>
+                    <p class="page-hero-subtitle">2025–2026 School Year</p>
+                    <nav class="breadcrumb">
+                        <a href="index.html">Home</a> <span>/</span> <span>Academic Calendar</span>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <section class="calendar-section">
+            <div class="container">
+                <div class="calendar-layout">
+
+                    <!-- ── Main calendar ────────────────────── -->
+                    <div class="calendar-main">
+
+                        <!-- Navigation -->
+                        <div class="cal-nav">
+                            <button class="cal-nav-btn" id="cal-prev" aria-label="Previous month">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <h2 class="cal-month-year" id="cal-month-year">Loading…</h2>
+                            <button class="cal-nav-btn" id="cal-next" aria-label="Next month">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                            <button class="cal-nav-btn today-btn" id="cal-today">Today</button>
+                            <button class="cal-print-btn" onclick="window.print()">
+                                <i class="fas fa-print"></i> Print
+                            </button>
+                        </div>
+
+                        <!-- Day headers -->
+                        <div class="cal-headers" role="row">
+                            <span>Sun</span><span>Mon</span><span>Tue</span>
+                            <span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+                        </div>
+
+                        <!-- Grid populated by JS -->
+                        <div class="cal-grid" id="cal-grid" role="grid"></div>
+
+                        <!-- Event detail panel -->
+                        <div class="cal-day-panel" id="cal-day-panel" aria-live="polite"></div>
+
+                        <!-- Legend -->
+                        <div class="cal-legend" aria-label="Event type legend">
+                            <div class="legend-item"><span class="legend-dot" style="background:#1a2744"></span> School Event</div>
+                            <div class="legend-item"><span class="legend-dot" style="background:#7b2d3a"></span> No School</div>
+                            <div class="legend-item"><span class="legend-dot" style="background:#a88a38"></span> Early Release</div>
+                            <div class="legend-item"><span class="legend-dot" style="background:#5b3d8a"></span> Faith Event</div>
+                            <div class="legend-item"><span class="legend-dot" style="background:#1a6b5e"></span> Special Event</div>
+                        </div>
+
+                        <!-- Month event list -->
+                        <h3 class="cal-list-heading">Events This Month</h3>
+                        <div class="cal-month-list" id="cal-month-list"></div>
+                    </div>
+
+                    <!-- ── Sidebar ───────────────────────────── -->
+                    <div class="sidebar cal-sidebar">
+
+                        <div class="sidebar-card">
+                            <h3>Upcoming Events</h3>
+                            <div id="cal-upcoming"></div>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>How to Update This Calendar</h3>
+                            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:0.75rem;">
+                                Events are stored in <strong>calendar-data.js</strong>. Open that file in any text editor and add a line to the <code>CALENDAR_EVENTS</code> array:
+                            </p>
+                            <pre style="background:var(--background-light);border:1px solid var(--border-color);border-radius:0.375rem;padding:0.75rem;font-size:0.75rem;line-height:1.6;overflow-x:auto;white-space:pre-wrap;">{ date: "2026-02-14",
+  title: "Valentine's Party",
+  type: "special" },</pre>
+                            <p style="font-size:0.82rem;color:var(--text-light);margin-top:0.6rem;">
+                                Save the file and reload the page — the calendar updates automatically.
+                            </p>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>School Year</h3>
+                            <ul class="quick-info-list">
+                                <li>
+                                    <i class="fas fa-flag-checkered"></i>
+                                    <div><strong>First Day</strong><br>August 18, 2025</div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <div><strong>Last Day</strong><br>June 3, 2026</div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-phone"></i>
+                                    <div><strong>Questions?</strong><br>(910) 483-3216</div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                            <span>St. Ann Catholic School</span>
+                        </div>
+                        <p>Providing quality Catholic education to the Fayetteville and Cape Fear region since 1956. The first all-inclusive school in North Carolina.</p>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="mission.html">About Us</a></li>
+                        <li><a href="index.html#programs">Academics</a></li>
+                        <li><a href="contact.html">Admissions</a></li>
+                        <li><a href="parish.html">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="openPortal()">Student Portal</a></li>
+                        <li><a href="newsletter.html">Newsletter</a></li>
+
+                        <li><a href="calendar.html">Calendar</a></li>
+                        <li><a href="supply-lists.html">Supply Lists</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/St.AnnCatholicSchoolFayettevilleNC" target="_blank" rel="noopener" class="social-link" aria-label="St. Ann Catholic School on Facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> (910) 483-3216</p>
+                        <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 365 N Cool Spring Street, Fayetteville, NC 28301</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 St. Ann Catholic School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.gtranslateSettings = {
+            default_language: "en",
+            languages: ["en", "es"],
+            wrapper_selector: ".gtranslate_wrapper",
+            switcher_horizontal_position: "inline"
+        };
+    </script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
+    <script src="script.js"></script>
+    <script src="calendar-data.js"></script>
+    <script>
+    (function () {
+        var MONTH_NAMES = ["January","February","March","April","May","June",
+                           "July","August","September","October","November","December"];
+        var DAY_SHORT   = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+        var DAY_LONG    = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+        var TYPE = {
+            "school":        { label: "School Event",  color: "#1a2744", bg: "rgba(26,39,68,0.08)"   },
+            "no-school":     { label: "No School",     color: "#7b2d3a", bg: "rgba(123,45,58,0.08)"  },
+            "early-release": { label: "Early Release", color: "#a88a38", bg: "rgba(168,138,56,0.1)"  },
+            "faith":         { label: "Faith Event",   color: "#5b3d8a", bg: "rgba(91,61,138,0.08)"  },
+            "special":       { label: "Special Event", color: "#1a6b5e", bg: "rgba(26,107,94,0.08)"  }
+        };
+
+        var today = new Date();
+        var curYear  = today.getFullYear();
+        var curMonth = today.getMonth();
+
+        // Build date→events lookup
+        var eventMap = {};
+        CALENDAR_EVENTS.forEach(function (ev) {
+            if (!eventMap[ev.date]) eventMap[ev.date] = [];
+            eventMap[ev.date].push(ev);
+        });
+
+        function pad(n) { return String(n).padStart(2, '0'); }
+
+        function dateKey(y, m, d) {
+            return y + '-' + pad(m + 1) + '-' + pad(d);
+        }
+
+        var todayKey = dateKey(today.getFullYear(), today.getMonth(), today.getDate());
+
+        // ── Render grid ──────────────────────────────────────────
+        function renderCalendar(year, month) {
+            document.getElementById('cal-month-year').textContent =
+                MONTH_NAMES[month] + ' ' + year;
+
+            var firstDay     = new Date(year, month, 1).getDay();
+            var daysInMonth  = new Date(year, month + 1, 0).getDate();
+            var daysInPrev   = new Date(year, month, 0).getDate();
+            var totalCells   = Math.ceil((firstDay + daysInMonth) / 7) * 7;
+
+            var grid = document.getElementById('cal-grid');
+            grid.innerHTML = '';
+            document.getElementById('cal-day-panel').style.display = 'none';
+
+            for (var i = 0; i < totalCells; i++) {
+                var cell = document.createElement('div');
+                cell.className = 'cal-cell';
+                cell.setAttribute('role', 'gridcell');
+
+                var dk, dayNum, isOther = false;
+
+                if (i < firstDay) {
+                    dayNum  = daysInPrev - firstDay + i + 1;
+                    var pm  = month === 0 ? 11 : month - 1;
+                    var py  = month === 0 ? year - 1 : year;
+                    dk      = py + '-' + pad(pm + 1) + '-' + pad(dayNum);
+                    isOther = true;
+                } else if (i >= firstDay + daysInMonth) {
+                    dayNum  = i - firstDay - daysInMonth + 1;
+                    var nm  = month === 11 ? 0 : month + 1;
+                    var ny  = month === 11 ? year + 1 : year;
+                    dk      = ny + '-' + pad(nm + 1) + '-' + pad(dayNum);
+                    isOther = true;
+                } else {
+                    dayNum = i - firstDay + 1;
+                    dk     = dateKey(year, month, dayNum);
+                }
+
+                if (isOther)   cell.classList.add('other-month');
+                if (dk === todayKey) cell.classList.add('is-today');
+
+                var numEl = document.createElement('span');
+                numEl.className = 'cal-day-num';
+                numEl.textContent = dayNum;
+                cell.appendChild(numEl);
+
+                var evts = eventMap[dk] || [];
+                if (evts.length) {
+                    cell.classList.add('has-events');
+
+                    var chipsEl = document.createElement('div');
+                    chipsEl.className = 'cal-chips';
+
+                    evts.forEach(function (ev) {
+                        var cfg = TYPE[ev.type] || TYPE.special;
+
+                        var dot  = document.createElement('span');
+                        dot.className = 'cal-dot';
+                        dot.style.background = cfg.color;
+
+                        var chip = document.createElement('span');
+                        chip.className = 'cal-chip';
+                        chip.textContent = ev.title;
+                        chip.style.color      = cfg.color;
+                        chip.style.background = cfg.bg;
+                        chip.style.borderLeftColor = cfg.color;
+
+                        chipsEl.appendChild(dot);
+                        chipsEl.appendChild(chip);
+                    });
+
+                    cell.appendChild(chipsEl);
+
+                    (function (evList, key) {
+                        cell.addEventListener('click', function () {
+                            showPanel(key, evList);
+                        });
+                    }(evts, dk));
+                }
+
+                grid.appendChild(cell);
+            }
+
+            renderMonthList(year, month);
+        }
+
+        // ── Day panel ────────────────────────────────────────────
+        function showPanel(dk, evts) {
+            var parts = dk.split('-');
+            var d     = new Date(+parts[0], +parts[1] - 1, +parts[2]);
+            var panel = document.getElementById('cal-day-panel');
+
+            var html = '<h3>' + DAY_LONG[d.getDay()] + ', ' +
+                MONTH_NAMES[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear() + '</h3>';
+
+            evts.forEach(function (ev) {
+                var cfg = TYPE[ev.type] || TYPE.special;
+                html += '<div class="day-event-item" style="border-left-color:' + cfg.color +
+                        ';background:' + cfg.bg + '">';
+                html += '<div class="day-event-type" style="color:' + cfg.color + '">' + cfg.label + '</div>';
+                html += '<div class="day-event-title">' + ev.title + '</div>';
+                if (ev.description) {
+                    html += '<div class="day-event-desc">' + ev.description + '</div>';
+                }
+                html += '</div>';
+            });
+
+            panel.innerHTML = html;
+            panel.style.display = 'block';
+            panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // ── Month list ───────────────────────────────────────────
+        function renderMonthList(year, month) {
+            var prefix = year + '-' + pad(month + 1) + '-';
+            var evts   = CALENDAR_EVENTS
+                .filter(function (ev) { return ev.date.indexOf(prefix) === 0; })
+                .sort(function (a, b) { return a.date < b.date ? -1 : 1; });
+
+            var list = document.getElementById('cal-month-list');
+
+            if (!evts.length) {
+                list.innerHTML = '<p class="cal-no-events">No events this month.</p>';
+                return;
+            }
+
+            list.innerHTML = evts.map(function (ev) {
+                var cfg   = TYPE[ev.type] || TYPE.special;
+                var parts = ev.date.split('-');
+                var d     = new Date(+parts[0], +parts[1] - 1, +parts[2]);
+                return '<div class="cal-list-item">' +
+                    '<div class="cal-list-date" style="color:' + cfg.color + '">' +
+                        '<span class="cal-list-day">' + +parts[2] + '</span>' +
+                        '<span class="cal-list-weekday">' + DAY_SHORT[d.getDay()] + '</span>' +
+                    '</div>' +
+                    '<div class="cal-list-info" style="border-left-color:' + cfg.color + '">' +
+                        '<span class="cal-list-tag" style="color:' + cfg.color + ';background:' + cfg.bg + '">' + cfg.label + '</span>' +
+                        '<span class="cal-list-title">' + ev.title + '</span>' +
+                        (ev.description ? '<span class="cal-list-desc">' + ev.description + '</span>' : '') +
+                    '</div>' +
+                '</div>';
+            }).join('');
+        }
+
+        // ── Upcoming sidebar ─────────────────────────────────────
+        function renderUpcoming() {
+            var future = CALENDAR_EVENTS
+                .filter(function (ev) { return ev.date >= todayKey; })
+                .sort(function (a, b) { return a.date < b.date ? -1 : 1; })
+                .slice(0, 8);
+
+            var el = document.getElementById('cal-upcoming');
+
+            if (!future.length) {
+                el.innerHTML = '<p style="font-size:0.85rem;color:var(--text-light)">No upcoming events.</p>';
+                return;
+            }
+
+            el.innerHTML = future.map(function (ev) {
+                var cfg   = TYPE[ev.type] || TYPE.special;
+                var parts = ev.date.split('-');
+                var d     = new Date(+parts[0], +parts[1] - 1, +parts[2]);
+                var label = MONTH_NAMES[d.getMonth()].slice(0, 3) + ' ' + +parts[2];
+                return '<div class="cal-upcoming-item">' +
+                    '<span class="cal-upcoming-dot" style="background:' + cfg.color + '"></span>' +
+                    '<div class="cal-upcoming-info">' +
+                        '<span class="cal-upcoming-title">' + ev.title + '</span>' +
+                        '<span class="cal-upcoming-date">' + label + ', ' + parts[0] + '</span>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+        }
+
+        // ── Navigation ───────────────────────────────────────────
+        document.getElementById('cal-prev').addEventListener('click', function () {
+            curMonth--;
+            if (curMonth < 0) { curMonth = 11; curYear--; }
+            renderCalendar(curYear, curMonth);
+        });
+
+        document.getElementById('cal-next').addEventListener('click', function () {
+            curMonth++;
+            if (curMonth > 11) { curMonth = 0; curYear++; }
+            renderCalendar(curYear, curMonth);
+        });
+
+        document.getElementById('cal-today').addEventListener('click', function () {
+            curYear  = today.getFullYear();
+            curMonth = today.getMonth();
+            renderCalendar(curYear, curMonth);
+        });
+
+        // ── Init ─────────────────────────────────────────────────
+        renderCalendar(curYear, curMonth);
+        renderUpcoming();
+    }());
+    </script>
+</body>
+</html>

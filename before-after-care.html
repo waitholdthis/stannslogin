@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Before &amp; After Care - St. Ann Catholic School | Fayetteville, NC</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    /* ── Before/After Care page layout ──────────────────────── */
+    .care-section {
+        padding: 4rem 0 5rem;
+        background: var(--background);
+    }
+
+    .care-layout {
+        display: grid;
+        grid-template-columns: 1fr 280px;
+        gap: 2rem;
+        align-items: start;
+    }
+
+    /* ── Program hours hero cards ──────────────────────────── */
+    .hours-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem;
+        margin-bottom: 2rem;
+    }
+
+    .hours-card {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.75rem;
+        padding: 1.5rem 1.75rem;
+        box-shadow: var(--shadow-sm);
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    .hours-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%;
+        height: 4px;
+    }
+
+    .hours-card-before::before { background: var(--gradient-gold); }
+    .hours-card-after::before  { background: var(--gradient-primary); }
+
+    .hours-card-icon {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        margin: 0 auto 0.85rem;
+    }
+
+    .hours-card-before .hours-card-icon { background: #fff8e1; color: #b07a00; }
+    .hours-card-after  .hours-card-icon { background: #e8eaf6; color: #1a2744; }
+
+    .hours-card h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin: 0 0 0.35rem;
+    }
+
+    .hours-time {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        line-height: 1.1;
+        margin-bottom: 0.35rem;
+    }
+
+    .hours-card p {
+        font-size: 0.82rem;
+        color: var(--text-secondary);
+        margin: 0;
+        line-height: 1.45;
+    }
+
+    /* ── Section dividers ──────────────────────────────────── */
+    .section-divider {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        margin: 2rem 0 1.25rem;
+    }
+
+    .section-divider h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        white-space: nowrap;
+        margin: 0;
+    }
+
+    .section-divider-line {
+        flex: 1;
+        height: 1px;
+        background: var(--border-color);
+    }
+
+    /* ── Rate tables ───────────────────────────────────────── */
+    .rates-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .rate-card {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.75rem;
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .rate-card-head {
+        padding: 0.85rem 1.25rem;
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+    }
+
+    .rate-card-head-before { background: linear-gradient(135deg, #7c5c00, #b08630); }
+    .rate-card-head-after  { background: var(--gradient-primary); }
+
+    .rate-card-head i { color: rgba(255,255,255,0.85); font-size: 0.9rem; }
+
+    .rate-card-head h4 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: white;
+        margin: 0;
+    }
+
+    .rate-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .rate-table th {
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--text-secondary);
+        padding: 0.55rem 1.25rem;
+        text-align: left;
+        background: #f8f9fb;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .rate-table th:last-child { text-align: right; }
+
+    .rate-table td {
+        padding: 0.65rem 1.25rem;
+        font-size: 0.88rem;
+        color: var(--text-primary);
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .rate-table tr:last-child td { border-bottom: none; }
+
+    .rate-table td:last-child {
+        text-align: right;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+    .rate-table tr:hover td { background: #f5f7fb; }
+
+    .rate-note {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        padding: 0.65rem 1.25rem;
+        border-top: 1px solid var(--border-color);
+        background: #f8f9fb;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.45rem;
+        line-height: 1.45;
+    }
+
+    .rate-note i { color: var(--accent-color); margin-top: 0.1rem; flex-shrink: 0; }
+
+    /* ── August notice banner ──────────────────────────────── */
+    .august-banner {
+        background: #fff8e1;
+        border: 1px solid #ffe082;
+        border-left: 4px solid var(--accent-color);
+        border-radius: 0 0.5rem 0.5rem 0;
+        padding: 0.9rem 1.25rem;
+        display: flex;
+        gap: 0.85rem;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+        font-size: 0.88rem;
+        color: #5a3e00;
+        line-height: 1.55;
+    }
+
+    .august-banner i { color: #b07a00; margin-top: 0.1rem; flex-shrink: 0; font-size: 1rem; }
+    .august-banner strong { color: #7c5c00; }
+
+    /* ── Policy cards ──────────────────────────────────────── */
+    .policy-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .policy-card {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.6rem;
+        padding: 1.1rem 1.25rem;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .policy-card-top {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        margin-bottom: 0.55rem;
+    }
+
+    .policy-icon {
+        width: 2rem;
+        height: 2rem;
+        background: var(--gradient-primary);
+        border-radius: 0.4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-size: 0.8rem;
+        flex-shrink: 0;
+    }
+
+    .policy-title {
+        font-weight: 700;
+        font-size: 0.88rem;
+        color: var(--primary-color);
+    }
+
+    .policy-body {
+        font-size: 0.83rem;
+        color: var(--text-secondary);
+        line-height: 1.55;
+    }
+
+    /* ── Activities included block ─────────────────────────── */
+    .includes-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.85rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .include-chip {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.5rem;
+        padding: 0.85rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .include-chip i {
+        color: var(--accent-color);
+        font-size: 1rem;
+        width: 1.25rem;
+        text-align: center;
+        flex-shrink: 0;
+    }
+
+    /* ── Sidebar cards ─────────────────────────────────────── */
+    .sidebar-card {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.75rem;
+        padding: 1.25rem 1.35rem;
+        box-shadow: var(--shadow-sm);
+        margin-bottom: 1.25rem;
+    }
+
+    .sidebar-card-title {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin: 0 0 0.85rem;
+        padding-bottom: 0.6rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .sidebar-card-title i {
+        color: var(--accent-color);
+        margin-right: 0.4rem;
+        font-size: 0.9rem;
+    }
+
+    .sidebar-info-row {
+        display: flex;
+        gap: 0.6rem;
+        align-items: flex-start;
+        font-size: 0.83rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.55rem;
+        line-height: 1.45;
+    }
+
+    .sidebar-info-row:last-child { margin-bottom: 0; }
+
+    .sidebar-info-row i {
+        color: var(--accent-color);
+        width: 1rem;
+        text-align: center;
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+    }
+
+    .sidebar-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+        padding: 0.65rem 1rem;
+        border-radius: 0.4rem;
+        font-size: 0.84rem;
+        font-weight: 600;
+        text-decoration: none;
+        margin-bottom: 0.6rem;
+        transition: opacity 0.15s, transform 0.15s;
+    }
+
+    .sidebar-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .sidebar-btn:last-child { margin-bottom: 0; }
+    .sidebar-btn-primary { background: var(--gradient-primary); color: white; }
+    .sidebar-btn-gold    { background: var(--gradient-gold); color: var(--primary-color); }
+    .sidebar-btn-outline { background: transparent; border: 1.5px solid var(--primary-color); color: var(--primary-color); }
+
+    .sidebar-rate-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.45rem 0;
+        border-bottom: 1px solid var(--border-color);
+        font-size: 0.83rem;
+    }
+
+    .sidebar-rate-row:last-child { border-bottom: none; }
+    .sidebar-rate-row span { color: var(--text-secondary); }
+    .sidebar-rate-row strong { color: var(--primary-color); }
+
+    /* ── Responsive ────────────────────────────────────────── */
+    @media (max-width: 860px) {
+        .care-layout    { grid-template-columns: 1fr; }
+        .hours-grid     { grid-template-columns: 1fr; }
+        .rates-grid     { grid-template-columns: 1fr; }
+        .includes-grid  { grid-template-columns: 1fr 1fr; }
+        .policy-grid    { grid-template-columns: 1fr; }
+    }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="utility-bar">
+            <div class="nav-container">
+                <div class="utility-location">
+                    <i class="fas fa-location-dot"></i>
+                    <span>365 N Cool Spring Street, Fayetteville, NC</span>
+                </div>
+                <div class="utility-links">
+                    <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+                    <a href="calendar.html"><i class="fas fa-calendar-days"></i> Calendar</a>
+                    <a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener"><i class="fas fa-pencil-alt"></i> Apply</a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <a href="index.html" class="logo" style="text-decoration:none;color:inherit;">
+                        <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                        <span>St. Ann Catholic School</span>
+                    </a>
+                </div>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="mission.html" class="nav-link">About <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="mission.html">Mission &amp; Vision</a></li>
+                                <li><a href="history.html">Our History</a></li>
+                                <li><a href="principal.html">Our Principal</a></li>
+                                <li><a href="faculty.html">Our Faculty</a></li>
+                                <li><a href="parish.html">Parish Connection</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="index.html#programs" class="nav-link">Academics <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.html#programs">Curriculum</a></li>
+                                <li><a href="index.html#programs">Pre-K through 8th Grade</a></li>
+                                <li><a href="index.html#programs">Art, Music, STEM &amp; Band</a></li>
+                                <li><a href="index.html#programs">Spanish Program</a></li>
+                                <li><a href="index.html#programs">Physical Education</a></li>
+                                <li><a href="calendar.html">Academic Calendar</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="contact.html" class="nav-link active">Admissions <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener">Rolling Admissions</a></li>
+                                <li><a href="tuition.html">Tuition Information</a></li>
+                                <li><a href="uniforms.html">School Uniforms</a></li>
+                                <li><a href="opportunity-scholarship.html">NC Opportunity Scholarships</a></li>
+                                <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                                <li><a href="contact.html">Schedule a Tour</a></li>
+                                <li><a href="history.html">Military Families Welcome</a></li>
+                                <li><a href="supply-lists.html">School Supply Lists</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="newsletter.html" class="nav-link">Parents <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="newsletter.html">Newsletter</a></li>
+                                <li><a href="calendar.html">Calendar</a></li>
+                                <li><a href="uniforms.html">Uniforms</a></li>
+                                <li><a href="before-after-care.html">Before/After Care</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/Community-Opportunities" target="_blank" rel="noopener">Community Opportunities</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="activities.html" class="nav-link">Students <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="activities.html">Activities</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/School-Events" target="_blank" rel="noopener">School Events</a></li>
+                                <li><a href="say-something.html">Say Something</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="parish.html" class="nav-link">Community</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-actions">
+                    <div class="translate-widget" aria-label="Translate this site">
+                        <i class="fas fa-language"></i>
+                        <div class="gtranslate_wrapper"></div>
+                    </div>
+                    <button class="btn-secondary" onclick="openPortal()">
+                        <i class="fas fa-user"></i> Portal Login
+                    </button>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="page-hero-background">
+                <div class="page-hero-overlay"></div>
+            </div>
+            <div class="container">
+                <div class="page-hero-content">
+                    <h1 class="page-hero-title">Before &amp; After Care</h1>
+                    <p class="page-hero-subtitle">Safe, Supervised Extended Care for St. Ann Families</p>
+                    <nav class="breadcrumb">
+                        <a href="index.html">Home</a> <span>/</span>
+                        <span>Admissions</span> <span>/</span>
+                        <span>Before &amp; After Care</span>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <section class="care-section">
+            <div class="container">
+                <div class="care-layout">
+
+                    <!-- ── Main content ──────────────────────── -->
+                    <div class="care-main">
+
+                        <div class="section-kicker">Extended Day Program</div>
+                        <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.75rem;font-weight:700;color:var(--primary-color);margin:0.35rem 0 0.75rem;">Before &amp; After School Care</h2>
+
+                        <div class="intro-block" style="margin-bottom:1.75rem;">
+                            <div class="intro-block-icon">
+                                <i class="fas fa-child-reaching"></i>
+                            </div>
+                            <p>
+                                St. Ann Catholic School's Before &amp; After Care program provides a safe, structured, and
+                                nurturing environment for students before and after the regular school day. The program
+                                operates on all days when students are in school, giving families the flexibility they need
+                                while maintaining the values of our school community.
+                            </p>
+                        </div>
+
+                        <!-- Program Hours -->
+                        <div class="hours-grid">
+                            <div class="hours-card hours-card-before">
+                                <div class="hours-card-icon">
+                                    <i class="fas fa-sun"></i>
+                                </div>
+                                <h3>Before Care</h3>
+                                <div class="hours-time">7:00 – 8:00 AM</div>
+                                <p>Drop off early and start the school day with confidence. Beforecare opens if school has a delayed opening.</p>
+                            </div>
+                            <div class="hours-card hours-card-after">
+                                <div class="hours-card-icon">
+                                    <i class="fas fa-moon"></i>
+                                </div>
+                                <h3>After Care</h3>
+                                <div class="hours-time">3:00 – 6:00 PM</div>
+                                <p>Safe, supervised care until 6:00 PM. Aftercare closes if school closes early due to weather or emergency.</p>
+                            </div>
+                        </div>
+
+                        <!-- What's included -->
+                        <div class="section-divider">
+                            <h3><i class="fas fa-star" style="color:var(--accent-color);margin-right:0.5rem;font-size:0.9rem;"></i> What's Included</h3>
+                            <div class="section-divider-line"></div>
+                        </div>
+
+                        <div class="includes-grid">
+                            <div class="include-chip">
+                                <i class="fas fa-book-open"></i>
+                                Homework Time
+                            </div>
+                            <div class="include-chip">
+                                <i class="fas fa-person-running"></i>
+                                Indoor &amp; Outdoor Activities
+                            </div>
+                            <div class="include-chip">
+                                <i class="fas fa-apple-whole"></i>
+                                Healthy Snack
+                            </div>
+                        </div>
+
+                        <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:0;">
+                            Homework time is <strong>non-negotiable</strong> — all students are expected to use the structured
+                            study period to complete assignments. The program applies the same discipline standards as the
+                            regular school day.
+                        </p>
+
+                        <!-- Monthly Rates -->
+                        <div class="section-divider" style="margin-top:2.25rem;">
+                            <h3><i class="fas fa-calendar-days" style="color:var(--accent-color);margin-right:0.5rem;font-size:0.9rem;"></i> Monthly Rates — 2025–2026</h3>
+                            <div class="section-divider-line"></div>
+                        </div>
+
+                        <div class="rates-grid">
+                            <!-- Beforecare monthly -->
+                            <div class="rate-card">
+                                <div class="rate-card-head rate-card-head-before">
+                                    <i class="fas fa-sun"></i>
+                                    <h4>Beforecare — Monthly</h4>
+                                </div>
+                                <table class="rate-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Children Enrolled</th>
+                                            <th>Monthly Rate</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>1 Child</td><td>$80.00</td></tr>
+                                        <tr><td>2 Children</td><td>$130.00</td></tr>
+                                        <tr><td>3 Children</td><td>$170.00</td></tr>
+                                        <tr><td>4 Children</td><td>$210.00</td></tr>
+                                    </tbody>
+                                </table>
+                                <div class="rate-note">
+                                    <i class="fas fa-circle-info"></i>
+                                    Payment due the 1st of each month.
+                                </div>
+                            </div>
+
+                            <!-- Aftercare monthly -->
+                            <div class="rate-card">
+                                <div class="rate-card-head rate-card-head-after">
+                                    <i class="fas fa-moon"></i>
+                                    <h4>Aftercare — Monthly</h4>
+                                </div>
+                                <table class="rate-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Children Enrolled</th>
+                                            <th>Monthly Rate</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>1 Child</td><td>$210.00</td></tr>
+                                        <tr><td>2 Children</td><td>$380.00</td></tr>
+                                        <tr><td>3 Children</td><td>$530.00</td></tr>
+                                        <tr><td>4 Children</td><td>$640.00</td></tr>
+                                    </tbody>
+                                </table>
+                                <div class="rate-note">
+                                    <i class="fas fa-circle-info"></i>
+                                    Payment due the 1st of each month.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hourly Rates -->
+                        <div class="section-divider">
+                            <h3><i class="fas fa-clock" style="color:var(--accent-color);margin-right:0.5rem;font-size:0.9rem;"></i> Hourly Rates</h3>
+                            <div class="section-divider-line"></div>
+                        </div>
+
+                        <div class="august-banner">
+                            <i class="fas fa-triangle-exclamation"></i>
+                            <div>
+                                <strong>August Billing:</strong> All students attending Before/After Care during August are billed on an hourly basis. Hourly billing is also available as an alternative to the monthly rate year-round — contact the coordinator to switch.
+                            </div>
+                        </div>
+
+                        <div class="rate-card" style="max-width:420px;">
+                            <div class="rate-card-head rate-card-head-after">
+                                <i class="fas fa-hourglass-half"></i>
+                                <h4>Hourly Rate (per hour or partial hour)</h4>
+                            </div>
+                            <table class="rate-table">
+                                <thead>
+                                    <tr>
+                                        <th>Children Enrolled</th>
+                                        <th>Hourly Rate</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>1 Child</td><td>$6.00 / hr</td></tr>
+                                    <tr><td>2 Children</td><td>$10.00 / hr</td></tr>
+                                    <tr><td>3 Children</td><td>$14.00 / hr</td></tr>
+                                    <tr><td>4 Children</td><td>$17.00 / hr</td></tr>
+                                </tbody>
+                            </table>
+                            <div class="rate-note">
+                                <i class="fas fa-circle-info"></i>
+                                Charged per hour <em>or partial hour</em>. Two weeks' notice required to switch from monthly to hourly billing.
+                            </div>
+                        </div>
+
+                        <!-- Policies -->
+                        <div class="section-divider" style="margin-top:2.25rem;">
+                            <h3><i class="fas fa-shield-halved" style="color:var(--accent-color);margin-right:0.5rem;font-size:0.9rem;"></i> Program Policies</h3>
+                            <div class="section-divider-line"></div>
+                        </div>
+
+                        <div class="policy-grid">
+                            <div class="policy-card">
+                                <div class="policy-card-top">
+                                    <div class="policy-icon"><i class="fas fa-triangle-exclamation"></i></div>
+                                    <div class="policy-title">Late Pickup Fee</div>
+                                </div>
+                                <p class="policy-body">
+                                    A fee of <strong>$5.00 per student</strong> is charged for every 5-minute period
+                                    (or portion thereof) after the 6:00 PM program closure. Please arrange timely pickup.
+                                </p>
+                            </div>
+
+                            <div class="policy-card">
+                                <div class="policy-card-top">
+                                    <div class="policy-icon"><i class="fas fa-arrows-rotate"></i></div>
+                                    <div class="policy-title">Billing Changes</div>
+                                </div>
+                                <p class="policy-body">
+                                    Families wishing to change between monthly and hourly billing must provide
+                                    <strong>two weeks' written notice</strong> to the program coordinator before the change takes effect.
+                                </p>
+                            </div>
+
+                            <div class="policy-card">
+                                <div class="policy-card-top">
+                                    <div class="policy-icon"><i class="fas fa-ban"></i></div>
+                                    <div class="policy-title">No Refunds</div>
+                                </div>
+                                <p class="policy-body">
+                                    <strong>All fees paid are non-refundable.</strong> This applies to both monthly
+                                    and hourly payments regardless of attendance or school closures.
+                                </p>
+                            </div>
+
+                            <div class="policy-card">
+                                <div class="policy-card-top">
+                                    <div class="policy-icon"><i class="fas fa-cloud-sun-rain"></i></div>
+                                    <div class="policy-title">Weather &amp; Closures</div>
+                                </div>
+                                <p class="policy-body">
+                                    Aftercare closes whenever school closes early. Beforecare adjusts its
+                                    opening time if the school announces a delayed opening. The program does
+                                    not operate on non-school days.
+                                </p>
+                            </div>
+
+                            <div class="policy-card">
+                                <div class="policy-card-top">
+                                    <div class="policy-icon"><i class="fas fa-book"></i></div>
+                                    <div class="policy-title">Discipline Code</div>
+                                </div>
+                                <p class="policy-body">
+                                    The school's full discipline code applies to Before &amp; After Care. Students
+                                    are expected to follow all school rules and treat staff and peers with
+                                    respect at all times.
+                                </p>
+                            </div>
+
+                            <div class="policy-card">
+                                <div class="policy-card-top">
+                                    <div class="policy-icon"><i class="fas fa-id-card"></i></div>
+                                    <div class="policy-title">Emergency Contacts</div>
+                                </div>
+                                <p class="policy-body">
+                                    Parents and guardians must maintain current emergency contact information
+                                    at all times. Notify the coordinator immediately of any changes to pickup
+                                    authorization or emergency contacts.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div><!-- /.care-main -->
+
+                    <!-- ── Sidebar ───────────────────────────────────── -->
+                    <aside class="care-sidebar">
+
+                        <div class="sidebar-card" style="background:var(--gradient-primary);border-color:transparent;">
+                            <div class="sidebar-card-title" style="color:var(--accent-color);border-bottom-color:rgba(255,255,255,0.15);">
+                                <i class="fas fa-file-signature"></i> Enroll Now
+                            </div>
+                            <p style="font-size:0.83rem;color:rgba(255,255,255,0.8);margin:0 0 1rem;line-height:1.5;">
+                                Download and complete the enrollment form to register your child for Before or After Care.
+                            </p>
+                            <a href="documents/Before_After_School_Care_Registration.pdf"
+                               target="_blank" rel="noopener"
+                               class="sidebar-btn sidebar-btn-gold">
+                                <i class="fas fa-download"></i> Download Enrollment Form
+                            </a>
+                            <a href="mailto:aftercare@mysacs.org" class="sidebar-btn" style="background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.25);">
+                                <i class="fas fa-envelope"></i> Email Coordinator
+                            </a>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <div class="sidebar-card-title">
+                                <i class="fas fa-clock"></i> Program Hours
+                            </div>
+                            <div class="sidebar-info-row">
+                                <i class="fas fa-sun"></i>
+                                <span><strong>Beforecare:</strong> 7:00 – 8:00 AM</span>
+                            </div>
+                            <div class="sidebar-info-row">
+                                <i class="fas fa-moon"></i>
+                                <span><strong>Aftercare:</strong> 3:00 – 6:00 PM</span>
+                            </div>
+                            <div class="sidebar-info-row" style="margin-top:0.4rem;padding-top:0.6rem;border-top:1px solid var(--border-color);">
+                                <i class="fas fa-circle-info"></i>
+                                <span style="font-size:0.78rem;">Available on all regular school days only.</span>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <div class="sidebar-card-title">
+                                <i class="fas fa-dollar-sign"></i> Monthly Rate Summary
+                            </div>
+                            <p style="font-size:0.75rem;color:var(--text-muted);margin:0 0 0.6rem;text-transform:uppercase;letter-spacing:0.05em;font-weight:700;">Beforecare</p>
+                            <div class="sidebar-rate-row"><span>1 child</span><strong>$80 / mo</strong></div>
+                            <div class="sidebar-rate-row"><span>2 children</span><strong>$130 / mo</strong></div>
+                            <div class="sidebar-rate-row"><span>3 children</span><strong>$170 / mo</strong></div>
+                            <div class="sidebar-rate-row" style="margin-bottom:0.75rem;"><span>4 children</span><strong>$210 / mo</strong></div>
+                            <p style="font-size:0.75rem;color:var(--text-muted);margin:0.6rem 0;padding-top:0.6rem;border-top:1px solid var(--border-color);text-transform:uppercase;letter-spacing:0.05em;font-weight:700;">Aftercare</p>
+                            <div class="sidebar-rate-row"><span>1 child</span><strong>$210 / mo</strong></div>
+                            <div class="sidebar-rate-row"><span>2 children</span><strong>$380 / mo</strong></div>
+                            <div class="sidebar-rate-row"><span>3 children</span><strong>$530 / mo</strong></div>
+                            <div class="sidebar-rate-row"><span>4 children</span><strong>$640 / mo</strong></div>
+                            <p style="font-size:0.78rem;color:var(--text-secondary);margin:0.75rem 0 0;padding-top:0.65rem;border-top:1px solid var(--border-color);">
+                                <i class="fas fa-circle-exclamation" style="color:var(--accent-color);margin-right:0.3rem;"></i>
+                                Due the 1st of each month. All fees non-refundable.
+                            </p>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <div class="sidebar-card-title">
+                                <i class="fas fa-envelope"></i> Contact
+                            </div>
+                            <div class="sidebar-info-row">
+                                <i class="fas fa-envelope"></i>
+                                <span>aftercare@mysacs.org</span>
+                            </div>
+                            <div class="sidebar-info-row">
+                                <i class="fas fa-phone"></i>
+                                <span>(910) 483-3216</span>
+                            </div>
+                            <div class="sidebar-info-row">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>365 N Cool Spring Street, Fayetteville, NC 28301</span>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <div class="sidebar-card-title">
+                                <i class="fas fa-compass"></i> Also Explore
+                            </div>
+                            <div class="sidebar-info-row" style="padding:0.35rem 0;border-bottom:1px solid var(--border-color);">
+                                <i class="fas fa-dollar-sign"></i>
+                                <a href="tuition.html" style="color:var(--text-secondary);text-decoration:none;font-size:0.83rem;">Tuition Information</a>
+                            </div>
+                            <div class="sidebar-info-row" style="padding:0.35rem 0;border-bottom:1px solid var(--border-color);">
+                                <i class="fas fa-graduation-cap"></i>
+                                <a href="opportunity-scholarship.html" style="color:var(--text-secondary);text-decoration:none;font-size:0.83rem;">NC Opportunity Scholarships</a>
+                            </div>
+                            <div class="sidebar-info-row" style="padding:0.35rem 0;">
+                                <i class="fas fa-pencil-alt"></i>
+                                <a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none;font-size:0.83rem;">Apply for Enrollment</a>
+                            </div>
+                        </div>
+
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                            <span>St. Ann Catholic School</span>
+                        </div>
+                        <p>Providing quality Catholic education to the Fayetteville and Cape Fear region since 1956. The first all-inclusive school in North Carolina.</p>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="mission.html">About Us</a></li>
+                        <li><a href="index.html#programs">Academics</a></li>
+                        <li><a href="tuition.html">Tuition</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="openPortal()">Student Portal</a></li>
+                        <li><a href="newsletter.html">Newsletter</a></li>
+                        <li><a href="calendar.html">Calendar</a></li>
+                        <li><a href="supply-lists.html">Supply Lists</a></li>
+                        <li><a href="uniforms.html">Uniforms</a></li>
+                        <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                        <li><a href="activities.html">Activities</a></li>
+                        <li><a href="say-something.html">Say Something</a></li>
+                        <li><a href="parish.html">Parish</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/St.AnnCatholicSchoolFayettevilleNC" target="_blank" rel="noopener" class="social-link" aria-label="St. Ann Catholic School on Facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> (910) 483-3216</p>
+                        <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 365 N Cool Spring Street, Fayetteville, NC 28301</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 St. Ann Catholic School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.gtranslateSettings = {
+            default_language: "en",
+            languages: ["en", "es"],
+            wrapper_selector: ".gtranslate_wrapper",
+            switcher_horizontal_position: "inline"
+        };
+    </script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
+    <script src="script.js"></script>
+</body>
+</html>

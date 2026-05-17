@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extracurricular Activities - St. Ann Catholic School | Fayetteville, NC</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    /* ── Activities page layout ──────────────────────────────── */
+    .activities-section {
+        padding: 4rem 0 5rem;
+        background: var(--background);
+    }
+
+    .activities-layout {
+        display: grid;
+        grid-template-columns: 1fr 280px;
+        gap: 2rem;
+        align-items: start;
+    }
+
+    /* ── Activity cards ──────────────────────────────────────── */
+    .activity-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+        margin-bottom: 0;
+    }
+
+    .activity-card {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.75rem;
+        padding: 1.6rem 1.6rem 1.4rem;
+        box-shadow: var(--shadow-sm);
+        position: relative;
+        overflow: hidden;
+        transition: box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .activity-card:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+    }
+
+    .activity-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--gradient-gold);
+    }
+
+    .activity-card-top {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 0.85rem;
+    }
+
+    .activity-icon {
+        width: 2.75rem;
+        height: 2.75rem;
+        background: var(--gradient-primary);
+        border-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-size: 1.1rem;
+        flex-shrink: 0;
+    }
+
+    .activity-title-block {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .activity-title {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.25rem;
+        line-height: 1.2;
+    }
+
+    .activity-grade-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 0.74rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--primary-color);
+        background: rgba(201,168,76,0.15);
+        border-radius: 2rem;
+        padding: 0.15rem 0.6rem;
+    }
+
+    .activity-description {
+        font-size: 0.88rem;
+        color: var(--text-secondary);
+        line-height: 1.65;
+        margin: 0 0 0.85rem;
+    }
+
+    .activity-advisor {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: 0.8rem;
+        color: var(--text-light);
+        font-weight: 500;
+        border-top: 1px solid var(--border-light);
+        padding-top: 0.75rem;
+        margin-top: auto;
+    }
+
+    .activity-advisor i {
+        color: var(--accent-color);
+        font-size: 0.75rem;
+    }
+
+    /* ── Faith activities span full width ────────────────────── */
+    .activity-card.faith-card {
+        border-left: 3px solid var(--accent-color);
+        border-radius: 0 0.75rem 0.75rem 0.75rem;
+    }
+
+    /* ── Intro block ─────────────────────────────────────────── */
+    .intro-block {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.75rem;
+        padding: 1.6rem 2rem;
+        margin-bottom: 1.75rem;
+        box-shadow: var(--shadow-sm);
+        display: flex;
+        gap: 1.25rem;
+        align-items: flex-start;
+    }
+
+    .intro-block-icon {
+        width: 3rem;
+        height: 3rem;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-size: 1.2rem;
+        flex-shrink: 0;
+    }
+
+    .intro-block p {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    /* ── Section divider ─────────────────────────────────────── */
+    .section-divider {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin: 2rem 0 1.5rem;
+    }
+
+    .section-divider h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        white-space: nowrap;
+        margin: 0;
+    }
+
+    .section-divider-line {
+        flex: 1;
+        height: 1px;
+        background: var(--border-color);
+    }
+
+    /* ── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 900px) {
+        .activities-layout { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+        .activity-grid { grid-template-columns: 1fr; }
+        .intro-block { flex-direction: column; gap: 0.75rem; }
+    }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="utility-bar">
+            <div class="nav-container">
+                <div class="utility-location">
+                    <i class="fas fa-location-dot"></i>
+                    <span>365 N Cool Spring Street, Fayetteville, NC</span>
+                </div>
+                <div class="utility-links">
+                    <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+                    <a href="calendar.html"><i class="fas fa-calendar-days"></i> Calendar</a>
+                    <a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener"><i class="fas fa-pencil-alt"></i> Apply</a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <div class="logo">
+                        <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                        <a href="index.html" style="text-decoration: none; color: inherit;">
+                            <span>St. Ann Catholic School</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="mission.html" class="nav-link">About <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="mission.html">Mission &amp; Vision</a></li>
+                                <li><a href="history.html">Our History</a></li>
+                                <li><a href="principal.html">Our Principal</a></li>
+                                <li><a href="faculty.html">Our Faculty</a></li>
+                                <li><a href="parish.html">Parish Connection</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="index.html#programs" class="nav-link">Academics <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.html#programs">Curriculum</a></li>
+                                <li><a href="index.html#programs">Pre-K through 8th Grade</a></li>
+                                <li><a href="index.html#programs">Art, Music, STEM &amp; Band</a></li>
+                                <li><a href="index.html#programs">Spanish Program</a></li>
+                                <li><a href="index.html#programs">Physical Education</a></li>
+                                <li><a href="calendar.html">Academic Calendar</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="contact.html" class="nav-link">Admissions <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener">Rolling Admissions</a></li>
+                                <li><a href="tuition.html">Tuition Information</a></li>
+                                <li><a href="uniforms.html">School Uniforms</a></li>
+                                <li><a href="opportunity-scholarship.html">NC Opportunity Scholarships</a></li>
+                                <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                                <li><a href="contact.html">Schedule a Tour</a></li>
+                                <li><a href="history.html">Military Families Welcome</a></li>
+                                <li><a href="supply-lists.html">School Supply Lists</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="newsletter.html" class="nav-link">Parents <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="newsletter.html">Newsletter</a></li>
+
+                                <li><a href="calendar.html">Calendar</a></li>
+                                <li><a href="uniforms.html">Uniforms</a></li>
+                                <li><a href="before-after-care.html">Before/After Care</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/Community-Opportunities" target="_blank" rel="noopener">Community Opportunities</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="activities.html" class="nav-link active">Students <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="activities.html">Activities</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/School-Events" target="_blank" rel="noopener">School Events</a></li>
+                                <li><a href="say-something.html">Say Something</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="parish.html" class="nav-link">Community</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-actions">
+                    <div class="translate-widget" aria-label="Translate this site">
+                        <i class="fas fa-language"></i>
+                        <div class="gtranslate_wrapper"></div>
+                    </div>
+                    <button class="btn-secondary" onclick="openPortal()">
+                        <i class="fas fa-user"></i> Portal Login
+                    </button>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="page-hero-background">
+                <div class="page-hero-overlay"></div>
+            </div>
+            <div class="container">
+                <div class="page-hero-content">
+                    <h1 class="page-hero-title">Extracurricular Activities</h1>
+                    <p class="page-hero-subtitle">Faith, Arts, Leadership &amp; Academic Competition</p>
+                    <nav class="breadcrumb">
+                        <a href="index.html">Home</a> <span>/</span>
+                        <span>Students</span> <span>/</span>
+                        <span>Activities</span>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <section class="activities-section">
+            <div class="container">
+                <div class="activities-layout">
+
+                    <!-- ── Main content ──────────────────────── -->
+                    <div class="activities-main">
+
+                        <div class="section-kicker">Student Life at St. Ann</div>
+                        <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.75rem;font-weight:700;color:var(--primary-color);margin:0.35rem 0 1.25rem;">Get Involved</h2>
+
+                        <div class="intro-block">
+                            <div class="intro-block-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p>
+                                St. Ann Catholic School offers a variety of extracurricular activities that enrich
+                                student life beyond the classroom. From faith-based service to music, academic
+                                competition, and student leadership, there is something for every student to explore,
+                                grow, and shine. Activities are open to eligible students in Grades 3 through 8.
+                            </p>
+                        </div>
+
+                        <!-- Faith & Service -->
+                        <div class="section-divider">
+                            <h3><i class="fas fa-cross" style="color:var(--accent-color);margin-right:0.5rem;font-size:1rem;"></i> Faith &amp; Service</h3>
+                            <div class="section-divider-line"></div>
+                        </div>
+
+                        <div class="activity-grid" style="margin-bottom:0;">
+                            <div class="activity-card">
+                                <div class="activity-card-top">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-church"></i>
+                                    </div>
+                                    <div class="activity-title-block">
+                                        <div class="activity-title">Altar Servers</div>
+                                        <span class="activity-grade-badge">
+                                            <i class="fas fa-graduation-cap"></i> Grades 3–8
+                                        </span>
+                                    </div>
+                                </div>
+                                <p class="activity-description">
+                                    Students are trained to serve at Mass, assisting the priest and deacon during the
+                                    liturgy. Altar service is a privilege that deepens students' understanding and love
+                                    of the Catholic faith.
+                                </p>
+                                <div class="activity-advisor">
+                                    <i class="fas fa-user"></i> Organized by Deacon Gary
+                                </div>
+                            </div>
+
+                            <div class="activity-card">
+                                <div class="activity-card-top">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-music"></i>
+                                    </div>
+                                    <div class="activity-title-block">
+                                        <div class="activity-title">Mass Choir</div>
+                                        <span class="activity-grade-badge">
+                                            <i class="fas fa-graduation-cap"></i> Grades 4–8
+                                        </span>
+                                    </div>
+                                </div>
+                                <p class="activity-description">
+                                    Students are trained to lead the singing at school Mass, helping to lift the
+                                    community in worship through song. A wonderful opportunity for students with a
+                                    love of music and faith.
+                                </p>
+                                <div class="activity-advisor">
+                                    <i class="fas fa-user"></i> Advisor: Ms. Attaway
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Music & Arts -->
+                        <div class="section-divider">
+                            <h3><i class="fas fa-music" style="color:var(--accent-color);margin-right:0.5rem;font-size:1rem;"></i> Music &amp; Arts</h3>
+                            <div class="section-divider-line"></div>
+                        </div>
+
+                        <div class="activity-grid" style="margin-bottom:0;">
+                            <div class="activity-card">
+                                <div class="activity-card-top">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-guitar"></i>
+                                    </div>
+                                    <div class="activity-title-block">
+                                        <div class="activity-title">Band</div>
+                                        <span class="activity-grade-badge">
+                                            <i class="fas fa-graduation-cap"></i> Grades 4–8
+                                        </span>
+                                    </div>
+                                </div>
+                                <p class="activity-description">
+                                    Band meets weekly and gives students the opportunity to learn and develop
+                                    instrumental music skills. Fees for band participation are paid directly to
+                                    the band teacher.
+                                </p>
+                                <div class="activity-advisor">
+                                    <i class="fas fa-user"></i> Organized by Mrs. Carter
+                                </div>
+                            </div>
+
+                            <div class="activity-card">
+                                <div class="activity-card-top">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-microphone-lines"></i>
+                                    </div>
+                                    <div class="activity-title-block">
+                                        <div class="activity-title">Chorus</div>
+                                        <span class="activity-grade-badge">
+                                            <i class="fas fa-graduation-cap"></i> Grades 4–8
+                                        </span>
+                                    </div>
+                                </div>
+                                <p class="activity-description">
+                                    Chorus meets weekly during the school day. Members perform for school and
+                                    community events throughout the year, sharing their talents with families
+                                    and the wider Fayetteville community.
+                                </p>
+                                <div class="activity-advisor">
+                                    <i class="fas fa-user"></i> Organized by Mrs. Carter
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Academic & Leadership -->
+                        <div class="section-divider">
+                            <h3><i class="fas fa-award" style="color:var(--accent-color);margin-right:0.5rem;font-size:1rem;"></i> Academic &amp; Leadership</h3>
+                            <div class="section-divider-line"></div>
+                        </div>
+
+                        <div class="activity-grid">
+                            <div class="activity-card">
+                                <div class="activity-card-top">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-book-open"></i>
+                                    </div>
+                                    <div class="activity-title-block">
+                                        <div class="activity-title">Battle of the Books</div>
+                                        <span class="activity-grade-badge">
+                                            <i class="fas fa-graduation-cap"></i> Grades 4–8
+                                        </span>
+                                    </div>
+                                </div>
+                                <p class="activity-description">
+                                    Students who meet eligibility requirements join the team to prepare for the
+                                    annual Battle of the Books competition — a reading-based academic challenge
+                                    that promotes a love of literature.
+                                </p>
+                                <div class="activity-advisor">
+                                    <i class="fas fa-user"></i> Coach: Mrs. Coughlin
+                                </div>
+                            </div>
+
+                            <div class="activity-card">
+                                <div class="activity-card-top">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="activity-title-block">
+                                        <div class="activity-title">National Junior Beta Club</div>
+                                        <span class="activity-grade-badge">
+                                            <i class="fas fa-graduation-cap"></i> Grades 6–8
+                                        </span>
+                                    </div>
+                                </div>
+                                <p class="activity-description">
+                                    The National Junior Beta Club fosters the qualities of responsibility,
+                                    leadership, and respect, allowing students to have a voice in school matters
+                                    and initiate meaningful school projects.
+                                </p>
+                                <div class="activity-advisor">
+                                    <i class="fas fa-user"></i> Faculty Advisor: Mrs. Desjardin
+                                </div>
+                            </div>
+
+                            <div class="activity-card">
+                                <div class="activity-card-top">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-spell-check"></i>
+                                    </div>
+                                    <div class="activity-title-block">
+                                        <div class="activity-title">Spelling Bee</div>
+                                        <span class="activity-grade-badge">
+                                            <i class="fas fa-graduation-cap"></i> Grades 4–8
+                                        </span>
+                                    </div>
+                                </div>
+                                <p class="activity-description">
+                                    The annual Spelling Bee is held each year around December. Students compete
+                                    to demonstrate their vocabulary and spelling skills in front of their school
+                                    community.
+                                </p>
+                                <div class="activity-advisor">
+                                    <i class="fas fa-calendar"></i> Held annually in December
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- ── Sidebar ───────────────────────────── -->
+                    <div class="sidebar">
+
+                        <div class="sidebar-card">
+                            <h3>Interested in Joining?</h3>
+                            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1rem;">
+                                Contact the school office for information about eligibility requirements, sign-up periods, and upcoming activity schedules.
+                            </p>
+                            <div class="contact-info">
+                                <p><i class="fas fa-phone"></i> (910) 483-3216</p>
+                                <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                            </div>
+                            <a href="contact.html" class="btn-primary sidebar-btn" style="text-decoration:none;display:inline-flex;margin-top:1rem;">
+                                <i class="fas fa-paper-plane"></i> Contact Us
+                            </a>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Activity Summary</h3>
+                            <ul class="quick-info-list">
+                                <li>
+                                    <i class="fas fa-church"></i>
+                                    <div><strong>Altar Servers</strong><br><span style="font-size:0.82rem;color:var(--text-secondary);">Grades 3–8 · Deacon Gary</span></div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-guitar"></i>
+                                    <div><strong>Band</strong><br><span style="font-size:0.82rem;color:var(--text-secondary);">Grades 4–8 · Mrs. Carter</span></div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-book-open"></i>
+                                    <div><strong>Battle of the Books</strong><br><span style="font-size:0.82rem;color:var(--text-secondary);">Grades 4–8 · Mrs. Coughlin</span></div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-microphone-lines"></i>
+                                    <div><strong>Chorus</strong><br><span style="font-size:0.82rem;color:var(--text-secondary);">Grades 4–8 · Mrs. Carter</span></div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-music"></i>
+                                    <div><strong>Mass Choir</strong><br><span style="font-size:0.82rem;color:var(--text-secondary);">Grades 4–8 · Ms. Attaway</span></div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-star"></i>
+                                    <div><strong>National Junior Beta Club</strong><br><span style="font-size:0.82rem;color:var(--text-secondary);">Grades 6–8 · Mrs. Desjardin</span></div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-spell-check"></i>
+                                    <div><strong>Spelling Bee</strong><br><span style="font-size:0.82rem;color:var(--text-secondary);">Grades 4–8 · Held in December</span></div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Academic Calendar</h3>
+                            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1rem;">
+                                Stay up to date on activity dates, performances, and competitions throughout the school year.
+                            </p>
+                            <a href="calendar.html" class="btn-primary sidebar-btn" style="text-decoration:none;display:inline-flex;">
+                                <i class="fas fa-calendar-days"></i> View Calendar
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                            <span>St. Ann Catholic School</span>
+                        </div>
+                        <p>Providing quality Catholic education to the Fayetteville and Cape Fear region since 1956. The first all-inclusive school in North Carolina.</p>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="mission.html">About Us</a></li>
+                        <li><a href="index.html#programs">Academics</a></li>
+                        <li><a href="tuition.html">Tuition</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="openPortal()">Student Portal</a></li>
+                        <li><a href="newsletter.html">Newsletter</a></li>
+
+                        <li><a href="calendar.html">Calendar</a></li>
+                        <li><a href="supply-lists.html">Supply Lists</a></li>
+                        <li><a href="uniforms.html">Uniforms</a></li>
+                                <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                        <li><a href="activities.html">Activities</a></li>
+                        <li><a href="say-something.html">Say Something</a></li>
+                        <li><a href="parish.html">Parish</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/St.AnnCatholicSchoolFayettevilleNC" target="_blank" rel="noopener" class="social-link" aria-label="St. Ann Catholic School on Facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> (910) 483-3216</p>
+                        <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 365 N Cool Spring Street, Fayetteville, NC 28301</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 St. Ann Catholic School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.gtranslateSettings = {
+            default_language: "en",
+            languages: ["en", "es"],
+            wrapper_selector: ".gtranslate_wrapper",
+            switcher_horizontal_position: "inline"
+        };
+    </script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
+    <script src="script.js"></script>
+</body>
+</html>

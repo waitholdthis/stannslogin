@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NC Opportunity Scholarship - St. Ann Catholic School | Fayetteville, NC</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    /* ── Scholarship page layout ─────────────────────────────── */
+    .scholarship-section {
+        padding: 4rem 0 5rem;
+        background: var(--background);
+    }
+
+    .scholarship-layout {
+        display: grid;
+        grid-template-columns: 1fr 280px;
+        gap: 2rem;
+        align-items: start;
+    }
+
+    /* ── Section blocks ──────────────────────────────────────── */
+    .scholarship-block {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.75rem;
+        padding: 1.75rem 2rem;
+        margin-bottom: 1.5rem;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .scholarship-block-header {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.85rem;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .scholarship-block-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-size: 1rem;
+        flex-shrink: 0;
+    }
+
+    .scholarship-block h2 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin: 0;
+    }
+
+    /* ── Award amount hero card ──────────────────────────────── */
+    .award-hero {
+        background: linear-gradient(135deg, var(--primary-color) 0%, #2d3f6e 100%);
+        border-radius: 0.75rem;
+        padding: 2.25rem 2rem;
+        margin-bottom: 1.5rem;
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        box-shadow: var(--shadow-md);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .award-hero::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--gradient-gold);
+    }
+
+    .award-hero-amount {
+        text-align: center;
+        flex-shrink: 0;
+    }
+
+    .award-hero-amount .amount-label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.65);
+        margin-bottom: 0.25rem;
+    }
+
+    .award-hero-amount .amount-value {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 3rem;
+        font-weight: 700;
+        color: var(--accent-color);
+        line-height: 1;
+    }
+
+    .award-hero-amount .amount-sub {
+        font-size: 0.82rem;
+        color: rgba(255,255,255,0.65);
+        margin-top: 0.25rem;
+    }
+
+    .award-hero-divider {
+        width: 1px;
+        height: 5rem;
+        background: rgba(255,255,255,0.2);
+        flex-shrink: 0;
+    }
+
+    .award-hero-text h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.45rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 0.5rem;
+    }
+
+    .award-hero-text p {
+        font-size: 0.9rem;
+        color: rgba(255,255,255,0.78);
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* ── Steps ───────────────────────────────────────────────── */
+    .apply-steps {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .apply-step {
+        display: flex;
+        gap: 1.25rem;
+        align-items: flex-start;
+        padding: 1.25rem 0;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .apply-step:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .apply-step-num {
+        width: 2.25rem;
+        height: 2.25rem;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .apply-step-content h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.35rem;
+    }
+
+    .apply-step-content p {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        line-height: 1.65;
+        margin: 0;
+    }
+
+    .apply-step-content a {
+        color: var(--primary-color);
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .apply-step-content a:hover {
+        text-decoration: underline;
+    }
+
+    .step-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        margin-top: 0.5rem;
+        font-size: 0.76rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        background: rgba(201,168,76,0.15);
+        border-radius: 2rem;
+        padding: 0.15rem 0.65rem;
+    }
+
+    /* ── FAQ-style blocks ────────────────────────────────────── */
+    .faq-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .faq-item {
+        padding: 1.1rem 1.25rem;
+        background: var(--background-light);
+        border: 1px solid var(--border-light);
+        border-left: 3px solid var(--accent-color);
+        border-radius: 0 0.5rem 0.5rem 0;
+    }
+
+    .faq-item h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.4rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .faq-item h3 i {
+        color: var(--accent-color);
+        font-size: 0.9rem;
+    }
+
+    .faq-item p {
+        font-size: 0.88rem;
+        color: var(--text-secondary);
+        line-height: 1.65;
+        margin: 0;
+    }
+
+    .faq-item a {
+        color: var(--primary-color);
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .faq-item a:hover {
+        text-decoration: underline;
+    }
+
+    /* ── Renewal banner ──────────────────────────────────────── */
+    .renewal-banner {
+        background: rgba(26,39,68,0.06);
+        border: 1px solid rgba(26,39,68,0.18);
+        border-left: 4px solid var(--primary-color);
+        border-radius: 0 0.5rem 0.5rem 0;
+        padding: 1rem 1.25rem;
+        display: flex;
+        gap: 0.85rem;
+        align-items: flex-start;
+    }
+
+    .renewal-banner i {
+        color: var(--primary-color);
+        font-size: 1.05rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .renewal-banner div h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.35rem;
+    }
+
+    .renewal-banner div p {
+        font-size: 0.88rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    .renewal-banner div a {
+        color: var(--primary-color);
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .renewal-banner div a:hover {
+        text-decoration: underline;
+    }
+
+    /* ── Important notice ────────────────────────────────────── */
+    .notice-banner {
+        background: rgba(123,45,58,0.06);
+        border: 1px solid rgba(123,45,58,0.2);
+        border-left: 4px solid var(--secondary-color);
+        border-radius: 0 0.5rem 0.5rem 0;
+        padding: 0.9rem 1.1rem;
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .notice-banner i {
+        color: var(--secondary-color);
+        font-size: 1rem;
+        flex-shrink: 0;
+    }
+
+    .notice-banner p {
+        font-size: 0.88rem;
+        color: var(--secondary-color);
+        font-weight: 600;
+        margin: 0;
+        line-height: 1.45;
+    }
+
+    /* ── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 900px) {
+        .scholarship-layout { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+        .scholarship-block { padding: 1.25rem; }
+        .award-hero { flex-direction: column; gap: 1rem; }
+        .award-hero-divider { display: none; }
+    }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="utility-bar">
+            <div class="nav-container">
+                <div class="utility-location">
+                    <i class="fas fa-location-dot"></i>
+                    <span>365 N Cool Spring Street, Fayetteville, NC</span>
+                </div>
+                <div class="utility-links">
+                    <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+                    <a href="calendar.html"><i class="fas fa-calendar-days"></i> Calendar</a>
+                    <a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener"><i class="fas fa-pencil-alt"></i> Apply</a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <div class="logo">
+                        <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                        <a href="index.html" style="text-decoration: none; color: inherit;">
+                            <span>St. Ann Catholic School</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="mission.html" class="nav-link">About <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="mission.html">Mission &amp; Vision</a></li>
+                                <li><a href="history.html">Our History</a></li>
+                                <li><a href="principal.html">Our Principal</a></li>
+                                <li><a href="faculty.html">Our Faculty</a></li>
+                                <li><a href="parish.html">Parish Connection</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="index.html#programs" class="nav-link">Academics <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.html#programs">Curriculum</a></li>
+                                <li><a href="index.html#programs">Pre-K through 8th Grade</a></li>
+                                <li><a href="index.html#programs">Art, Music, STEM &amp; Band</a></li>
+                                <li><a href="index.html#programs">Spanish Program</a></li>
+                                <li><a href="index.html#programs">Physical Education</a></li>
+                                <li><a href="calendar.html">Academic Calendar</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="contact.html" class="nav-link active">Admissions <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener">Rolling Admissions</a></li>
+                                <li><a href="tuition.html">Tuition Information</a></li>
+                                <li><a href="uniforms.html">School Uniforms</a></li>
+                                <li><a href="opportunity-scholarship.html">NC Opportunity Scholarships</a></li>
+                                <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                                <li><a href="contact.html">Schedule a Tour</a></li>
+                                <li><a href="history.html">Military Families Welcome</a></li>
+                                <li><a href="supply-lists.html">School Supply Lists</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="newsletter.html" class="nav-link">Parents <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="newsletter.html">Newsletter</a></li>
+
+                                <li><a href="calendar.html">Calendar</a></li>
+                                <li><a href="uniforms.html">Uniforms</a></li>
+                                <li><a href="before-after-care.html">Before/After Care</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/Community-Opportunities" target="_blank" rel="noopener">Community Opportunities</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="activities.html" class="nav-link">Students <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="activities.html">Activities</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/School-Events" target="_blank" rel="noopener">School Events</a></li>
+                                <li><a href="say-something.html">Say Something</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="parish.html" class="nav-link">Community</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-actions">
+                    <div class="translate-widget" aria-label="Translate this site">
+                        <i class="fas fa-language"></i>
+                        <div class="gtranslate_wrapper"></div>
+                    </div>
+                    <button class="btn-secondary" onclick="openPortal()">
+                        <i class="fas fa-user"></i> Portal Login
+                    </button>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="page-hero-background">
+                <div class="page-hero-overlay"></div>
+            </div>
+            <div class="container">
+                <div class="page-hero-content">
+                    <h1 class="page-hero-title">NC Opportunity Scholarship</h1>
+                    <p class="page-hero-subtitle">State-Funded Private School Tuition Assistance</p>
+                    <nav class="breadcrumb">
+                        <a href="index.html">Home</a> <span>/</span>
+                        <a href="contact.html">Admissions</a> <span>/</span>
+                        <span>NC Opportunity Scholarship</span>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <section class="scholarship-section">
+            <div class="container">
+                <div class="scholarship-layout">
+
+                    <!-- ── Main content ──────────────────────── -->
+                    <div class="scholarship-main">
+
+                        <!-- Award amount hero -->
+                        <div class="section-kicker">2026–2027 School Year</div>
+                        <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.75rem;font-weight:700;color:var(--primary-color);margin:0.35rem 0 1.25rem;">Program Overview</h2>
+
+                        <div class="award-hero">
+                            <div class="award-hero-amount">
+                                <div class="amount-label">Up to</div>
+                                <div class="amount-value">$7,000</div>
+                                <div class="amount-sub">per student, per year</div>
+                            </div>
+                            <div class="award-hero-divider"></div>
+                            <div class="award-hero-text">
+                                <h3>NC Opportunity Scholarships</h3>
+                                <p>
+                                    The Opportunity Scholarship Program is a North Carolina state-funded initiative
+                                    that provides working-class families with tuition assistance to attend the private
+                                    school of their choice. Scholarships now range from approximately
+                                    <strong style="color:var(--accent-color);">$3,000 to $7,000</strong> annually,
+                                    and eligibility requirements were recently expanded — more families qualify than
+                                    ever before.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Important notice -->
+                        <div class="notice-banner">
+                            <i class="fas fa-calendar-check"></i>
+                            <p>Applications for the 2026–2027 school year open <strong>February 2, 2026</strong>. Families may only officially apply through the NC State Education Assistance Authority website.</p>
+                        </div>
+
+                        <!-- How to apply steps -->
+                        <div class="scholarship-block">
+                            <div class="scholarship-block-header">
+                                <div class="scholarship-block-icon"><i class="fas fa-list-ol"></i></div>
+                                <h2>How to Apply</h2>
+                            </div>
+                            <div class="apply-steps">
+                                <div class="apply-step">
+                                    <div class="apply-step-num">1</div>
+                                    <div class="apply-step-content">
+                                        <h3>Check Your Eligibility</h3>
+                                        <p>
+                                            Visit the <a href="https://www.ncseaa.edu/k12/opportunity/" target="_blank" rel="noopener">North Carolina Education Authority website</a> to
+                                            see if you may qualify based on income. This is a pre-eligibility determination only —
+                                            it is <strong>not</strong> the official application.
+                                        </p>
+                                        <span class="step-tag"><i class="fas fa-globe"></i> ncseaa.edu/k12/opportunity/</span>
+                                    </div>
+                                </div>
+                                <div class="apply-step">
+                                    <div class="apply-step-num">2</div>
+                                    <div class="apply-step-content">
+                                        <h3>Create a MyPortal Account</h3>
+                                        <p>
+                                            Set up your student portal account at the NC State Education Assistance Authority.
+                                            You will use this account to submit your application and manage your scholarship.
+                                        </p>
+                                        <span class="step-tag"><i class="fas fa-user-plus"></i> myportal.ncseaa.edu</span>
+                                    </div>
+                                </div>
+                                <div class="apply-step">
+                                    <div class="apply-step-num">3</div>
+                                    <div class="apply-step-content">
+                                        <h3>Submit an Application for Each Child</h3>
+                                        <p>
+                                            Beginning <strong>February 2, 2026</strong>, submit a separate application for
+                                            each child you wish to receive a scholarship. You will receive a confirmation
+                                            email from the NC State Education Assistance Authority for each application submitted.
+                                        </p>
+                                        <span class="step-tag"><i class="fas fa-exclamation-circle"></i> One application per child — do not combine</span>
+                                    </div>
+                                </div>
+                                <div class="apply-step">
+                                    <div class="apply-step-num">4</div>
+                                    <div class="apply-step-content">
+                                        <h3>Apply During the Priority Window</h3>
+                                        <p>
+                                            Applications received during the <strong>priority window</strong> are entered
+                                            into a lottery and awarded scholarships. Applications submitted after the
+                                            priority window are placed on a waiting list. Apply early for the best chance.
+                                        </p>
+                                        <span class="step-tag"><i class="fas fa-clock"></i> Priority window applications receive lottery placement</span>
+                                    </div>
+                                </div>
+                                <div class="apply-step">
+                                    <div class="apply-step-num">5</div>
+                                    <div class="apply-step-content">
+                                        <h3>Enroll at St. Ann Catholic School</h3>
+                                        <p>
+                                            St. Ann Catholic School participates in the NC Opportunity Scholarship Program.
+                                            Once your scholarship is awarded, contact our office to begin the enrollment
+                                            process. Note that families must be prepared to pay the registration fee at
+                                            the time of enrollment.
+                                        </p>
+                                        <span class="step-tag"><i class="fas fa-phone"></i> (910) 483-3216</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ section -->
+                        <div class="scholarship-block">
+                            <div class="scholarship-block-header">
+                                <div class="scholarship-block-icon"><i class="fas fa-circle-question"></i></div>
+                                <h2>Frequently Asked Questions</h2>
+                            </div>
+                            <div class="faq-list">
+                                <div class="faq-item">
+                                    <h3><i class="fas fa-user-check"></i> Are you eligible?</h3>
+                                    <p>
+                                        The income cap for the program was recently raised, meaning more families
+                                        now qualify than in previous years. Visit the
+                                        <a href="https://www.ncseaa.edu/k12/opportunity/" target="_blank" rel="noopener">NC Education Authority website</a>
+                                        to check your pre-eligibility. This is not an official application — it simply
+                                        lets you know whether to proceed with a full application.
+                                    </p>
+                                </div>
+                                <div class="faq-item">
+                                    <h3><i class="fas fa-gear"></i> How does it work?</h3>
+                                    <p>
+                                        Applications are accepted during a priority period each year. Those received
+                                        within the priority window are selected through a lottery and awarded a
+                                        scholarship. Applications received after the priority window are placed on a
+                                        waiting list and may be awarded if additional funding becomes available.
+                                    </p>
+                                </div>
+                                <div class="faq-item">
+                                    <h3><i class="fas fa-file-pen"></i> How do I apply?</h3>
+                                    <p>
+                                        Create a <a href="https://myportal.ncseaa.edu" target="_blank" rel="noopener">MyPortal account</a> at the NC State Education
+                                        Assistance Authority to begin the application. You must submit a
+                                        <strong>separate application for each child</strong> — do not combine children
+                                        on one application. A confirmation email will be sent for each application submitted.
+                                        Official applications open <strong>February 2, 2026</strong>.
+                                    </p>
+                                </div>
+                                <div class="faq-item">
+                                    <h3><i class="fas fa-school"></i> Where can a scholarship be used?</h3>
+                                    <p>
+                                        Use <a href="https://www.ncschoolsaroundme.com" target="_blank" rel="noopener">NC Schools Around Me</a> to find
+                                        participating private schools near you, compare average tuition, and learn more.
+                                        Schools continue to register for the program — always confirm directly with the
+                                        school whether they accept the Opportunity Scholarship.
+                                        <strong>St. Ann Catholic School participates in this program.</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Renewal section -->
+                        <div class="scholarship-block">
+                            <div class="scholarship-block-header">
+                                <div class="scholarship-block-icon"><i class="fas fa-rotate"></i></div>
+                                <h2>Already Have a Scholarship?</h2>
+                            </div>
+                            <div class="renewal-banner">
+                                <i class="fas fa-rotate"></i>
+                                <div>
+                                    <h3>Renew for the 2026–2027 School Year</h3>
+                                    <p>
+                                        If you received an Opportunity Scholarship for the <strong>2025–2026</strong> school
+                                        year, you must officially renew through the NC State Education Assistance Authority.
+                                        Sign into <a href="https://myportal.ncseaa.edu" target="_blank" rel="noopener">MyPortal</a> where you will find
+                                        a renewal link for 2026–2027. If you also have children who did <em>not</em> use a
+                                        scholarship last year, create a new application for each of them separately.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- ── Sidebar ───────────────────────────── -->
+                    <div class="sidebar">
+
+                        <div class="sidebar-card">
+                            <h3>Apply for the Scholarship</h3>
+                            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1rem;">
+                                Official applications open <strong>February 2, 2026</strong>. Apply through the NC State Education Assistance Authority.
+                            </p>
+                            <a href="https://myportal.ncseaa.edu" target="_blank" rel="noopener"
+                               class="btn-primary sidebar-btn"
+                               style="text-decoration:none;display:inline-flex;margin-bottom:0.65rem;">
+                                <i class="fas fa-arrow-up-right-from-square"></i> Go to MyPortal
+                            </a>
+                            <a href="https://www.ncseaa.edu/k12/opportunity/" target="_blank" rel="noopener"
+                               class="btn-primary sidebar-btn"
+                               style="text-decoration:none;display:inline-flex;background:var(--background-light);color:var(--primary-color);border:1px solid var(--border-color);">
+                                <i class="fas fa-circle-check"></i> Check Eligibility
+                            </a>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Key Links</h3>
+                            <ul class="quick-info-list">
+                                <li>
+                                    <i class="fas fa-globe"></i>
+                                    <div>
+                                        <strong>NC Education Authority</strong><br>
+                                        <a href="https://www.ncseaa.edu/k12/opportunity/" target="_blank" rel="noopener"
+                                           style="font-size:0.82rem;color:var(--primary-color);text-decoration:none;font-weight:600;">
+                                            ncseaa.edu/k12/opportunity/
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-user"></i>
+                                    <div>
+                                        <strong>MyPortal (Apply / Renew)</strong><br>
+                                        <a href="https://myportal.ncseaa.edu" target="_blank" rel="noopener"
+                                           style="font-size:0.82rem;color:var(--primary-color);text-decoration:none;font-weight:600;">
+                                            myportal.ncseaa.edu
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-school"></i>
+                                    <div>
+                                        <strong>Find Participating Schools</strong><br>
+                                        <a href="https://www.ncschoolsaroundme.com" target="_blank" rel="noopener"
+                                           style="font-size:0.82rem;color:var(--primary-color);text-decoration:none;font-weight:600;">
+                                            ncschoolsaroundme.com
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-phone"></i>
+                                    <div>
+                                        <strong>NCSEAA Helpline</strong><br>
+                                        <span style="font-size:0.82rem;color:var(--text-secondary);">(888) 858-8802</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Questions About Enrollment?</h3>
+                            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:0.75rem;">
+                                Our office can help guide you through using an Opportunity Scholarship to enroll at St. Ann.
+                            </p>
+                            <div class="contact-info">
+                                <p><i class="fas fa-phone"></i> (910) 483-3216</p>
+                                <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                            </div>
+                            <a href="contact.html" class="btn-primary sidebar-btn" style="text-decoration:none;display:inline-flex;margin-top:1rem;">
+                                <i class="fas fa-paper-plane"></i> Contact Us
+                            </a>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Also Explore</h3>
+                            <ul class="quick-info-list">
+                                <li>
+                                    <i class="fas fa-dollar-sign"></i>
+                                    <div><a href="tuition.html" style="color:var(--primary-color);font-weight:600;text-decoration:none;font-size:0.9rem;">Tuition &amp; Financial Aid</a><br>
+                                    <span style="font-size:0.82rem;color:var(--text-secondary);">View rates, fees, and FACTS aid</span></div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-pencil-alt"></i>
+                                    <div><a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener" style="color:var(--primary-color);font-weight:600;text-decoration:none;font-size:0.9rem;">Apply Now</a><br>
+                                    <span style="font-size:0.82rem;color:var(--text-secondary);">Rolling admissions — Pre-K to 8th</span></div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-phone"></i>
+                                    <div><a href="contact.html" style="color:var(--primary-color);font-weight:600;text-decoration:none;font-size:0.9rem;">Schedule a Tour</a><br>
+                                    <span style="font-size:0.82rem;color:var(--text-secondary);">Visit campus and meet our faculty</span></div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                            <span>St. Ann Catholic School</span>
+                        </div>
+                        <p>Providing quality Catholic education to the Fayetteville and Cape Fear region since 1956. The first all-inclusive school in North Carolina.</p>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="mission.html">About Us</a></li>
+                        <li><a href="index.html#programs">Academics</a></li>
+                        <li><a href="tuition.html">Tuition</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="openPortal()">Student Portal</a></li>
+                        <li><a href="newsletter.html">Newsletter</a></li>
+
+                        <li><a href="calendar.html">Calendar</a></li>
+                        <li><a href="supply-lists.html">Supply Lists</a></li>
+                        <li><a href="uniforms.html">Uniforms</a></li>
+                                <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                        <li><a href="parish.html">Parish</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/St.AnnCatholicSchoolFayettevilleNC" target="_blank" rel="noopener" class="social-link" aria-label="St. Ann Catholic School on Facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> (910) 483-3216</p>
+                        <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 365 N Cool Spring Street, Fayetteville, NC 28301</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 St. Ann Catholic School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.gtranslateSettings = {
+            default_language: "en",
+            languages: ["en", "es"],
+            wrapper_selector: ".gtranslate_wrapper",
+            switcher_horizontal_position: "inline"
+        };
+    </script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
+    <script src="script.js"></script>
+</body>
+</html>

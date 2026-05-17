@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuition & Financial Aid - St. Ann Catholic School | Fayetteville, NC</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    /* ── Tuition page layout ─────────────────────────────────── */
+    .tuition-section {
+        padding: 4rem 0 5rem;
+        background: var(--background);
+    }
+
+    .tuition-layout {
+        display: grid;
+        grid-template-columns: 1fr 280px;
+        gap: 2rem;
+        align-items: start;
+    }
+
+    /* ── Rate cards ──────────────────────────────────────────── */
+    .rate-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .rate-card {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.75rem;
+        padding: 2rem 1.75rem;
+        text-align: center;
+        box-shadow: var(--shadow-sm);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .rate-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--gradient-gold);
+    }
+
+    .rate-card-label {
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-light);
+        margin-bottom: 0.5rem;
+    }
+
+    .rate-card-grade {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+
+    .rate-card-amount {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 2.75rem;
+        font-weight: 700;
+        color: var(--secondary-color);
+        line-height: 1;
+        margin-bottom: 0.35rem;
+    }
+
+    .rate-card-period {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        margin-bottom: 1rem;
+    }
+
+    .rate-card-monthly {
+        display: inline-block;
+        background: var(--background-light);
+        border: 1px solid var(--border-light);
+        border-radius: 2rem;
+        padding: 0.3rem 0.85rem;
+        font-size: 0.88rem;
+        color: var(--text-secondary);
+        font-weight: 500;
+    }
+
+    .rate-card-monthly strong {
+        color: var(--primary-color);
+    }
+
+    /* ── Section blocks ──────────────────────────────────────── */
+    .tuition-block {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.75rem;
+        padding: 1.75rem 2rem;
+        margin-bottom: 1.5rem;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .tuition-block-header {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.85rem;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .tuition-block-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-size: 1rem;
+        flex-shrink: 0;
+    }
+
+    .tuition-block h2 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin: 0;
+    }
+
+    /* ── Fee table ───────────────────────────────────────────── */
+    .fee-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .fee-table tr {
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .fee-table tr:last-child {
+        border-bottom: none;
+    }
+
+    .fee-table td {
+        padding: 0.7rem 0.5rem;
+        font-size: 0.95rem;
+        vertical-align: top;
+    }
+
+    .fee-table td:first-child {
+        color: var(--text-primary);
+        font-weight: 500;
+        width: 55%;
+    }
+
+    .fee-table td:last-child {
+        color: var(--secondary-color);
+        font-weight: 700;
+        text-align: right;
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.05rem;
+        white-space: nowrap;
+    }
+
+    .fee-note {
+        font-size: 0.8rem;
+        color: var(--text-light);
+        font-weight: 400;
+        font-family: 'Source Sans 3', sans-serif;
+        display: block;
+    }
+
+    /* ── Payment plan cards ──────────────────────────────────── */
+    .plan-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
+    .plan-card {
+        border: 1.5px solid var(--border-color);
+        border-radius: 0.5rem;
+        padding: 1.25rem 1rem;
+        text-align: center;
+        transition: all 0.2s ease;
+    }
+
+    .plan-card:hover {
+        border-color: var(--accent-color);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .plan-card-icon {
+        font-size: 1.5rem;
+        color: var(--accent-color);
+        margin-bottom: 0.6rem;
+    }
+
+    .plan-card h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.4rem;
+    }
+
+    .plan-card p {
+        font-size: 0.83rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    .plan-card .plan-due {
+        display: inline-block;
+        margin-top: 0.6rem;
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: var(--secondary-color);
+        background: rgba(123,45,58,0.06);
+        border-radius: 2rem;
+        padding: 0.15rem 0.65rem;
+    }
+
+    /* ── Aid cards ───────────────────────────────────────────── */
+    .aid-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .aid-card {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+        padding: 1.1rem 1.25rem;
+        background: var(--background-light);
+        border: 1px solid var(--border-light);
+        border-left: 3px solid var(--accent-color);
+        border-radius: 0 0.5rem 0.5rem 0;
+    }
+
+    .aid-card-icon {
+        color: var(--accent-color);
+        font-size: 1.15rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .aid-card h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.3rem;
+    }
+
+    .aid-card p {
+        font-size: 0.87rem;
+        color: var(--text-secondary);
+        line-height: 1.55;
+        margin: 0;
+    }
+
+    .aid-tag {
+        display: inline-block;
+        margin-top: 0.45rem;
+        font-size: 0.74rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--primary-color);
+        background: rgba(201,168,76,0.15);
+        border-radius: 2rem;
+        padding: 0.15rem 0.6rem;
+    }
+
+    /* ── Policy list ─────────────────────────────────────────── */
+    .policy-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .policy-list li {
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+        font-size: 0.92rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+    }
+
+    .policy-list li i {
+        color: var(--accent-color);
+        font-size: 0.85rem;
+        flex-shrink: 0;
+        margin-top: 4px;
+    }
+
+    /* ── Non-refundable banner ───────────────────────────────── */
+    .nonrefund-banner {
+        background: rgba(123,45,58,0.06);
+        border: 1px solid rgba(123,45,58,0.2);
+        border-left: 4px solid var(--secondary-color);
+        border-radius: 0 0.5rem 0.5rem 0;
+        padding: 0.9rem 1.1rem;
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+        margin-top: 1rem;
+    }
+
+    .nonrefund-banner i {
+        color: var(--secondary-color);
+        font-size: 1rem;
+        flex-shrink: 0;
+    }
+
+    .nonrefund-banner p {
+        font-size: 0.88rem;
+        color: var(--secondary-color);
+        font-weight: 600;
+        margin: 0;
+        line-height: 1.4;
+    }
+
+    /* ── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 900px) {
+        .tuition-layout { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+        .rate-grid  { grid-template-columns: 1fr; }
+        .plan-grid  { grid-template-columns: 1fr; }
+        .tuition-block { padding: 1.25rem; }
+    }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="utility-bar">
+            <div class="nav-container">
+                <div class="utility-location">
+                    <i class="fas fa-location-dot"></i>
+                    <span>365 N Cool Spring Street, Fayetteville, NC</span>
+                </div>
+                <div class="utility-links">
+                    <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+                    <a href="calendar.html"><i class="fas fa-calendar-days"></i> Calendar</a>
+                    <a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener"><i class="fas fa-pencil-alt"></i> Apply</a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <div class="logo">
+                        <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                        <a href="index.html" style="text-decoration: none; color: inherit;">
+                            <span>St. Ann Catholic School</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="mission.html" class="nav-link">About <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="mission.html">Mission &amp; Vision</a></li>
+                                <li><a href="history.html">Our History</a></li>
+                                <li><a href="principal.html">Our Principal</a></li>
+                                <li><a href="faculty.html">Our Faculty</a></li>
+                                <li><a href="parish.html">Parish Connection</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="index.html#programs" class="nav-link">Academics <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.html#programs">Curriculum</a></li>
+                                <li><a href="index.html#programs">Pre-K through 8th Grade</a></li>
+                                <li><a href="index.html#programs">Art, Music, STEM &amp; Band</a></li>
+                                <li><a href="index.html#programs">Spanish Program</a></li>
+                                <li><a href="index.html#programs">Physical Education</a></li>
+                                <li><a href="calendar.html">Academic Calendar</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="contact.html" class="nav-link active">Admissions <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener">Rolling Admissions</a></li>
+                                <li><a href="tuition.html">Tuition Information</a></li>
+                                <li><a href="uniforms.html">School Uniforms</a></li>
+                                <li><a href="opportunity-scholarship.html">NC Opportunity Scholarships</a></li>
+                                <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                                <li><a href="contact.html">Schedule a Tour</a></li>
+                                <li><a href="history.html">Military Families Welcome</a></li>
+                                <li><a href="supply-lists.html">School Supply Lists</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="newsletter.html" class="nav-link">Parents <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="newsletter.html">Newsletter</a></li>
+
+                                <li><a href="calendar.html">Calendar</a></li>
+                                <li><a href="uniforms.html">Uniforms</a></li>
+                                <li><a href="before-after-care.html">Before/After Care</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/Community-Opportunities" target="_blank" rel="noopener">Community Opportunities</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="activities.html" class="nav-link">Students <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="activities.html">Activities</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/School-Events" target="_blank" rel="noopener">School Events</a></li>
+                                <li><a href="say-something.html">Say Something</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="parish.html" class="nav-link">Community</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-actions">
+                    <div class="translate-widget" aria-label="Translate this site">
+                        <i class="fas fa-language"></i>
+                        <div class="gtranslate_wrapper"></div>
+                    </div>
+                    <button class="btn-secondary" onclick="openPortal()">
+                        <i class="fas fa-user"></i> Portal Login
+                    </button>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="page-hero-background">
+                <div class="page-hero-overlay"></div>
+            </div>
+            <div class="container">
+                <div class="page-hero-content">
+                    <h1 class="page-hero-title">Tuition &amp; Financial Aid</h1>
+                    <p class="page-hero-subtitle">2026–2027 School Year</p>
+                    <nav class="breadcrumb">
+                        <a href="index.html">Home</a> <span>/</span>
+                        <a href="contact.html">Admissions</a> <span>/</span>
+                        <span>Tuition</span>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <section class="tuition-section">
+            <div class="container">
+                <div class="tuition-layout">
+
+                    <!-- ── Main content ──────────────────────── -->
+                    <div class="tuition-main">
+
+                        <!-- Tuition rates -->
+                        <div class="section-kicker">2026–2027 School Year</div>
+                        <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.75rem;font-weight:700;color:var(--primary-color);margin:0.35rem 0 1.25rem;">Annual Tuition Rates</h2>
+
+                        <div class="rate-grid">
+                            <div class="rate-card">
+                                <div class="rate-card-label">Grade Level</div>
+                                <div class="rate-card-grade">Pre-Kindergarten</div>
+                                <div class="rate-card-amount">$6,350</div>
+                                <div class="rate-card-period">per year</div>
+                                <span class="rate-card-monthly">or <strong>$529.17</strong>/month</span>
+                            </div>
+                            <div class="rate-card">
+                                <div class="rate-card-label">Grade Level</div>
+                                <div class="rate-card-grade">Kindergarten – 8th Grade</div>
+                                <div class="rate-card-amount">$7,350</div>
+                                <div class="rate-card-period">per year</div>
+                                <span class="rate-card-monthly">or <strong>$612.50</strong>/month</span>
+                            </div>
+                        </div>
+
+                        <!-- Fees -->
+                        <div class="tuition-block">
+                            <div class="tuition-block-header">
+                                <div class="tuition-block-icon"><i class="fas fa-receipt"></i></div>
+                                <h2>Fees</h2>
+                            </div>
+                            <table class="fee-table">
+                                <tr>
+                                    <td>
+                                        Registration Fee
+                                        <span class="fee-note">Per family — paid once at enrollment</span>
+                                    </td>
+                                    <td>$150</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Instructional Fee
+                                        <span class="fee-note">Per child, Pre-K through 8th Grade — due May 1</span>
+                                    </td>
+                                    <td>$200 / child</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Technology Fee
+                                        <span class="fee-note">Per child, Pre-K through 8th Grade — due May 1</span>
+                                    </td>
+                                    <td>$100 / child</td>
+                                </tr>
+                            </table>
+                            <div class="nonrefund-banner">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <p>All fees and tuition payments are non-refundable.</p>
+                            </div>
+                        </div>
+
+                        <!-- Payment plans -->
+                        <div class="tuition-block">
+                            <div class="tuition-block-header">
+                                <div class="tuition-block-icon"><i class="fas fa-calendar-check"></i></div>
+                                <h2>Payment Plans</h2>
+                            </div>
+                            <div class="plan-grid">
+                                <div class="plan-card">
+                                    <div class="plan-card-icon"><i class="fas fa-circle-check"></i></div>
+                                    <h3>Annual</h3>
+                                    <p>Pay the full year's tuition in one payment and simplify your year.</p>
+                                    <span class="plan-due">Due June 1</span>
+                                </div>
+                                <div class="plan-card">
+                                    <div class="plan-card-icon"><i class="fas fa-arrows-split-up-and-left"></i></div>
+                                    <h3>Bi-Annual</h3>
+                                    <p>Split into two equal payments — one in the fall, one in the spring.</p>
+                                    <span class="plan-due">June 1 &amp; December 1</span>
+                                </div>
+                                <div class="plan-card">
+                                    <div class="plan-card-icon"><i class="fas fa-calendar-days"></i></div>
+                                    <h3>Monthly</h3>
+                                    <p>10 monthly payments through FACTS Tuition Management.</p>
+                                    <span class="plan-due">$50 FACTS enrollment fee</span>
+                                </div>
+                            </div>
+                            <p style="font-size:0.85rem;color:var(--text-secondary);margin-top:1rem;line-height:1.6;">
+                                Credit and debit cards (Visa, MasterCard, Discover) are accepted. Monthly payments are processed through
+                                <strong>FACTS Tuition Management</strong>. A $50 application fee applies for the monthly plan.
+                            </p>
+                        </div>
+
+                        <!-- Financial aid -->
+                        <div class="tuition-block">
+                            <div class="tuition-block-header">
+                                <div class="tuition-block-icon"><i class="fas fa-hand-holding-dollar"></i></div>
+                                <h2>Financial Aid &amp; Scholarships</h2>
+                            </div>
+                            <div class="aid-grid">
+                                <div class="aid-card">
+                                    <i class="fas fa-star aid-card-icon"></i>
+                                    <div>
+                                        <h3>FACTS Grant &amp; Aid Assessment</h3>
+                                        <p>
+                                            Apply for need-based financial assistance through FACTS at
+                                            <strong>factsmgt.com</strong>. A $45 application fee applies.
+                                            Priority is given to active parish members.
+                                        </p>
+                                        <span class="aid-tag"><i class="fas fa-clock"></i> Deadline: March 1</span>
+                                    </div>
+                                </div>
+                                <div class="aid-card">
+                                    <i class="fas fa-award aid-card-icon"></i>
+                                    <div>
+                                        <h3>AAMEN &amp; God's Work Our Challenge Awards</h3>
+                                        <p>
+                                            Scholarship awards offered through the Diocese of Raleigh for
+                                            qualifying students and families.
+                                        </p>
+                                        <span class="aid-tag"><i class="fas fa-clock"></i> Deadline: March 15, 2026</span>
+                                    </div>
+                                </div>
+                                <div class="aid-card">
+                                    <i class="fas fa-landmark aid-card-icon"></i>
+                                    <div>
+                                        <h3>NC Opportunity Scholarship</h3>
+                                        <p>
+                                            State-funded voucher program available to qualifying North Carolina families.
+                                            Families must be prepared to pay the registration fee at the time of enrollment.
+                                            Contact the school office for guidance on applying.
+                                        </p>
+                                        <span class="aid-tag"><i class="fas fa-phone"></i> Call (910) 483-3216</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Policies -->
+                        <div class="tuition-block">
+                            <div class="tuition-block-header">
+                                <div class="tuition-block-icon"><i class="fas fa-file-lines"></i></div>
+                                <h2>Policies</h2>
+                            </div>
+                            <ul class="policy-list">
+                                <li>
+                                    <i class="fas fa-circle-dot"></i>
+                                    <span><strong>Volunteer Requirement:</strong> Each family is required to contribute at least <strong>10 volunteer hours per year</strong>. Families who do not fulfill this requirement are charged a $100 fee.</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-circle-dot"></i>
+                                    <span><strong>Early Withdrawal:</strong> One month's tuition is charged upon early withdrawal, unless the withdrawal is due to employment-related relocation.</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-circle-dot"></i>
+                                    <span><strong>Mid-Year Admissions:</strong> Tuition is pro-rated for students admitted after the start of the school year.</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-circle-dot"></i>
+                                    <span><strong>Accepted Payment Methods:</strong> Visa, MasterCard, and Discover credit/debit cards are accepted in addition to check and cash.</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-circle-dot"></i>
+                                    <span><strong>Non-Refundable:</strong> All fees and tuition payments are non-refundable once submitted.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- ── Sidebar ───────────────────────────── -->
+                    <div class="sidebar">
+
+                        <div class="sidebar-card">
+                            <h3>Questions About Tuition?</h3>
+                            <div class="contact-info">
+                                <p><i class="fas fa-phone"></i> (910) 483-3216</p>
+                                <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                                <p><i class="fas fa-map-marker-alt"></i> 365 N Cool Spring Street<br>Fayetteville, NC 28301</p>
+                            </div>
+                            <a href="contact.html" class="btn-primary sidebar-btn" style="text-decoration:none;display:inline-flex;margin-top:1rem;">
+                                <i class="fas fa-paper-plane"></i> Contact Us
+                            </a>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Apply Now</h3>
+                            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1rem;">
+                                Rolling admissions are open year-round for Pre-K through 8th Grade. Start your application today.
+                            </p>
+                            <a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener" class="btn-primary sidebar-btn" style="text-decoration:none;display:inline-flex;">
+                                <i class="fas fa-pencil-alt"></i> Apply Online
+                            </a>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Key Deadlines</h3>
+                            <ul class="quick-info-list">
+                                <li>
+                                    <i class="fas fa-clock"></i>
+                                    <div><strong>FACTS Aid Application</strong><br>March 1</div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-clock"></i>
+                                    <div><strong>AAMEN / Diocese Awards</strong><br>March 15, 2026</div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-clock"></i>
+                                    <div><strong>Instructional &amp; Tech Fees</strong><br>May 1</div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-clock"></i>
+                                    <div><strong>Annual / Bi-Annual Payment</strong><br>June 1</div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Admissions Steps</h3>
+                            <div class="admissions-steps">
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <h4>Contact Us</h4>
+                                        <p>Call or email to discuss your family's needs</p>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <h4>Schedule a Tour</h4>
+                                        <p>Visit campus and meet our faculty</p>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <h4>Apply &amp; Enroll</h4>
+                                        <p>Submit your application and registration fee</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                            <span>St. Ann Catholic School</span>
+                        </div>
+                        <p>Providing quality Catholic education to the Fayetteville and Cape Fear region since 1956. The first all-inclusive school in North Carolina.</p>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="mission.html">About Us</a></li>
+                        <li><a href="index.html#programs">Academics</a></li>
+                        <li><a href="tuition.html">Tuition</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="openPortal()">Student Portal</a></li>
+                        <li><a href="newsletter.html">Newsletter</a></li>
+
+                        <li><a href="calendar.html">Calendar</a></li>
+                        <li><a href="supply-lists.html">Supply Lists</a></li>
+                        <li><a href="parish.html">Parish</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/St.AnnCatholicSchoolFayettevilleNC" target="_blank" rel="noopener" class="social-link" aria-label="St. Ann Catholic School on Facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> (910) 483-3216</p>
+                        <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 365 N Cool Spring Street, Fayetteville, NC 28301</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 St. Ann Catholic School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.gtranslateSettings = {
+            default_language: "en",
+            languages: ["en", "es"],
+            wrapper_selector: ".gtranslate_wrapper",
+            switcher_horizontal_position: "inline"
+        };
+    </script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
+    <script src="script.js"></script>
+</body>
+</html>

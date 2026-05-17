@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Faculty - St. Ann Catholic School | Fayetteville, NC</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="utility-bar">
+            <div class="nav-container">
+                <div class="utility-location">
+                    <i class="fas fa-location-dot"></i>
+                    <span>365 N Cool Spring Street, Fayetteville, NC</span>
+                </div>
+                <div class="utility-links">
+                    <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+                    <a href="calendar.html"><i class="fas fa-calendar-days"></i> Calendar</a>
+                    <a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener"><i class="fas fa-pencil-alt"></i> Apply</a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <div class="logo">
+                        <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                        <a href="index.html" style="text-decoration: none; color: inherit;">
+                            <span>St. Ann Catholic School</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="mission.html" class="nav-link active">About <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="mission.html">Mission & Vision</a></li>
+                                <li><a href="history.html">Our History</a></li>
+                                <li><a href="principal.html">Our Principal</a></li>
+                                <li><a href="faculty.html">Our Faculty</a></li>
+                                <li><a href="parish.html">Parish Connection</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="index.html#programs" class="nav-link">Academics <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.html#programs">Curriculum</a></li>
+                                <li><a href="index.html#programs">Pre-K through 8th Grade</a></li>
+                                <li><a href="index.html#programs">Art, Music, STEM & Band</a></li>
+                                <li><a href="index.html#programs">Spanish Program</a></li>
+                                <li><a href="index.html#programs">Physical Education</a></li>
+                                <li><a href="calendar.html">Academic Calendar</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="contact.html" class="nav-link">Admissions <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener">Rolling Admissions</a></li>
+                                <li><a href="tuition.html">Tuition Information</a></li>
+                                <li><a href="uniforms.html">School Uniforms</a></li>
+                                <li><a href="opportunity-scholarship.html">NC Opportunity Scholarships</a></li>
+                                <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                                <li><a href="contact.html">Schedule a Tour</a></li>
+                                <li><a href="history.html">Military Families Welcome</a></li>
+                                <li><a href="supply-lists.html">School Supply Lists</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="newsletter.html" class="nav-link">Parents <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="newsletter.html">Newsletter</a></li>
+
+                                <li><a href="calendar.html">Calendar</a></li>
+                                <li><a href="uniforms.html">Uniforms</a></li>
+                                <li><a href="before-after-care.html">Before/After Care</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/Community-Opportunities" target="_blank" rel="noopener">Community Opportunities</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="activities.html" class="nav-link">Students <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="activities.html">Activities</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/School-Events" target="_blank" rel="noopener">School Events</a></li>
+                                <li><a href="say-something.html">Say Something</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="parish.html" class="nav-link">Community</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-actions">
+                    <!-- GTranslate: https://gtranslate.com -->
+                    <div class="translate-widget" aria-label="Translate this site">
+                        <i class="fas fa-language"></i>
+                        <div class="gtranslate_wrapper"></div>
+                    </div>
+                    <button class="btn-secondary" onclick="openPortal()">
+                        <i class="fas fa-user"></i> Portal Login
+                    </button>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="page-hero-background">
+                <div class="page-hero-overlay"></div>
+            </div>
+            <div class="container">
+                <div class="page-hero-content">
+                    <h1 class="page-hero-title">Our Faculty</h1>
+                    <p class="page-hero-subtitle">Licensed professionals with high expectations for every student</p>
+                    <nav class="breadcrumb">
+                        <a href="index.html">Home</a> <span>/</span> <a href="mission.html">About</a> <span>/</span> <span>Our Faculty</span>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <section class="mission-content">
+            <div class="container">
+                <div class="content-grid">
+                    <div class="main-content">
+                        <div class="faculty-intro">
+                            <div class="section-icon">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                            <h2>Dedicated Educational Professionals</h2>
+                            <p class="lead-text">
+                                Our faculty consists of licensed professionals who maintain high expectations for all students 
+                                while providing the individual attention and support each child needs to succeed.
+                            </p>
+                            <p>
+                                Every member of our teaching staff is committed to educating the whole child, recognizing 
+                                students' multiple intelligences and varied interests. We establish strong bonds with all 
+                                students and their families in our safe, nurturing learning environment.
+                            </p>
+                        </div>
+
+                        <div class="faculty-excellence">
+                            <h3>Excellence in Education</h3>
+                            <div class="excellence-grid">
+                                <div class="excellence-card">
+                                    <div class="excellence-icon">
+                                        <i class="fas fa-certificate"></i>
+                                    </div>
+                                    <h4>Licensed Professionals</h4>
+                                    <p>All faculty members are licensed educators with proper credentials and ongoing professional development.</p>
+                                </div>
+                                <div class="excellence-card">
+                                    <div class="excellence-icon">
+                                        <i class="fas fa-heart"></i>
+                                    </div>
+                                    <h4>High Expectations</h4>
+                                    <p>Our teachers maintain high academic and behavioral expectations while providing supportive guidance.</p>
+                                </div>
+                                <div class="excellence-card">
+                                    <div class="excellence-icon">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <h4>Individual Attention</h4>
+                                    <p>With our 11:1 student-teacher ratio, every child receives personalized attention and support.</p>
+                                </div>
+                                <div class="excellence-card">
+                                    <div class="excellence-icon">
+                                        <i class="fas fa-cross"></i>
+                                    </div>
+                                    <h4>Catholic Identity</h4>
+                                    <p>Faculty integrate Catholic values and teachings into all aspects of education and school life.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="staff-spotlight">
+                            <h3>Faculty Spotlight</h3>
+                            <div class="staff-member">
+                                <div class="staff-info">
+                                    <div class="staff-icon">
+                                        <i class="fas fa-user-graduate"></i>
+                                    </div>
+                                    <div class="staff-details">
+                                        <h4>Ms. Herrera</h4>
+                                        <p class="staff-role">Early Childhood Education Teacher</p>
+                                        <p class="staff-experience">10-year St. Ann family member</p>
+                                        <p class="staff-credentials">NC Certified Early Childhood Education • UNC-Greensboro Alumna • Former Librarian/Teacher's Assistant</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="departments-section">
+                            <div class="section-icon">
+                                <i class="fas fa-sitemap"></i>
+                            </div>
+                            <h2>Academic Departments</h2>
+                            <div class="departments-grid">
+                                <div class="department-card">
+                                    <div class="department-icon">
+                                        <i class="fas fa-cross"></i>
+                                    </div>
+                                    <h3>Religious Education</h3>
+                                    <p>Catholic faith formation, sacramental preparation, and spiritual development integrated into daily learning.</p>
+                                </div>
+                                <div class="department-card">
+                                    <div class="department-icon">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <h3>Core Academics</h3>
+                                    <p>Mathematics, English Language Arts, Science, and Social Studies aligned with NC Standard Course of Study.</p>
+                                </div>
+                                <div class="department-card">
+                                    <div class="department-icon">
+                                        <i class="fas fa-palette"></i>
+                                    </div>
+                                    <h3>Arts & Enrichment</h3>
+                                    <p>Visual Arts, Music, Band, and Choral programs fostering creativity and artistic expression.</p>
+                                </div>
+                                <div class="department-card">
+                                    <div class="department-icon">
+                                        <i class="fas fa-globe"></i>
+                                    </div>
+                                    <h3>World Languages</h3>
+                                    <p>Spanish instruction for all students, promoting cultural awareness and global understanding.</p>
+                                </div>
+                                <div class="department-card">
+                                    <div class="department-icon">
+                                        <i class="fas fa-running"></i>
+                                    </div>
+                                    <h3>Physical Education</h3>
+                                    <p>Physical fitness, health education, and character development through sports and activities.</p>
+                                </div>
+                                <div class="department-card">
+                                    <div class="department-icon">
+                                        <i class="fas fa-atom"></i>
+                                    </div>
+                                    <h3>STEM Programs</h3>
+                                    <p>Science, Technology, Engineering, and Mathematics with hands-on learning and innovation.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="teaching-philosophy">
+                            <div class="philosophy-box">
+                                <h3>Our Teaching Philosophy</h3>
+                                <p>
+                                    At St. Ann Catholic School, our faculty embraces a holistic approach to education that nurtures 
+                                    the mind, body, and spirit of every student. We believe in:
+                                </p>
+                                <ul class="philosophy-list">
+                                    <li><strong>Differentiated Instruction:</strong> Recognizing that each student learns differently and adapting our methods accordingly.</li>
+                                    <li><strong>Character Formation:</strong> Developing moral and ethical reasoning alongside academic skills.</li>
+                                    <li><strong>Community Partnership:</strong> Working closely with families to support each child's growth and development.</li>
+                                    <li><strong>Continuous Growth:</strong> Engaging in ongoing professional development to stay current with best practices.</li>
+                                    <li><strong>Faith Integration:</strong> Weaving Catholic values and teachings throughout the curriculum and school experience.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar">
+                        <div class="sidebar-card">
+                            <h3>Faculty Stats</h3>
+                            <div class="faculty-stats">
+                                <div class="stat-item">
+                                    <div class="stat-number">11:1</div>
+                                    <div class="stat-label">Student-Teacher Ratio</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number">100%</div>
+                                    <div class="stat-label">Licensed Educators</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number">Pre-K through 8</div>
+                                    <div class="stat-label">Grade Levels Served</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number">6</div>
+                                    <div class="stat-label">Subject Areas</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Professional Development</h3>
+                            <ul class="fact-list">
+                                <li><i class="fas fa-graduation-cap"></i> Ongoing education requirements</li>
+                                <li><i class="fas fa-certificate"></i> Diocese training programs</li>
+                                <li><i class="fas fa-users"></i> Collaborative planning time</li>
+                                <li><i class="fas fa-book"></i> Curriculum workshops</li>
+                                <li><i class="fas fa-cross"></i> Catholic identity formation</li>
+                                <li><i class="fas fa-star"></i> Best practices sharing</li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Join Our Team</h3>
+                            <p>Interested in becoming part of our dedicated faculty? We welcome qualified educators who share our commitment to Catholic education excellence.</p>
+                            <div class="contact-info">
+                                <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                                <p><i class="fas fa-phone"></i> (910) 483-3216</p>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Learn More</h3>
+                            <div class="sidebar-links">
+                                <a href="mission.html" class="sidebar-link">
+                                    <i class="fas fa-cross"></i> Mission & Vision
+                                </a>
+                                <a href="principal.html" class="sidebar-link">
+                                    <i class="fas fa-user-tie"></i> Our Principal
+                                </a>
+                                <a href="history.html" class="sidebar-link">
+                                    <i class="fas fa-book"></i> Our History
+                                </a>
+                                <a href="parish.html" class="sidebar-link">
+                                    <i class="fas fa-church"></i> Parish Connection
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                            <span>St. Ann Catholic School</span>
+                        </div>
+                        <p>Providing quality Catholic education to the Fayetteville and Cape Fear region since 1956. The first all-inclusive school in North Carolina.</p>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="mission.html">Mission & Vision</a></li>
+                        <li><a href="history.html">Our History</a></li>
+                        <li><a href="principal.html">Our Principal</a></li>
+                        <li><a href="faculty.html">Our Faculty</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="openPortal()">Student Portal</a></li>
+                        <li><a href="newsletter.html">Newsletter</a></li>
+
+                        <li><a href="calendar.html">Calendar</a></li>
+                        <li><a href="contact.html">Policies</a></li>
+                        <li><a href="contact.html">Forms</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/St.AnnCatholicSchoolFayettevilleNC" target="_blank" rel="noopener" class="social-link" aria-label="St. Ann Catholic School on Facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> (910) 483-3216</p>
+                        <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 365 N Cool Spring Street, Fayetteville, NC 28301</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 St. Ann Catholic School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.gtranslateSettings = {
+            default_language: "en",
+            languages: ["en", "es"],
+            wrapper_selector: ".gtranslate_wrapper",
+            switcher_horizontal_position: "inline"
+        };
+    </script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
+    <script src="script.js"></script>
+</body>
+</html>

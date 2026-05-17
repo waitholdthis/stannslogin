@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter Admin – St. Ann Catholic School</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    /* ── Reset & base ──────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root {
+        --navy:   #1a2744;
+        --red:    #7b2d3a;
+        --gold:   #c9a84c;
+        --border: #dde1e7;
+        --bg:     #f4f5f7;
+        --white:  #ffffff;
+        --text:   #1e2329;
+        --muted:  #6b7280;
+        --green:  #1b5e20;
+        --green-bg: #e8f5e9;
+        --radius: 0.6rem;
+        --shadow: 0 1px 4px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06);
+    }
+
+    body {
+        margin: 0;
+        font-family: 'Source Sans 3', sans-serif;
+        font-size: 15px;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+    }
+
+    /* ── Admin header ──────────────────────────────────────── */
+    .admin-header {
+        background: var(--navy);
+        padding: 0.875rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .admin-header-left {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+    }
+
+    .admin-logo-dot {
+        width: 2.5rem;
+        height: 2.5rem;
+        background: rgba(201,168,76,0.15);
+        border: 1px solid rgba(201,168,76,0.3);
+        border-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gold);
+        font-size: 1.1rem;
+    }
+
+    .admin-header-title {
+        color: white;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+    }
+
+    .admin-header-sub {
+        color: rgba(255,255,255,0.6);
+        font-size: 0.78rem;
+        margin-top: 0.1rem;
+    }
+
+    .admin-header-actions {
+        display: flex;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.5rem 1rem;
+        border-radius: 0.4rem;
+        font-size: 0.83rem;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        font-family: inherit;
+        text-decoration: none;
+        transition: opacity 0.15s, transform 0.15s;
+        white-space: nowrap;
+    }
+
+    .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-gold  { background: var(--gold); color: var(--navy); }
+    .btn-ghost { background: rgba(255,255,255,0.12); color: white; }
+    .btn-green { background: #2e7d32; color: white; }
+    .btn-outline{ background: transparent; border: 1.5px solid var(--border); color: var(--text); }
+    .btn-danger { background: #c62828; color: white; }
+    .btn-sm { padding: 0.3rem 0.7rem; font-size: 0.78rem; }
+
+    /* ── Page wrapper ──────────────────────────────────────── */
+    .admin-wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 2rem 1.25rem 4rem;
+        display: grid;
+        grid-template-columns: 1fr 340px;
+        gap: 1.75rem;
+        align-items: start;
+    }
+
+    @media (max-width: 820px) {
+        .admin-wrap { grid-template-columns: 1fr; }
+    }
+
+    /* ── Cards ─────────────────────────────────────────────── */
+    .card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        margin-bottom: 1.25rem;
+        overflow: hidden;
+    }
+
+    .card-head {
+        background: var(--navy);
+        padding: 0.9rem 1.25rem;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    .card-head-icon {
+        width: 1.75rem;
+        height: 1.75rem;
+        background: rgba(201,168,76,0.15);
+        border-radius: 0.35rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gold);
+        font-size: 0.8rem;
+    }
+
+    .card-head h2 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: white;
+        margin: 0;
+        flex: 1;
+    }
+
+    .card-body { padding: 1.25rem; }
+
+    /* ── Instruction steps ─────────────────────────────────── */
+    .step-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        counter-reset: step;
+    }
+
+    .step-list li {
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+        padding: 0.7rem 0;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.88rem;
+        color: var(--text);
+        line-height: 1.5;
+        counter-increment: step;
+    }
+
+    .step-list li:last-child { border-bottom: none; padding-bottom: 0; }
+    .step-list li:first-child { padding-top: 0; }
+
+    .step-num {
+        width: 1.6rem;
+        height: 1.6rem;
+        background: var(--navy);
+        color: var(--gold);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        font-weight: 700;
+        flex-shrink: 0;
+        margin-top: 0.05rem;
+    }
+
+    /* ── Form elements ─────────────────────────────────────── */
+    .form-row {
+        margin-bottom: 1rem;
+    }
+
+    .form-row label {
+        display: block;
+        font-weight: 600;
+        font-size: 0.83rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.4rem;
+    }
+
+    .form-row input[type="text"],
+    .form-row input[type="date"],
+    .form-row textarea,
+    .form-row select {
+        width: 100%;
+        padding: 0.55rem 0.85rem;
+        border: 1.5px solid var(--border);
+        border-radius: 0.4rem;
+        font-family: inherit;
+        font-size: 0.88rem;
+        color: var(--text);
+        background: white;
+        transition: border-color 0.15s;
+        appearance: none;
+    }
+
+    .form-row input:focus,
+    .form-row textarea:focus,
+    .form-row select:focus {
+        outline: none;
+        border-color: var(--navy);
+    }
+
+    .form-row textarea { resize: vertical; min-height: 4rem; }
+
+    .form-hint {
+        font-size: 0.76rem;
+        color: var(--muted);
+        margin-top: 0.3rem;
+    }
+
+    /* ── Item builder ──────────────────────────────────────── */
+    .items-container { margin-top: 0.25rem; }
+
+    .item-row {
+        background: #f9f9fb;
+        border: 1px solid var(--border);
+        border-radius: 0.5rem;
+        padding: 1rem;
+        margin-bottom: 0.75rem;
+        position: relative;
+    }
+
+    .item-row-head {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .item-row-num {
+        width: 1.5rem;
+        height: 1.5rem;
+        background: var(--navy);
+        color: var(--gold);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.72rem;
+        font-weight: 700;
+        flex-shrink: 0;
+    }
+
+    .item-row-label {
+        font-weight: 600;
+        font-size: 0.83rem;
+        flex: 1;
+        color: var(--text);
+    }
+
+    .item-grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+    }
+
+    .item-urgent-check {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+        font-size: 0.85rem;
+        color: var(--text);
+        cursor: pointer;
+    }
+
+    .item-urgent-check input { cursor: pointer; }
+
+    /* ── Category select with color chip ──────────────────── */
+    .cat-select-wrap { position: relative; }
+    .cat-select-wrap select { padding-left: 2.1rem; }
+    .cat-chip {
+        position: absolute;
+        left: 0.7rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 0.75rem;
+        height: 0.75rem;
+        border-radius: 50%;
+        pointer-events: none;
+        background: var(--navy);
+        transition: background 0.15s;
+    }
+
+    /* ── Success banner ────────────────────────────────────── */
+    .success-banner {
+        display: none;
+        background: var(--green-bg);
+        border: 1px solid #a5d6a7;
+        border-radius: var(--radius);
+        padding: 1rem 1.25rem;
+        margin-bottom: 1.25rem;
+        color: var(--green);
+        font-weight: 600;
+        font-size: 0.9rem;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .success-banner.show { display: flex; }
+
+    /* ── Current data preview (right panel) ─────────────────── */
+    .current-issue {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        margin-bottom: 1.25rem;
+    }
+
+    .current-issue-head {
+        background: linear-gradient(135deg, var(--navy), #2d3f6e);
+        padding: 1rem 1.25rem;
+        color: white;
+    }
+
+    .current-issue-head h3 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin: 0 0 0.15rem;
+    }
+
+    .current-issue-head p {
+        font-size: 0.78rem;
+        opacity: 0.7;
+        margin: 0;
+    }
+
+    .current-issue-body { padding: 1rem 1.25rem; }
+
+    .preview-item {
+        display: flex;
+        gap: 0.75rem;
+        padding: 0.6rem 0;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.83rem;
+    }
+
+    .preview-item:last-child { border-bottom: none; }
+
+    .preview-dot {
+        width: 0.3rem;
+        min-width: 0.3rem;
+        border-radius: 0.15rem;
+        background: var(--navy);
+        align-self: stretch;
+    }
+
+    .preview-title { font-weight: 600; color: var(--text); }
+    .preview-body  { color: var(--muted); font-size: 0.78rem; margin-top: 0.15rem; line-height: 1.4; }
+
+    .cat-badge-sm {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.66rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        padding: 0.1rem 0.45rem;
+        border-radius: 2rem;
+        vertical-align: middle;
+        margin-left: 0.3rem;
+    }
+
+    /* ── History list (right panel) ────────────────────────── */
+    .history-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.6rem 0;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.83rem;
+    }
+
+    .history-item:last-child { border-bottom: none; }
+
+    .history-icon {
+        width: 2rem;
+        height: 2rem;
+        background: linear-gradient(135deg, var(--navy), #2d3f6e);
+        border-radius: 0.35rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gold);
+        font-size: 0.75rem;
+        flex-shrink: 0;
+    }
+
+    .history-date { font-weight: 600; color: var(--text); }
+    .history-count { color: var(--muted); font-size: 0.78rem; }
+
+    /* ── Category color map for JS ─────────────────────────── */
+    </style>
+</head>
+<body>
+
+<!-- ── Admin header ───────────────────────────────────── -->
+<header class="admin-header">
+    <div class="admin-header-left">
+        <div class="admin-logo-dot"><i class="fas fa-newspaper"></i></div>
+        <div>
+            <div class="admin-header-title">Newsletter Admin</div>
+            <div class="admin-header-sub">St. Ann Catholic School — Staff Only</div>
+        </div>
+    </div>
+    <div class="admin-header-actions">
+        <a href="newsletter.html" class="btn btn-ghost" target="_blank">
+            <i class="fas fa-eye"></i> View Live Page
+        </a>
+        <a href="index.html" class="btn btn-ghost">
+            <i class="fas fa-house"></i> School Website
+        </a>
+    </div>
+</header>
+
+<div class="admin-wrap">
+
+    <!-- ══════════════════════════════════════════════════════
+         LEFT COLUMN — Instructions + Form
+    ═══════════════════════════════════════════════════════ -->
+    <div class="admin-left">
+
+        <!-- How it works -->
+        <div class="card">
+            <div class="card-head">
+                <div class="card-head-icon"><i class="fas fa-circle-info"></i></div>
+                <h2>How to Post a Newsletter</h2>
+            </div>
+            <div class="card-body">
+                <ol class="step-list">
+                    <li>
+                        <span class="step-num">1</span>
+                        <span>Fill in the <strong>Issue Date</strong> and <strong>Display Title</strong> below (e.g., "Week of May 19, 2026").</span>
+                    </li>
+                    <li>
+                        <span class="step-num">2</span>
+                        <span>Click <strong>"Add Item"</strong> to add each announcement. Fill in the title, description, and pick a category color.</span>
+                    </li>
+                    <li>
+                        <span class="step-num">3</span>
+                        <span>When finished, click <strong>"Generate &amp; Download newsletter-data.js"</strong>. A file will download automatically.</span>
+                    </li>
+                    <li>
+                        <span class="step-num">4</span>
+                        <span>Upload the downloaded <code>newsletter-data.js</code> to the website folder, <strong>replacing the old file</strong>. The newsletter page will update immediately.</span>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Success banner -->
+        <div class="success-banner" id="success-banner">
+            <i class="fas fa-circle-check" style="font-size:1.25rem;flex-shrink:0;"></i>
+            <span id="success-msg">newsletter-data.js downloaded! Upload it to the website folder to publish.</span>
+        </div>
+
+        <!-- ── New Newsletter Form ─────────────────────────── -->
+        <div class="card">
+            <div class="card-head">
+                <div class="card-head-icon"><i class="fas fa-plus"></i></div>
+                <h2>New Weekly Newsletter</h2>
+            </div>
+            <div class="card-body">
+
+                <div class="item-grid-2">
+                    <div class="form-row">
+                        <label for="issue-date">Issue Date</label>
+                        <input type="date" id="issue-date">
+                        <p class="form-hint">The Friday this newsletter is posted.</p>
+                    </div>
+                    <div class="form-row">
+                        <label for="issue-title">Display Title</label>
+                        <input type="text" id="issue-title" placeholder="e.g. Week of May 19, 2026">
+                        <p class="form-hint">Shown as the newsletter heading.</p>
+                    </div>
+                </div>
+
+                <!-- Item builder -->
+                <div class="form-row" style="margin-top:0.5rem;">
+                    <label>Announcements / Items</label>
+                    <div class="items-container" id="items-container"></div>
+                    <button type="button" class="btn btn-outline" onclick="addItem()" style="margin-top:0.5rem;width:100%;">
+                        <i class="fas fa-plus"></i> Add Item
+                    </button>
+                </div>
+
+                <!-- Actions -->
+                <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--border);">
+                    <button type="button" class="btn btn-green" onclick="generateFile()" style="flex:1;justify-content:center;padding:0.7rem;">
+                        <i class="fas fa-download"></i> Generate &amp; Download newsletter-data.js
+                    </button>
+                    <button type="button" class="btn btn-outline btn-sm" onclick="clearForm()" title="Clear form">
+                        <i class="fas fa-xmark"></i> Clear
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════
+         RIGHT COLUMN — Current issue preview + history
+    ═══════════════════════════════════════════════════════ -->
+    <div class="admin-right">
+
+        <div class="card">
+            <div class="card-head">
+                <div class="card-head-icon"><i class="fas fa-eye"></i></div>
+                <h2>Currently Live</h2>
+            </div>
+            <div class="card-body" id="live-preview-body" style="padding:0.5rem 1.25rem 1.25rem;">
+                <p style="color:var(--muted);font-size:0.83rem;margin:0.75rem 0 0;font-style:italic;">Loading current data…</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-head">
+                <div class="card-head-icon"><i class="fas fa-clock-rotate-left"></i></div>
+                <h2>All Issues on File</h2>
+            </div>
+            <div class="card-body" id="history-body" style="padding:0.5rem 1.25rem 1.25rem;">
+                <p style="color:var(--muted);font-size:0.83rem;margin:0.75rem 0 0;font-style:italic;">Loading…</p>
+            </div>
+        </div>
+
+        <div class="card" style="border-color:rgba(201,168,76,0.4);background:#fffdf4;">
+            <div class="card-head" style="background:linear-gradient(135deg,#7c5c00,#b08630);">
+                <div class="card-head-icon" style="background:rgba(255,255,255,0.15);color:white;"><i class="fas fa-lightbulb"></i></div>
+                <h2>Tips for Admins</h2>
+            </div>
+            <div class="card-body" style="font-size:0.83rem;color:var(--text);line-height:1.6;">
+                <p style="margin:0 0 0.65rem;"><strong>Categories</strong> — use the right color to help families scan quickly:</p>
+                <div id="cat-key" style="margin-bottom:0.75rem;"></div>
+                <p style="margin:0 0 0.65rem;"><strong>Urgent items</strong> — check the "Mark as Important" box for financial deadlines, emergencies, or permission slip due dates.</p>
+                <p style="margin:0;"><strong>Archive</strong> — old newsletters stay visible in the archive automatically. You never lose old issues — they just move down.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Newsletter data (same file the public page uses) -->
+<script src="newsletter-data.js"></script>
+<script>
+// ── Category config ──────────────────────────────────────────
+const CATS = {
+    event:        { label:'Event',        icon:'fa-calendar-star',        badge:'cat-event',        dot:'#c9a84c', dotBg:'#fff8e1', dotColor:'#b07a00' },
+    announcement: { label:'Announcement', icon:'fa-bullhorn',              badge:'cat-announcement', dot:'#3949ab', dotBg:'#e8eaf6', dotColor:'#1a237e' },
+    reminder:     { label:'Reminder',     icon:'fa-triangle-exclamation',  badge:'cat-reminder',     dot:'#c62878', dotBg:'#fce4ec', dotColor:'#880e4f' },
+    'no-school':  { label:'No School',    icon:'fa-calendar-xmark',        badge:'cat-no-school',    dot:'#388e3c', dotBg:'#e8f5e9', dotColor:'#1b5e20' },
+    sports:       { label:'Sports',       icon:'fa-trophy',                badge:'cat-sports',       dot:'#1565c0', dotBg:'#e3f2fd', dotColor:'#0d47a1' },
+    fundraiser:   { label:'Fundraiser',   icon:'fa-hand-holding-heart',    badge:'cat-fundraiser',   dot:'#7b1fa2', dotBg:'#f3e5f5', dotColor:'#4a148c' },
+};
+
+let itemCount = 0;
+
+// ── Build the category key in the tips card ─────────────────
+(function buildCatKey() {
+    const el = document.getElementById('cat-key');
+    if (!el) return;
+    el.innerHTML = Object.entries(CATS).map(([key, c]) => `
+        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.35rem;">
+            <span style="display:inline-flex;align-items:center;gap:0.25rem;font-size:0.7rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;padding:0.15rem 0.5rem;border-radius:2rem;background:${c.dotBg};color:${c.dotColor};">
+                <i class="fas ${c.icon}"></i> ${c.label}
+            </span>
+            <span style="color:var(--muted);font-size:0.8rem;">${catDesc(key)}</span>
+        </div>`).join('');
+})();
+
+function catDesc(key) {
+    const map = {
+        event:        'Concerts, ceremonies, parent nights',
+        announcement: 'General school news',
+        reminder:     'Fees, forms, deadlines',
+        'no-school':  'Closures, holidays, early release',
+        sports:       'Athletic events and tryouts',
+        fundraiser:   'Fundraising campaigns',
+    };
+    return map[key] || '';
+}
+
+// ── Load live data into right panel ─────────────────────────
+(function loadLivePreview() {
+    const previewEl = document.getElementById('live-preview-body');
+    const historyEl = document.getElementById('history-body');
+    if (!window.NEWSLETTER_DATA) {
+        previewEl.innerHTML = '<p style="color:#c62828;font-size:0.83rem;margin:0.75rem 0 0;">Could not load newsletter-data.js.</p>';
+        historyEl.innerHTML = '<p style="color:#c62828;font-size:0.83rem;margin:0.75rem 0 0;">No data.</p>';
+        return;
+    }
+
+    const newsletters = (window.NEWSLETTER_DATA.newsletters || []).slice().reverse();
+
+    if (newsletters.length === 0) {
+        previewEl.innerHTML = '<p style="color:var(--muted);font-size:0.83rem;margin:0.75rem 0 0;font-style:italic;">No newsletters posted yet.</p>';
+        historyEl.innerHTML = '<p style="color:var(--muted);font-size:0.83rem;margin:0.75rem 0 0;font-style:italic;">No issues on file.</p>';
+        return;
+    }
+
+    // Latest issue preview
+    const latest = newsletters[0];
+    previewEl.innerHTML = `
+        <div style="background:linear-gradient(135deg,#1a2744,#2d3f6e);border-radius:0.5rem;padding:0.85rem 1rem;margin-bottom:0.85rem;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:700;color:white;margin:0 0 0.2rem;">${esc(latest.title || latest.date)}</div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,0.65);">${esc(latest.date)}</div>
+        </div>
+        ${(latest.items || []).map(item => {
+            const cat = CATS[item.category] || CATS.announcement;
+            return `<div class="preview-item">
+                <div class="preview-dot" style="background:${cat.dot};"></div>
+                <div>
+                    <div class="preview-title">${esc(item.title)}
+                        <span class="cat-badge-sm" style="background:${cat.dotBg};color:${cat.dotColor};">
+                            <i class="fas ${cat.icon}"></i> ${cat.label}
+                        </span>
+                        ${item.urgent ? '<span class="cat-badge-sm" style="background:#fce4ec;color:#c62828;"><i class="fas fa-circle-exclamation"></i> Important</span>' : ''}
+                    </div>
+                    <div class="preview-body">${esc(item.body)}</div>
+                </div>
+            </div>`;
+        }).join('')}`;
+
+    // History list
+    historyEl.innerHTML = newsletters.map((nl, i) => `
+        <div class="history-item">
+            <div class="history-icon"><i class="fas fa-newspaper"></i></div>
+            <div>
+                <div class="history-date">${esc(nl.title || nl.date)}</div>
+                <div class="history-count">${nl.date} &middot; ${(nl.items||[]).length} item${(nl.items||[]).length !== 1 ? 's' : ''}${i === 0 ? ' &nbsp;<strong style="color:#2e7d32;">✓ Live</strong>' : ''}</div>
+            </div>
+        </div>`).join('');
+})();
+
+// ── Item builder ─────────────────────────────────────────────
+function addItem() {
+    itemCount++;
+    const container = document.getElementById('items-container');
+    const row = document.createElement('div');
+    row.className = 'item-row';
+    row.id = `item-row-${itemCount}`;
+    row.innerHTML = `
+        <div class="item-row-head">
+            <div class="item-row-num">${itemCount}</div>
+            <div class="item-row-label">Item ${itemCount}</div>
+            <button type="button" class="btn btn-danger btn-sm" onclick="removeItem(${itemCount})">
+                <i class="fas fa-trash"></i>
+            </button>
+        </div>
+        <div class="item-grid-2" style="margin-bottom:0.6rem;">
+            <div class="form-row" style="margin:0;">
+                <label>Title</label>
+                <input type="text" id="item-title-${itemCount}" placeholder="e.g. Piano Recital">
+            </div>
+            <div class="form-row" style="margin:0;">
+                <label>Category</label>
+                <div class="cat-select-wrap">
+                    <div class="cat-chip" id="chip-${itemCount}" style="background:#3949ab;"></div>
+                    <select id="item-cat-${itemCount}" onchange="updateChip(${itemCount})">
+                        <option value="event">Event</option>
+                        <option value="announcement" selected>Announcement</option>
+                        <option value="reminder">Reminder</option>
+                        <option value="no-school">No School</option>
+                        <option value="sports">Sports</option>
+                        <option value="fundraiser">Fundraiser</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-row" style="margin-bottom:0.5rem;">
+            <label>Description</label>
+            <textarea id="item-body-${itemCount}" rows="2" placeholder="Describe the announcement for families…"></textarea>
+        </div>
+        <label class="item-urgent-check">
+            <input type="checkbox" id="item-urgent-${itemCount}">
+            Mark as Important (shows red "Important" flag — use for deadlines, emergencies)
+        </label>`;
+    container.appendChild(row);
+    updateChip(itemCount);
+    // scroll to new item
+    row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function removeItem(id) {
+    const row = document.getElementById(`item-row-${id}`);
+    if (row) row.remove();
+}
+
+function updateChip(id) {
+    const cat = document.getElementById(`item-cat-${id}`)?.value || 'announcement';
+    const chip = document.getElementById(`chip-${id}`);
+    if (chip) chip.style.background = CATS[cat]?.dot || '#3949ab';
+}
+
+// ── Generate & download the JS data file ────────────────────
+function generateFile() {
+    const dateVal = document.getElementById('issue-date').value;
+    const titleVal = document.getElementById('issue-title').value.trim();
+
+    if (!dateVal) { alert('Please set the Issue Date.'); return; }
+    if (!titleVal) { alert('Please set the Display Title (e.g. "Week of May 19, 2026").'); return; }
+
+    // Collect items
+    const rows = document.querySelectorAll('.item-row');
+    if (rows.length === 0) { alert('Please add at least one item before generating.'); return; }
+
+    const items = [];
+    let valid = true;
+    rows.forEach(row => {
+        const id = row.id.replace('item-row-', '');
+        const t = document.getElementById(`item-title-${id}`)?.value.trim() || '';
+        const b = document.getElementById(`item-body-${id}`)?.value.trim() || '';
+        const c = document.getElementById(`item-cat-${id}`)?.value || 'announcement';
+        const u = document.getElementById(`item-urgent-${id}`)?.checked || false;
+        if (!t) { alert(`Item ${id}: Please enter a title.`); valid = false; return; }
+        const entry = { title: t, body: b, category: c };
+        if (u) entry.urgent = true;
+        items.push(entry);
+    });
+    if (!valid) return;
+
+    // Format date
+    const d = new Date(dateVal + 'T12:00:00');
+    const formattedDate = d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    const isoDate = dateVal;
+
+    // Build new newsletter entry
+    const newEntry = {
+        id: isoDate,
+        date: formattedDate,
+        title: titleVal,
+        items: items
+    };
+
+    // Merge with existing data (new entry goes at end — page shows newest first)
+    const existing = (window.NEWSLETTER_DATA?.newsletters || []).filter(n => n.id !== isoDate);
+    const allNewsletters = [...existing, newEntry];
+
+    const intro = window.NEWSLETTER_DATA?.intro || "The St. Ann Weekly Newsletter is posted here every Friday. It is also emailed to all families via Gradelink.";
+
+    // Serialize
+    const dataJson = JSON.stringify({ intro, newsletters: allNewsletters }, null, 2);
+
+    const fileContent = `/* ============================================================
+   St. Ann Catholic School — Newsletter Data
+   ============================================================
+   HOW TO UPDATE:
+   1. Open admin-newsletter.html in a browser
+   2. Fill in the new weekly newsletter and click "Generate File"
+   3. Download the new newsletter-data.js that appears
+   4. Upload it here (replace this file)
+   The newsletter page updates automatically.
+   Last updated: ${formattedDate}
+   ============================================================ */
+
+window.NEWSLETTER_DATA = ${dataJson};
+`;
+
+    // Trigger download
+    const blob = new Blob([fileContent], { type: 'application/javascript' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'newsletter-data.js';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    // Show success
+    const banner = document.getElementById('success-banner');
+    document.getElementById('success-msg').textContent = `newsletter-data.js downloaded! Upload it to the website folder to publish the "${titleVal}" newsletter.`;
+    banner.classList.add('show');
+    banner.scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => banner.classList.remove('show'), 8000);
+}
+
+// ── Clear form ───────────────────────────────────────────────
+function clearForm() {
+    if (!confirm('Clear the form? This cannot be undone.')) return;
+    document.getElementById('issue-date').value = '';
+    document.getElementById('issue-title').value = '';
+    document.getElementById('items-container').innerHTML = '';
+    itemCount = 0;
+}
+
+// ── Escape HTML ──────────────────────────────────────────────
+function esc(str) {
+    return String(str||'')
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// Pre-fill today's date
+(function setDefaultDate() {
+    const today = new Date();
+    // Find the upcoming Friday
+    const day = today.getDay();
+    const daysUntilFriday = (5 - day + 7) % 7 || 7;
+    const friday = new Date(today);
+    friday.setDate(today.getDate() + (day === 5 ? 0 : daysUntilFriday));
+    document.getElementById('issue-date').value = friday.toISOString().split('T')[0];
+
+    // Auto-fill title
+    const nextWeek = new Date(friday);
+    nextWeek.setDate(friday.getDate() + 3); // following Monday
+    document.getElementById('issue-title').value = 'Week of ' + nextWeek.toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' });
+})();
+</script>
+</body>
+</html>

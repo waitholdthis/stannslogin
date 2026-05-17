@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Newsletter - St. Ann Catholic School | Fayetteville, NC</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    /* ── Newsletter page layout ────────────────────────────── */
+    .newsletter-section {
+        padding: 4rem 0 5rem;
+        background: var(--background);
+    }
+
+    .newsletter-layout {
+        display: grid;
+        grid-template-columns: 1fr 280px;
+        gap: 2rem;
+        align-items: start;
+    }
+
+    /* ── Issue header bar ──────────────────────────────────── */
+    .issue-header {
+        background: var(--gradient-primary);
+        border-radius: 0.75rem 0.75rem 0 0;
+        padding: 1.25rem 1.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .issue-header-left {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+    }
+
+    .issue-icon {
+        width: 2.75rem;
+        height: 2.75rem;
+        background: rgba(201,168,76,0.15);
+        border: 1px solid rgba(201,168,76,0.3);
+        border-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-size: 1.1rem;
+        flex-shrink: 0;
+    }
+
+    .issue-meta h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #fff;
+        margin: 0 0 0.15rem;
+    }
+
+    .issue-meta p {
+        font-size: 0.8rem;
+        color: rgba(255,255,255,0.7);
+        margin: 0;
+    }
+
+    .latest-badge {
+        background: var(--accent-color);
+        color: var(--primary-color);
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        padding: 0.25rem 0.65rem;
+        border-radius: 2rem;
+    }
+
+    /* ── Issue card wrapper ──────────────────────────────── */
+    .issue-card {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.75rem;
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+        margin-bottom: 1.5rem;
+    }
+
+    .issue-body {
+        padding: 1.5rem 1.75rem;
+    }
+
+    /* ── Newsletter item rows ──────────────────────────────── */
+    .newsletter-item {
+        display: flex;
+        gap: 1rem;
+        padding: 0.9rem 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .newsletter-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .newsletter-item:first-child {
+        padding-top: 0;
+    }
+
+    .item-cat-dot {
+        width: 0.35rem;
+        min-width: 0.35rem;
+        border-radius: 0.2rem;
+        margin-top: 0.15rem;
+        align-self: stretch;
+        background: var(--primary-color);
+    }
+
+    .item-content {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .item-top {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-bottom: 0.3rem;
+        flex-wrap: wrap;
+    }
+
+    .item-title {
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: var(--text-primary);
+    }
+
+    .item-badge {
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        padding: 0.15rem 0.55rem;
+        border-radius: 2rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        white-space: nowrap;
+    }
+
+    .item-body {
+        font-size: 0.88rem;
+        color: var(--text-secondary);
+        line-height: 1.55;
+    }
+
+    .item-urgent-flag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #c62828;
+        margin-left: auto;
+    }
+
+    /* Category color tokens */
+    .cat-event       { background:#fff8e1; color:#b07a00; }
+    .cat-event-dot   { background: #c9a84c; }
+    .cat-announcement{ background:#e8eaf6; color:#1a237e; }
+    .cat-announcement-dot { background: #3949ab; }
+    .cat-reminder    { background:#fce4ec; color:#880e4f; }
+    .cat-reminder-dot{ background: #c62878; }
+    .cat-no-school   { background:#e8f5e9; color:#1b5e20; }
+    .cat-no-school-dot { background: #388e3c; }
+    .cat-sports      { background:#e3f2fd; color:#0d47a1; }
+    .cat-sports-dot  { background: #1565c0; }
+    .cat-fundraiser  { background:#f3e5f5; color:#4a148c; }
+    .cat-fundraiser-dot { background: #7b1fa2; }
+
+    /* ── Archive section ───────────────────────────────────── */
+    .archive-section-head {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin: 2rem 0 1rem;
+    }
+
+    .archive-section-head h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin: 0;
+    }
+
+    .archive-section-line {
+        flex: 1;
+        height: 1px;
+        background: var(--border-color);
+    }
+
+    .archive-empty {
+        color: var(--text-secondary);
+        font-size: 0.88rem;
+        font-style: italic;
+        padding: 0.75rem 0;
+    }
+
+    .archive-accordion {
+        border: 1px solid var(--border-color);
+        border-radius: 0.5rem;
+        overflow: hidden;
+        margin-bottom: 0.5rem;
+        background: white;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .archive-toggle {
+        width: 100%;
+        background: none;
+        border: none;
+        padding: 0.9rem 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        font-family: inherit;
+        text-align: left;
+        transition: background 0.15s;
+    }
+
+    .archive-toggle:hover { background: #f5f7fa; }
+
+    .archive-toggle-left {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .archive-toggle-icon {
+        width: 2rem;
+        height: 2rem;
+        background: var(--gradient-primary);
+        border-radius: 0.375rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-size: 0.8rem;
+        flex-shrink: 0;
+    }
+
+    .archive-toggle-title {
+        font-weight: 600;
+        font-size: 0.92rem;
+        color: var(--text-primary);
+    }
+
+    .archive-toggle-sub {
+        font-size: 0.78rem;
+        color: var(--text-secondary);
+    }
+
+    .archive-toggle-right {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-shrink: 0;
+    }
+
+    .archive-count-badge {
+        background: var(--background);
+        border: 1px solid var(--border-color);
+        border-radius: 2rem;
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        padding: 0.15rem 0.55rem;
+    }
+
+    .archive-chevron {
+        color: var(--text-muted);
+        font-size: 0.75rem;
+        transition: transform 0.2s;
+    }
+
+    .archive-chevron.open { transform: rotate(180deg); }
+
+    .archive-body {
+        display: none;
+        padding: 0 1.25rem 1rem;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .archive-body.open { display: block; }
+
+    /* ── Sidebar cards ─────────────────────────────────────── */
+    .sidebar-card {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.75rem;
+        padding: 1.25rem 1.35rem;
+        box-shadow: var(--shadow-sm);
+        margin-bottom: 1.25rem;
+    }
+
+    .sidebar-card-title {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin: 0 0 0.85rem;
+        padding-bottom: 0.6rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .sidebar-card-title i {
+        color: var(--accent-color);
+        margin-right: 0.45rem;
+        font-size: 0.9rem;
+    }
+
+    .sidebar-info-row {
+        display: flex;
+        gap: 0.6rem;
+        align-items: flex-start;
+        font-size: 0.83rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.55rem;
+        line-height: 1.45;
+    }
+
+    .sidebar-info-row i {
+        color: var(--accent-color);
+        width: 1rem;
+        text-align: center;
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+    }
+
+    .sidebar-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .sidebar-links li {
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .sidebar-links li:last-child { border-bottom: none; }
+
+    .sidebar-links a {
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.5rem 0;
+        font-size: 0.83rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color 0.15s;
+    }
+
+    .sidebar-links a:hover { color: var(--primary-color); }
+
+    .sidebar-links a i {
+        color: var(--accent-color);
+        width: 1rem;
+        text-align: center;
+        font-size: 0.8rem;
+    }
+
+    .sidebar-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+        padding: 0.65rem 1rem;
+        border-radius: 0.4rem;
+        font-size: 0.84rem;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        border: none;
+        transition: opacity 0.15s, transform 0.15s;
+        margin-bottom: 0.6rem;
+    }
+
+    .sidebar-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .sidebar-btn:last-child { margin-bottom: 0; }
+
+    .sidebar-btn-primary {
+        background: var(--gradient-primary);
+        color: white;
+    }
+
+    .sidebar-btn-outline {
+        background: transparent;
+        border: 1.5px solid var(--primary-color);
+        color: var(--primary-color);
+    }
+
+    .sidebar-btn-admin {
+        background: #f5f7fa;
+        border: 1.5px dashed var(--border-color);
+        color: var(--text-secondary);
+        font-size: 0.78rem;
+    }
+
+    .sidebar-btn-admin:hover { border-color: var(--primary-color); color: var(--primary-color); }
+
+    /* ── Loading / error states ──────────────────────────── */
+    .nl-loading, .nl-error {
+        text-align: center;
+        padding: 3rem 1rem;
+        color: var(--text-secondary);
+    }
+
+    .nl-error { color: #c62828; }
+    .nl-error i { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
+
+    /* ── Responsive ────────────────────────────────────────── */
+    @media (max-width: 860px) {
+        .newsletter-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .newsletter-sidebar {
+            order: -1;
+        }
+
+        .issue-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="utility-bar">
+            <div class="nav-container">
+                <div class="utility-location">
+                    <i class="fas fa-location-dot"></i>
+                    <span>365 N Cool Spring Street, Fayetteville, NC</span>
+                </div>
+                <div class="utility-links">
+                    <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+                    <a href="calendar.html"><i class="fas fa-calendar-days"></i> Calendar</a>
+                    <a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener"><i class="fas fa-pencil-alt"></i> Apply</a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <a href="index.html" class="logo" style="text-decoration:none;color:inherit;">
+                        <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                        <span>St. Ann Catholic School</span>
+                    </a>
+                </div>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="mission.html" class="nav-link">About <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="mission.html">Mission &amp; Vision</a></li>
+                                <li><a href="history.html">Our History</a></li>
+                                <li><a href="principal.html">Our Principal</a></li>
+                                <li><a href="faculty.html">Our Faculty</a></li>
+                                <li><a href="parish.html">Parish Connection</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="index.html#programs" class="nav-link">Academics <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.html#programs">Curriculum</a></li>
+                                <li><a href="index.html#programs">Pre-K through 8th Grade</a></li>
+                                <li><a href="index.html#programs">Art, Music, STEM &amp; Band</a></li>
+                                <li><a href="index.html#programs">Spanish Program</a></li>
+                                <li><a href="index.html#programs">Physical Education</a></li>
+                                <li><a href="calendar.html">Academic Calendar</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="contact.html" class="nav-link">Admissions <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener">Rolling Admissions</a></li>
+                                <li><a href="tuition.html">Tuition Information</a></li>
+                                <li><a href="uniforms.html">School Uniforms</a></li>
+                                <li><a href="opportunity-scholarship.html">NC Opportunity Scholarships</a></li>
+                                <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                                <li><a href="contact.html">Schedule a Tour</a></li>
+                                <li><a href="history.html">Military Families Welcome</a></li>
+                                <li><a href="supply-lists.html">School Supply Lists</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="newsletter.html" class="nav-link active">Parents <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="newsletter.html">Newsletter</a></li>
+                                <li><a href="calendar.html">Calendar</a></li>
+                                <li><a href="uniforms.html">Uniforms</a></li>
+                                <li><a href="before-after-care.html">Before/After Care</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/Community-Opportunities" target="_blank" rel="noopener">Community Opportunities</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="activities.html" class="nav-link">Students <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="activities.html">Activities</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/School-Events" target="_blank" rel="noopener">School Events</a></li>
+                                <li><a href="say-something.html">Say Something</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="parish.html" class="nav-link">Community</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-actions">
+                    <div class="translate-widget" aria-label="Translate this site">
+                        <i class="fas fa-language"></i>
+                        <div class="gtranslate_wrapper"></div>
+                    </div>
+                    <button class="btn-secondary" onclick="openPortal()">
+                        <i class="fas fa-user"></i> Portal Login
+                    </button>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="page-hero-background">
+                <div class="page-hero-overlay"></div>
+            </div>
+            <div class="container">
+                <div class="page-hero-content">
+                    <h1 class="page-hero-title">Weekly Newsletter</h1>
+                    <p class="page-hero-subtitle">School Updates &amp; Announcements for St. Ann Families</p>
+                    <nav class="breadcrumb">
+                        <a href="index.html">Home</a> <span>/</span>
+                        <span>Parents</span> <span>/</span>
+                        <span>Newsletter</span>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <section class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-layout">
+
+                    <!-- ── Main content ──────────────────────────────── -->
+                    <div class="newsletter-main" id="newsletter-main">
+                        <div class="nl-loading">
+                            <i class="fas fa-spinner fa-spin" style="font-size:1.75rem;color:var(--accent-color);margin-bottom:0.75rem;display:block;"></i>
+                            Loading newsletter…
+                        </div>
+                    </div>
+
+                    <!-- ── Sidebar ───────────────────────────────────── -->
+                    <aside class="newsletter-sidebar">
+
+                        <div class="sidebar-card">
+                            <div class="sidebar-card-title">
+                                <i class="fas fa-envelope-open-text"></i> Stay Connected
+                            </div>
+                            <div class="sidebar-info-row">
+                                <i class="fas fa-calendar-check"></i>
+                                <span>New newsletters are posted every <strong>Friday</strong>.</span>
+                            </div>
+                            <div class="sidebar-info-row">
+                                <i class="fas fa-bell"></i>
+                                <span>Newsletters are also delivered by email through <strong>Gradelink</strong>. Make sure your email is up to date in the portal.</span>
+                            </div>
+                            <a href="javascript:void(0)" onclick="openPortal()" class="sidebar-btn sidebar-btn-primary" style="margin-top:0.5rem;">
+                                <i class="fas fa-user"></i> Open Gradelink Portal
+                            </a>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <div class="sidebar-card-title">
+                                <i class="fas fa-link"></i> Quick Links
+                            </div>
+                            <ul class="sidebar-links">
+                                <li><a href="calendar.html"><i class="fas fa-calendar-days"></i> School Calendar</a></li>
+                                <li><a href="supply-lists.html"><i class="fas fa-list-check"></i> Supply Lists</a></li>
+                                <li><a href="uniforms.html"><i class="fas fa-shirt"></i> School Uniforms</a></li>
+                                <li><a href="activities.html"><i class="fas fa-star"></i> Extracurricular Activities</a></li>
+                                <li><a href="contact.html"><i class="fas fa-phone"></i> Contact the School</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <div class="sidebar-card-title">
+                                <i class="fas fa-school"></i> School Office
+                            </div>
+                            <div class="sidebar-info-row">
+                                <i class="fas fa-phone"></i>
+                                <span>(910) 483-3216</span>
+                            </div>
+                            <div class="sidebar-info-row">
+                                <i class="fas fa-envelope"></i>
+                                <span>schooladmin@mysacs.org</span>
+                            </div>
+                            <div class="sidebar-info-row">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>365 N Cool Spring Street, Fayetteville, NC 28301</span>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-card" style="border-style:dashed;background:#f9f9fb;">
+                            <div class="sidebar-card-title" style="color:var(--text-secondary);">
+                                <i class="fas fa-lock" style="color:var(--text-muted);"></i> Admin Access
+                            </div>
+                            <p style="font-size:0.8rem;color:var(--text-secondary);margin:0 0 0.75rem;line-height:1.5;">
+                                School staff: use the admin panel to post a new weekly newsletter without editing any code.
+                            </p>
+                            <a href="admin-newsletter.html" class="sidebar-btn sidebar-btn-admin">
+                                <i class="fas fa-pen-to-square"></i> Open Newsletter Admin
+                            </a>
+                        </div>
+
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                            <span>St. Ann Catholic School</span>
+                        </div>
+                        <p>Providing quality Catholic education to the Fayetteville and Cape Fear region since 1956. The first all-inclusive school in North Carolina.</p>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="mission.html">About Us</a></li>
+                        <li><a href="index.html#programs">Academics</a></li>
+                        <li><a href="tuition.html">Tuition</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="openPortal()">Student Portal</a></li>
+                        <li><a href="newsletter.html">Newsletter</a></li>
+                        <li><a href="calendar.html">Calendar</a></li>
+                        <li><a href="supply-lists.html">Supply Lists</a></li>
+                        <li><a href="uniforms.html">Uniforms</a></li>
+                                <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                        <li><a href="activities.html">Activities</a></li>
+                        <li><a href="say-something.html">Say Something</a></li>
+                        <li><a href="parish.html">Parish</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/St.AnnCatholicSchoolFayettevilleNC" target="_blank" rel="noopener" class="social-link" aria-label="St. Ann Catholic School on Facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> (910) 483-3216</p>
+                        <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 365 N Cool Spring Street, Fayetteville, NC 28301</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 St. Ann Catholic School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.gtranslateSettings = {
+            default_language: "en",
+            languages: ["en", "es"],
+            wrapper_selector: ".gtranslate_wrapper",
+            switcher_horizontal_position: "inline"
+        };
+    </script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
+    <!-- Newsletter data file — replace this file to update the newsletter -->
+    <script src="newsletter-data.js"></script>
+    <script src="script.js"></script>
+    <script>
+    // ── Category config ────────────────────────────────────────
+    const CAT = {
+        event:        { label: 'Event',        icon: 'fa-calendar-star',        badge: 'cat-event',        dot: 'cat-event-dot' },
+        announcement: { label: 'Announcement', icon: 'fa-bullhorn',              badge: 'cat-announcement', dot: 'cat-announcement-dot' },
+        reminder:     { label: 'Reminder',     icon: 'fa-triangle-exclamation',  badge: 'cat-reminder',     dot: 'cat-reminder-dot' },
+        'no-school':  { label: 'No School',    icon: 'fa-calendar-xmark',        badge: 'cat-no-school',    dot: 'cat-no-school-dot' },
+        sports:       { label: 'Sports',       icon: 'fa-trophy',                badge: 'cat-sports',       dot: 'cat-sports-dot' },
+        fundraiser:   { label: 'Fundraiser',   icon: 'fa-hand-holding-heart',    badge: 'cat-fundraiser',   dot: 'cat-fundraiser-dot' },
+    };
+
+    function esc(str) {
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+    }
+
+    function renderItem(item) {
+        const cat = CAT[item.category] || CAT.announcement;
+        const urgentHtml = item.urgent
+            ? `<span class="item-urgent-flag"><i class="fas fa-circle-exclamation"></i> Important</span>`
+            : '';
+        return `
+        <div class="newsletter-item">
+            <div class="item-cat-dot ${esc(cat.dot)}"></div>
+            <div class="item-content">
+                <div class="item-top">
+                    <span class="item-title">${esc(item.title)}</span>
+                    <span class="item-badge ${esc(cat.badge)}">
+                        <i class="fas ${esc(cat.icon)}"></i> ${esc(cat.label)}
+                    </span>
+                    ${urgentHtml}
+                </div>
+                <div class="item-body">${esc(item.body)}</div>
+            </div>
+        </div>`;
+    }
+
+    function renderIssue(newsletter, isLatest) {
+        const itemsHtml = newsletter.items.map(renderItem).join('');
+        const badgeHtml = isLatest
+            ? `<span class="latest-badge">Latest Issue</span>`
+            : '';
+        return `
+        <div class="issue-card">
+            <div class="issue-header">
+                <div class="issue-header-left">
+                    <div class="issue-icon"><i class="fas fa-newspaper"></i></div>
+                    <div class="issue-meta">
+                        <h3>${esc(newsletter.title || newsletter.date)}</h3>
+                        <p><i class="fas fa-calendar-days" style="margin-right:0.3rem;"></i>${esc(newsletter.date)}&nbsp;&nbsp;·&nbsp;&nbsp;<i class="fas fa-circle-dot" style="margin-right:0.3rem;"></i>Friday Edition</p>
+                    </div>
+                </div>
+                ${badgeHtml}
+            </div>
+            <div class="issue-body">
+                ${itemsHtml}
+            </div>
+        </div>`;
+    }
+
+    function renderArchiveAccordion(newsletter, idx) {
+        const bodyId = `archive-body-${idx}`;
+        const chevronId = `archive-chevron-${idx}`;
+        const itemsHtml = newsletter.items.map(renderItem).join('');
+        const count = newsletter.items.length;
+        return `
+        <div class="archive-accordion">
+            <button class="archive-toggle" onclick="toggleArchive('${bodyId}','${chevronId}')" aria-expanded="false">
+                <div class="archive-toggle-left">
+                    <div class="archive-toggle-icon"><i class="fas fa-newspaper"></i></div>
+                    <div>
+                        <div class="archive-toggle-title">${esc(newsletter.title || newsletter.date)}</div>
+                        <div class="archive-toggle-sub">${esc(newsletter.date)}</div>
+                    </div>
+                </div>
+                <div class="archive-toggle-right">
+                    <span class="archive-count-badge">${count} item${count !== 1 ? 's' : ''}</span>
+                    <i class="fas fa-chevron-down archive-chevron" id="${chevronId}"></i>
+                </div>
+            </button>
+            <div class="archive-body" id="${bodyId}">
+                ${itemsHtml}
+            </div>
+        </div>`;
+    }
+
+    function toggleArchive(bodyId, chevronId) {
+        const body = document.getElementById(bodyId);
+        const chevron = document.getElementById(chevronId);
+        body.classList.toggle('open');
+        chevron.classList.toggle('open');
+    }
+
+    function renderNewsletter() {
+        const container = document.getElementById('newsletter-main');
+        if (!window.NEWSLETTER_DATA) {
+            container.innerHTML = `
+            <div class="nl-error">
+                <i class="fas fa-triangle-exclamation"></i>
+                Newsletter data could not be loaded. Please check back later or contact the school office.
+            </div>`;
+            return;
+        }
+
+        const data = window.NEWSLETTER_DATA;
+        const newsletters = (data.newsletters || []).slice().reverse(); // newest first
+        let html = '';
+
+        // Intro block
+        html += `
+        <div class="section-kicker">Parent Communications</div>
+        <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.75rem;font-weight:700;color:var(--primary-color);margin:0.35rem 0 0.75rem;">Weekly Newsletter</h2>
+        <div class="intro-block" style="margin-bottom:1.75rem;">
+            <div class="intro-block-icon"><i class="fas fa-newspaper"></i></div>
+            <p>${esc(data.intro || '')}</p>
+        </div>`;
+
+        if (newsletters.length === 0) {
+            html += `<div class="nl-error" style="color:var(--text-secondary);"><i class="fas fa-inbox" style="font-size:2rem;color:var(--text-muted);margin-bottom:0.75rem;display:block;"></i> No newsletters posted yet. Check back on Friday!</div>`;
+        } else {
+            // Latest issue
+            html += renderIssue(newsletters[0], true);
+
+            // Past issues archive
+            html += `
+            <div class="archive-section-head">
+                <h3>Past Issues</h3>
+                <div class="archive-section-line"></div>
+            </div>`;
+
+            if (newsletters.length <= 1) {
+                html += `<p class="archive-empty">No archived issues yet — past newsletters will appear here as new ones are posted.</p>`;
+            } else {
+                newsletters.slice(1).forEach((nl, i) => {
+                    html += renderArchiveAccordion(nl, i);
+                });
+            }
+        }
+
+        container.innerHTML = html;
+    }
+
+    document.addEventListener('DOMContentLoaded', renderNewsletter);
+    </script>
+</body>
+</html>

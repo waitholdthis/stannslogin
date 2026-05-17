@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Say Something - Sandy Hook Promise | St. Ann Catholic School</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    /* ── Say Something page layout ───────────────────────────── */
+    .saysomething-section {
+        padding: 4rem 0 5rem;
+        background: var(--background);
+    }
+
+    .saysomething-layout {
+        display: grid;
+        grid-template-columns: 1fr 280px;
+        gap: 2rem;
+        align-items: start;
+    }
+
+    /* ── Section blocks ──────────────────────────────────────── */
+    .ss-block {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.75rem;
+        padding: 1.75rem 2rem;
+        margin-bottom: 1.5rem;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .ss-block-header {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.85rem;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .ss-block-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-size: 1rem;
+        flex-shrink: 0;
+    }
+
+    .ss-block h2 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin: 0;
+    }
+
+    /* ── Report now hero card ────────────────────────────────── */
+    .report-hero {
+        background: linear-gradient(135deg, var(--primary-color) 0%, #2d3f6e 100%);
+        border-radius: 0.75rem;
+        padding: 2.25rem 2rem;
+        margin-bottom: 1.5rem;
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        box-shadow: var(--shadow-md);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .report-hero::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--gradient-gold);
+    }
+
+    .report-hero-icon {
+        font-size: 3rem;
+        color: var(--accent-color);
+        flex-shrink: 0;
+    }
+
+    .report-hero-text h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.45rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 0.4rem;
+    }
+
+    .report-hero-text p {
+        font-size: 0.9rem;
+        color: rgba(255,255,255,0.78);
+        line-height: 1.6;
+        margin: 0 0 1.1rem;
+    }
+
+    .report-hero-actions {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+
+    .report-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--accent-color);
+        color: var(--primary-color);
+        font-weight: 700;
+        font-size: 0.92rem;
+        padding: 0.6rem 1.35rem;
+        border-radius: 0.35rem;
+        text-decoration: none;
+        transition: background 0.2s ease, transform 0.15s ease;
+    }
+
+    .report-btn-primary:hover {
+        background: #e0bb5e;
+        transform: translateY(-1px);
+    }
+
+    .report-btn-outline {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(255,255,255,0.12);
+        color: white;
+        font-weight: 600;
+        font-size: 0.88rem;
+        padding: 0.6rem 1.1rem;
+        border-radius: 0.35rem;
+        text-decoration: none;
+        border: 1px solid rgba(255,255,255,0.3);
+        transition: background 0.2s ease;
+    }
+
+    .report-btn-outline:hover {
+        background: rgba(255,255,255,0.2);
+    }
+
+    /* ── Three-step model ────────────────────────────────────── */
+    .three-steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-bottom: 0;
+    }
+
+    .three-step-card {
+        border: 1.5px solid var(--border-color);
+        border-radius: 0.5rem;
+        padding: 1.35rem 1.1rem;
+        text-align: center;
+        transition: all 0.2s ease;
+        position: relative;
+    }
+
+    .three-step-card:hover {
+        border-color: var(--accent-color);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .three-step-number {
+        width: 2.2rem;
+        height: 2.2rem;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        margin: 0 auto 0.75rem;
+    }
+
+    .three-step-card h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.4rem;
+        line-height: 1.3;
+    }
+
+    .three-step-card p {
+        font-size: 0.83rem;
+        color: var(--text-secondary);
+        line-height: 1.55;
+        margin: 0;
+    }
+
+    /* ── Warning signs grid ──────────────────────────────────── */
+    .warning-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.85rem;
+    }
+
+    .warning-item {
+        display: flex;
+        gap: 0.85rem;
+        align-items: flex-start;
+        padding: 1rem 1.1rem;
+        background: var(--background-light);
+        border: 1px solid var(--border-light);
+        border-radius: 0.5rem;
+        border-left: 3px solid var(--accent-color);
+    }
+
+    .warning-item-icon {
+        color: var(--accent-color);
+        font-size: 1rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .warning-item-text h4 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.2rem;
+        line-height: 1.3;
+    }
+
+    .warning-item-text p {
+        font-size: 0.82rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    /* ── What to report list ─────────────────────────────────── */
+    .report-tag-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .report-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: var(--background-light);
+        border: 1px solid var(--border-color);
+        border-radius: 2rem;
+        padding: 0.35rem 0.85rem;
+        font-size: 0.84rem;
+        color: var(--text-secondary);
+        font-weight: 500;
+    }
+
+    .report-tag i {
+        color: var(--accent-color);
+        font-size: 0.75rem;
+    }
+
+    /* ── Reporting process steps ─────────────────────────────── */
+    .process-steps {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .process-step {
+        display: flex;
+        gap: 1.1rem;
+        align-items: flex-start;
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .process-step:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .process-step-num {
+        width: 2rem;
+        height: 2rem;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1rem;
+        font-weight: 700;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .process-step h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.25rem;
+    }
+
+    .process-step p {
+        font-size: 0.88rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* ── Impact stat cards ───────────────────────────────────── */
+    .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .stat-card {
+        background: var(--background-light);
+        border: 1px solid var(--border-light);
+        border-radius: 0.5rem;
+        padding: 1.1rem;
+        text-align: center;
+    }
+
+    .stat-card-value {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--secondary-color);
+        line-height: 1;
+        margin-bottom: 0.3rem;
+    }
+
+    .stat-card-label {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        line-height: 1.4;
+    }
+
+    /* ── Urgent notice ───────────────────────────────────────── */
+    .urgent-notice {
+        background: rgba(123,45,58,0.06);
+        border: 1px solid rgba(123,45,58,0.2);
+        border-left: 4px solid var(--secondary-color);
+        border-radius: 0 0.5rem 0.5rem 0;
+        padding: 1rem 1.25rem;
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+    }
+
+    .urgent-notice i {
+        color: var(--secondary-color);
+        font-size: 1rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .urgent-notice p {
+        font-size: 0.88rem;
+        color: var(--secondary-color);
+        font-weight: 600;
+        margin: 0;
+        line-height: 1.5;
+    }
+
+    /* ── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 900px) {
+        .saysomething-layout { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+        .ss-block         { padding: 1.25rem; }
+        .three-steps      { grid-template-columns: 1fr; }
+        .warning-grid     { grid-template-columns: 1fr; }
+        .stat-grid        { grid-template-columns: 1fr; }
+        .report-hero      { flex-direction: column; gap: 1rem; }
+    }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="utility-bar">
+            <div class="nav-container">
+                <div class="utility-location">
+                    <i class="fas fa-location-dot"></i>
+                    <span>365 N Cool Spring Street, Fayetteville, NC</span>
+                </div>
+                <div class="utility-links">
+                    <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+                    <a href="calendar.html"><i class="fas fa-calendar-days"></i> Calendar</a>
+                    <a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener"><i class="fas fa-pencil-alt"></i> Apply</a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <div class="logo">
+                        <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                        <a href="index.html" style="text-decoration: none; color: inherit;">
+                            <span>St. Ann Catholic School</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="mission.html" class="nav-link">About <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="mission.html">Mission &amp; Vision</a></li>
+                                <li><a href="history.html">Our History</a></li>
+                                <li><a href="principal.html">Our Principal</a></li>
+                                <li><a href="faculty.html">Our Faculty</a></li>
+                                <li><a href="parish.html">Parish Connection</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="index.html#programs" class="nav-link">Academics <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.html#programs">Curriculum</a></li>
+                                <li><a href="index.html#programs">Pre-K through 8th Grade</a></li>
+                                <li><a href="index.html#programs">Art, Music, STEM &amp; Band</a></li>
+                                <li><a href="index.html#programs">Spanish Program</a></li>
+                                <li><a href="index.html#programs">Physical Education</a></li>
+                                <li><a href="calendar.html">Academic Calendar</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="contact.html" class="nav-link">Admissions <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener">Rolling Admissions</a></li>
+                                <li><a href="tuition.html">Tuition Information</a></li>
+                                <li><a href="uniforms.html">School Uniforms</a></li>
+                                <li><a href="opportunity-scholarship.html">NC Opportunity Scholarships</a></li>
+                                <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                                <li><a href="contact.html">Schedule a Tour</a></li>
+                                <li><a href="history.html">Military Families Welcome</a></li>
+                                <li><a href="supply-lists.html">School Supply Lists</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="newsletter.html" class="nav-link">Parents <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="newsletter.html">Newsletter</a></li>
+
+                                <li><a href="calendar.html">Calendar</a></li>
+                                <li><a href="uniforms.html">Uniforms</a></li>
+                                <li><a href="before-after-care.html">Before/After Care</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/Community-Opportunities" target="_blank" rel="noopener">Community Opportunities</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="https://www.stanncatholicschool.net/Activities" target="_blank" rel="noopener" class="nav-link active">Students <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="activities.html">Activities</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/School-Events" target="_blank" rel="noopener">School Events</a></li>
+                                <li><a href="say-something.html">Say Something</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="parish.html" class="nav-link">Community</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-actions">
+                    <div class="translate-widget" aria-label="Translate this site">
+                        <i class="fas fa-language"></i>
+                        <div class="gtranslate_wrapper"></div>
+                    </div>
+                    <button class="btn-secondary" onclick="openPortal()">
+                        <i class="fas fa-user"></i> Portal Login
+                    </button>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="page-hero-background">
+                <div class="page-hero-overlay"></div>
+            </div>
+            <div class="container">
+                <div class="page-hero-content">
+                    <h1 class="page-hero-title">Say Something</h1>
+                    <p class="page-hero-subtitle">Sandy Hook Promise — Know the Signs. Speak Up. Save Lives.</p>
+                    <nav class="breadcrumb">
+                        <a href="index.html">Home</a> <span>/</span>
+                        <span>Students</span> <span>/</span>
+                        <span>Say Something</span>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <section class="saysomething-section">
+            <div class="container">
+                <div class="saysomething-layout">
+
+                    <!-- ── Main content ──────────────────────── -->
+                    <div class="saysomething-main">
+
+                        <!-- Report now hero -->
+                        <div class="section-kicker">Sandy Hook Promise Program</div>
+                        <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.75rem;font-weight:700;color:var(--primary-color);margin:0.35rem 0 1.25rem;">If You See Something, Say Something</h2>
+
+                        <div class="report-hero">
+                            <div class="report-hero-icon">
+                                <i class="fas fa-shield-heart"></i>
+                            </div>
+                            <div class="report-hero-text">
+                                <h3>Anonymous Reporting — Available 24/7</h3>
+                                <p>
+                                    If you see warning signs that someone may be in danger of hurting themselves
+                                    or others, report it immediately. Your tip is anonymous and could save a life.
+                                    Crisis counselors are available around the clock.
+                                </p>
+                                <div class="report-hero-actions">
+                                    <a href="tel:18445729669" class="report-btn-primary">
+                                        <i class="fas fa-phone"></i> Call 1-844-5-SayNow
+                                    </a>
+                                    <a href="https://www.sandyhookpromise.org/say-something-tips/" target="_blank" rel="noopener" class="report-btn-outline">
+                                        <i class="fas fa-arrow-up-right-from-square"></i> Submit a Tip Online
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Emergency notice -->
+                        <div class="urgent-notice">
+                            <i class="fas fa-triangle-exclamation"></i>
+                            <p>If there is an immediate threat to life, <strong>call 911 first</strong>. The Say Something line is for non-emergency concerns where you want to report a warning sign anonymously.</p>
+                        </div>
+
+                        <!-- Program overview -->
+                        <div class="ss-block">
+                            <div class="ss-block-header">
+                                <div class="ss-block-icon"><i class="fas fa-bullhorn"></i></div>
+                                <h2>About the Program</h2>
+                            </div>
+                            <p style="font-size:0.95rem;color:var(--text-secondary);line-height:1.7;margin:0 0 1.5rem;">
+                                The <strong>Say Something</strong> program by Sandy Hook Promise teaches students
+                                in Kindergarten through 12th Grade to recognize the warning signs of someone who
+                                may be at risk of hurting themselves or others — and to speak up to a trusted adult
+                                before a tragedy occurs. Research has shown that <strong>nearly 100% of school
+                                attackers displayed warning signs before their attack</strong>, most often on social
+                                media or to people around them. Knowing the signs and having the courage to act can
+                                prevent violence before it happens.
+                            </p>
+
+                            <!-- Impact stats -->
+                            <div class="stat-grid">
+                                <div class="stat-card">
+                                    <div class="stat-card-value">395K+</div>
+                                    <div class="stat-card-label">Anonymous tips submitted since 2018</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-card-value">24/7</div>
+                                    <div class="stat-card-label">Trained crisis counselors available every day</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-card-value">~100%</div>
+                                    <div class="stat-card-label">Of school attackers showed warning signs beforehand</div>
+                                </div>
+                            </div>
+
+                            <!-- Three-step model -->
+                            <div class="three-steps">
+                                <div class="three-step-card">
+                                    <div class="three-step-number">1</div>
+                                    <h3>Recognize Warning Signs</h3>
+                                    <p>Learn what warning signs and threats look like — in person and on social media.</p>
+                                </div>
+                                <div class="three-step-card">
+                                    <div class="three-step-number">2</div>
+                                    <h3>Act Immediately</h3>
+                                    <p>Take it seriously. Don't wait or assume someone else will report it.</p>
+                                </div>
+                                <div class="three-step-card">
+                                    <div class="three-step-number">3</div>
+                                    <h3>Say Something</h3>
+                                    <p>Tell a trusted adult or use the anonymous reporting system right away.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Warning signs -->
+                        <div class="ss-block">
+                            <div class="ss-block-header">
+                                <div class="ss-block-icon"><i class="fas fa-eye"></i></div>
+                                <h2>Warning Signs to Watch For</h2>
+                            </div>
+                            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.6;margin:0 0 1.25rem;">
+                                Warning signs can appear in thoughts, feelings, actions, and behaviors — including
+                                online activity. A single sign doesn't always mean danger, but if you notice
+                                any of these, report it to a trusted adult right away.
+                            </p>
+                            <div class="warning-grid">
+                                <div class="warning-item">
+                                    <i class="fas fa-user-slash warning-item-icon"></i>
+                                    <div class="warning-item-text">
+                                        <h4>Social Withdrawal</h4>
+                                        <p>Suddenly pulling away from friends, family, and activities — including online or on social media.</p>
+                                    </div>
+                                </div>
+                                <div class="warning-item">
+                                    <i class="fas fa-face-angry warning-item-icon"></i>
+                                    <div class="warning-item-text">
+                                        <h4>Excessive Irritability</h4>
+                                        <p>Becoming angry very quickly, showing little patience, or having extreme mood changes.</p>
+                                    </div>
+                                </div>
+                                <div class="warning-item">
+                                    <i class="fas fa-person-circle-exclamation warning-item-icon"></i>
+                                    <div class="warning-item-text">
+                                        <h4>Bullying Others</h4>
+                                        <p>Targeting others — especially based on race, religion, gender, or sexual orientation.</p>
+                                    </div>
+                                </div>
+                                <div class="warning-item">
+                                    <i class="fas fa-heart-crack warning-item-icon"></i>
+                                    <div class="warning-item-text">
+                                        <h4>Chronic Loneliness or Isolation</h4>
+                                        <p>Experiencing deep and lasting feelings of loneliness or being cut off from others.</p>
+                                    </div>
+                                </div>
+                                <div class="warning-item">
+                                    <i class="fas fa-comment-dots warning-item-icon"></i>
+                                    <div class="warning-item-text">
+                                        <h4>Thoughts of Harm</h4>
+                                        <p>Expressing persistent thoughts of hurting themselves or someone else.</p>
+                                    </div>
+                                </div>
+                                <div class="warning-item">
+                                    <i class="fas fa-triangle-exclamation warning-item-icon"></i>
+                                    <div class="warning-item-text">
+                                        <h4>Direct Threats</h4>
+                                        <p>Making direct threats — verbal, written, or online — toward a person, place, or themselves.</p>
+                                    </div>
+                                </div>
+                                <div class="warning-item">
+                                    <i class="fas fa-gun warning-item-icon"></i>
+                                    <div class="warning-item-text">
+                                        <h4>Bragging About Weapons</h4>
+                                        <p>Boasting about access to guns or other weapons, or showing them off.</p>
+                                    </div>
+                                </div>
+                                <div class="warning-item">
+                                    <i class="fas fa-users warning-item-icon"></i>
+                                    <div class="warning-item-text">
+                                        <h4>Recruiting Others</h4>
+                                        <p>Trying to recruit accomplices or an audience for a planned attack.</p>
+                                    </div>
+                                </div>
+                                <div class="warning-item">
+                                    <i class="fas fa-laptop warning-item-icon"></i>
+                                    <div class="warning-item-text">
+                                        <h4>Obsession with Violence</h4>
+                                        <p>Fixation on violent online content, mass shooters, or weapons — especially online.</p>
+                                    </div>
+                                </div>
+                                <div class="warning-item">
+                                    <i class="fas fa-paw warning-item-icon"></i>
+                                    <div class="warning-item-text">
+                                        <h4>Cruelty to Animals</h4>
+                                        <p>Harming or showing cruelty toward animals, which can signal deeper behavioral concerns.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- What to report -->
+                        <div class="ss-block">
+                            <div class="ss-block-header">
+                                <div class="ss-block-icon"><i class="fas fa-clipboard-list"></i></div>
+                                <h2>What You Can Report</h2>
+                            </div>
+                            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.6;margin:0 0 1.1rem;">
+                                You don't have to be certain something is wrong to report it. When in doubt, say something. The Say Something system handles all of the following concerns:
+                            </p>
+                            <div class="report-tag-grid">
+                                <span class="report-tag"><i class="fas fa-circle-dot"></i> Violence (with or without weapons)</span>
+                                <span class="report-tag"><i class="fas fa-circle-dot"></i> Verbal or physical abuse</span>
+                                <span class="report-tag"><i class="fas fa-circle-dot"></i> Sexual abuse or harassment</span>
+                                <span class="report-tag"><i class="fas fa-circle-dot"></i> Social media threats</span>
+                                <span class="report-tag"><i class="fas fa-circle-dot"></i> Bullying &amp; intimidation</span>
+                                <span class="report-tag"><i class="fas fa-circle-dot"></i> Weapon access or attack planning</span>
+                                <span class="report-tag"><i class="fas fa-circle-dot"></i> Depression, anxiety, or isolation</span>
+                                <span class="report-tag"><i class="fas fa-circle-dot"></i> Substance abuse</span>
+                                <span class="report-tag"><i class="fas fa-circle-dot"></i> Suicide threats or self-harm</span>
+                                <span class="report-tag"><i class="fas fa-circle-dot"></i> Any other troubling behavior</span>
+                            </div>
+                        </div>
+
+                        <!-- How to report -->
+                        <div class="ss-block">
+                            <div class="ss-block-header">
+                                <div class="ss-block-icon"><i class="fas fa-paper-plane"></i></div>
+                                <h2>How to Submit a Tip</h2>
+                            </div>
+                            <div class="process-steps">
+                                <div class="process-step">
+                                    <div class="process-step-num">1</div>
+                                    <div>
+                                        <h3>Choose How to Report</h3>
+                                        <p>Call <strong>1-844-5-SayNow (1-844-572-9669)</strong>, submit a tip online at sandyhookpromise.org, or download the free Say Something app from the App Store or Google Play.</p>
+                                    </div>
+                                </div>
+                                <div class="process-step">
+                                    <div class="process-step-num">2</div>
+                                    <div>
+                                        <h3>Share What You Know</h3>
+                                        <p>Describe the warning signs or behavior you've observed. You can remain completely anonymous — you never have to share your name.</p>
+                                    </div>
+                                </div>
+                                <div class="process-step">
+                                    <div class="process-step-num">3</div>
+                                    <div>
+                                        <h3>Chat with a Crisis Counselor</h3>
+                                        <p>A trained crisis counselor will review your tip and follow up with you privately through a secure anonymous chat to gather any additional details.</p>
+                                    </div>
+                                </div>
+                                <div class="process-step">
+                                    <div class="process-step-num">4</div>
+                                    <div>
+                                        <h3>The Right People Are Notified</h3>
+                                        <p>If the concern is serious, the crisis counselor refers the information to school officials and/or law enforcement so the right help can reach the person at risk.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- ── Sidebar ───────────────────────────── -->
+                    <div class="sidebar">
+
+                        <div class="sidebar-card" style="border-top: 3px solid var(--secondary-color);">
+                            <h3 style="color:var(--secondary-color);">Report a Concern Now</h3>
+                            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1rem;">
+                                Anonymous. Free. Available 24 hours a day, 365 days a year.
+                            </p>
+                            <a href="tel:18445729669"
+                               class="btn-primary sidebar-btn"
+                               style="text-decoration:none;display:inline-flex;margin-bottom:0.65rem;background:var(--secondary-color);border-color:var(--secondary-color);">
+                                <i class="fas fa-phone"></i> 1-844-5-SayNow
+                            </a>
+                            <a href="https://www.sandyhookpromise.org/say-something-tips/"
+                               target="_blank" rel="noopener"
+                               class="btn-primary sidebar-btn"
+                               style="text-decoration:none;display:inline-flex;background:var(--background-light);color:var(--primary-color);border:1px solid var(--border-color);">
+                                <i class="fas fa-globe"></i> Submit Online
+                            </a>
+                            <p style="font-size:0.78rem;color:var(--text-light);margin-top:0.75rem;line-height:1.5;">
+                                <strong style="color:var(--secondary-color);">Immediate danger?</strong> Call 911.
+                            </p>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Download the App</h3>
+                            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1rem;">
+                                The free Say Something app lets you submit anonymous tips from your phone anytime, anywhere.
+                            </p>
+                            <ul class="quick-info-list">
+                                <li>
+                                    <i class="fab fa-apple"></i>
+                                    <div>
+                                        <strong>iPhone / iPad</strong><br>
+                                        <span style="font-size:0.82rem;color:var(--text-secondary);">Available on the App Store</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fab fa-google-play"></i>
+                                    <div>
+                                        <strong>Android</strong><br>
+                                        <span style="font-size:0.82rem;color:var(--text-secondary);">Available on Google Play</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <p style="font-size:0.8rem;color:var(--text-light);margin-top:0.75rem;">Search <strong>"Say Something"</strong> in your app store.</p>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Sandy Hook Promise</h3>
+                            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1rem;">
+                                Sandy Hook Promise is a national nonprofit dedicated to preventing gun violence and other forms of violence before they happen through education and awareness.
+                            </p>
+                            <ul class="quick-info-list">
+                                <li>
+                                    <i class="fas fa-globe"></i>
+                                    <div>
+                                        <a href="https://www.sandyhookpromise.org" target="_blank" rel="noopener"
+                                           style="color:var(--primary-color);font-weight:600;text-decoration:none;font-size:0.88rem;">
+                                            sandyhookpromise.org
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-phone"></i>
+                                    <div>
+                                        <strong>Say Something Hotline</strong><br>
+                                        <span style="font-size:0.82rem;color:var(--text-secondary);">1-844-572-9669</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Questions for St. Ann?</h3>
+                            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:0.75rem;">
+                                If you have a concern about a student's wellbeing and prefer to speak with someone at school, contact us directly.
+                            </p>
+                            <div class="contact-info">
+                                <p><i class="fas fa-phone"></i> (910) 483-3216</p>
+                                <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                            </div>
+                            <a href="contact.html" class="btn-primary sidebar-btn" style="text-decoration:none;display:inline-flex;margin-top:1rem;">
+                                <i class="fas fa-paper-plane"></i> Contact School
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                            <span>St. Ann Catholic School</span>
+                        </div>
+                        <p>Providing quality Catholic education to the Fayetteville and Cape Fear region since 1956. The first all-inclusive school in North Carolina.</p>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="mission.html">About Us</a></li>
+                        <li><a href="index.html#programs">Academics</a></li>
+                        <li><a href="tuition.html">Tuition</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="openPortal()">Student Portal</a></li>
+                        <li><a href="newsletter.html">Newsletter</a></li>
+
+                        <li><a href="calendar.html">Calendar</a></li>
+                        <li><a href="supply-lists.html">Supply Lists</a></li>
+                        <li><a href="uniforms.html">Uniforms</a></li>
+                                <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                        <li><a href="say-something.html">Say Something</a></li>
+                        <li><a href="parish.html">Parish</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/St.AnnCatholicSchoolFayettevilleNC" target="_blank" rel="noopener" class="social-link" aria-label="St. Ann Catholic School on Facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> (910) 483-3216</p>
+                        <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 365 N Cool Spring Street, Fayetteville, NC 28301</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 St. Ann Catholic School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.gtranslateSettings = {
+            default_language: "en",
+            languages: ["en", "es"],
+            wrapper_selector: ".gtranslate_wrapper",
+            switcher_horizontal_position: "inline"
+        };
+    </script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
+    <script src="script.js"></script>
+</body>
+</html>

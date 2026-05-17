@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Supply Lists - St. Ann Catholic School | Fayetteville, NC</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    .supply-card {
+        cursor: pointer;
+    }
+    .supply-card:hover {
+        border-color: var(--accent-color);
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+    }
+    .supply-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(15, 26, 46, 0.85);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        backdrop-filter: blur(6px);
+        animation: fadeIn 0.3s ease-out;
+        padding: 1rem;
+    }
+    .supply-modal {
+        background: #faf8f0;
+        border-radius: 0.75rem;
+        max-width: 650px;
+        width: 100%;
+        max-height: 90vh;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 25px 50px -12px rgba(26, 39, 68, 0.3);
+        animation: modalSlideIn 0.3s ease-out;
+        border: 1px solid #e2ddd2;
+        overflow: hidden;
+    }
+    .supply-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 1.75rem 2rem 1.25rem;
+        border-bottom: 3px solid;
+        border-image: linear-gradient(90deg, #7b2d3a, #c9a84c, #7b2d3a) 1;
+        background: white;
+    }
+    .supply-modal-school {
+        font-family: 'Cormorant Garamond', 'Georgia', serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #7b2d3a;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 0.25rem;
+    }
+    .supply-modal-header h2 {
+        font-family: 'Cormorant Garamond', 'Georgia', serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #1a2744;
+        margin: 0;
+        line-height: 1.2;
+    }
+    .supply-modal-subtitle {
+        color: #5a524d;
+        font-size: 0.9rem;
+        margin: 0.25rem 0 0;
+    }
+    .supply-modal-close {
+        background: none;
+        border: none;
+        font-size: 1.75rem;
+        color: #8a827c;
+        cursor: pointer;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        transition: all 0.3s ease;
+        line-height: 1;
+        flex-shrink: 0;
+    }
+    .supply-modal-close:hover {
+        background: #f5f2e8;
+        color: #2c2420;
+    }
+    .supply-modal-body {
+        padding: 1.75rem 2rem;
+        overflow-y: auto;
+        flex: 1;
+    }
+    .supply-print-header {
+        display: none;
+    }
+    .supply-modal-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .supply-modal-list li {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #e2ddd2;
+        font-size: 0.95rem;
+        color: #2c2420;
+        display: flex;
+        align-items: baseline;
+        gap: 0.6rem;
+        line-height: 1.5;
+    }
+    .supply-modal-list li:last-child {
+        border-bottom: none;
+    }
+    .supply-modal-list li::before {
+        content: "\2610";
+        color: #7b2d3a;
+        font-size: 1.15rem;
+        flex-shrink: 0;
+    }
+    .supply-modal-note {
+        margin-top: 1.25rem;
+        padding: 1rem 1.25rem;
+        background: #f5f2e8;
+        border-left: 3px solid #c9a84c;
+        border-radius: 0 0.4rem 0.4rem 0;
+    }
+    .supply-modal-note strong {
+        display: block;
+        margin-bottom: 0.4rem;
+        color: #1a2744;
+        font-size: 0.95rem;
+    }
+    .supply-modal-note .supply-modal-list li {
+        border-color: #ddd8cc;
+        padding: 0.35rem 0;
+        font-size: 0.9rem;
+    }
+    .supply-modal-footer-note {
+        margin-top: 1.5rem;
+        padding-top: 1rem;
+        border-top: 1px solid #e2ddd2;
+        font-size: 0.85rem;
+        color: #5a524d;
+    }
+    .supply-modal-footer-note em {
+        color: #7b2d3a;
+    }
+    .supply-modal-footer-note p {
+        margin: 0 0 0.35rem;
+    }
+    .supply-modal-actions {
+        display: flex;
+        gap: 0.75rem;
+        padding: 1.25rem 2rem;
+        border-top: 1px solid #e2ddd2;
+        background: white;
+    }
+    .supply-modal-actions .btn-primary,
+    .supply-modal-actions .btn-secondary {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+    }
+    @media (max-width: 768px) {
+        .supply-modal-overlay {
+            padding: 0.5rem;
+            align-items: flex-end;
+        }
+        .supply-modal {
+            max-height: 95vh;
+            border-radius: 0.75rem 0.75rem 0 0;
+        }
+        .supply-modal-header,
+        .supply-modal-body,
+        .supply-modal-actions {
+            padding-left: 1.25rem;
+            padding-right: 1.25rem;
+        }
+        .supply-modal-header h2 {
+            font-size: 1.3rem;
+        }
+        .supply-modal-actions {
+            flex-direction: column;
+        }
+    }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="utility-bar">
+            <div class="nav-container">
+                <div class="utility-location">
+                    <i class="fas fa-location-dot"></i>
+                    <span>365 N Cool Spring Street, Fayetteville, NC</span>
+                </div>
+                <div class="utility-links">
+                    <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+                    <a href="calendar.html"><i class="fas fa-calendar-days"></i> Calendar</a>
+                    <a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener"><i class="fas fa-pencil-alt"></i> Apply</a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <div class="logo">
+                        <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                        <a href="index.html" style="text-decoration: none; color: inherit;">
+                            <span>St. Ann Catholic School</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="mission.html" class="nav-link">About <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="mission.html">Mission & Vision</a></li>
+                                <li><a href="history.html">Our History</a></li>
+                                <li><a href="principal.html">Our Principal</a></li>
+                                <li><a href="faculty.html">Our Faculty</a></li>
+                                <li><a href="parish.html">Parish Connection</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="index.html#programs" class="nav-link">Academics <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.html#programs">Curriculum</a></li>
+                                <li><a href="index.html#programs">Pre-K through 8th Grade</a></li>
+                                <li><a href="index.html#programs">Art, Music, STEM & Band</a></li>
+                                <li><a href="index.html#programs">Spanish Program</a></li>
+                                <li><a href="index.html#programs">Physical Education</a></li>
+                                <li><a href="calendar.html">Academic Calendar</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="contact.html" class="nav-link active">Admissions <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener">Rolling Admissions</a></li>
+                                <li><a href="tuition.html">Tuition Information</a></li>
+                                <li><a href="uniforms.html">School Uniforms</a></li>
+                                <li><a href="opportunity-scholarship.html">NC Opportunity Scholarships</a></li>
+                                <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                                <li><a href="contact.html">Schedule a Tour</a></li>
+                                <li><a href="history.html">Military Families Welcome</a></li>
+                                <li><a href="supply-lists.html">School Supply Lists</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="newsletter.html" class="nav-link">Parents <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="newsletter.html">Newsletter</a></li>
+
+                                <li><a href="calendar.html">Calendar</a></li>
+                                <li><a href="uniforms.html">Uniforms</a></li>
+                                <li><a href="before-after-care.html">Before/After Care</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/Community-Opportunities" target="_blank" rel="noopener">Community Opportunities</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="activities.html" class="nav-link">Students <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="activities.html">Activities</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/School-Events" target="_blank" rel="noopener">School Events</a></li>
+                                <li><a href="say-something.html">Say Something</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="parish.html" class="nav-link">Community</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-actions">
+                    <!-- GTranslate: https://gtranslate.com -->
+                    <div class="translate-widget" aria-label="Translate this site">
+                        <i class="fas fa-language"></i>
+                        <div class="gtranslate_wrapper"></div>
+                    </div>
+                    <button class="btn-secondary" onclick="openPortal()">
+                        <i class="fas fa-user"></i> Portal Login
+                    </button>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="page-hero-background">
+                <div class="page-hero-overlay"></div>
+            </div>
+            <div class="container">
+                <div class="page-hero-content">
+                    <h1 class="page-hero-title">School Supply Lists</h1>
+                    <p class="page-hero-subtitle">Everything your child needs to start the school year prepared</p>
+                    <nav class="breadcrumb">
+                        <a href="index.html">Home</a> <span>/</span> <a href="contact.html">Admissions</a> <span>/</span> <span>School Supply Lists</span>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <section class="mission-content">
+            <div class="container">
+                <div class="content-grid">
+                    <div class="main-content">
+                        <div class="supply-intro">
+                            <div class="section-icon">
+                                <i class="fas fa-list-check"></i>
+                            </div>
+                            <h2>2025&ndash;2026 School Supply Lists</h2>
+                            <p class="lead-text">
+                                Help your child start the school year ready to learn! Click on your child's grade level
+                                below to view and print their supply list.
+                            </p>
+                            <p>
+                                Our teachers have carefully selected the supplies needed for a successful year.
+                                Many items may need to be replaced throughout the year. If you have any questions,
+                                please contact the school office at <strong>(910) 483-3216</strong>.
+                            </p>
+                        </div>
+
+                        <div class="supply-grades">
+                            <div class="section-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h2>Select a Grade Level</h2>
+                            <p>Click on a grade to view the complete supply list.</p>
+
+                            <div class="values-grid" style="margin-top: 2rem;">
+                                <div class="value-card supply-card" data-grade="preschool">
+                                    <div class="value-icon">
+                                        <i class="fas fa-baby"></i>
+                                    </div>
+                                    <h3>Preschool</h3>
+                                    <p>Ages 3&ndash;4</p>
+                                </div>
+                                <div class="value-card supply-card" data-grade="kindergarten">
+                                    <div class="value-icon">
+                                        <i class="fas fa-apple-alt"></i>
+                                    </div>
+                                    <h3>Kindergarten</h3>
+                                    <p>Age 5</p>
+                                </div>
+                                <div class="value-card supply-card" data-grade="grade1">
+                                    <div class="value-icon">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </div>
+                                    <h3>Grade 1</h3>
+                                    <p>Lower Elementary</p>
+                                </div>
+                                <div class="value-card supply-card" data-grade="grade2">
+                                    <div class="value-icon">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </div>
+                                    <h3>Grade 2</h3>
+                                    <p>Lower Elementary</p>
+                                </div>
+                                <div class="value-card supply-card" data-grade="grade3">
+                                    <div class="value-icon">
+                                        <i class="fas fa-book-reader"></i>
+                                    </div>
+                                    <h3>Grade 3</h3>
+                                    <p>Upper Elementary</p>
+                                </div>
+                                <div class="value-card supply-card" data-grade="grade45">
+                                    <div class="value-icon">
+                                        <i class="fas fa-book-reader"></i>
+                                    </div>
+                                    <h3>Grades 4 &amp; 5</h3>
+                                    <p>Upper Elementary</p>
+                                </div>
+                                <div class="value-card supply-card" data-grade="grade678">
+                                    <div class="value-icon">
+                                        <i class="fas fa-user-graduate"></i>
+                                    </div>
+                                    <h3>Grades 6, 7 &amp; 8</h3>
+                                    <p>Middle School</p>
+                                </div>
+                                <div class="value-card supply-card" data-grade="spanish">
+                                    <div class="value-icon">
+                                        <i class="fas fa-globe-americas"></i>
+                                    </div>
+                                    <h3>Spanish</h3>
+                                    <p>All Grades</p>
+                                </div>
+                                <div class="value-card supply-card" data-grade="music">
+                                    <div class="value-icon">
+                                        <i class="fas fa-music"></i>
+                                    </div>
+                                    <h3>Music</h3>
+                                    <p>Grades K&ndash;8</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="supply-download" style="margin-top: 3rem;">
+                            <div class="commitment-box">
+                                <h3><i class="fas fa-file-pdf" style="color: var(--secondary-color); margin-right: 0.5rem;"></i> Download the Complete Supply List</h3>
+                                <p>
+                                    Prefer a printable version of all grades on one page? Download the full PDF.
+                                </p>
+                                <a href="https://www.saintanncs.com/s/School-Supply-List-2025-2026-xjdc.pdf" target="_blank" rel="noopener" class="btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1rem; text-decoration: none;">
+                                    <i class="fas fa-download"></i>
+                                    Download Complete List (PDF)
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar">
+                        <div class="sidebar-card">
+                            <h3>Quick Download</h3>
+                            <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.95rem;">Get the complete 2025&ndash;2026 supply list for all grades.</p>
+                            <a href="https://www.saintanncs.com/s/School-Supply-List-2025-2026-xjdc.pdf" target="_blank" rel="noopener" class="btn-primary sidebar-btn" style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; text-decoration: none; width: 100%;">
+                                <i class="fas fa-download"></i>
+                                Download PDF
+                            </a>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Grade Levels</h3>
+                            <ul class="fact-list">
+                                <li><i class="fas fa-baby"></i> Preschool (Ages 3&ndash;4)</li>
+                                <li><i class="fas fa-apple-alt"></i> Kindergarten</li>
+                                <li><i class="fas fa-pencil-alt"></i> 1st &ndash; 2nd Grade</li>
+                                <li><i class="fas fa-book-reader"></i> 3rd &ndash; 5th Grade</li>
+                                <li><i class="fas fa-user-graduate"></i> 6th &ndash; 8th Grade</li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Reminders</h3>
+                            <ul class="fact-list">
+                                <li><i class="fas fa-tag"></i> Label all supplies with child's name</li>
+                                <li><i class="fas fa-sync-alt"></i> Many items need mid-year replenishing</li>
+                                <li><i class="fas fa-shopping-cart"></i> Purchase supplies before first day</li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Need Help?</h3>
+                            <div class="contact-info">
+                                <p><i class="fas fa-phone"></i> (910) 483-3216</p>
+                                <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                                <p><i class="fas fa-map-marker-alt"></i> 365 N Cool Spring Street<br>Fayetteville, NC 28301</p>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Learn More</h3>
+                            <div class="sidebar-links">
+                                <a href="mission.html" class="sidebar-link">
+                                    <i class="fas fa-cross"></i> Mission & Vision
+                                </a>
+                                <a href="principal.html" class="sidebar-link">
+                                    <i class="fas fa-user-tie"></i> Our Principal
+                                </a>
+                                <a href="faculty.html" class="sidebar-link">
+                                    <i class="fas fa-users"></i> Our Faculty
+                                </a>
+                                <a href="contact.html" class="sidebar-link">
+                                    <i class="fas fa-phone"></i> Contact Us
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                            <span>St. Ann Catholic School</span>
+                        </div>
+                        <p>Providing quality Catholic education to the Fayetteville and Cape Fear region since 1956. The first all-inclusive school in North Carolina.</p>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="mission.html">Mission & Vision</a></li>
+                        <li><a href="history.html">Our History</a></li>
+                        <li><a href="principal.html">Our Principal</a></li>
+                        <li><a href="faculty.html">Our Faculty</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="openPortal()">Student Portal</a></li>
+                        <li><a href="newsletter.html">Newsletter</a></li>
+
+                        <li><a href="calendar.html">Calendar</a></li>
+                        <li><a href="contact.html">Policies</a></li>
+                        <li><a href="contact.html">Forms</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/St.AnnCatholicSchoolFayettevilleNC" target="_blank" rel="noopener" class="social-link" aria-label="St. Ann Catholic School on Facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> (910) 483-3216</p>
+                        <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 365 N Cool Spring Street, Fayetteville, NC 28301</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 St. Ann Catholic School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="supply-lists.js"></script>
+    <script>
+        window.gtranslateSettings = {
+            default_language: "en",
+            languages: ["en", "es"],
+            wrapper_selector: ".gtranslate_wrapper",
+            switcher_horizontal_position: "inline"
+        };
+    </script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
+    <script src="script.js"></script>
+</body>
+</html>

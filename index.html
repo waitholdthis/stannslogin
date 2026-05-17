@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>St. Ann Catholic School - Enter to Learn; Depart to Serve | Fayetteville, NC</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="utility-bar">
+            <div class="nav-container">
+                <div class="utility-location">
+                    <i class="fas fa-location-dot"></i>
+                    <span>365 N Cool Spring Street, Fayetteville, NC</span>
+                </div>
+                <div class="utility-links">
+                    <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+                    <a href="calendar.html"><i class="fas fa-calendar-days"></i> Calendar</a>
+                    <a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener"><i class="fas fa-pencil-alt"></i> Apply</a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <a href="index.html" class="logo" style="text-decoration: none; color: inherit;">
+                        <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                        <span>St. Ann Catholic School</span>
+                    </a>
+                </div>
+                
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="#home" class="nav-link active">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="mission.html" class="nav-link">About <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="mission.html">Mission & Vision</a></li>
+                                <li><a href="history.html">Our History</a></li>
+                                <li><a href="principal.html">Our Principal</a></li>
+                                <li><a href="faculty.html">Our Faculty</a></li>
+                                <li><a href="parish.html">Parish Connection</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="index.html#programs" class="nav-link">Academics <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.html#programs">Curriculum</a></li>
+                                <li><a href="index.html#programs">Pre-K through 8th Grade</a></li>
+                                <li><a href="index.html#programs">Art, Music, STEM & Band</a></li>
+                                <li><a href="index.html#programs">Spanish Program</a></li>
+                                <li><a href="index.html#programs">Physical Education</a></li>
+                                <li><a href="calendar.html">Academic Calendar</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="contact.html" class="nav-link">Admissions <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener">Rolling Admissions</a></li>
+                                <li><a href="tuition.html">Tuition Information</a></li>
+                                <li><a href="uniforms.html">School Uniforms</a></li>
+                                <li><a href="opportunity-scholarship.html">NC Opportunity Scholarships</a></li>
+                                <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                                <li><a href="contact.html">Schedule a Tour</a></li>
+                                <li><a href="history.html">Military Families Welcome</a></li>
+                                <li><a href="supply-lists.html">School Supply Lists</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="newsletter.html" class="nav-link">Parents <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="newsletter.html">Newsletter</a></li>
+
+                                <li><a href="calendar.html">Calendar</a></li>
+                                <li><a href="uniforms.html">Uniforms</a></li>
+                                <li><a href="before-after-care.html">Before/After Care</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/Community-Opportunities" target="_blank" rel="noopener">Community Opportunities</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="activities.html" class="nav-link">Students <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="activities.html">Activities</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/School-Events" target="_blank" rel="noopener">School Events</a></li>
+                                <li><a href="say-something.html">Say Something</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="parish.html" class="nav-link">Community</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-actions">
+                    <!-- GTranslate: https://gtranslate.com -->
+                    <div class="translate-widget" aria-label="Translate this site">
+                        <i class="fas fa-language"></i>
+                        <div class="gtranslate_wrapper"></div>
+                    </div>
+                    <button class="btn-secondary" onclick="openPortal()">
+                        <i class="fas fa-user"></i> Portal Login
+                    </button>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-background">
+                <div class="hero-overlay"></div>
+            </div>
+            <div class="hero-content">
+                <div class="container">
+                    <div class="hero-text">
+                        <h1 class="hero-title">
+                            <span class="highlight">Enter to Learn;</span><br>
+                            <span class="highlight">Depart to Serve</span>
+                        </h1>
+                        <p class="hero-subtitle">
+                            Serving Fayetteville since 1956, St. Ann Catholic School provides quality education 
+                            in a structured environment where academic excellence and Catholic identity are priorities. 
+                            We are a culturally diverse school that serves our entire military and civilian community.
+                        </p>
+                        <div class="hero-actions">
+                            <a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener" class="btn-primary" style="text-decoration: none;">
+                                <i class="fas fa-pencil-alt"></i>
+                                Apply Now
+                            </a>
+                            <a href="mission.html" class="btn-primary" style="text-decoration: none;">
+                                <i class="fas fa-graduation-cap"></i>
+                                Learn More About Us
+                            </a>
+                            <a href="contact.html" class="btn-outline" style="text-decoration: none;">
+                                <i class="fas fa-calendar-alt"></i>
+                                Schedule a Visit
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-scroll">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </section>
+
+        <section class="parish-actions" aria-label="Quick links">
+            <div class="container">
+                <div class="parish-actions-grid">
+                    <a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener" class="parish-action">
+                        <i class="fas fa-pencil-alt"></i>
+                        <span>Apply</span>
+                    </a>
+                    <a href="contact.html" class="parish-action">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Schedule a Tour</span>
+                    </a>
+                    <a href="supply-lists.html" class="parish-action">
+                        <i class="fas fa-list-check"></i>
+                        <span>Supply Lists</span>
+                    </a>
+                    <a href="parish.html" class="parish-action">
+                        <i class="fas fa-church"></i>
+                        <span>Parish Life</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="school-life-strip" aria-label="Explore St. Ann">
+            <a href="contact.html" class="school-life-panel school-life-panel-large">
+                <span>Admissions</span>
+                <strong>Be part of the St. Ann family</strong>
+            </a>
+            <a href="newsletter.html" class="school-life-panel">
+                <span>News</span>
+                <strong>Classroom blessings, reminders, and updates</strong>
+            </a>
+            <a href="parish.html" class="school-life-panel">
+                <span>Parish</span>
+                <strong>Faith, service, and community life</strong>
+            </a>
+        </section>
+
+        <section class="family-pathways" aria-label="Find your path">
+            <div class="container">
+                <div class="pathways-grid">
+                    <a href="mission.html" class="pathway-card">
+                        <i class="fas fa-compass"></i>
+                        <span>New to St. Ann?</span>
+                        <strong>Discover if our school is the right fit for your family.</strong>
+                    </a>
+                    <a href="newsletter.html" class="pathway-card">
+                        <i class="fas fa-house-user"></i>
+                        <span>Current Families</span>
+                        <strong>Find newsletters, calendar updates, and parent resources.</strong>
+                    </a>
+                    <a href="#programs" class="pathway-card">
+                        <i class="fas fa-palette"></i>
+                        <span>Student Life</span>
+                        <strong>Explore art, music, STEM, athletics, service, and leadership.</strong>
+                    </a>
+                    <a href="parish.html" class="pathway-card">
+                        <i class="fas fa-hands-praying"></i>
+                        <span>Faith Formation</span>
+                        <strong>See how prayer, Mass, and service shape each school day.</strong>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="highlights">
+            <div class="container">
+                <div class="section-kicker">Encounter Christ Here</div>
+                <div class="section-header">
+                    <h2>Live the St. Ann Way</h2>
+                    <p>Love God. Cherish family. Challenge our minds. Celebrate our differences.</p>
+                </div>
+                <div class="highlights-grid">
+                    <div class="highlight-card">
+                        <div class="highlight-icon">
+                            <i class="fas fa-cross"></i>
+                        </div>
+                        <h3>Catholic Faith Formation</h3>
+                        <p>Daily prayer led by students, weekly Mass as a school family, and students serving as altar servers, lectors, and choir members</p>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3>Academic Excellence</h3>
+                        <p>Rigorous curriculum aligned with NC Standard Course of Study, 11:1 student-teacher ratio, and Cognia accreditation</p>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Culturally Diverse Community</h3>
+                        <p>An inclusive school serving students of every race, culture, and religious background, with strong support for military families</p>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>68+ Years of Excellence</h3>
+                        <p>Serving downtown Fayetteville and the Cape Fear region with Catholic education since 1956</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="announcements">
+            <div class="container">
+                <div class="section-kicker">Stay Connected</div>
+                <div class="section-header">
+                    <h2>Latest News & Events</h2>
+                    <p>Stay connected with what's happening at St. Ann</p>
+                </div>
+                <div class="announcements-grid">
+                    <article class="announcement-card featured">
+                        <div class="announcement-badge">Rolling Admissions</div>
+                        <div class="announcement-content">
+                            <h3>Now Accepting Applications</h3>
+                            <p>Applications reviewed year-round for Pre-K through 8th grade. Military families and students of all religious backgrounds welcome!</p>
+                            <div class="announcement-meta">
+                                <span><i class="fas fa-phone"></i> Call (910) 483-3216</span>
+                                <span><i class="fas fa-envelope"></i> schooladmin@mysacs.org</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="announcement-card">
+                        <div class="announcement-content">
+                            <h3>NC Opportunity Scholarships Available</h3>
+                            <p>Financial assistance available through NC Opportunity Scholarship Grants and Diocese of Raleigh tuition assistance programs.</p>
+                            <div class="announcement-meta">
+                                <span><i class="fas fa-dollar-sign"></i> Learn More</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="announcement-card">
+                        <div class="announcement-content">
+                            <h3>Principal Mr. Lee Pittman</h3>
+                            <p>Our experienced principal leads a team of licensed professionals dedicated to high expectations and educating the whole child.</p>
+                            <div class="announcement-meta">
+                                <span><i class="fas fa-user-tie"></i> Leadership</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="upcoming-dates">
+            <div class="container">
+                <div class="dates-layout">
+                    <div>
+                        <div class="section-kicker">Family Reminders</div>
+                        <h2>Know What Matters Next</h2>
+                        <p>Simple, parent-friendly next steps for families exploring or returning to St. Ann.</p>
+                    </div>
+                    <div class="date-list">
+                        <article class="date-item">
+                            <div class="date-box">
+                                <span>Step</span>
+                                <strong>01</strong>
+                            </div>
+                            <div>
+                                <h3>Schedule a Tour</h3>
+                                <p>Visit campus, meet our staff, and see the school day in motion.</p>
+                            </div>
+                        </article>
+                        <article class="date-item">
+                            <div class="date-box">
+                                <span>Step</span>
+                                <strong>02</strong>
+                            </div>
+                            <div>
+                                <h3>Review Admissions</h3>
+                                <p>Applications are reviewed year-round for Pre-K through 8th grade.</p>
+                            </div>
+                        </article>
+                        <article class="date-item">
+                            <div class="date-box">
+                                <span>Step</span>
+                                <strong>03</strong>
+                            </div>
+                            <div>
+                                <h3>Connect With Us</h3>
+                                <p>Call the school office for tuition, scholarships, and family support.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="programs" class="programs-overview">
+            <div class="container">
+                <div class="section-kicker">Know Your Faith</div>
+                <div class="section-header">
+                    <h2>Our Programs</h2>
+                    <p>Comprehensive Catholic education from preschool through 8th grade</p>
+                </div>
+                <div class="programs-grid">
+                    <div class="program-card">
+                        <div class="program-icon">
+                            <i class="fas fa-baby"></i>
+                        </div>
+                        <h3>Pre-K Program</h3>
+                        <p>Foundation learning in a nurturing Catholic environment preparing students for kindergarten success with age-appropriate activities.</p>
+                        <ul>
+                            <li>Daily prayer and faith formation</li>
+                            <li>Early literacy and math readiness</li>
+                            <li>Social skills development</li>
+                        </ul>
+                    </div>
+                    <div class="program-card">
+                        <div class="program-icon">
+                            <i class="fas fa-child"></i>
+                        </div>
+                        <h3>Elementary (K-5)</h3>
+                        <p>Rigorous curriculum aligned with NC Standard Course of Study, enriched with Catholic values and diverse learning opportunities.</p>
+                        <ul>
+                            <li>Core subjects + Religion</li>
+                            <li>Spanish, Art, Music, PE for all</li>
+                            <li>Small class sizes (11:1 ratio)</li>
+                        </ul>
+                    </div>
+                    <div class="program-card">
+                        <div class="program-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3>Middle School (6-8)</h3>
+                        <p>Challenging academic preparation with extracurricular enrichment including STEM, band, and choral music programs.</p>
+                        <ul>
+                            <li>College-prep curriculum</li>
+                            <li>STEM, Art, Band programs</li>
+                            <li>Leadership & service opportunities</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mission-showcase">
+            <div class="container">
+                <div class="mission-showcase-grid">
+                    <div class="mission-copy">
+                        <div class="section-kicker">Why St. Ann?</div>
+                        <h2>A school where children are known, challenged, and loved.</h2>
+                        <p class="lead-text">
+                            St. Ann Catholic School pairs a structured academic environment with a deeply personal Catholic community. Students are formed to think clearly, serve generously, and grow in faith.
+                        </p>
+                        <p>
+                            Families choose St. Ann for small classes, a diverse and welcoming culture, weekly Mass, and a downtown Fayetteville campus rooted in more than six decades of Catholic education.
+                        </p>
+                        <div class="mission-actions">
+                            <a href="mission.html" class="btn-primary" style="text-decoration: none;">
+                                <i class="fas fa-cross"></i>
+                                Read Our Mission
+                            </a>
+                            <a href="contact.html" class="btn-soft" style="text-decoration: none;">
+                                <i class="fas fa-calendar-check"></i>
+                                Visit Campus
+                            </a>
+                        </div>
+                    </div>
+                    <div class="welcome-video-card">
+                        <div class="video-frame">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <span>Welcome Message</span>
+                        <strong>Meet the spirit of St. Ann.</strong>
+                        <p>A warm introduction to the people, prayer, and purpose that shape each day at St. Ann.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials-section">
+            <div class="container">
+                <div class="section-kicker">The St. Ann Difference</div>
+                <div class="section-header">
+                    <h2>What Families Find Here</h2>
+                    <p>A closer look at the experience families find here.</p>
+                </div>
+                <div class="testimonial-grid">
+                    <article class="testimonial-card">
+                        <p>Caring teachers and small class sizes help students grow in confidence, faith, and love of learning.</p>
+                        <div>
+                            <strong>Known by Name</strong>
+                            <span>Personal attention in every grade</span>
+                        </div>
+                    </article>
+                    <article class="testimonial-card">
+                        <p>St. Ann is a community where children are welcomed, challenged, and formed through prayer and service.</p>
+                        <div>
+                            <strong>Rooted in Faith</strong>
+                            <span>Connected to parish life</span>
+                        </div>
+                    </article>
+                    <article class="testimonial-card">
+                        <p>Military families find stability, structure, and a school culture that helps children belong quickly.</p>
+                        <div>
+                            <strong>Military Friendly</strong>
+                            <span>Serving Fort Liberty families</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="at-a-glance">
+            <div class="container">
+                <div class="section-kicker section-kicker-light">At a Glance</div>
+                <h2>St. Ann Catholic School</h2>
+                <div class="glance-grid">
+                    <div class="glance-item">
+                        <strong>1956</strong>
+                        <span>Serving Fayetteville since</span>
+                    </div>
+                    <div class="glance-item">
+                        <strong>11:1</strong>
+                        <span>Student-teacher ratio</span>
+                    </div>
+                    <div class="glance-item">
+                        <strong>PK-8</strong>
+                        <span>Faith-filled education</span>
+                    </div>
+                    <div class="glance-item">
+                        <strong>50%</strong>
+                        <span>Military dependents</span>
+                    </div>
+                    <div class="glance-item">
+                        <strong>121</strong>
+                        <span>Students known by name</span>
+                    </div>
+                    <div class="glance-item">
+                        <strong>Cognia</strong>
+                        <span>Accredited school</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="heritage-section">
+            <div class="container">
+                <div class="heritage-content">
+                    <div class="section-kicker section-kicker-light">Our Story</div>
+                    <h2>Our Heritage of Inclusion</h2>
+                    <p class="heritage-subtitle">First all-inclusive school in North Carolina - welcoming all students since 1956</p>
+                    <div class="heritage-grid">
+                        <div class="heritage-card">
+                            <div class="heritage-icon">
+                                <i class="fas fa-flag-usa"></i>
+                            </div>
+                            <h3>Military Friendly</h3>
+                            <p>50% of our students are military dependents. We understand military families and support their unique needs.</p>
+                        </div>
+                        <div class="heritage-card">
+                            <div class="heritage-icon">
+                                <i class="fas fa-globe-americas"></i>
+                            </div>
+                            <h3>Culturally Diverse</h3>
+                            <p>Students of any race, color, national origin, and religious preference welcome in our inclusive community.</p>
+                        </div>
+                        <div class="heritage-card">
+                            <div class="heritage-icon">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <h3>Cognia Accredited</h3>
+                            <p>Recently completed our 5-year accreditation review, ensuring rigorous and relevant 21st-century education.</p>
+                        </div>
+                        <div class="heritage-card">
+                            <div class="heritage-icon">
+                                <i class="fas fa-users-cog"></i>
+                            </div>
+                            <h3>Small Class Sizes</h3>
+                            <p>11:1 student-teacher ratio with 121 total students ensures personalized attention for every child.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faith-life">
+            <div class="container">
+                <div class="faith-content">
+                    <div class="section-kicker">Grow Your Faith</div>
+                    <h2>Faith Life at St. Ann</h2>
+                    <p>Our Catholic identity, rooted in Gospel values and approved by the Diocese of Raleigh, shapes everything we do:</p>
+                    <div class="faith-features">
+                        <div class="faith-feature">
+                            <i class="fas fa-praying-hands"></i>
+                            <div>
+                                <h4>Daily Prayer & Reflection</h4>
+                                <p>Each day begins and ends with prayer led by student leaders, fostering personal relationships with God.</p>
+                            </div>
+                        </div>
+                        <div class="faith-feature">
+                            <i class="fas fa-church"></i>
+                            <div>
+                                <h4>Weekly School Mass</h4>
+                                <p>Students attend Mass as a school family, with many serving as altar servers, lectors, and choir members.</p>
+                            </div>
+                        </div>
+                        <div class="faith-feature">
+                            <i class="fas fa-hands-helping"></i>
+                            <div>
+                                <h4>Service Learning</h4>
+                                <p>Students serve others through age-appropriate community service projects, living our motto "Depart to Serve."</p>
+                            </div>
+                        </div>
+                        <div class="faith-feature">
+                            <i class="fas fa-cross"></i>
+                            <div>
+                                <h4>Reconciliation Services</h4>
+                                <p>Students participate in Reconciliation during Advent and Lent seasons, deepening their spiritual growth.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Join Our St. Ann Family</h2>
+                    <p>With rolling admissions and a welcoming environment for military families and students of all backgrounds, discover why St. Ann has been Fayetteville's choice for quality Catholic education for over 68 years.</p>
+                    <div class="cta-actions">
+                        <a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener" class="btn-primary" style="text-decoration: none;">
+                            <i class="fas fa-edit"></i>
+                            Apply Now
+                        </a>
+                        <a href="contact.html" class="btn-outline-white" style="text-decoration: none;">
+                            <i class="fas fa-phone"></i>
+                            Schedule a Tour
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                            <span>St. Ann Catholic School</span>
+                        </div>
+                        <p>Providing quality Catholic education to the Fayetteville and Cape Fear region since 1956. The first all-inclusive school in North Carolina.</p>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="mission.html">About Us</a></li>
+                        <li><a href="index.html#programs">Academics</a></li>
+                        <li><a href="contact.html">Admissions</a></li>
+                        <li><a href="parish.html">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="openPortal()">Student Portal</a></li>
+                        <li><a href="newsletter.html">Newsletter</a></li>
+
+                        <li><a href="calendar.html">Calendar</a></li>
+                        <li><a href="contact.html">Policies</a></li>
+                        <li><a href="contact.html">Forms</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/St.AnnCatholicSchoolFayettevilleNC" target="_blank" rel="noopener" class="social-link" aria-label="St. Ann Catholic School on Facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> (910) 483-3216</p>
+                        <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 365 N Cool Spring Street, Fayetteville, NC 28301</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 St. Ann Catholic School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.gtranslateSettings = {
+            default_language: "en",
+            languages: ["en", "es"],
+            wrapper_selector: ".gtranslate_wrapper",
+            switcher_horizontal_position: "inline"
+        };
+    </script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
+    <script src="script.js"></script>
+</body>
+</html>
