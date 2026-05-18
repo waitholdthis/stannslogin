@@ -422,6 +422,256 @@ document.addEventListener('DOMContentLoaded', function() {
 
     images.forEach(img => imageObserver.observe(img));
 
+    // School FAQ chatbot
+    function initSchoolChatbot() {
+        if (document.querySelector('.school-chatbot')) return;
+
+        const isNestedPage = window.location.pathname.includes('/photos/');
+        const pageUrl = (path) => `${isNestedPage ? '../' : ''}${path}`;
+        const officePhone = '(910) 483-3216';
+        const officeEmail = 'schooladmin@mysacs.org';
+
+        const faqItems = [
+            {
+                label: 'Apply',
+                patterns: [/apply|application|admission|enroll|enrollment|rolling|visit|tour/i],
+                answer: `Applications are reviewed year-round for Pre-K through 8th grade. You can apply through Gradelink, schedule a tour, or call ${officePhone} for help with admissions.`,
+                links: [
+                    ['Apply online', 'https://secure.gradelink.com/1994/enrollment'],
+                    ['Application checklist', pageUrl('application-checklist.html')],
+                    ['Contact admissions', pageUrl('contact.html')]
+                ]
+            },
+            {
+                label: 'Tuition',
+                patterns: [/tuition|cost|fee|payment|price|rate/i],
+                answer: `Tuition and fee details are listed on the tuition page. For family-specific questions, the school office can help at ${officePhone}.`,
+                links: [['Tuition information', pageUrl('tuition.html')]]
+            },
+            {
+                label: 'Scholarships',
+                patterns: [/scholar|financial|aid|opportunity|grant|ncseaa|tuition assistance/i],
+                answer: 'St. Ann families may be able to use NC Opportunity Scholarships and Diocese of Raleigh tuition assistance. The scholarship page explains the options and next steps.',
+                links: [['Scholarship opportunities', pageUrl('opportunity-scholarship.html')]]
+            },
+            {
+                label: 'Calendar',
+                patterns: [/calendar|date|event|schedule|holiday|break|early release|school year/i],
+                answer: 'The school calendar includes upcoming dates, holidays, school events, and family reminders.',
+                links: [['View calendar', pageUrl('calendar.html')]]
+            },
+            {
+                label: 'Uniforms',
+                patterns: [/uniform|dress code|clothes|shirt|pants|skirt|shoes/i],
+                answer: 'Uniform guidelines and ordering details are available on the uniforms page.',
+                links: [['Uniform information', pageUrl('uniforms.html')]]
+            },
+            {
+                label: 'Before/After Care',
+                patterns: [/before|after|care|extended|morning|afternoon|pickup|drop off/i],
+                answer: 'Before and After Care information, including rates and program details, is available online.',
+                links: [['Before/After Care', pageUrl('before-after-care.html')]]
+            },
+            {
+                label: 'Contact',
+                patterns: [/contact|phone|call|email|address|location|office|directions/i],
+                answer: `St. Ann Catholic School is located at 365 N Cool Spring Street, Fayetteville, NC. Call ${officePhone} or email ${officeEmail}.`,
+                links: [
+                    ['Call the school', 'tel:+19104833216'],
+                    ['Email the office', `mailto:${officeEmail}`],
+                    ['Contact page', pageUrl('contact.html')]
+                ]
+            },
+            {
+                label: 'Faculty',
+                patterns: [/faculty|teacher|staff|principal|bishop|pittman|administrator/i],
+                answer: 'You can find faculty, staff, and leadership information on the faculty and principal pages.',
+                links: [
+                    ['Our faculty', pageUrl('faculty.html')],
+                    ['Our principal', pageUrl('principal.html')]
+                ]
+            },
+            {
+                label: 'Supply Lists',
+                patterns: [/supply|supplies|list|classroom materials|back to school/i],
+                answer: 'Supply lists are available by grade so families can prepare for the school year.',
+                links: [['School supply lists', pageUrl('supply-lists.html')]]
+            },
+            {
+                label: 'Lunch & Handbook',
+                patterns: [/lunch|meal|food|handbook|policy|policies|forms/i],
+                answer: 'Handbook information and lunch ordering details are collected on one page for families.',
+                links: [['Handbook & lunch ordering', pageUrl('handbook-lunch.html')]]
+            },
+            {
+                label: 'Athletics',
+                patterns: [/athletic|sports|basketball|soccer|volleyball|team|st patrick|shamrock/i],
+                answer: 'Athletics information, sports seasons, and St. Ann/St. Patrick team unity details are available on the athletics page.',
+                links: [['Athletics', pageUrl('athletics.html')]]
+            },
+            {
+                label: 'Support',
+                patterns: [/donate|support|gift|giving|fundraising|raiseright|double good/i],
+                answer: 'Families and friends can support St. Ann through donations and fundraising opportunities.',
+                links: [
+                    ['Support Us', pageUrl('support-us.html')],
+                    ['Donate', pageUrl('donate.html')],
+                    ['Fundraising opportunities', pageUrl('fundraising-opportunities.html')]
+                ]
+            },
+            {
+                label: 'Safe Environment',
+                patterns: [/safe|environment|volunteer|training|background|child protection/i],
+                answer: 'Safe Environment information explains volunteer requirements, training, and child protection resources.',
+                links: [['Safe Environment', pageUrl('safe-environment.html')]]
+            },
+            {
+                label: 'Parish',
+                patterns: [/parish|church|mass|faith|service|sacrament|prayer/i],
+                answer: 'St. Ann is deeply connected to parish life, faith formation, Mass, prayer, and service.',
+                links: [['Parish connection', pageUrl('parish.html')]]
+            }
+        ];
+
+        const quickPrompts = [
+            'How do I apply?',
+            'Tuition and scholarships',
+            'School calendar',
+            'Uniforms',
+            'Contact the office'
+        ];
+
+        const widget = document.createElement('section');
+        widget.className = 'school-chatbot';
+        widget.setAttribute('aria-label', 'Ask St. Ann FAQ assistant');
+        widget.innerHTML = `
+            <button class="chatbot-toggle" type="button" aria-expanded="false" aria-controls="school-chatbot-panel">
+                <i class="fas fa-comments" aria-hidden="true"></i>
+                <span>Ask St. Ann</span>
+            </button>
+            <div class="chatbot-panel" id="school-chatbot-panel" aria-live="polite">
+                <div class="chatbot-header">
+                    <div>
+                        <span>St. Ann FAQ</span>
+                        <strong>How can we help?</strong>
+                    </div>
+                    <button class="chatbot-close" type="button" aria-label="Close chat">
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="chatbot-messages"></div>
+                <div class="chatbot-prompts" aria-label="Common questions"></div>
+                <form class="chatbot-form">
+                    <input type="text" name="chatbot-question" placeholder="Ask about admissions, tuition, uniforms..." autocomplete="off" aria-label="Ask a question">
+                    <button type="submit" aria-label="Send question">
+                        <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                    </button>
+                </form>
+            </div>
+        `;
+
+        document.body.appendChild(widget);
+
+        const toggle = widget.querySelector('.chatbot-toggle');
+        const close = widget.querySelector('.chatbot-close');
+        const panel = widget.querySelector('.chatbot-panel');
+        const messages = widget.querySelector('.chatbot-messages');
+        const prompts = widget.querySelector('.chatbot-prompts');
+        const form = widget.querySelector('.chatbot-form');
+        const input = widget.querySelector('input');
+
+        function setOpen(isOpen) {
+            widget.classList.toggle('active', isOpen);
+            toggle.setAttribute('aria-expanded', String(isOpen));
+            if (isOpen) {
+                window.setTimeout(() => input.focus(), 120);
+            } else {
+                toggle.focus();
+            }
+        }
+
+        function addMessage(text, sender, links = []) {
+            const message = document.createElement('div');
+            message.className = `chatbot-message ${sender}`;
+            const bubble = document.createElement('div');
+            bubble.className = 'chatbot-bubble';
+            const copy = document.createElement('p');
+            copy.textContent = text;
+            bubble.appendChild(copy);
+
+            if (links.length) {
+                const linkWrap = document.createElement('div');
+                linkWrap.className = 'chatbot-links';
+                links.forEach(([label, href]) => {
+                    const link = document.createElement('a');
+                    link.href = href;
+                    link.textContent = label;
+                    if (/^https?:/.test(href)) {
+                        link.target = '_blank';
+                        link.rel = 'noopener';
+                    }
+                    linkWrap.appendChild(link);
+                });
+                bubble.appendChild(linkWrap);
+            }
+
+            message.appendChild(bubble);
+            messages.appendChild(message);
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function findAnswer(question) {
+            const normalized = question.trim();
+            return faqItems.find(item => item.patterns.some(pattern => pattern.test(normalized))) || {
+                answer: `I can help with common school questions. For anything specific, please call ${officePhone} or email ${officeEmail}.`,
+                links: [
+                    ['Contact the office', pageUrl('contact.html')],
+                    ['Call now', 'tel:+19104833216']
+                ]
+            };
+        }
+
+        function askQuestion(question) {
+            const trimmed = question.trim();
+            if (!trimmed) return;
+            addMessage(trimmed, 'user');
+            const result = findAnswer(trimmed);
+            window.setTimeout(() => {
+                addMessage(result.answer, 'bot', result.links);
+            }, 180);
+        }
+
+        quickPrompts.forEach(prompt => {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.textContent = prompt;
+            button.addEventListener('click', () => askQuestion(prompt));
+            prompts.appendChild(button);
+        });
+
+        addMessage('Hi! I can answer quick questions about admissions, tuition, scholarships, uniforms, calendars, faculty, and school contact information.', 'bot');
+
+        toggle.addEventListener('click', () => setOpen(!widget.classList.contains('active')));
+        close.addEventListener('click', () => setOpen(false));
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && widget.classList.contains('active')) {
+                setOpen(false);
+            }
+        });
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            askQuestion(input.value);
+            input.value = '';
+        });
+
+        panel.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
+
+    initSchoolChatbot();
+
     // Performance optimization: debounce scroll events
     function debounce(func, wait) {
         let timeout;
