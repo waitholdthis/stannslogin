@@ -56,31 +56,35 @@ document.addEventListener('DOMContentLoaded', function() {
         subtree: false
     });
 
+    function closeMobileMenu() {
+        mobileMenuToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+        document.body.classList.remove('menu-open');
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+    }
+
+    mobileMenuToggle.setAttribute('aria-expanded', 'false');
+    mobileMenuToggle.setAttribute('aria-controls', 'nav-menu');
+
     // Mobile menu toggle functionality
     mobileMenuToggle.addEventListener('click', function() {
-        mobileMenuToggle.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        document.body.classList.toggle('menu-open');
+        const isOpen = navMenu.classList.toggle('active');
+        mobileMenuToggle.classList.toggle('active', isOpen);
+        document.body.classList.toggle('menu-open', isOpen);
+        mobileMenuToggle.setAttribute('aria-expanded', String(isOpen));
     });
 
     // Close mobile menu when clicking on a link
     navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            if (navMenu.classList.contains('active')) {
-                mobileMenuToggle.classList.remove('active');
-                navMenu.classList.remove('active');
-                document.body.classList.remove('menu-open');
-            }
-        });
-    });
-
-    // Mobile dropdown functionality
-    dropdowns.forEach(dropdown => {
-        const link = dropdown.querySelector('.nav-link');
         link.addEventListener('click', function(e) {
-            if (window.innerWidth <= 768) {
+            if (window.innerWidth <= 768 && link.closest('.dropdown')) {
                 e.preventDefault();
-                dropdown.classList.toggle('active');
+                link.closest('.dropdown').classList.toggle('active');
+                return;
+            }
+
+            if (navMenu.classList.contains('active')) {
+                closeMobileMenu();
             }
         });
     });
@@ -91,6 +95,12 @@ document.addEventListener('DOMContentLoaded', function() {
             dropdowns.forEach(dropdown => {
                 dropdown.classList.remove('active');
             });
+        }
+    });
+
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
+            closeMobileMenu();
         }
     });
 

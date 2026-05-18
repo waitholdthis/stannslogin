@@ -5070,6 +5070,28 @@ code {
 }
 
 @media (max-width: 768px) {
+    body.menu-open {
+        overflow: hidden;
+    }
+
+    .header {
+        transform: translateY(0) !important;
+    }
+
+    .nav-menu {
+        left: 0;
+        max-height: calc(100svh - 6.5rem);
+        overflow-y: auto;
+        right: 0;
+        top: 6.5rem;
+        transform: translateY(-0.75rem);
+        z-index: 1001;
+    }
+
+    .nav-menu.active {
+        transform: translateY(0);
+    }
+
     html,
     body {
         overflow-x: hidden;
