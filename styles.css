@@ -4300,7 +4300,48 @@ body {
     font-family: 'Cormorant Garamond', 'Georgia', serif;
     font-size: clamp(2.3rem, 4vw, 3.8rem);
     line-height: 1;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.accreditation-badge {
+    align-items: center;
+    background: rgba(255, 253, 247, 0.96);
+    border: 1px solid rgba(255, 253, 247, 0.32);
+    border-radius: 0.5rem;
+    box-shadow: 0 18px 36px -24px rgba(0, 0, 0, 0.55);
+    color: var(--primary-color);
+    display: inline-flex;
+    gap: 1rem;
+    margin: 0 auto 2.5rem;
+    max-width: 560px;
+    padding: 0.8rem 1.1rem;
+    text-align: left;
+}
+
+.accreditation-badge img {
+    display: block;
+    flex: 0 0 auto;
+    max-height: 4.4rem;
+    object-fit: contain;
+    width: clamp(5.5rem, 18vw, 8rem);
+}
+
+.accreditation-badge span {
+    color: var(--secondary-color);
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+}
+
+.accreditation-badge strong {
+    color: var(--primary-color);
+    display: block;
+    font-size: 0.98rem;
+    line-height: 1.35;
 }
 
 .glance-grid {
@@ -5144,10 +5185,22 @@ code {
         width: 100%;
     }
 
+    .nav-menu .dropdown:hover .dropdown-menu,
+    .nav-menu .dropdown.active .dropdown-menu {
+        display: block;
+        left: auto;
+        opacity: 1;
+        transform: none;
+        visibility: visible;
+    }
+
     .nav-menu .dropdown-menu a {
+        border-left: 0;
         overflow-wrap: anywhere;
         padding: 0.72rem 1rem;
+        text-align: center;
         white-space: normal;
+        width: 100%;
     }
 
     html,
@@ -5277,6 +5330,18 @@ code {
 }
 
 @media (max-width: 560px) {
+    .accreditation-badge {
+        align-items: center;
+        flex-direction: column;
+        max-width: 100%;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .accreditation-badge img {
+        max-height: 4rem;
+    }
+
     .footer-brand .logo,
     .nav-brand .logo {
         min-width: 0;
