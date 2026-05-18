@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundraising Opportunities - St. Ann Catholic School | Fayetteville, NC</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .fundraising-content {
+            padding: 4rem 0 5rem;
+            background: var(--background);
+        }
+
+        .fundraising-intro {
+            background: var(--background-white);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .fundraising-intro h2,
+        .opportunities-list h2 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            color: var(--primary-color);
+            font-size: 1.6rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .fundraising-intro p {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .opportunities-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .opportunity-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1rem;
+        }
+
+        .opportunity-icon {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            background: rgba(201,168,76,0.14);
+            color: var(--accent-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .opportunity-card h3 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            color: var(--primary-color);
+            font-size: 1.25rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .opportunity-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .opportunity-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .opportunity-card p {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .opportunity-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .opportunity-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.92rem;
+            padding: 0.65rem 1rem;
+            border-radius: 0.45rem;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .opportunity-action:hover {
+            background: var(--primary-light);
+            transform: translateY(-1px);
+        }
+
+        .opportunity-action.secondary {
+            background: rgba(26,39,68,0.08);
+            color: var(--primary-color);
+        }
+
+        .opportunity-action.secondary:hover {
+            background: rgba(26,39,68,0.14);
+        }
+
+        .opportunity-details {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .opportunity-detail {
+            background: var(--background-light);
+            border: 1px solid var(--border-light);
+            border-radius: 0.55rem;
+            padding: 0.85rem;
+        }
+
+        .opportunity-detail strong {
+            display: block;
+            color: var(--primary-color);
+            margin-bottom: 0.2rem;
+        }
+
+        .opportunity-detail span {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.45;
+        }
+
+        .empty-opportunities {
+            background: rgba(201,168,76,0.1);
+            border: 1px solid rgba(201,168,76,0.35);
+            border-left: 4px solid var(--accent-color);
+            border-radius: 0 0.75rem 0.75rem 0;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            gap: 0.9rem;
+            align-items: flex-start;
+        }
+
+        .empty-opportunities i {
+            color: var(--accent-dark);
+            margin-top: 0.25rem;
+        }
+
+        @media (max-width: 768px) {
+            .opportunity-card {
+                grid-template-columns: 1fr;
+            }
+
+            .opportunity-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="utility-bar">
+            <div class="nav-container">
+                <div class="utility-location">
+                    <i class="fas fa-location-dot"></i>
+                    <span>365 N Cool Spring Street, Fayetteville, NC</span>
+                </div>
+                <div class="utility-links">
+                    <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+                    <a href="calendar.html"><i class="fas fa-calendar-days"></i> Calendar</a>
+                    <a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener"><i class="fas fa-pencil-alt"></i> Apply</a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <div class="logo">
+                        <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                        <a href="index.html" style="text-decoration: none; color: inherit;">
+                            <span>St. Ann Catholic School</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="mission.html" class="nav-link">About <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="mission.html">Mission & Vision</a></li>
+                                <li><a href="history.html">Our History</a></li>
+                                <li><a href="alumni.html">Alumni</a></li>
+                                <li><a href="principal.html">Our Principal</a></li>
+                                <li><a href="faculty.html">Our Faculty</a></li>
+                                <li><a href="parish.html">Parish Connection</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="index.html#programs" class="nav-link">Academics <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.html#programs">Curriculum</a></li>
+                                <li><a href="index.html#programs">Pre-K through 8th Grade</a></li>
+                                <li><a href="index.html#programs">Art, Music, STEM & Band</a></li>
+                                <li><a href="index.html#programs">Spanish Program</a></li>
+                                <li><a href="index.html#programs">Physical Education</a></li>
+                                <li><a href="calendar.html">Academic Calendar</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="contact.html" class="nav-link">Admissions <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener">Rolling Admissions</a></li>
+                                <li><a href="tuition.html">Tuition Information</a></li>
+                                <li><a href="uniforms.html">School Uniforms</a></li>
+                                <li><a href="opportunity-scholarship.html">Scholarship Opportunities</a></li>
+                                <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                                <li><a href="application-checklist.html">Application Checklist</a></li>
+                                <li><a href="contact.html">Schedule a Tour</a></li>
+                                <li><a href="history.html">Military Families Welcome</a></li>
+                                <li><a href="supply-lists.html">School Supply Lists</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="newsletter.html" class="nav-link active">Parents <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="newsletter.html">Newsletter</a></li>
+
+                                <li><a href="calendar.html">Calendar</a></li>
+                                <li><a href="uniforms.html">Uniforms</a></li>
+                                <li><a href="before-after-care.html">Before/After Care</a></li>
+                                <li><a href="fundraising-opportunities.html">Fundraising Opportunities</a></li>
+                                <li><a href="safe-environment.html">Safe Environment</a></li>
+                                <li><a href="longleaf-academy.html">Longleaf Academy</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/Community-Opportunities" target="_blank" rel="noopener">Community Opportunities</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="activities.html" class="nav-link">Students <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="activities.html">Activities</a></li>
+                                <li><a href="athletics.html">Athletics</a></li>
+                                <li><a href="handbook-lunch.html">Handbook &amp; Lunch Ordering</a></li>
+                                <li><a href="year-in-review-2025-2026.html">Year in Review 2025-2026</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/School-Events" target="_blank" rel="noopener">School Events</a></li>
+                                <li><a href="say-something.html">Say Something</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="parish.html" class="nav-link">Community</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="support-us.html" class="nav-link">Support Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-actions">
+                    <!-- GTranslate: https://gtranslate.com -->
+                    <div class="translate-widget" aria-label="Translate this site">
+                        <i class="fas fa-language"></i>
+                        <div class="gtranslate_wrapper"></div>
+                    </div>
+                    <button class="btn-secondary" onclick="openPortal()">
+                        <i class="fas fa-user"></i> Portal Login
+                    </button>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="page-hero-background">
+                <div class="page-hero-overlay"></div>
+            </div>
+            <div class="container">
+                <div class="page-hero-content">
+                    <h1 class="page-hero-title">Fundraising Opportunities</h1>
+                    <p class="page-hero-subtitle">Upcoming ways to support St. Ann Catholic School</p>
+                    <nav class="breadcrumb">
+                        <a href="index.html">Home</a> <span>/</span> <a href="newsletter.html">Parents</a> <span>/</span> <span>Fundraising Opportunities</span>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <section class="fundraising-content">
+            <div class="container">
+                <div class="content-grid">
+                    <div class="main-content">
+                        <div class="fundraising-intro">
+                            <h2>Support Our School Community</h2>
+                            <p>
+                                Fundraising opportunities help strengthen student programs, classroom resources,
+                                campus activities, and the shared life of our St. Ann community.
+                            </p>
+                        </div>
+
+                        <div class="opportunities-list" aria-label="Upcoming fundraising opportunities">
+                            <h2>Upcoming Opportunities</h2>
+
+                            <article class="opportunity-card">
+                                <div class="opportunity-icon">
+                                    <i class="fas fa-gift" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <h3>RaiseRight Everyday Fundraising</h3>
+                                    <div class="opportunity-meta">
+                                        <span><i class="fas fa-calendar-days"></i> Ongoing</span>
+                                        <span><i class="fas fa-bag-shopping"></i> Gift cards, online shopping, dining, and travel</span>
+                                    </div>
+                                    <p>
+                                        RaiseRight lets families support school fundraising through routine purchases.
+                                        Participating brands share a percentage of qualifying purchases back to the
+                                        fundraising organization, with earning options available through gift cards,
+                                        online shopping, local dining, and travel bookings.
+                                    </p>
+                                    <div class="opportunity-details">
+                                        <div class="opportunity-detail">
+                                            <strong>How families earn</strong>
+                                            <span>Shop with participating brands and a portion of eligible spending supports the fundraiser.</span>
+                                        </div>
+                                        <div class="opportunity-detail">
+                                            <strong>Why it is easy</strong>
+                                            <span>No door-to-door selling, event planning, minimums, or seasonal campaign window.</span>
+                                        </div>
+                                        <div class="opportunity-detail">
+                                            <strong>Ways to participate</strong>
+                                            <span>Use gift cards, shop online, dine locally, book travel, or use the RaiseRight app.</span>
+                                        </div>
+                                        <div class="opportunity-detail">
+                                            <strong>Need school setup info?</strong>
+                                            <span>Contact the school office for St. Ann participation details before creating or joining a program.</span>
+                                        </div>
+                                    </div>
+                                    <div class="opportunity-actions">
+                                        <a href="https://www.raiseright.com/" target="_blank" rel="noopener" class="opportunity-action">
+                                            <i class="fas fa-arrow-up-right-from-square"></i> Visit RaiseRight
+                                        </a>
+                                        <a href="https://www.raiseright.com/brands" target="_blank" rel="noopener" class="opportunity-action secondary">
+                                            <i class="fas fa-store"></i> Browse Brands
+                                        </a>
+                                        <a href="https://www.raiseright.com/m/earnings-calculator" target="_blank" rel="noopener" class="opportunity-action secondary">
+                                            <i class="fas fa-calculator"></i> Estimate Earnings
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="opportunity-card">
+                                <div class="opportunity-icon">
+                                    <i class="fas fa-cookie-bite" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <h3>Double Good Popcorn Fundraising</h3>
+                                    <div class="opportunity-meta">
+                                        <span><i class="fas fa-calendar-days"></i> Campaign-based</span>
+                                        <span><i class="fas fa-mobile-screen-button"></i> App-powered Pop-Up Store fundraiser</span>
+                                    </div>
+                                    <p>
+                                        Double Good helps groups raise money by selling premium popcorn through
+                                        personalized Pop-Up Stores. Sellers share their store links by text, email,
+                                        or social media, and supporters order online from anywhere in the U.S.
+                                    </p>
+                                    <div class="opportunity-details">
+                                        <div class="opportunity-detail">
+                                            <strong>How it works</strong>
+                                            <span>Download the app, set up a fundraiser, invite sellers, and launch shareable Pop-Up Stores.</span>
+                                        </div>
+                                        <div class="opportunity-detail">
+                                            <strong>Group earnings</strong>
+                                            <span>Groups keep 50% of every bag sold, with no setup fees, handling fees, or minimums.</span>
+                                        </div>
+                                        <div class="opportunity-detail">
+                                            <strong>Easy fulfillment</strong>
+                                            <span>Double Good pops, packs, and ships orders directly to supporters, so families do not handle delivery.</span>
+                                        </div>
+                                        <div class="opportunity-detail">
+                                            <strong>Campaign energy</strong>
+                                            <span>Short selling windows, app tracking, and leaderboards help keep sellers engaged.</span>
+                                        </div>
+                                    </div>
+                                    <div class="opportunity-actions">
+                                        <a href="https://www.doublegood.com/" target="_blank" rel="noopener" class="opportunity-action">
+                                            <i class="fas fa-arrow-up-right-from-square"></i> Visit Double Good
+                                        </a>
+                                        <a href="https://www.doublegood.com/virtual-fundraising" target="_blank" rel="noopener" class="opportunity-action secondary">
+                                            <i class="fas fa-circle-play"></i> How It Works
+                                        </a>
+                                        <a href="https://popup.doublegood.com/" target="_blank" rel="noopener" class="opportunity-action secondary">
+                                            <i class="fas fa-store"></i> Start a Fundraiser
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Add future fundraising opportunities using this card pattern.
+                            <article class="opportunity-card">
+                                <div class="opportunity-icon">
+                                    <i class="fas fa-hand-holding-heart" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <h3>Fundraiser Name</h3>
+                                    <div class="opportunity-meta">
+                                        <span><i class="fas fa-calendar-days"></i> Date or deadline</span>
+                                        <span><i class="fas fa-location-dot"></i> Location or platform</span>
+                                    </div>
+                                    <p>Brief description with how families can participate.</p>
+                                </div>
+                            </article>
+                            -->
+                        </div>
+
+                        <div class="fundraising-intro">
+                            <h2>Have a Fundraising Question?</h2>
+                            <p>
+                                Please contact the school office for current fundraising information or to share a
+                                community partnership opportunity.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="sidebar">
+                        <div class="sidebar-card">
+                            <h3>RaiseRight at a Glance</h3>
+                            <ul class="fact-list">
+                                <li><i class="fas fa-calendar-alt"></i> 30 years helping organizations</li>
+                                <li><i class="fas fa-building-columns"></i> 50,000+ organizations served</li>
+                                <li><i class="fas fa-piggy-bank"></i> $900+ million raised</li>
+                                <li><i class="fas fa-star"></i> 4.9/5 stars from 20,000+ iOS reviews</li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Double Good at a Glance</h3>
+                            <ul class="fact-list">
+                                <li><i class="fas fa-percent"></i> Groups keep 50% of every bag sold</li>
+                                <li><i class="fas fa-ban"></i> No setup fees or minimums</li>
+                                <li><i class="fas fa-truck"></i> Orders ship directly to supporters</li>
+                                <li><i class="fas fa-chart-line"></i> Average seller can sell $400 over a 4-day fundraiser</li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Parent Resources</h3>
+                            <div class="sidebar-links">
+                                <a href="newsletter.html" class="sidebar-link">
+                                    <i class="fas fa-newspaper"></i> Newsletter
+                                </a>
+                                <a href="calendar.html" class="sidebar-link">
+                                    <i class="fas fa-calendar-days"></i> Calendar
+                                </a>
+                                <a href="uniforms.html" class="sidebar-link">
+                                    <i class="fas fa-shirt"></i> Uniforms
+                                </a>
+                                <a href="before-after-care.html" class="sidebar-link">
+                                    <i class="fas fa-clock"></i> Before/After Care
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>School Office</h3>
+                            <div class="contact-info">
+                                <p><a href="tel:+19104833216" class="tel-link"><i class="fas fa-phone"></i> (910) 483-3216</a></p>
+                                <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                                <p><i class="fas fa-map-marker-alt"></i> 365 N Cool Spring Street<br>Fayetteville, NC 28301</p>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Ways to Stay Updated</h3>
+                            <div class="sidebar-links">
+                                <a href="newsletter.html" class="sidebar-link">
+                                    <i class="fas fa-envelope-open-text"></i> Read the Newsletter
+                                </a>
+                                <a href="calendar.html" class="sidebar-link">
+                                    <i class="fas fa-calendar-check"></i> View the Calendar
+                                </a>
+                                <a href="contact.html" class="sidebar-link">
+                                    <i class="fas fa-message"></i> Contact Us
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                            <span>St. Ann Catholic School</span>
+                        </div>
+                        <p>Providing quality Catholic education to the Fayetteville and Cape Fear region since 1956. The first all-inclusive school in North Carolina.</p>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="mission.html">Mission & Vision</a></li>
+                        <li><a href="history.html">Our History</a></li>
+                        <li><a href="principal.html">Our Principal</a></li>
+                        <li><a href="faculty.html">Our Faculty</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="openPortal()">Student Portal</a></li>
+                        <li><a href="newsletter.html">Newsletter</a></li>
+
+                        <li><a href="calendar.html">Calendar</a></li>
+                        <li><a href="contact.html">Policies</a></li>
+                        <li><a href="contact.html">Forms</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/St.AnnCatholicSchoolFayettevilleNC" target="_blank" rel="noopener" class="social-link" aria-label="St. Ann Catholic School on Facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                    <div class="contact-info">
+                        <p><a href="tel:+19104833216" class="tel-link"><i class="fas fa-phone"></i> (910) 483-3216</a></p>
+                        <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 365 N Cool Spring Street, Fayetteville, NC 28301</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 St. Ann Catholic School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.gtranslateSettings = {
+            default_language: "en",
+            languages: ["en", "es"],
+            wrapper_selector: ".gtranslate_wrapper",
+            switcher_horizontal_position: "inline"
+        };
+    </script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
+    <script src="script.js"></script>
+</body>
+</html>

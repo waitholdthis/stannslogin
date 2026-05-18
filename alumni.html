@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni - St. Ann Catholic School | Fayetteville, NC</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    .support-section {
+        padding: 4rem 0 5rem;
+        background: var(--background);
+    }
+
+    .support-layout {
+        display: grid;
+        grid-template-columns: 1fr 280px;
+        gap: 2rem;
+        align-items: start;
+    }
+
+    .support-card,
+    .support-sidebar-card {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.75rem;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .support-card {
+        padding: 1.75rem 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .support-hero-card {
+        background: linear-gradient(135deg, var(--primary-color) 0%, #2d3f6e 100%);
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .support-hero-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--gradient-gold);
+    }
+
+    .support-card-header {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.85rem;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .support-icon {
+        width: 2.75rem;
+        height: 2.75rem;
+        border-radius: 50%;
+        background: var(--gradient-primary);
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .support-hero-card .support-icon {
+        background: rgba(201,168,76,0.2);
+        border: 2px solid rgba(201,168,76,0.45);
+    }
+
+    .support-card h2,
+    .support-sidebar-card h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        color: var(--primary-color);
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .support-hero-card h2 {
+        color: white;
+    }
+
+    .support-card h2 {
+        font-size: 1.45rem;
+    }
+
+    .support-card p,
+    .support-sidebar-card p {
+        color: var(--text-secondary);
+        margin: 0;
+        line-height: 1.65;
+    }
+
+    .support-hero-card p {
+        color: rgba(255,255,255,0.82);
+    }
+
+    .support-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+    }
+
+    .support-action {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--accent-color);
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 800;
+        border-radius: 0.45rem;
+        padding: 0.75rem 1.1rem;
+    }
+
+    .support-action.secondary {
+        background: rgba(255,255,255,0.12);
+        color: white;
+        border: 1px solid rgba(255,255,255,0.25);
+    }
+
+    .support-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-top: 1.25rem;
+    }
+
+    .support-mini-card {
+        background: var(--background-light);
+        border: 1px solid var(--border-light);
+        border-radius: 0.65rem;
+        padding: 1.1rem;
+    }
+
+    .support-mini-card i {
+        color: var(--accent-color);
+        margin-bottom: 0.6rem;
+    }
+
+    .support-mini-card h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        color: var(--primary-color);
+        font-size: 1.05rem;
+        margin: 0 0 0.35rem;
+    }
+
+    .donate-panel {
+        background: var(--background-light);
+        border: 1px solid var(--border-light);
+        border-radius: 0.65rem;
+        display: grid;
+        gap: 1rem;
+        padding: 1.25rem;
+    }
+
+    .donate-panel p {
+        margin: 0;
+    }
+
+    .donate-primary-link {
+        align-items: center;
+        background: var(--accent-color);
+        border-radius: 0.5rem;
+        color: var(--primary-color);
+        display: inline-flex;
+        font-weight: 900;
+        gap: 0.55rem;
+        justify-content: center;
+        padding: 0.9rem 1.2rem;
+        text-decoration: none;
+    }
+
+    .donate-note {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+    }
+
+    .donate-note a {
+        color: var(--primary-color);
+        font-weight: 800;
+    }
+
+    .alumni-form {
+        display: grid;
+        gap: 1rem;
+        margin-top: 1.25rem;
+    }
+
+    .alumni-form-grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .alumni-form label {
+        color: var(--primary-color);
+        display: grid;
+        font-size: 0.88rem;
+        font-weight: 800;
+        gap: 0.35rem;
+    }
+
+    .alumni-form input,
+    .alumni-form textarea {
+        border: 1px solid var(--border-color);
+        border-radius: 0.45rem;
+        color: var(--text-primary);
+        font: inherit;
+        padding: 0.75rem 0.85rem;
+        width: 100%;
+    }
+
+    .alumni-form textarea {
+        min-height: 8rem;
+        resize: vertical;
+    }
+
+    .alumni-form-note {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        line-height: 1.55;
+    }
+
+    .support-sidebar {
+        position: sticky;
+        top: 8rem;
+    }
+
+    .support-sidebar-card {
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+    }
+
+    .support-sidebar-card h3 {
+        font-size: 1.15rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .support-contact-list {
+        display: grid;
+        gap: 0.65rem;
+    }
+
+    .support-contact-list p,
+    .support-contact-list a {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: 0.92rem;
+        line-height: 1.45;
+    }
+
+    .support-contact-list i {
+        color: var(--accent-color);
+        margin-top: 0.2rem;
+    }
+
+    @media (max-width: 900px) {
+        .support-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .support-sidebar {
+            position: static;
+        }
+
+        .support-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .alumni-form-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="utility-bar">
+            <div class="nav-container">
+                <div class="utility-location">
+                    <i class="fas fa-location-dot"></i>
+                    <span>365 N Cool Spring Street, Fayetteville, NC</span>
+                </div>
+                <div class="utility-links">
+                    <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+                    <a href="calendar.html"><i class="fas fa-calendar-days"></i> Calendar</a>
+                    <a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener"><i class="fas fa-pencil-alt"></i> Apply</a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <div class="logo">
+                        <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                        <a href="index.html" style="text-decoration: none; color: inherit;">
+                            <span>St. Ann Catholic School</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                        <li class="nav-item dropdown">
+                            <a href="mission.html" class="nav-link">About <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="mission.html">Mission &amp; Vision</a></li>
+                                <li><a href="history.html">Our History</a></li>
+                                <li><a href="alumni.html">Alumni</a></li>
+                                <li><a href="principal.html">Our Principal</a></li>
+                                <li><a href="faculty.html">Our Faculty</a></li>
+                                <li><a href="parish.html">Parish Connection</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="index.html#programs" class="nav-link">Academics <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.html#programs">Curriculum</a></li>
+                                <li><a href="index.html#programs">Pre-K through 8th Grade</a></li>
+                                <li><a href="index.html#programs">Art, Music, STEM &amp; Band</a></li>
+                                <li><a href="index.html#programs">Spanish Program</a></li>
+                                <li><a href="index.html#programs">Physical Education</a></li>
+                                <li><a href="calendar.html">Academic Calendar</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="contact.html" class="nav-link">Admissions <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener">Rolling Admissions</a></li>
+                                <li><a href="tuition.html">Tuition Information</a></li>
+                                <li><a href="uniforms.html">School Uniforms</a></li>
+                                <li><a href="opportunity-scholarship.html">Scholarship Opportunities</a></li>
+                                <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                                <li><a href="application-checklist.html">Application Checklist</a></li>
+                                <li><a href="contact.html">Schedule a Tour</a></li>
+                                <li><a href="history.html">Military Families Welcome</a></li>
+                                <li><a href="supply-lists.html">School Supply Lists</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="newsletter.html" class="nav-link">Parents <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="newsletter.html">Newsletter</a></li>
+                                <li><a href="calendar.html">Calendar</a></li>
+                                <li><a href="uniforms.html">Uniforms</a></li>
+                                <li><a href="before-after-care.html">Before/After Care</a></li>
+                                <li><a href="fundraising-opportunities.html">Fundraising Opportunities</a></li>
+                                <li><a href="safe-environment.html">Safe Environment</a></li>
+                                <li><a href="longleaf-academy.html">Longleaf Academy</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/Community-Opportunities" target="_blank" rel="noopener">Community Opportunities</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="activities.html" class="nav-link">Students <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="activities.html">Activities</a></li>
+                                <li><a href="athletics.html">Athletics</a></li>
+                                <li><a href="handbook-lunch.html">Handbook &amp; Lunch Ordering</a></li>
+                                <li><a href="year-in-review-2025-2026.html">Year in Review 2025-2026</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/School-Events" target="_blank" rel="noopener">School Events</a></li>
+                                <li><a href="say-something.html">Say Something</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a href="parish.html" class="nav-link">Community</a></li>
+                        <li class="nav-item">
+                            <a href="support-us.html" class="nav-link">Support Us</a>
+                        </li>
+                        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-actions">
+                    <div class="translate-widget" aria-label="Translate this site">
+                        <i class="fas fa-language"></i>
+                        <div class="gtranslate_wrapper"></div>
+                    </div>
+                    <button class="btn-secondary" onclick="openPortal()">
+                        <i class="fas fa-user"></i> Portal Login
+                    </button>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="page-hero-background">
+                <div class="page-hero-overlay"></div>
+            </div>
+            <div class="container">
+                <div class="page-hero-content">
+                    <h1 class="page-hero-title">Alumni</h1>
+                    <p class="page-hero-subtitle">Welcome home to the St. Ann Catholic School family</p>
+                    <nav class="breadcrumb">
+                        <a href="index.html">Home</a> <span>/</span> <a href="mission.html">About</a> <span>/</span> <span>Alumni</span>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <section class="support-section">
+            <div class="container">
+                <div class="support-layout">
+                    <div class="support-main">
+                        <div class="support-card support-hero-card">
+                            <div class="support-card-header">
+                                <div class="support-icon"><i class="fas fa-school"></i></div>
+                                <h2>Welcome Home, St. Ann Alumni</h2>
+                            </div>
+                            <p>
+                                Whether you graduated recently or decades ago, you remain part of the St. Ann story.
+                                Our alumni carry forward the friendships, faith, service, and academic foundation
+                                formed here in downtown Fayetteville.
+                            </p>
+                            <div class="support-actions">
+                                <a href="#alumni-update" class="support-action">
+                                    <i class="fas fa-address-card"></i> Update Your Information
+                                </a>
+                                <a href="history.html" class="support-action secondary">
+                                    <i class="fas fa-book-open"></i> Our History
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="support-card">
+                            <div class="support-card-header">
+                                <div class="support-icon"><i class="fas fa-handshake"></i></div>
+                                <h2>Stay Connected</h2>
+                            </div>
+                            <p>
+                                We want to hear your stories, celebrate your milestones, and invite you back to campus.
+                                Alumni help keep St. Ann's legacy alive by sharing memories, mentoring students,
+                                attending school events, and supporting future generations.
+                            </p>
+                            <div class="support-grid">
+                                <div class="support-mini-card">
+                                    <i class="fas fa-comments"></i>
+                                    <h3>Share Your Story</h3>
+                                    <p>Tell us about your St. Ann memories, classmates, teachers, and where life has taken you.</p>
+                                </div>
+                                <div class="support-mini-card">
+                                    <i class="fas fa-calendar-days"></i>
+                                    <h3>Come Back to Visit</h3>
+                                    <p>Reconnect with the school community through Mass, events, service, and school celebrations.</p>
+                                </div>
+                                <div class="support-mini-card">
+                                    <i class="fas fa-hand-holding-heart"></i>
+                                    <h3>Support the Mission</h3>
+                                    <p>Help today's students experience the same faith-filled foundation that shaped you.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="support-card" id="alumni-update">
+                            <div class="support-card-header">
+                                <div class="support-icon"><i class="fas fa-address-book"></i></div>
+                                <h2>Alumni Update Form</h2>
+                            </div>
+                            <p>
+                                Send us your current contact information and a note for the St. Ann community.
+                                This form opens an email draft so the school can receive your update directly.
+                            </p>
+                            <form class="alumni-form" action="mailto:schooladmin@mysacs.org" method="post" enctype="text/plain">
+                                <div class="alumni-form-grid">
+                                    <label>
+                                        First Name
+                                        <input type="text" name="First Name" required>
+                                    </label>
+                                    <label>
+                                        Last Name
+                                        <input type="text" name="Last Name" required>
+                                    </label>
+                                    <label>
+                                        Class Year
+                                        <input type="text" name="Class Year" placeholder="Example: 1998">
+                                    </label>
+                                    <label>
+                                        Email
+                                        <input type="email" name="Email" required>
+                                    </label>
+                                    <label>
+                                        Phone
+                                        <input type="tel" name="Phone">
+                                    </label>
+                                    <label>
+                                        City / State
+                                        <input type="text" name="City and State">
+                                    </label>
+                                </div>
+                                <label>
+                                    Message or Memory
+                                    <textarea name="Message" placeholder="Share an update, memory, or way you would like to reconnect."></textarea>
+                                </label>
+                                <button type="submit" class="btn-primary" style="border:none;align-self:flex-start;">
+                                    <i class="fas fa-paper-plane"></i> Send Alumni Update
+                                </button>
+                                <p class="alumni-form-note">
+                                    If your email app does not open automatically, contact the school office at
+                                    <a href="mailto:schooladmin@mysacs.org">schooladmin@mysacs.org</a>.
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+
+                    <aside class="support-sidebar" aria-label="Alumni contact information">
+                        <div class="support-sidebar-card">
+                            <h3>Alumni Welcome</h3>
+                            <p style="margin-bottom:1rem;">Come home to St. Ann. We would love to hear your story and welcome you for a visit.</p>
+                            <a href="#alumni-update" class="btn-primary" style="text-decoration:none;display:inline-flex;">
+                                <i class="fas fa-address-card"></i> Update Info
+                            </a>
+                        </div>
+
+                        <div class="support-sidebar-card">
+                            <h3>Contact</h3>
+                            <div class="support-contact-list">
+                                <p><i class="fas fa-location-dot"></i> 365 N. Cool Spring St.<br>Fayetteville, NC 28301</p>
+                                <a href="tel:+19104833216"><i class="fas fa-phone"></i> (910) 483-3216</a>
+                                <a href="mailto:schooladmin@mysacs.org"><i class="fas fa-envelope"></i> schooladmin@mysacs.org</a>
+                            </div>
+                        </div>
+
+                        <div class="support-sidebar-card">
+                            <h3>Also Explore</h3>
+                            <div class="support-contact-list">
+                                <a href="history.html"><i class="fas fa-book-open"></i> Our History</a>
+                                <a href="year-in-review-2025-2026.html"><i class="fas fa-images"></i> Year in Review</a>
+                                <a href="donate.html"><i class="fas fa-gift"></i> Support St. Ann</a>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                            <span>St. Ann Catholic School</span>
+                        </div>
+                        <p>Providing quality Catholic education to the Fayetteville and Cape Fear region since 1956. The first all-inclusive school in North Carolina.</p>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="mission.html">Mission &amp; Vision</a></li>
+                        <li><a href="history.html">Our History</a></li>
+                        <li><a href="principal.html">Our Principal</a></li>
+                        <li><a href="faculty.html">Our Faculty</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="openPortal()">Student Portal</a></li>
+                        <li><a href="newsletter.html">Newsletter</a></li>
+                        <li><a href="calendar.html">Calendar</a></li>
+                        <li><a href="support-us.html">Support Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/St.AnnCatholicSchoolFayettevilleNC" target="_blank" rel="noopener" class="social-link" aria-label="St. Ann Catholic School on Facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                    <div class="contact-info">
+                        <p><a href="tel:+19104833216" class="tel-link"><i class="fas fa-phone"></i> (910) 483-3216</a></p>
+                        <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 365 N Cool Spring Street, Fayetteville, NC 28301</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 St. Ann Catholic School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.gtranslateSettings = {
+            default_language: "en",
+            languages: ["en", "es"],
+            wrapper_selector: ".gtranslate_wrapper",
+            switcher_horizontal_position: "inline"
+        };
+    </script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
+    <script src="script.js"></script>
+</body>
+</html>

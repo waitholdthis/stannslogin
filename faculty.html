@@ -7,6 +7,269 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    /* Meet Our Faculty CTA */
+    .meet-faculty-cta {
+        background: linear-gradient(135deg, var(--primary-color) 0%, #2d3f6e 100%);
+        border-radius: 0.75rem;
+        padding: 2.25rem 2rem;
+        text-align: center;
+        margin-top: 2rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .meet-faculty-cta::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 4px;
+        background: var(--gradient-gold);
+    }
+
+    .meet-faculty-cta h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 0.65rem;
+    }
+
+    .meet-faculty-cta p {
+        font-size: 0.93rem;
+        color: rgba(255,255,255,0.78);
+        margin-bottom: 1.5rem;
+        line-height: 1.65;
+        max-width: 480px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .meet-faculty-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: var(--accent-color);
+        color: var(--primary-color);
+        font-family: 'Source Sans 3', sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        padding: 0.85rem 2rem;
+        border-radius: 0.45rem;
+        border: none;
+        cursor: pointer;
+        letter-spacing: 0.02em;
+        transition: background 0.2s, transform 0.15s;
+    }
+
+    .meet-faculty-btn:hover {
+        background: #b8973e;
+        transform: translateY(-1px);
+    }
+
+    /* Modal overlay */
+    .faculty-modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(10,15,35,0.65);
+        z-index: 1000;
+        overflow-y: auto;
+        padding: 2rem 1rem;
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(3px);
+    }
+
+    .faculty-modal-overlay.active {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .faculty-modal {
+        background: white;
+        border-radius: 1rem;
+        max-width: 960px;
+        width: 100%;
+        box-shadow: 0 30px 70px rgba(0,0,0,0.45);
+        position: relative;
+        animation: modalIn 0.22s ease;
+    }
+
+    @keyframes modalIn {
+        from { opacity: 0; transform: translateY(20px) scale(0.97); }
+        to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Modal header */
+    .faculty-modal-header {
+        background: linear-gradient(135deg, var(--primary-color) 0%, #2d3f6e 100%);
+        border-radius: 1rem 1rem 0 0;
+        padding: 1.5rem 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .faculty-modal-header::after {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 0;
+        width: 100%; height: 3px;
+        background: var(--gradient-gold);
+    }
+
+    .faculty-modal-header-text h2 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 0.2rem;
+    }
+
+    .faculty-modal-header-text p {
+        font-size: 0.85rem;
+        color: rgba(255,255,255,0.7);
+        margin: 0;
+    }
+
+    .faculty-modal-close {
+        width: 2.2rem;
+        height: 2.2rem;
+        background: rgba(255,255,255,0.15);
+        border: 1px solid rgba(255,255,255,0.25);
+        border-radius: 50%;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+        flex-shrink: 0;
+    }
+
+    .faculty-modal-close:hover {
+        background: rgba(255,255,255,0.28);
+    }
+
+    /* Modal body + grid */
+    .faculty-modal-body {
+        padding: 2rem;
+    }
+
+    .faculty-modal-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+    }
+
+    @media (max-width: 680px) {
+        .faculty-modal-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* Faculty card */
+    .faculty-card {
+        background: #fafafa;
+        border: 1px solid var(--border-color);
+        border-radius: 0.65rem;
+        padding: 1.25rem 1rem;
+        text-align: center;
+        transition: box-shadow 0.18s, transform 0.18s;
+    }
+
+    .faculty-card:hover {
+        box-shadow: 0 6px 20px rgba(26,39,68,0.12);
+        transform: translateY(-2px);
+    }
+
+    .faculty-card-photo {
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: top center;
+        border: 3px solid var(--accent-color);
+        margin: 0 auto 0.9rem;
+        display: block;
+    }
+
+    .faculty-card-placeholder {
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+        background: var(--gradient-primary);
+        border: 3px solid var(--accent-color);
+        margin: 0 auto 0.9rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-size: 1.6rem;
+    }
+
+    .faculty-card-name {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.2rem;
+    }
+
+    .faculty-card-title {
+        font-size: 0.8rem;
+        color: var(--secondary-color);
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        line-height: 1.4;
+    }
+
+    .faculty-card-dept {
+        font-size: 0.78rem;
+        color: var(--text-secondary);
+        line-height: 1.45;
+    }
+
+    .faculty-card-email {
+        color: var(--primary-color);
+        display: inline-block;
+        font-size: 0.76rem;
+        font-weight: 600;
+        line-height: 1.35;
+        margin-top: 0.45rem;
+        overflow-wrap: anywhere;
+        text-decoration: none;
+    }
+
+    .faculty-card-email:hover {
+        text-decoration: underline;
+    }
+
+    /* placeholder card style */
+    .faculty-card.is-placeholder {
+        border-style: dashed;
+        border-color: #d0d5df;
+        background: #f7f8fb;
+        opacity: 0.7;
+    }
+
+    .faculty-card.is-placeholder .faculty-card-placeholder {
+        background: #e8eaf0;
+        border-color: #c5cadb;
+        color: #8890a8;
+    }
+
+    .faculty-card.is-placeholder .faculty-card-name {
+        color: #8890a8;
+        font-style: italic;
+    }
+
+    .faculty-card.is-placeholder .faculty-card-title {
+        color: #a0a8be;
+    }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -44,6 +307,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="mission.html">Mission & Vision</a></li>
                                 <li><a href="history.html">Our History</a></li>
+                                <li><a href="alumni.html">Alumni</a></li>
                                 <li><a href="principal.html">Our Principal</a></li>
                                 <li><a href="faculty.html">Our Faculty</a></li>
                                 <li><a href="parish.html">Parish Connection</a></li>
@@ -66,8 +330,9 @@
                                 <li><a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener">Rolling Admissions</a></li>
                                 <li><a href="tuition.html">Tuition Information</a></li>
                                 <li><a href="uniforms.html">School Uniforms</a></li>
-                                <li><a href="opportunity-scholarship.html">NC Opportunity Scholarships</a></li>
+                                <li><a href="opportunity-scholarship.html">Scholarship Opportunities</a></li>
                                 <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                                <li><a href="application-checklist.html">Application Checklist</a></li>
                                 <li><a href="contact.html">Schedule a Tour</a></li>
                                 <li><a href="history.html">Military Families Welcome</a></li>
                                 <li><a href="supply-lists.html">School Supply Lists</a></li>
@@ -81,6 +346,9 @@
                                 <li><a href="calendar.html">Calendar</a></li>
                                 <li><a href="uniforms.html">Uniforms</a></li>
                                 <li><a href="before-after-care.html">Before/After Care</a></li>
+                                <li><a href="fundraising-opportunities.html">Fundraising Opportunities</a></li>
+                                <li><a href="safe-environment.html">Safe Environment</a></li>
+                                <li><a href="longleaf-academy.html">Longleaf Academy</a></li>
                                 <li><a href="https://www.stanncatholicschool.net/Community-Opportunities" target="_blank" rel="noopener">Community Opportunities</a></li>
                             </ul>
                         </li>
@@ -88,12 +356,18 @@
                             <a href="activities.html" class="nav-link">Students <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="activities.html">Activities</a></li>
+                                <li><a href="athletics.html">Athletics</a></li>
+                                <li><a href="handbook-lunch.html">Handbook &amp; Lunch Ordering</a></li>
+                                <li><a href="year-in-review-2025-2026.html">Year in Review 2025-2026</a></li>
                                 <li><a href="https://www.stanncatholicschool.net/School-Events" target="_blank" rel="noopener">School Events</a></li>
                                 <li><a href="say-something.html">Say Something</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
                             <a href="parish.html" class="nav-link">Community</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="support-us.html" class="nav-link">Support Us</a>
                         </li>
                         <li class="nav-item">
                             <a href="contact.html" class="nav-link">Contact</a>
@@ -146,13 +420,13 @@
                             </div>
                             <h2>Dedicated Educational Professionals</h2>
                             <p class="lead-text">
-                                Our faculty consists of licensed professionals who maintain high expectations for all students 
-                                while providing the individual attention and support each child needs to succeed.
+                                St. Ann is blessed to have a magnificent staff with various backgrounds and a wealth
+                                of knowledge to share with our students.
                             </p>
                             <p>
-                                Every member of our teaching staff is committed to educating the whole child, recognizing 
-                                students' multiple intelligences and varied interests. We establish strong bonds with all 
-                                students and their families in our safe, nurturing learning environment.
+                                Every member of our teaching staff is committed to educating the whole child,
+                                recognizing students' multiple intelligences and varied interests. We establish strong
+                                bonds with students and families in a safe, nurturing learning environment.
                             </p>
                         </div>
 
@@ -194,9 +468,7 @@
                             <h3>Faculty Spotlight</h3>
                             <div class="staff-member">
                                 <div class="staff-info">
-                                    <div class="staff-icon">
-                                        <i class="fas fa-user-graduate"></i>
-                                    </div>
+                                    <img src="photos/faculty/melissa-herrera.jpg" class="staff-photo" alt="Ms. Herrera">
                                     <div class="staff-details">
                                         <h4>Ms. Herrera</h4>
                                         <p class="staff-role">Early Childhood Education Teacher</p>
@@ -262,7 +534,7 @@
                             <div class="philosophy-box">
                                 <h3>Our Teaching Philosophy</h3>
                                 <p>
-                                    At St. Ann Catholic School, our faculty embraces a holistic approach to education that nurtures 
+                                    At St. Ann Catholic School, our faculty embraces a holistic approach to education that nurtures
                                     the mind, body, and spirit of every student. We believe in:
                                 </p>
                                 <ul class="philosophy-list">
@@ -274,6 +546,19 @@
                                 </ul>
                             </div>
                         </div>
+
+                        <!-- Meet Our Faculty CTA -->
+                        <div class="meet-faculty-cta">
+                            <h3>Meet Our Faculty</h3>
+                            <p>
+                                Get to know the dedicated educators who make St. Ann Catholic School exceptional.
+                                Each one brings passion, credentials, and a deep commitment to your child's success.
+                            </p>
+                            <button class="meet-faculty-btn" onclick="openFacultyModal()">
+                                <i class="fas fa-users"></i> Meet Our Faculty
+                            </button>
+                        </div>
+
                     </div>
 
                     <div class="sidebar">
@@ -293,8 +578,8 @@
                                     <div class="stat-label">Grade Levels Served</div>
                                 </div>
                                 <div class="stat-item">
-                                    <div class="stat-number">6</div>
-                                    <div class="stat-label">Subject Areas</div>
+                                    <div class="stat-number">18</div>
+                                    <div class="stat-label">Faculty &amp; Staff Listed</div>
                                 </div>
                             </div>
                         </div>
@@ -316,7 +601,7 @@
                             <p>Interested in becoming part of our dedicated faculty? We welcome qualified educators who share our commitment to Catholic education excellence.</p>
                             <div class="contact-info">
                                 <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
-                                <p><i class="fas fa-phone"></i> (910) 483-3216</p>
+                                <p><a href="tel:+19104833216" class="tel-link"><i class="fas fa-phone"></i> (910) 483-3216</a></p>
                             </div>
                         </div>
 
@@ -384,7 +669,7 @@
                         <a href="https://www.facebook.com/St.AnnCatholicSchoolFayettevilleNC" target="_blank" rel="noopener" class="social-link" aria-label="St. Ann Catholic School on Facebook"><i class="fab fa-facebook"></i></a>
                     </div>
                     <div class="contact-info">
-                        <p><i class="fas fa-phone"></i> (910) 483-3216</p>
+                        <p><a href="tel:+19104833216" class="tel-link"><i class="fas fa-phone"></i> (910) 483-3216</a></p>
                         <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
                         <p><i class="fas fa-map-marker-alt"></i> 365 N Cool Spring Street, Fayetteville, NC 28301</p>
                     </div>
@@ -396,6 +681,174 @@
             </div>
         </div>
     </footer>
+
+    <!-- Meet Our Faculty Modal -->
+    <div class="faculty-modal-overlay" id="faculty-modal" role="dialog" aria-modal="true" aria-labelledby="faculty-modal-title">
+        <div class="faculty-modal">
+
+            <div class="faculty-modal-header">
+                <div class="faculty-modal-header-text">
+                    <h2 id="faculty-modal-title">Meet Our Faculty</h2>
+                    <p>St. Ann Catholic School &mdash; 2025&ndash;2026</p>
+                </div>
+                <button class="faculty-modal-close" onclick="closeFacultyModal()" aria-label="Close faculty directory">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="faculty-modal-body">
+                <div class="faculty-modal-grid">
+
+                    <div class="faculty-card">
+                        <img src="photos/faculty/melissa-herrera.jpg" class="faculty-card-photo" alt="Ms. Melissa Herrera">
+                        <div class="faculty-card-name">Ms. Melissa Herrera</div>
+                        <div class="faculty-card-title">Pre-Kindergarten</div>
+                        <a href="mailto:mherrera@mysacs.org" class="faculty-card-email">mherrera@mysacs.org</a>
+                    </div>
+
+                    <div class="faculty-card">
+                        <img src="photos/faculty/sandra-zuluaga.jpg" class="faculty-card-photo" alt="Mrs. Sandra Zuluaga">
+                        <div class="faculty-card-name">Mrs. Sandra Zuluaga</div>
+                        <div class="faculty-card-title">Kindergarten</div>
+                        <a href="mailto:szuluaga@mysacs.org" class="faculty-card-email">szuluaga@mysacs.org</a>
+                    </div>
+
+                    <div class="faculty-card">
+                        <img src="photos/faculty/leslee-dodge.jpg" class="faculty-card-photo" alt="Mrs. Leslee Dodge">
+                        <div class="faculty-card-name">Mrs. Leslee Dodge</div>
+                        <div class="faculty-card-title">First Grade</div>
+                        <a href="mailto:ldodge@mysacs.org" class="faculty-card-email">ldodge@mysacs.org</a>
+                    </div>
+
+                    <div class="faculty-card">
+                        <img src="photos/faculty/ariana-newlin.jpg" class="faculty-card-photo" alt="Mrs. Ariana Newlin">
+                        <div class="faculty-card-name">Mrs. Ariana Newlin</div>
+                        <div class="faculty-card-title">Second Grade</div>
+                        <a href="mailto:anewlin@mysacs.org" class="faculty-card-email">anewlin@mysacs.org</a>
+                    </div>
+
+                    <div class="faculty-card">
+                        <img src="photos/faculty/dawn-sifuentes.jpg" class="faculty-card-photo" alt="Mrs. Dawn Sifuentes">
+                        <div class="faculty-card-name">Mrs. Dawn Sifuentes</div>
+                        <div class="faculty-card-title">Third Grade</div>
+                        <a href="mailto:dsifuentes@mysacs.org" class="faculty-card-email">dsifuentes@mysacs.org</a>
+                    </div>
+
+                    <div class="faculty-card">
+                        <img src="photos/faculty/annielynn-claro.jpg" class="faculty-card-photo" alt="Mrs. Annielynn Claro">
+                        <div class="faculty-card-name">Mrs. Annielynn Claro</div>
+                        <div class="faculty-card-title">Fourth Grade</div>
+                        <a href="mailto:aclaro@mysacs.org" class="faculty-card-email">aclaro@mysacs.org</a>
+                    </div>
+
+                    <div class="faculty-card">
+                        <img src="photos/faculty/erin-coughlin.jpg" class="faculty-card-photo" alt="Mrs. Erin Coughlin">
+                        <div class="faculty-card-name">Mrs. Erin Coughlin</div>
+                        <div class="faculty-card-title">Fifth Grade</div>
+                        <a href="mailto:ecoughlin@mysacs.org" class="faculty-card-email">ecoughlin@mysacs.org</a>
+                    </div>
+
+                    <div class="faculty-card">
+                        <img src="photos/faculty/theresa-williams.jpg" class="faculty-card-photo" alt="Ms. Theresa Williams">
+                        <div class="faculty-card-name">Ms. Theresa Williams</div>
+                        <div class="faculty-card-title">Middle School Science</div>
+                        <a href="mailto:twilliams@mysacs.org" class="faculty-card-email">twilliams@mysacs.org</a>
+                    </div>
+
+                    <div class="faculty-card">
+                        <img src="photos/faculty/katie-desjardin.jpg" class="faculty-card-photo" alt="Mrs. Katie Desjardin">
+                        <div class="faculty-card-name">Mrs. Katie Desjardin</div>
+                        <div class="faculty-card-title">Middle School Math</div>
+                        <div class="faculty-card-dept">6th &amp; 7th Grade Social Studies</div>
+                        <a href="mailto:kdesjardin@mysacs.org" class="faculty-card-email">kdesjardin@mysacs.org</a>
+                    </div>
+
+                    <div class="faculty-card">
+                        <img src="photos/faculty/kathleen-stoneburner.jpg" class="faculty-card-photo" alt="Ms. Kathleen Stoneburner">
+                        <div class="faculty-card-name">Ms. Kathleen Stoneburner</div>
+                        <div class="faculty-card-title">Middle School ELA</div>
+                        <div class="faculty-card-dept">8th Grade Social Studies</div>
+                        <a href="mailto:kstoneburner@mysacs.org" class="faculty-card-email">kstoneburner@mysacs.org</a>
+                    </div>
+
+                    <div class="faculty-card">
+                        <img src="photos/faculty/antony-bishop.jpg" class="faculty-card-photo" alt="Mr. Antony Bishop">
+                        <div class="faculty-card-name">Mr. Antony Bishop</div>
+                        <div class="faculty-card-title">Middle School Theology</div>
+                        <a href="mailto:abishop@mysacs.org" class="faculty-card-email">abishop@mysacs.org</a>
+                    </div>
+
+                    <div class="faculty-card">
+                        <img src="photos/faculty/jeimy-mckenzie.jpg" class="faculty-card-photo" alt="Mrs. Jeimy McKenzie">
+                        <div class="faculty-card-name">Mrs. Jeimy McKenzie</div>
+                        <div class="faculty-card-title">Spanish</div>
+                        <a href="mailto:jmckenzie@mysacs.org" class="faculty-card-email">jmckenzie@mysacs.org</a>
+                    </div>
+
+                    <div class="faculty-card">
+                        <img src="photos/faculty/mitch-adams.jpg" class="faculty-card-photo" alt="Mr. Mitch Adams">
+                        <div class="faculty-card-name">Mr. Mitch Adams</div>
+                        <div class="faculty-card-title">Physical Education</div>
+                        <a href="mailto:madams@mysacs.org" class="faculty-card-email">madams@mysacs.org</a>
+                    </div>
+
+                    <div class="faculty-card">
+                        <img src="photos/faculty/sharona-carter.jpg" class="faculty-card-photo" alt="Mrs. Sharona Carter">
+                        <div class="faculty-card-name">Mrs. Sharona Carter</div>
+                        <div class="faculty-card-title">Music, Band, Chorus</div>
+                        <a href="mailto:scarter@mysacs.org" class="faculty-card-email">scarter@mysacs.org</a>
+                    </div>
+
+                    <div class="faculty-card">
+                        <img src="photos/faculty/sara-joyce.jpg" class="faculty-card-photo" alt="Ms. Sara Joyce">
+                        <div class="faculty-card-name">Ms. Sara Joyce</div>
+                        <div class="faculty-card-title">Administrative Assistant</div>
+                        <a href="mailto:adminasst@mysacs.org" class="faculty-card-email">adminasst@mysacs.org</a>
+                    </div>
+
+                    <div class="faculty-card">
+                        <img src="photos/faculty/susan-harris.jpg" class="faculty-card-photo" alt="Mrs. Susan Harris">
+                        <div class="faculty-card-name">Mrs. Susan Harris</div>
+                        <div class="faculty-card-title">Bookkeeper</div>
+                    </div>
+
+                    <div class="faculty-card">
+                        <img src="photos/faculty/mb-herring.jpg" class="faculty-card-photo" alt="Mr. MB Herring">
+                        <div class="faculty-card-name">Mr. MB Herring</div>
+                        <div class="faculty-card-title">Custodian</div>
+                    </div>
+
+                    <div class="faculty-card">
+                        <img src="photos/faculty/ernest-brown.jpg" class="faculty-card-photo" alt="Mr. Ernest Brown">
+                        <div class="faculty-card-name">Mr. Ernest Brown</div>
+                        <div class="faculty-card-title">Crossing Guard</div>
+                    </div>
+
+                </div><!-- /faculty-modal-grid -->
+            </div><!-- /faculty-modal-body -->
+
+        </div><!-- /faculty-modal -->
+    </div><!-- /faculty-modal-overlay -->
+
+    <script>
+        function openFacultyModal() {
+            document.getElementById('faculty-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeFacultyModal() {
+            document.getElementById('faculty-modal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('faculty-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeFacultyModal();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeFacultyModal();
+        });
+    </script>
 
     <script>
         window.gtranslateSettings = {

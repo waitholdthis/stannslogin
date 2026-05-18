@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handbook &amp; Lunch Ordering - St. Ann Catholic School | Fayetteville, NC</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    /* ── Page layout ─────────────────────────────────────────── */
+    .handbook-section {
+        padding: 4rem 0 5rem;
+        background: var(--background);
+    }
+
+    .handbook-layout {
+        display: grid;
+        grid-template-columns: 1fr 280px;
+        gap: 2rem;
+        align-items: start;
+    }
+
+    /* ── Shared block styles ─────────────────────────────────── */
+    .hb-block {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.75rem;
+        padding: 1.75rem 2rem;
+        margin-bottom: 1.5rem;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .hb-block-header {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.85rem;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .hb-block-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-size: 1rem;
+        flex-shrink: 0;
+    }
+
+    .hb-block h2 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin: 0;
+    }
+
+    /* ── Intro hero ──────────────────────────────────────────── */
+    .hb-hero {
+        background: linear-gradient(135deg, var(--primary-color) 0%, #2d3f6e 100%);
+        border-radius: 0.75rem;
+        padding: 2.25rem 2rem;
+        margin-bottom: 1.5rem;
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        box-shadow: var(--shadow-md);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hb-hero::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--gradient-gold);
+    }
+
+    .hb-hero-icon {
+        width: 4.5rem;
+        height: 4.5rem;
+        background: rgba(201,168,76,0.2);
+        border: 2px solid rgba(201,168,76,0.45);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-size: 1.75rem;
+        flex-shrink: 0;
+    }
+
+    .hb-hero-divider {
+        width: 1px;
+        height: 5rem;
+        background: rgba(255,255,255,0.2);
+        flex-shrink: 0;
+    }
+
+    .hb-hero-text h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.45rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 0.5rem;
+    }
+
+    .hb-hero-text p {
+        font-size: 0.9rem;
+        color: rgba(255,255,255,0.78);
+        line-height: 1.65;
+        margin: 0;
+    }
+
+    /* ── Download card ───────────────────────────────────────── */
+    .handbook-download-card {
+        background: linear-gradient(135deg, rgba(26,39,68,0.04) 0%, rgba(201,168,76,0.06) 100%);
+        border: 1px solid rgba(201,168,76,0.35);
+        border-radius: 0.75rem;
+        padding: 1.5rem 1.75rem;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .handbook-download-icon {
+        width: 3.5rem;
+        height: 3.5rem;
+        background: var(--secondary-color);
+        border-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        flex-shrink: 0;
+    }
+
+    .handbook-download-info {
+        flex: 1;
+    }
+
+    .handbook-download-info h4 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.2rem;
+    }
+
+    .handbook-download-info p {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        margin: 0;
+    }
+
+    .handbook-download-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--primary-color);
+        color: white;
+        padding: 0.65rem 1.25rem;
+        border-radius: 0.4rem;
+        font-size: 0.88rem;
+        font-weight: 600;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: background 0.2s;
+    }
+
+    .handbook-download-btn:hover {
+        background: #0f1a3a;
+    }
+
+    /* ── Policy highlights ───────────────────────────────────── */
+    .policy-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.65rem;
+    }
+
+    .policy-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.65rem;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+    }
+
+    .policy-list li i {
+        color: var(--accent-color);
+        font-size: 0.8rem;
+        margin-top: 0.25rem;
+        flex-shrink: 0;
+    }
+
+    /* ── Lunch ordering section ──────────────────────────────── */
+    .lunch-hero {
+        background: linear-gradient(135deg, #1a5c2a 0%, #2a7a3e 100%);
+        border-radius: 0.75rem;
+        padding: 1.75rem 2rem;
+        margin-bottom: 1.25rem;
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .lunch-hero::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--gradient-gold);
+    }
+
+    .lunch-hero-icon {
+        width: 3.5rem;
+        height: 3.5rem;
+        background: rgba(255,255,255,0.15);
+        border: 2px solid rgba(255,255,255,0.3);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.4rem;
+        flex-shrink: 0;
+    }
+
+    .lunch-hero-text h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 0.35rem;
+    }
+
+    .lunch-hero-text p {
+        font-size: 0.88rem;
+        color: rgba(255,255,255,0.82);
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    /* ── How-to steps ────────────────────────────────────────── */
+    .steps-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        counter-reset: step-counter;
+    }
+
+    .steps-list li {
+        counter-increment: step-counter;
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 0.85rem 0;
+        border-bottom: 1px solid var(--border-light);
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+    }
+
+    .steps-list li:last-child {
+        border-bottom: none;
+    }
+
+    .step-num {
+        width: 2rem;
+        height: 2rem;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-size: 0.8rem;
+        font-weight: 700;
+        flex-shrink: 0;
+        font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+
+    /* ── Lunch support card ──────────────────────────────────── */
+    .lunch-support-card {
+        background: rgba(26,92,42,0.05);
+        border: 1px solid rgba(26,92,42,0.2);
+        border-left: 4px solid #1a5c2a;
+        border-radius: 0 0.5rem 0.5rem 0;
+        padding: 1.1rem 1.25rem;
+        margin-top: 1rem;
+        display: flex;
+        gap: 0.9rem;
+        align-items: flex-start;
+    }
+
+    .lunch-support-card i {
+        color: #1a5c2a;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .lunch-support-card h4 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.3rem;
+    }
+
+    .lunch-support-card p {
+        font-size: 0.87rem;
+        color: var(--text-secondary);
+        margin: 0;
+        line-height: 1.55;
+    }
+
+    .lunch-support-card a {
+        color: #1a5c2a;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    /* ── Sidebar overrides ───────────────────────────────────── */
+    .sidebar-btn-green {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: #1a5c2a;
+        color: white;
+        padding: 0.7rem 1.1rem;
+        border-radius: 0.4rem;
+        font-size: 0.88rem;
+        font-weight: 600;
+        text-decoration: none;
+        width: 100%;
+        justify-content: center;
+        margin-top: 0.5rem;
+        box-sizing: border-box;
+        transition: background 0.2s;
+    }
+
+    .sidebar-btn-green:hover {
+        background: #144a22;
+    }
+    </style>
+</head>
+<body>
+    <header class="header" id="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <div class="logo">
+                        <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                        <a href="index.html" style="text-decoration: none; color: inherit;">
+                            <span>St. Ann Catholic School</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="mission.html" class="nav-link">About <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="mission.html">Mission &amp; Vision</a></li>
+                                <li><a href="history.html">Our History</a></li>
+                                <li><a href="alumni.html">Alumni</a></li>
+                                <li><a href="principal.html">Our Principal</a></li>
+                                <li><a href="faculty.html">Our Faculty</a></li>
+                                <li><a href="parish.html">Parish Connection</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="index.html#programs" class="nav-link">Academics <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.html#programs">Curriculum</a></li>
+                                <li><a href="index.html#programs">Pre-K through 8th Grade</a></li>
+                                <li><a href="index.html#programs">Art, Music, STEM &amp; Band</a></li>
+                                <li><a href="index.html#programs">Spanish Program</a></li>
+                                <li><a href="index.html#programs">Physical Education</a></li>
+                                <li><a href="calendar.html">Academic Calendar</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="contact.html" class="nav-link">Admissions <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener">Rolling Admissions</a></li>
+                                <li><a href="tuition.html">Tuition Information</a></li>
+                                <li><a href="uniforms.html">School Uniforms</a></li>
+                                <li><a href="opportunity-scholarship.html">Scholarship Opportunities</a></li>
+                                <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                                <li><a href="application-checklist.html">Application Checklist</a></li>
+                                <li><a href="contact.html">Schedule a Tour</a></li>
+                                <li><a href="history.html">Military Families Welcome</a></li>
+                                <li><a href="supply-lists.html">School Supply Lists</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="newsletter.html" class="nav-link">Parents <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="newsletter.html">Newsletter</a></li>
+                                <li><a href="calendar.html">Calendar</a></li>
+                                <li><a href="uniforms.html">Uniforms</a></li>
+                                <li><a href="before-after-care.html">Before/After Care</a></li>
+                                <li><a href="fundraising-opportunities.html">Fundraising Opportunities</a></li>
+                                <li><a href="safe-environment.html">Safe Environment</a></li>
+                                <li><a href="longleaf-academy.html">Longleaf Academy</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/Community-Opportunities" target="_blank" rel="noopener">Community Opportunities</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="activities.html" class="nav-link active">Students <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="activities.html">Activities</a></li>
+                                <li><a href="athletics.html">Athletics</a></li>
+                                <li><a href="handbook-lunch.html">Handbook &amp; Lunch Ordering</a></li>
+                                <li><a href="year-in-review-2025-2026.html">Year in Review 2025-2026</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/School-Events" target="_blank" rel="noopener">School Events</a></li>
+                                <li><a href="say-something.html">Say Something</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="parish.html" class="nav-link">Community</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="support-us.html" class="nav-link">Support Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-actions">
+                    <div class="translate-widget" aria-label="Translate this site">
+                        <i class="fas fa-language"></i>
+                        <div class="gtranslate_wrapper"></div>
+                    </div>
+                    <button class="btn-secondary" onclick="openPortal()">
+                        <i class="fas fa-user"></i> Portal Login
+                    </button>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="page-hero-background">
+                <div class="page-hero-overlay"></div>
+            </div>
+            <div class="container">
+                <div class="page-hero-content">
+                    <h1 class="page-hero-title">Handbook &amp; Lunch Ordering</h1>
+                    <p class="page-hero-subtitle">School Policies, Guidelines &amp; Online Meal Ordering</p>
+                    <nav class="breadcrumb">
+                        <a href="index.html">Home</a> <span>/</span>
+                        <a href="activities.html">Students</a> <span>/</span>
+                        <span>Handbook &amp; Lunch Ordering</span>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <section class="handbook-section">
+            <div class="container">
+                <div class="handbook-layout">
+
+                    <!-- ── Main content ──────────────────────── -->
+                    <div class="handbook-main">
+
+                        <div class="section-kicker">2025–2026 School Year</div>
+                        <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.75rem;font-weight:700;color:var(--primary-color);margin:0.35rem 0 1.25rem;">Student Resources &amp; School Policies</h2>
+
+                        <!-- Intro hero -->
+                        <div class="hb-hero">
+                            <div class="hb-hero-icon">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <div class="hb-hero-divider"></div>
+                            <div class="hb-hero-text">
+                                <h3>Everything You Need in One Place</h3>
+                                <p>
+                                    The St. Ann Catholic School Student Handbook outlines our school's policies,
+                                    expectations, and community standards for the 2025–2026 school year.
+                                    Families are also encouraged to use our convenient online lunch ordering
+                                    system — <strong style="color:var(--accent-color);">My Hot Lunchbox</strong> — to pre-order
+                                    hot meals for their students.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- ── Handbook section ──────────────── -->
+                        <div class="hb-block">
+                            <div class="hb-block-header">
+                                <div class="hb-block-icon"><i class="fas fa-book"></i></div>
+                                <h2>Student Handbook 2025–2026</h2>
+                            </div>
+
+                            <p style="font-size:0.93rem;color:var(--text-secondary);line-height:1.7;margin-bottom:1.25rem;">
+                                The Student Handbook contains all school policies, behavioral expectations, dress code,
+                                attendance guidelines, and community standards that govern life at St. Ann Catholic School.
+                                All families are asked to review the handbook at the beginning of the school year.
+                            </p>
+
+                            <!-- Download card -->
+                            <div class="handbook-download-card">
+                                <div class="handbook-download-icon">
+                                    <i class="fas fa-file-pdf"></i>
+                                </div>
+                                <div class="handbook-download-info">
+                                    <h4>Student Handbook 2025–2026</h4>
+                                    <p>PDF document &mdash; St. Ann Catholic School, Fayetteville, NC</p>
+                                </div>
+                                <a href="documents/Student_Handbook_25_26.pdf" target="_blank" rel="noopener" class="handbook-download-btn">
+                                    <i class="fas fa-download"></i> Download PDF
+                                </a>
+                            </div>
+
+                            <!-- Policy highlights -->
+                            <h3 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.1rem;font-weight:700;color:var(--primary-color);margin-bottom:0.85rem;">Handbook Covers</h3>
+                            <ul class="policy-list">
+                                <li><i class="fas fa-circle-dot"></i> <span>School Mission &amp; Catholic Identity</span></li>
+                                <li><i class="fas fa-circle-dot"></i> <span>Dress Code &amp; Uniform Policy</span></li>
+                                <li><i class="fas fa-circle-dot"></i> <span>Attendance &amp; Tardy Procedures</span></li>
+                                <li><i class="fas fa-circle-dot"></i> <span>Behavior &amp; Discipline Standards</span></li>
+                                <li><i class="fas fa-circle-dot"></i> <span>Academic Grading &amp; Promotion</span></li>
+                                <li><i class="fas fa-circle-dot"></i> <span>Homework &amp; Study Expectations</span></li>
+                                <li><i class="fas fa-circle-dot"></i> <span>Technology &amp; Device Policy</span></li>
+                                <li><i class="fas fa-circle-dot"></i> <span>Health, Safety &amp; Emergency Procedures</span></li>
+                                <li><i class="fas fa-circle-dot"></i> <span>Communication &amp; Parent Involvement</span></li>
+                                <li><i class="fas fa-circle-dot"></i> <span>Extracurricular Activities &amp; Athletics</span></li>
+                            </ul>
+                        </div>
+
+                        <!-- ── Lunch ordering section ────────── -->
+                        <div class="hb-block">
+                            <div class="hb-block-header">
+                                <div class="hb-block-icon"><i class="fas fa-utensils"></i></div>
+                                <h2>Online Lunch Ordering</h2>
+                            </div>
+
+                            <p style="font-size:0.93rem;color:var(--text-secondary);line-height:1.7;margin-bottom:1.25rem;">
+                                St. Ann Catholic School uses <strong>My Hot Lunchbox</strong> for convenient online meal
+                                ordering. Parents can pre-order hot lunches for their students directly through the
+                                My Hot Lunchbox platform — no more cash in backpacks.
+                            </p>
+
+                            <!-- Lunch intro card -->
+                            <div class="lunch-hero">
+                                <div class="lunch-hero-icon">
+                                    <i class="fas fa-bowl-food"></i>
+                                </div>
+                                <div class="lunch-hero-text">
+                                    <h3>My Hot Lunchbox</h3>
+                                    <p>
+                                        Order hot lunches online at your convenience. Choose from available menu options,
+                                        manage your student's account, and pay securely — all in one place.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- How to order steps -->
+                            <h3 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.1rem;font-weight:700;color:var(--primary-color);margin-bottom:0.75rem;">How to Get Started</h3>
+                            <ol class="steps-list">
+                                <li>
+                                    <div class="step-num">1</div>
+                                    <div><strong>Create an Account</strong> — Visit the My Hot Lunchbox website and register as a new parent. You will need your student's name and school information.</div>
+                                </li>
+                                <li>
+                                    <div class="step-num">2</div>
+                                    <div><strong>Find St. Ann Catholic School</strong> — Search for St. Ann Catholic School, Fayetteville, NC when setting up your account.</div>
+                                </li>
+                                <li>
+                                    <div class="step-num">3</div>
+                                    <div><strong>Add Your Student</strong> — Link your student(s) to your account using their name and grade level.</div>
+                                </li>
+                                <li>
+                                    <div class="step-num">4</div>
+                                    <div><strong>Browse the Menu &amp; Order</strong> — Select your desired lunch days and menu items. Orders must be placed by the school's designated weekly deadline.</div>
+                                </li>
+                                <li>
+                                    <div class="step-num">5</div>
+                                    <div><strong>Pay Online</strong> — Complete your order with a credit or debit card through the secure checkout process.</div>
+                                </li>
+                            </ol>
+
+                            <!-- Support contact -->
+                            <div class="lunch-support-card">
+                                <i class="fas fa-headset"></i>
+                                <div>
+                                    <h4>My Hot Lunchbox Support</h4>
+                                    <p>
+                                        For questions about your account, orders, or technical issues, contact My Hot Lunchbox directly:<br>
+                                        <strong>Phone:</strong> <a href="tel:8888948295">888-894-8295</a> &nbsp;&bull;&nbsp;
+                                        <strong>Email:</strong> <a href="mailto:info@myhotlunchbox.com">info@myhotlunchbox.com</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- ── Sidebar ───────────────────────────── -->
+                    <div class="handbook-sidebar">
+
+                        <!-- Download Handbook -->
+                        <div class="sidebar-card" style="border-top:3px solid var(--primary-color);">
+                            <h3>Student Handbook</h3>
+                            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:0.5rem;">
+                                Download the official 2025–2026 Student Handbook PDF.
+                            </p>
+                            <a href="documents/Student_Handbook_25_26.pdf" target="_blank" rel="noopener"
+                               class="btn-primary sidebar-btn"
+                               style="text-decoration:none;display:inline-flex;">
+                                <i class="fas fa-download"></i> Download Handbook
+                            </a>
+                        </div>
+
+                        <!-- Lunch Ordering -->
+                        <div class="sidebar-card" style="border-top:3px solid #1a5c2a;">
+                            <h3>Online Lunch Ordering</h3>
+                            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:0.5rem;">
+                                Order hot lunches online through My Hot Lunchbox. Set up your account to start ordering.
+                            </p>
+                            <a href="https://www.myhotlunchbox.com" target="_blank" rel="noopener"
+                               class="sidebar-btn-green">
+                                <i class="fas fa-arrow-up-right-from-square"></i> Go to My Hot Lunchbox
+                            </a>
+                            <div class="contact-info" style="margin-top:1rem;">
+                                <p><i class="fas fa-phone" style="color:#1a5c2a;"></i>
+                                    <a href="tel:8888948295" style="color:var(--text-secondary);text-decoration:none;">888-894-8295</a>
+                                </p>
+                                <p><i class="fas fa-envelope" style="color:#1a5c2a;"></i>
+                                    <a href="mailto:info@myhotlunchbox.com" style="color:var(--text-secondary);text-decoration:none;">info@myhotlunchbox.com</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- School Contact -->
+                        <div class="sidebar-card">
+                            <h3>Contact the School</h3>
+                            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:0.75rem;">
+                                Have questions about school policies? Reach out to us directly.
+                            </p>
+                            <div class="contact-info">
+                                <p><a href="tel:+19104833216" class="tel-link"><i class="fas fa-phone"></i> (910) 483-3216</a></p>
+                                <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                            </div>
+                            <a href="contact.html" class="btn-primary sidebar-btn" style="text-decoration:none;display:inline-flex;margin-top:1rem;">
+                                <i class="fas fa-paper-plane"></i> Contact Us
+                            </a>
+                        </div>
+
+                        <!-- Also Explore -->
+                        <div class="sidebar-card">
+                            <h3>Also Explore</h3>
+                            <ul class="quick-info-list">
+                                <li>
+                                    <i class="fas fa-tshirt"></i>
+                                    <div>
+                                        <a href="uniforms.html" style="color:var(--primary-color);font-weight:600;text-decoration:none;font-size:0.9rem;">School Uniforms</a><br>
+                                        <span style="font-size:0.82rem;color:var(--text-secondary);">Dress code &amp; where to purchase</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-backpack"></i>
+                                    <div>
+                                        <a href="supply-lists.html" style="color:var(--primary-color);font-weight:600;text-decoration:none;font-size:0.9rem;">Supply Lists</a><br>
+                                        <span style="font-size:0.82rem;color:var(--text-secondary);">Grade-level supply requirements</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-calendar-days"></i>
+                                    <div>
+                                        <a href="calendar.html" style="color:var(--primary-color);font-weight:600;text-decoration:none;font-size:0.9rem;">School Calendar</a><br>
+                                        <span style="font-size:0.82rem;color:var(--text-secondary);">Key dates &amp; events</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                            <span>St. Ann Catholic School</span>
+                        </div>
+                        <p>Providing quality Catholic education to the Fayetteville and Cape Fear region since 1956. The first all-inclusive school in North Carolina.</p>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="mission.html">About Us</a></li>
+                        <li><a href="index.html#programs">Academics</a></li>
+                        <li><a href="tuition.html">Tuition</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="openPortal()">Student Portal</a></li>
+                        <li><a href="newsletter.html">Newsletter</a></li>
+                        <li><a href="calendar.html">Calendar</a></li>
+                        <li><a href="supply-lists.html">Supply Lists</a></li>
+                        <li><a href="uniforms.html">Uniforms</a></li>
+                        <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                        <li><a href="activities.html">Activities</a></li>
+                        <li><a href="athletics.html">Athletics</a></li>
+                        <li><a href="handbook-lunch.html">Handbook &amp; Lunch</a></li>
+                        <li><a href="say-something.html">Say Something</a></li>
+                        <li><a href="parish.html">Parish</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/St.AnnCatholicSchoolFayettevilleNC" target="_blank" rel="noopener" class="social-link" aria-label="St. Ann Catholic School on Facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                    <div class="contact-info">
+                        <p><a href="tel:+19104833216" class="tel-link"><i class="fas fa-phone"></i> (910) 483-3216</a></p>
+                        <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 365 N Cool Spring Street, Fayetteville, NC 28301</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 St. Ann Catholic School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.gtranslateSettings = {
+            default_language: "en",
+            languages: ["en", "es"],
+            wrapper_selector: ".gtranslate_wrapper",
+            switcher_horizontal_position: "inline"
+        };
+    </script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
+    <script src="script.js"></script>
+</body>
+</html>

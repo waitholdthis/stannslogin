@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Checklist - St. Ann Catholic School | Fayetteville, NC</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    /* ── Page layout ─────────────────────────────────────────── */
+    .checklist-section {
+        padding: 4rem 0 5rem;
+        background: var(--background);
+    }
+
+    .checklist-layout {
+        display: grid;
+        grid-template-columns: 1fr 280px;
+        gap: 2rem;
+        align-items: start;
+    }
+
+    /* ── Section blocks ──────────────────────────────────────── */
+    .checklist-block {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.75rem;
+        padding: 1.75rem 2rem;
+        margin-bottom: 1.5rem;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .checklist-block-header {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.85rem;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .checklist-block-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-size: 1rem;
+        flex-shrink: 0;
+    }
+
+    .checklist-block h2 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin: 0;
+    }
+
+    /* ── Intro hero card ─────────────────────────────────────── */
+    .enroll-hero {
+        background: linear-gradient(135deg, var(--primary-color) 0%, #2d3f6e 100%);
+        border-radius: 0.75rem;
+        padding: 2.25rem 2rem;
+        margin-bottom: 1.5rem;
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        box-shadow: var(--shadow-md);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .enroll-hero::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--gradient-gold);
+    }
+
+    .enroll-hero-icon {
+        width: 4rem;
+        height: 4rem;
+        background: rgba(201,168,76,0.2);
+        border: 2px solid rgba(201,168,76,0.5);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-size: 1.6rem;
+        flex-shrink: 0;
+    }
+
+    .enroll-hero-divider {
+        width: 1px;
+        height: 5rem;
+        background: rgba(255,255,255,0.2);
+        flex-shrink: 0;
+    }
+
+    .enroll-hero-text h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.45rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 0.5rem;
+    }
+
+    .enroll-hero-text p {
+        font-size: 0.9rem;
+        color: rgba(255,255,255,0.78);
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    .enroll-hero-text a {
+        color: var(--accent-color);
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .enroll-hero-text a:hover {
+        text-decoration: underline;
+    }
+
+    /* ── Checklist items ─────────────────────────────────────── */
+    .checklist-items {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .checklist-item {
+        display: flex;
+        gap: 1.25rem;
+        align-items: flex-start;
+        padding: 1.35rem 0;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .checklist-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .checklist-item-num {
+        width: 2.25rem;
+        height: 2.25rem;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .checklist-item-content {
+        flex: 1;
+    }
+
+    .checklist-item-title-row {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        flex-wrap: wrap;
+        margin-bottom: 0.35rem;
+    }
+
+    .checklist-item-content h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin: 0;
+    }
+
+    .checklist-item-content p {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        line-height: 1.65;
+        margin: 0;
+    }
+
+    .checklist-item-content a {
+        color: var(--primary-color);
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .checklist-item-content a:hover {
+        text-decoration: underline;
+    }
+
+    /* ── Badges ──────────────────────────────────────────────── */
+    .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        border-radius: 2rem;
+        padding: 0.15rem 0.6rem;
+        white-space: nowrap;
+    }
+
+    .badge-required {
+        background: rgba(26,39,68,0.1);
+        color: var(--primary-color);
+    }
+
+    .badge-deadline {
+        background: rgba(201,168,76,0.18);
+        color: #8a6a1a;
+    }
+
+    .badge-conditional {
+        background: rgba(123,45,58,0.1);
+        color: var(--secondary-color);
+    }
+
+    .badge-optional {
+        background: rgba(100,100,100,0.1);
+        color: #555;
+    }
+
+    /* ── Notice banners ──────────────────────────────────────── */
+    .notice-banner {
+        background: rgba(123,45,58,0.06);
+        border: 1px solid rgba(123,45,58,0.2);
+        border-left: 4px solid var(--secondary-color);
+        border-radius: 0 0.5rem 0.5rem 0;
+        padding: 0.9rem 1.1rem;
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+    }
+
+    .notice-banner i {
+        color: var(--secondary-color);
+        font-size: 1rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .notice-banner p {
+        font-size: 0.88rem;
+        color: var(--secondary-color);
+        font-weight: 500;
+        margin: 0;
+        line-height: 1.55;
+    }
+
+    .info-banner {
+        background: rgba(26,39,68,0.05);
+        border: 1px solid rgba(26,39,68,0.15);
+        border-left: 4px solid var(--primary-color);
+        border-radius: 0 0.5rem 0.5rem 0;
+        padding: 1rem 1.1rem;
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+    }
+
+    .info-banner i {
+        color: var(--primary-color);
+        font-size: 1rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .info-banner div h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.3rem;
+    }
+
+    .info-banner div p {
+        font-size: 0.88rem;
+        color: var(--text-secondary);
+        margin: 0;
+        line-height: 1.55;
+    }
+
+    /* ── Deadline summary table ──────────────────────────────── */
+    .deadline-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.88rem;
+    }
+
+    .deadline-table th {
+        text-align: left;
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        padding: 0.5rem 0.75rem;
+        border-bottom: 2px solid var(--border-color);
+        background: var(--background-light);
+    }
+
+    .deadline-table td {
+        padding: 0.65rem 0.75rem;
+        border-bottom: 1px solid var(--border-light);
+        color: var(--text-secondary);
+        vertical-align: top;
+    }
+
+    .deadline-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .deadline-table td:first-child {
+        font-weight: 600;
+        color: var(--text-primary);
+        white-space: nowrap;
+    }
+
+    /* ── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 900px) {
+        .checklist-layout { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+        .checklist-block { padding: 1.25rem; }
+        .enroll-hero { flex-direction: column; gap: 1rem; }
+        .enroll-hero-divider { display: none; }
+    }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="utility-bar">
+            <div class="nav-container">
+                <div class="utility-location">
+                    <i class="fas fa-location-dot"></i>
+                    <span>365 N Cool Spring Street, Fayetteville, NC</span>
+                </div>
+                <div class="utility-links">
+                    <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+                    <a href="calendar.html"><i class="fas fa-calendar-days"></i> Calendar</a>
+                    <a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener"><i class="fas fa-pencil-alt"></i> Apply</a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <div class="logo">
+                        <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                        <a href="index.html" style="text-decoration: none; color: inherit;">
+                            <span>St. Ann Catholic School</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="mission.html" class="nav-link">About <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="mission.html">Mission &amp; Vision</a></li>
+                                <li><a href="history.html">Our History</a></li>
+                                <li><a href="alumni.html">Alumni</a></li>
+                                <li><a href="principal.html">Our Principal</a></li>
+                                <li><a href="faculty.html">Our Faculty</a></li>
+                                <li><a href="parish.html">Parish Connection</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="index.html#programs" class="nav-link">Academics <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.html#programs">Curriculum</a></li>
+                                <li><a href="index.html#programs">Pre-K through 8th Grade</a></li>
+                                <li><a href="index.html#programs">Art, Music, STEM &amp; Band</a></li>
+                                <li><a href="index.html#programs">Spanish Program</a></li>
+                                <li><a href="index.html#programs">Physical Education</a></li>
+                                <li><a href="calendar.html">Academic Calendar</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="contact.html" class="nav-link active">Admissions <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener">Rolling Admissions</a></li>
+                                <li><a href="tuition.html">Tuition Information</a></li>
+                                <li><a href="uniforms.html">School Uniforms</a></li>
+                                <li><a href="opportunity-scholarship.html">Scholarship Opportunities</a></li>
+                                <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                                <li><a href="application-checklist.html">Application Checklist</a></li>
+                                <li><a href="contact.html">Schedule a Tour</a></li>
+                                <li><a href="history.html">Military Families Welcome</a></li>
+                                <li><a href="supply-lists.html">School Supply Lists</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="newsletter.html" class="nav-link">Parents <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="newsletter.html">Newsletter</a></li>
+                                <li><a href="calendar.html">Calendar</a></li>
+                                <li><a href="uniforms.html">Uniforms</a></li>
+                                <li><a href="before-after-care.html">Before/After Care</a></li>
+                                <li><a href="fundraising-opportunities.html">Fundraising Opportunities</a></li>
+                                <li><a href="safe-environment.html">Safe Environment</a></li>
+                                <li><a href="longleaf-academy.html">Longleaf Academy</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/Community-Opportunities" target="_blank" rel="noopener">Community Opportunities</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="activities.html" class="nav-link">Students <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="activities.html">Activities</a></li>
+                                <li><a href="athletics.html">Athletics</a></li>
+                                <li><a href="handbook-lunch.html">Handbook &amp; Lunch Ordering</a></li>
+                                <li><a href="year-in-review-2025-2026.html">Year in Review 2025-2026</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/School-Events" target="_blank" rel="noopener">School Events</a></li>
+                                <li><a href="say-something.html">Say Something</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="parish.html" class="nav-link">Community</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="support-us.html" class="nav-link">Support Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-actions">
+                    <div class="translate-widget" aria-label="Translate this site">
+                        <i class="fas fa-language"></i>
+                        <div class="gtranslate_wrapper"></div>
+                    </div>
+                    <button class="btn-secondary" onclick="openPortal()">
+                        <i class="fas fa-user"></i> Portal Login
+                    </button>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="page-hero-background">
+                <div class="page-hero-overlay"></div>
+            </div>
+            <div class="container">
+                <div class="page-hero-content">
+                    <h1 class="page-hero-title">Application Checklist</h1>
+                    <p class="page-hero-subtitle">Everything You Need to Complete Enrollment</p>
+                    <nav class="breadcrumb">
+                        <a href="index.html">Home</a> <span>/</span>
+                        <a href="contact.html">Admissions</a> <span>/</span>
+                        <span>Application Checklist</span>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <section class="checklist-section">
+            <div class="container">
+                <div class="checklist-layout">
+
+                    <!-- ── Main content ──────────────────────── -->
+                    <div class="checklist-main">
+
+                        <div class="section-kicker">2026–2027 School Year</div>
+                        <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.75rem;font-weight:700;color:var(--primary-color);margin:0.35rem 0 1.25rem;">Enrollment Overview</h2>
+
+                        <!-- Intro hero -->
+                        <div class="enroll-hero">
+                            <div class="enroll-hero-icon">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
+                            <div class="enroll-hero-divider"></div>
+                            <div class="enroll-hero-text">
+                                <h3>Online Enrollment via Gradelink</h3>
+                                <p>
+                                    All items below are completed as part of the online enrollment process through the
+                                    <a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener">Gradelink enrollment portal</a>.
+                                    Enrollment requires principal approval and payment of all applicable fees.
+                                    Full admission is not granted until the successful completion of a
+                                    <strong style="color:var(--accent-color);">60-day probationary period</strong>.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Notice -->
+                        <div class="notice-banner">
+                            <i class="fas fa-triangle-exclamation"></i>
+                            <p>
+                                <strong>Principal Approval Required.</strong> Enrollment is not finalized until the principal reviews and approves the application. Please ensure all documents are submitted promptly to avoid delays.
+                            </p>
+                        </div>
+
+                        <!-- Checklist -->
+                        <div class="checklist-block">
+                            <div class="checklist-block-header">
+                                <div class="checklist-block-icon"><i class="fas fa-list-check"></i></div>
+                                <h2>Required Items &amp; Documents</h2>
+                            </div>
+
+                            <div class="checklist-items">
+
+                                <div class="checklist-item">
+                                    <div class="checklist-item-num">1</div>
+                                    <div class="checklist-item-content">
+                                        <div class="checklist-item-title-row">
+                                            <h3>Completed Application</h3>
+                                            <span class="badge badge-required"><i class="fas fa-asterisk"></i> Required</span>
+                                        </div>
+                                        <p>
+                                            Submit your completed application through the
+                                            <a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener">Gradelink enrollment portal</a>.
+                                            All sections of the application must be filled out in full before the application can be reviewed.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="checklist-item">
+                                    <div class="checklist-item-num">2</div>
+                                    <div class="checklist-item-content">
+                                        <div class="checklist-item-title-row">
+                                            <h3>Registration Fee</h3>
+                                            <span class="badge badge-required"><i class="fas fa-asterisk"></i> Required</span>
+                                            <span class="badge badge-deadline"><i class="fas fa-calendar"></i> Due March 1, 2026</span>
+                                        </div>
+                                        <p>
+                                            The non-refundable registration fee secures your child's spot for the upcoming school year.
+                                            New families enrolling after March 1 should pay this fee at the time of registration.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="checklist-item">
+                                    <div class="checklist-item-num">3</div>
+                                    <div class="checklist-item-content">
+                                        <div class="checklist-item-title-row">
+                                            <h3>Instructional Fee</h3>
+                                            <span class="badge badge-required"><i class="fas fa-asterisk"></i> Required</span>
+                                            <span class="badge badge-deadline"><i class="fas fa-calendar"></i> Due May 1, 2026 or at registration</span>
+                                        </div>
+                                        <p>
+                                            The instructional fee covers classroom materials and resources for the school year.
+                                            It is due by May 1, 2026, or at the time of registration for families enrolling after that date.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="checklist-item">
+                                    <div class="checklist-item-num">4</div>
+                                    <div class="checklist-item-content">
+                                        <div class="checklist-item-title-row">
+                                            <h3>Technology Fee</h3>
+                                            <span class="badge badge-required"><i class="fas fa-asterisk"></i> Required</span>
+                                            <span class="badge badge-deadline"><i class="fas fa-calendar"></i> Due May 1, 2026 or at registration</span>
+                                        </div>
+                                        <p>
+                                            The technology fee supports digital learning tools, devices, and infrastructure.
+                                            Due by May 1, 2026, or at the time of registration for families enrolling after that date.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="checklist-item">
+                                    <div class="checklist-item-num">5</div>
+                                    <div class="checklist-item-content">
+                                        <div class="checklist-item-title-row">
+                                            <h3>Immunization Record</h3>
+                                            <span class="badge badge-required"><i class="fas fa-asterisk"></i> Required</span>
+                                        </div>
+                                        <p>
+                                            North Carolina state law requires documentation of the following immunizations:
+                                            5 DTap/DT, 4 Oral Polio, 4 Pneumococcal Conjugate, 3–4 HIB, 3 Hep B,
+                                            2 Varicella, and 2 MMR. Records must be current and signed by a healthcare provider.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="checklist-item">
+                                    <div class="checklist-item-num">6</div>
+                                    <div class="checklist-item-content">
+                                        <div class="checklist-item-title-row">
+                                            <h3>Health Record</h3>
+                                            <span class="badge badge-conditional"><i class="fas fa-circle-info"></i> Pre-K &amp; Kindergarten Only</span>
+                                        </div>
+                                        <p>
+                                            A health record signed by a qualified physician is required for all students
+                                            entering Pre-K or Kindergarten. This must be completed prior to the first day of school.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="checklist-item">
+                                    <div class="checklist-item-num">7</div>
+                                    <div class="checklist-item-content">
+                                        <div class="checklist-item-title-row">
+                                            <h3>Birth Certificate</h3>
+                                            <span class="badge badge-required"><i class="fas fa-asterisk"></i> Required</span>
+                                        </div>
+                                        <p>
+                                            A copy of your child's official birth certificate must be submitted as part of the enrollment packet.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="checklist-item">
+                                    <div class="checklist-item-num">8</div>
+                                    <div class="checklist-item-content">
+                                        <div class="checklist-item-title-row">
+                                            <h3>Baptismal Certificate</h3>
+                                            <span class="badge badge-required"><i class="fas fa-asterisk"></i> Required</span>
+                                        </div>
+                                        <p>
+                                            A copy of your child's baptismal certificate is required. If your family is not
+                                            Catholic or your child is not baptized, please contact the school office to discuss
+                                            your enrollment options.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="checklist-item">
+                                    <div class="checklist-item-num">9</div>
+                                    <div class="checklist-item-content">
+                                        <div class="checklist-item-title-row">
+                                            <h3>Signed Tuition Agreement</h3>
+                                            <span class="badge badge-required"><i class="fas fa-asterisk"></i> Required</span>
+                                        </div>
+                                        <p>
+                                            All families must sign a tuition agreement acknowledging the fee schedule, payment
+                                            terms, and financial obligations for the school year. View the
+                                            <a href="tuition.html">Tuition Information page</a> for a full breakdown of rates and fees.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="checklist-item">
+                                    <div class="checklist-item-num">10</div>
+                                    <div class="checklist-item-content">
+                                        <div class="checklist-item-title-row">
+                                            <h3>Current Report Card</h3>
+                                            <span class="badge badge-required"><i class="fas fa-asterisk"></i> Required</span>
+                                        </div>
+                                        <p>
+                                            Submit your child's most recent report card from their current school,
+                                            along with any other relevant academic records or progress reports from
+                                            the previous school year.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="checklist-item">
+                                    <div class="checklist-item-num">11</div>
+                                    <div class="checklist-item-content">
+                                        <div class="checklist-item-title-row">
+                                            <h3>Standardized Test Scores</h3>
+                                            <span class="badge badge-optional"><i class="fas fa-circle-minus"></i> If Applicable</span>
+                                        </div>
+                                        <p>
+                                            If your child has taken any standardized tests (such as state assessments,
+                                            MAP testing, or similar), please include copies of those score reports
+                                            with your enrollment paperwork.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="checklist-item">
+                                    <div class="checklist-item-num">12</div>
+                                    <div class="checklist-item-content">
+                                        <div class="checklist-item-title-row">
+                                            <h3>Principal Interview</h3>
+                                            <span class="badge badge-required"><i class="fas fa-asterisk"></i> Required</span>
+                                        </div>
+                                        <p>
+                                            All new students and their families are required to meet with the principal
+                                            as part of the admissions process. Contact the school office to schedule
+                                            your interview appointment at <strong>(910) 483-3902</strong> or
+                                            <a href="mailto:principal@mysacs.org">principal@mysacs.org</a>.
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Fee Deadlines Summary -->
+                        <div class="checklist-block">
+                            <div class="checklist-block-header">
+                                <div class="checklist-block-icon"><i class="fas fa-calendar-check"></i></div>
+                                <h2>Fee Deadlines — 2026–2027</h2>
+                            </div>
+                            <table class="deadline-table">
+                                <thead>
+                                    <tr>
+                                        <th>Fee</th>
+                                        <th>Due Date</th>
+                                        <th>Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Registration Fee</td>
+                                        <td>March 1, 2026</td>
+                                        <td>Due at time of registration if enrolling after March 1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Instructional Fee</td>
+                                        <td>May 1, 2026</td>
+                                        <td>Due at time of registration if enrolling after May 1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Technology Fee</td>
+                                        <td>May 1, 2026</td>
+                                        <td>Due at time of registration if enrolling after May 1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p style="font-size:0.82rem;color:var(--text-secondary);margin-top:1rem;line-height:1.5;">
+                                For a full breakdown of tuition rates and annual fees, visit the
+                                <a href="tuition.html" style="color:var(--primary-color);font-weight:600;text-decoration:none;">Tuition Information page</a>.
+                                Families with questions about Scholarship Opportunities or financial assistance should visit the
+                                <a href="opportunity-scholarship.html" style="color:var(--primary-color);font-weight:600;text-decoration:none;">Scholarship Opportunities page</a>.
+                            </p>
+                        </div>
+
+                        <!-- Probationary Period Notice -->
+                        <div class="info-banner">
+                            <i class="fas fa-shield-halved"></i>
+                            <div>
+                                <h3>60-Day Probationary Period</h3>
+                                <p>
+                                    Full admission is not granted to any student until the successful completion of a
+                                    60-day probationary period. During this time, the school evaluates whether the
+                                    placement is the right fit for the student and the community.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- ── Sidebar ───────────────────────────── -->
+                    <div class="sidebar">
+
+                        <div class="sidebar-card">
+                            <h3>Begin Enrollment</h3>
+                            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1rem;">
+                                St. Ann uses rolling admissions — applications are accepted year-round for
+                                Pre-K through 8th Grade.
+                            </p>
+                            <a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener"
+                               class="btn-primary sidebar-btn"
+                               style="text-decoration:none;display:inline-flex;margin-bottom:0.65rem;">
+                                <i class="fas fa-pencil-alt"></i> Start Application
+                            </a>
+                            <a href="contact.html"
+                               class="btn-primary sidebar-btn"
+                               style="text-decoration:none;display:inline-flex;background:var(--background-light);color:var(--primary-color);border:1px solid var(--border-color);">
+                                <i class="fas fa-calendar-check"></i> Schedule a Tour
+                            </a>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Key Deadlines</h3>
+                            <ul class="quick-info-list">
+                                <li>
+                                    <i class="fas fa-calendar-day" style="color:var(--accent-color);"></i>
+                                    <div>
+                                        <strong>Registration Fee</strong><br>
+                                        <span style="font-size:0.82rem;color:var(--text-secondary);">Due March 1, 2026</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-calendar-day" style="color:var(--accent-color);"></i>
+                                    <div>
+                                        <strong>Instructional Fee</strong><br>
+                                        <span style="font-size:0.82rem;color:var(--text-secondary);">Due May 1, 2026 or at registration</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-calendar-day" style="color:var(--accent-color);"></i>
+                                    <div>
+                                        <strong>Technology Fee</strong><br>
+                                        <span style="font-size:0.82rem;color:var(--text-secondary);">Due May 1, 2026 or at registration</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Questions?</h3>
+                            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:0.75rem;">
+                                Our office is happy to walk you through the enrollment process and answer any questions about required documents.
+                            </p>
+                            <div class="contact-info">
+                                <p><i class="fas fa-phone"></i> (910) 483-3902</p>
+                                <p><i class="fas fa-envelope"></i> principal@mysacs.org</p>
+                            </div>
+                            <a href="contact.html" class="btn-primary sidebar-btn" style="text-decoration:none;display:inline-flex;margin-top:1rem;">
+                                <i class="fas fa-paper-plane"></i> Contact Us
+                            </a>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Also Explore</h3>
+                            <ul class="quick-info-list">
+                                <li>
+                                    <i class="fas fa-dollar-sign"></i>
+                                    <div><a href="tuition.html" style="color:var(--primary-color);font-weight:600;text-decoration:none;font-size:0.9rem;">Tuition &amp; Fees</a><br>
+                                    <span style="font-size:0.82rem;color:var(--text-secondary);">View full rate schedule</span></div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-award"></i>
+                                    <div><a href="opportunity-scholarship.html" style="color:var(--primary-color);font-weight:600;text-decoration:none;font-size:0.9rem;">Scholarship Opportunities</a><br>
+                                    <span style="font-size:0.82rem;color:var(--text-secondary);">State tuition assistance up to $7,000</span></div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-clock"></i>
+                                    <div><a href="before-after-care.html" style="color:var(--primary-color);font-weight:600;text-decoration:none;font-size:0.9rem;">Before &amp; After Care</a><br>
+                                    <span style="font-size:0.82rem;color:var(--text-secondary);">7:00 AM – 6:00 PM extended care</span></div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                            <span>St. Ann Catholic School</span>
+                        </div>
+                        <p>Providing quality Catholic education to the Fayetteville and Cape Fear region since 1956. The first all-inclusive school in North Carolina.</p>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="mission.html">About Us</a></li>
+                        <li><a href="index.html#programs">Academics</a></li>
+                        <li><a href="tuition.html">Tuition</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="openPortal()">Student Portal</a></li>
+                        <li><a href="newsletter.html">Newsletter</a></li>
+                        <li><a href="calendar.html">Calendar</a></li>
+                        <li><a href="supply-lists.html">Supply Lists</a></li>
+                        <li><a href="uniforms.html">Uniforms</a></li>
+                        <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                        <li><a href="activities.html">Activities</a></li>
+                        <li><a href="say-something.html">Say Something</a></li>
+                        <li><a href="parish.html">Parish</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/St.AnnCatholicSchoolFayettevilleNC" target="_blank" rel="noopener" class="social-link" aria-label="St. Ann Catholic School on Facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                    <div class="contact-info">
+                        <p><a href="tel:+19104833216" class="tel-link"><i class="fas fa-phone"></i> (910) 483-3216</a></p>
+                        <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 365 N Cool Spring Street, Fayetteville, NC 28301</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 St. Ann Catholic School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.gtranslateSettings = {
+            default_language: "en",
+            languages: ["en", "es"],
+            wrapper_selector: ".gtranslate_wrapper",
+            switcher_horizontal_position: "inline"
+        };
+    </script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Athletics - St. Ann Catholic School | Fayetteville, NC</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    .athletics-section {
+        padding: 4rem 0 5rem;
+        background: var(--background);
+    }
+
+    .athletics-layout {
+        display: grid;
+        grid-template-columns: 1fr 280px;
+        gap: 2rem;
+        align-items: start;
+    }
+
+    .ath-block,
+    .ath-sidebar-card {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.75rem;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .ath-block {
+        padding: 1.75rem 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .ath-block-header {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.85rem;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .ath-block-icon,
+    .ath-hero-icon {
+        background: var(--gradient-primary);
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .ath-block-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        font-size: 1rem;
+    }
+
+    .ath-block h2,
+    .ath-sidebar-card h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        color: var(--primary-color);
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .ath-block h2 {
+        font-size: 1.35rem;
+    }
+
+    .athletics-hero-unity {
+        position: absolute;
+        right: 2.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        padding: 0;
+        margin: 0;
+        z-index: 2;
+    }
+
+    .athletics-hero-logo {
+        width: 7.25rem;
+        height: 7.25rem;
+        object-fit: contain;
+        filter: drop-shadow(0 8px 16px rgba(0,0,0,0.2));
+    }
+
+    .athletics-hero-plus {
+        color: var(--accent-color);
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 2.25rem;
+        font-weight: 700;
+        line-height: 1;
+    }
+
+    .page-hero-content {
+        padding-right: 20rem;
+    }
+
+    .ath-hero {
+        background: linear-gradient(135deg, var(--primary-color) 0%, #2d3f6e 100%);
+        border-radius: 0.75rem;
+        padding: 2.25rem 2rem;
+        margin-bottom: 1.5rem;
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        box-shadow: var(--shadow-md);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .ath-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--gradient-gold);
+    }
+
+    .ath-hero-icon {
+        width: 4.5rem;
+        height: 4.5rem;
+        background: rgba(201,168,76,0.2);
+        border: 2px solid rgba(201,168,76,0.45);
+        border-radius: 50%;
+        font-size: 1.75rem;
+    }
+
+    .ath-hero-divider {
+        width: 1px;
+        height: 5rem;
+        background: rgba(255,255,255,0.2);
+        flex-shrink: 0;
+    }
+
+    .ath-hero-text h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.45rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 0.5rem;
+    }
+
+    .ath-hero-text p {
+        font-size: 0.9rem;
+        color: rgba(255,255,255,0.78);
+        line-height: 1.65;
+        margin: 0;
+    }
+
+    .partnership-banner {
+        background: rgba(201,168,76,0.1);
+        border: 1px solid rgba(201,168,76,0.4);
+        border-left: 4px solid var(--accent-color);
+        border-radius: 0 0.5rem 0.5rem 0;
+        padding: 1rem 1.25rem;
+        display: flex;
+        gap: 0.9rem;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+    }
+
+    .partnership-banner i {
+        color: var(--accent-color);
+        font-size: 1.15rem;
+        flex-shrink: 0;
+        margin-top: 1px;
+    }
+
+    .partnership-banner h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.3rem;
+    }
+
+    .partnership-banner p {
+        font-size: 0.88rem;
+        color: var(--text-secondary);
+        margin: 0;
+        line-height: 1.55;
+    }
+
+    .season-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .season-card {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.75rem;
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .season-card-header {
+        padding: 1rem 1.25rem 0.85rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .season-card-header.fall { background: linear-gradient(135deg, #7b4a1a 0%, #a0622a 100%); }
+    .season-card-header.winter { background: linear-gradient(135deg, var(--primary-color) 0%, #2d3f6e 100%); }
+    .season-card-header.spring { background: linear-gradient(135deg, #1a5c2a 0%, #2a7a3e 100%); }
+
+    .season-card-header-icon {
+        width: 2.25rem;
+        height: 2.25rem;
+        background: rgba(255,255,255,0.15);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        flex-shrink: 0;
+    }
+
+    .season-card-header h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: white;
+        margin: 0;
+    }
+
+    .season-card-sports {
+        padding: 1rem 1.25rem;
+        list-style: none;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+
+    .season-card-sports li {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+    }
+
+    .season-card-sports i {
+        color: var(--accent-color);
+        width: 1rem;
+        text-align: center;
+    }
+
+    .season-card-sports strong {
+        color: var(--text-primary);
+    }
+
+    .grade-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: rgba(26,39,68,0.08);
+        border: 1px solid rgba(26,39,68,0.18);
+        color: var(--primary-color);
+        font-size: 0.85rem;
+        font-weight: 700;
+        padding: 0.35rem 0.9rem;
+        border-radius: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .grade-chip i {
+        color: var(--accent-color);
+    }
+
+    .director-card {
+        display: flex;
+        gap: 1.5rem;
+        align-items: flex-start;
+    }
+
+    .director-photo {
+        width: 8rem;
+        height: 8rem;
+        border-radius: 0.75rem;
+        object-fit: cover;
+        box-shadow: var(--shadow-sm);
+        flex-shrink: 0;
+    }
+
+    .director-card h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        color: var(--primary-color);
+        font-size: 1.25rem;
+        margin: 0 0 0.25rem;
+    }
+
+    .director-card p {
+        color: var(--text-secondary);
+        margin: 0 0 0.75rem;
+    }
+
+    .contact-row {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.75rem;
+        margin-top: 1rem;
+    }
+
+    .contact-row a,
+    .contact-row span {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--primary-color);
+        font-weight: 600;
+        text-decoration: none;
+        background: var(--background-light);
+        border: 1px solid var(--border-light);
+        border-radius: 0.5rem;
+        padding: 0.65rem 0.8rem;
+    }
+
+    .ath-sidebar {
+        position: sticky;
+        top: 8rem;
+    }
+
+    .ath-sidebar-card {
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+    }
+
+    .ath-sidebar-card h3 {
+        font-size: 1.15rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .ath-sidebar-links {
+        display: grid;
+        gap: 0.65rem;
+    }
+
+    .ath-sidebar-links a {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .ath-sidebar-links a:hover {
+        color: var(--secondary-color);
+    }
+
+    .fact-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 0.65rem;
+    }
+
+    .fact-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+    }
+
+    .fact-list i {
+        color: var(--accent-color);
+        margin-top: 0.25rem;
+    }
+
+    @media (max-width: 900px) {
+        .athletics-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .ath-sidebar {
+            position: static;
+        }
+
+        .season-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .athletics-hero-unity {
+            position: static;
+            transform: none;
+            display: inline-flex;
+            margin: 1rem 0 0.85rem;
+        }
+
+        .page-hero-content {
+            padding-right: 0;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .ath-hero,
+        .director-card {
+            flex-direction: column;
+            text-align: center;
+            gap: 1rem;
+        }
+
+        .ath-hero-divider {
+            width: 5rem;
+            height: 1px;
+        }
+
+        .contact-row {
+            grid-template-columns: 1fr;
+        }
+
+        .athletics-hero-logo {
+            width: 4.25rem;
+            height: 4.25rem;
+        }
+
+        .athletics-hero-plus {
+            font-size: 1.65rem;
+        }
+    }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="utility-bar">
+            <div class="nav-container">
+                <div class="utility-location">
+                    <i class="fas fa-location-dot"></i>
+                    <span>365 N Cool Spring Street, Fayetteville, NC</span>
+                </div>
+                <div class="utility-links">
+                    <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+                    <a href="calendar.html"><i class="fas fa-calendar-days"></i> Calendar</a>
+                    <a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener"><i class="fas fa-pencil-alt"></i> Apply</a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <div class="logo">
+                        <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                        <a href="index.html" style="text-decoration: none; color: inherit;">
+                            <span>St. Ann Catholic School</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                        <li class="nav-item dropdown">
+                            <a href="mission.html" class="nav-link">About <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="mission.html">Mission &amp; Vision</a></li>
+                                <li><a href="history.html">Our History</a></li>
+                                <li><a href="alumni.html">Alumni</a></li>
+                                <li><a href="principal.html">Our Principal</a></li>
+                                <li><a href="faculty.html">Our Faculty</a></li>
+                                <li><a href="parish.html">Parish Connection</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="index.html#programs" class="nav-link">Academics <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.html#programs">Curriculum</a></li>
+                                <li><a href="index.html#programs">Pre-K through 8th Grade</a></li>
+                                <li><a href="index.html#programs">Art, Music, STEM &amp; Band</a></li>
+                                <li><a href="index.html#programs">Spanish Program</a></li>
+                                <li><a href="index.html#programs">Physical Education</a></li>
+                                <li><a href="calendar.html">Academic Calendar</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="contact.html" class="nav-link">Admissions <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener">Rolling Admissions</a></li>
+                                <li><a href="tuition.html">Tuition Information</a></li>
+                                <li><a href="uniforms.html">School Uniforms</a></li>
+                                <li><a href="opportunity-scholarship.html">Scholarship Opportunities</a></li>
+                                <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                                <li><a href="application-checklist.html">Application Checklist</a></li>
+                                <li><a href="contact.html">Schedule a Tour</a></li>
+                                <li><a href="history.html">Military Families Welcome</a></li>
+                                <li><a href="supply-lists.html">School Supply Lists</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="newsletter.html" class="nav-link">Parents <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="newsletter.html">Newsletter</a></li>
+                                <li><a href="calendar.html">Calendar</a></li>
+                                <li><a href="uniforms.html">Uniforms</a></li>
+                                <li><a href="before-after-care.html">Before/After Care</a></li>
+                                <li><a href="fundraising-opportunities.html">Fundraising Opportunities</a></li>
+                                <li><a href="safe-environment.html">Safe Environment</a></li>
+                                <li><a href="longleaf-academy.html">Longleaf Academy</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/Community-Opportunities" target="_blank" rel="noopener">Community Opportunities</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="activities.html" class="nav-link active">Students <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="activities.html">Activities</a></li>
+                                <li><a href="athletics.html">Athletics</a></li>
+                                <li><a href="handbook-lunch.html">Handbook &amp; Lunch Ordering</a></li>
+                                <li><a href="year-in-review-2025-2026.html">Year in Review 2025-2026</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/School-Events" target="_blank" rel="noopener">School Events</a></li>
+                                <li><a href="say-something.html">Say Something</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a href="parish.html" class="nav-link">Community</a></li>
+                        <li class="nav-item">
+                            <a href="support-us.html" class="nav-link">Support Us</a>
+                        </li>
+                        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-actions">
+                    <div class="translate-widget" aria-label="Translate this site">
+                        <i class="fas fa-language"></i>
+                        <div class="gtranslate_wrapper"></div>
+                    </div>
+                    <button class="btn-secondary" onclick="openPortal()">
+                        <i class="fas fa-user"></i> Portal Login
+                    </button>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="page-hero-background">
+                <div class="page-hero-overlay"></div>
+            </div>
+            <div class="container">
+                <div class="page-hero-content">
+                    <h1 class="page-hero-title">Athletics</h1>
+                    <p class="page-hero-subtitle">St. Ann &amp; St. Patrick - Competing Together, Growing Together</p>
+                    <div class="athletics-hero-unity" aria-label="St. Ann and St. Patrick athletic unity">
+                        <img src="photos/Logo.webp" alt="St. Ann athletics logo" class="athletics-hero-logo">
+                        <span class="athletics-hero-plus" aria-hidden="true">+</span>
+                        <img src="photos/Shamrock.png" alt="St. Patrick shamrock logo" class="athletics-hero-logo">
+                    </div>
+                    <nav class="breadcrumb">
+                        <a href="index.html">Home</a> <span>/</span>
+                        <a href="activities.html">Students</a> <span>/</span>
+                        <span>Athletics</span>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <section class="athletics-section">
+            <div class="container">
+                <div class="athletics-layout">
+                    <div class="athletics-main">
+                        <div class="section-kicker">2025-2026 Athletic Programs</div>
+                        <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.75rem;font-weight:700;color:var(--primary-color);margin:0.35rem 0 1.25rem;">Catholic School Athletics in Fayetteville</h2>
+
+                        <div class="ath-hero">
+                            <div class="ath-hero-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="ath-hero-divider"></div>
+                            <div class="ath-hero-text">
+                                <h3>Faith, Teamwork &amp; Sportsmanship</h3>
+                                <p>
+                                    St. Ann Catholic School students in grades 5 through 8 compete as part of a
+                                    joint athletic program with <strong style="color:var(--accent-color);">Saint Patrick Catholic School</strong>.
+                                    Together, our students represent Catholic values on and off the field, building
+                                    character through competition, discipline, and community.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="partnership-banner">
+                            <i class="fas fa-handshake"></i>
+                            <div>
+                                <h3>St. Ann + St. Patrick Athletic Partnership</h3>
+                                <p>
+                                    St. Ann Catholic School partners with Saint Patrick Catholic School (SPCS) to field
+                                    competitive athletic teams for students in <strong>grades 5-8</strong>. This collaboration
+                                    gives students the opportunity to compete at a higher level while strengthening the
+                                    bond between two of Fayetteville's Catholic school communities.
+                                    <a href="https://www.spcsnc.org/athletics/" target="_blank" rel="noopener" style="color:var(--primary-color);font-weight:600;text-decoration:none;">Learn more at spcsnc.org &rarr;</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <span class="grade-chip"><i class="fas fa-user-graduate"></i> Grades 5-8 eligible to participate in all athletic programs</span>
+
+                        <div class="season-grid">
+                            <div class="season-card">
+                                <div class="season-card-header fall">
+                                    <div class="season-card-header-icon"><i class="fas fa-leaf"></i></div>
+                                    <h3>Fall Season</h3>
+                                </div>
+                                <ul class="season-card-sports">
+                                    <li><i class="fas fa-person-running"></i> <span><strong>Cross Country</strong></span></li>
+                                    <li><i class="fas fa-volleyball"></i> <span><strong>Girls Volleyball</strong></span></li>
+                                    <li><i class="fas fa-futbol"></i> <span><strong>Boys Soccer</strong></span></li>
+                                </ul>
+                            </div>
+
+                            <div class="season-card">
+                                <div class="season-card-header winter">
+                                    <div class="season-card-header-icon"><i class="fas fa-snowflake"></i></div>
+                                    <h3>Winter Season</h3>
+                                </div>
+                                <ul class="season-card-sports">
+                                    <li><i class="fas fa-basketball"></i> <span><strong>Girls Basketball</strong></span></li>
+                                    <li><i class="fas fa-basketball"></i> <span><strong>Boys Basketball</strong></span></li>
+                                    <li><i class="fas fa-star"></i> <span><strong>Cheerleading</strong></span></li>
+                                </ul>
+                            </div>
+
+                            <div class="season-card">
+                                <div class="season-card-header spring">
+                                    <div class="season-card-header-icon"><i class="fas fa-sun"></i></div>
+                                    <h3>Spring Season</h3>
+                                </div>
+                                <ul class="season-card-sports">
+                                    <li><i class="fas fa-futbol"></i> <span><strong>Girls Soccer</strong></span></li>
+                                    <li><i class="fas fa-baseball"></i> <span><strong>Boys Baseball</strong></span></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="ath-block">
+                            <div class="ath-block-header">
+                                <div class="ath-block-icon"><i class="fas fa-user-tie"></i></div>
+                                <h2>Athletic Director</h2>
+                            </div>
+                            <div class="director-card">
+                                <img src="photos/Kellie_Aldridge_Sports.jpg" alt="Kellie Aldridge" class="director-photo">
+                                <div>
+                                    <h3>Kellie Aldridge</h3>
+                                    <p>
+                                        For athletic questions, schedules, eligibility, and team information, families
+                                        can contact the athletic director or the school office.
+                                    </p>
+                                    <div class="contact-row">
+                                        <a href="tel:+19104833216" class="tel-link"><i class="fas fa-phone"></i> (910) 483-3216</a>
+                                        <a href="mailto:schooladmin@mysacs.org"><i class="fas fa-envelope"></i> schooladmin@mysacs.org</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <aside class="ath-sidebar" aria-label="Athletics quick links">
+                        <div class="ath-sidebar-card">
+                            <h3>Quick Facts</h3>
+                            <ul class="fact-list">
+                                <li><i class="fas fa-school"></i> Joint athletic program with Saint Patrick Catholic School</li>
+                                <li><i class="fas fa-user-graduate"></i> Open to eligible students in grades 5-8</li>
+                                <li><i class="fas fa-heart"></i> Built on faith, teamwork, and sportsmanship</li>
+                            </ul>
+                        </div>
+
+                        <div class="ath-sidebar-card">
+                            <h3>Student Links</h3>
+                            <div class="ath-sidebar-links">
+                                <a href="activities.html"><i class="fas fa-star"></i> Student Activities</a>
+                                <a href="handbook-lunch.html"><i class="fas fa-book"></i> Handbook &amp; Lunch</a>
+                                <a href="year-in-review-2025-2026.html"><i class="fas fa-images"></i> Year in Review</a>
+                                <a href="say-something.html"><i class="fas fa-shield-heart"></i> Say Something</a>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                            <span>St. Ann Catholic School</span>
+                        </div>
+                        <p>Providing quality Catholic education to the Fayetteville and Cape Fear region since 1956. The first all-inclusive school in North Carolina.</p>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="mission.html">Mission &amp; Vision</a></li>
+                        <li><a href="history.html">Our History</a></li>
+                        <li><a href="principal.html">Our Principal</a></li>
+                        <li><a href="faculty.html">Our Faculty</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Student Life</h4>
+                    <ul class="footer-links">
+                        <li><a href="activities.html">Activities</a></li>
+                        <li><a href="athletics.html">Athletics</a></li>
+                        <li><a href="handbook-lunch.html">Handbook &amp; Lunch</a></li>
+                        <li><a href="say-something.html">Say Something</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/St.AnnCatholicSchoolFayettevilleNC" target="_blank" rel="noopener" class="social-link" aria-label="St. Ann Catholic School on Facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                    <div class="contact-info">
+                        <p><a href="tel:+19104833216" class="tel-link"><i class="fas fa-phone"></i> (910) 483-3216</a></p>
+                        <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 365 N Cool Spring Street, Fayetteville, NC 28301</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 St. Ann Catholic School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.gtranslateSettings = {
+            default_language: "en",
+            languages: ["en", "es"],
+            wrapper_selector: ".gtranslate_wrapper",
+            switcher_horizontal_position: "inline"
+        };
+    </script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
+    <script src="script.js"></script>
+</body>
+</html>

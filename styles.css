@@ -676,6 +676,10 @@ html {
     box-shadow: var(--shadow-md);
 }
 
+.announcement-card.featured .announcement-content {
+    padding-top: 4.35rem;
+}
+
 .announcement-badge {
     position: absolute;
     top: 1rem;
@@ -688,6 +692,11 @@ html {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    line-height: 1.15;
+    max-width: calc(100% - 2rem);
+    text-align: center;
+    white-space: normal;
+    z-index: 1;
 }
 
 .announcement-content {
@@ -715,12 +724,14 @@ html {
     flex-wrap: wrap;
 }
 
-.announcement-meta span {
+.announcement-meta span,
+.announcement-meta a {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     color: var(--text-light);
     font-size: 0.875rem;
+    text-decoration: none;
 }
 
 .announcement-meta i {
@@ -817,6 +828,112 @@ html {
     font-weight: 900;
     color: var(--accent-color);
     font-size: 0.75rem;
+}
+
+.curriculum-standards-card {
+    background: #fffdf7;
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-md);
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.75fr);
+    gap: 2rem;
+    margin-top: 2rem;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.curriculum-standards-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient-gold);
+}
+
+.curriculum-standards-copy .section-kicker {
+    text-align: left;
+}
+
+.curriculum-standards-copy h3 {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    color: var(--primary-color);
+    font-size: 1.6rem;
+    margin: 0 0 0.65rem;
+}
+
+.curriculum-standards-copy p,
+.curriculum-standards-panel li {
+    color: var(--text-secondary);
+    line-height: 1.65;
+}
+
+.curriculum-pill-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1.25rem 0 1.5rem;
+}
+
+.curriculum-pill-grid span {
+    align-items: center;
+    background: rgba(26,39,68,0.07);
+    border: 1px solid rgba(26,39,68,0.14);
+    border-radius: 999px;
+    color: var(--primary-color);
+    display: inline-flex;
+    gap: 0.4rem;
+    font-size: 0.86rem;
+    font-weight: 700;
+    padding: 0.35rem 0.75rem;
+}
+
+.curriculum-pill-grid i {
+    color: var(--accent-color);
+}
+
+.curriculum-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+}
+
+.curriculum-standards-panel {
+    background: var(--background-light);
+    border: 1px solid var(--border-light);
+    border-radius: 0.65rem;
+    padding: 1.25rem;
+}
+
+.curriculum-standards-panel h4 {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin: 0 0 0.75rem;
+}
+
+.curriculum-standards-panel ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.curriculum-standards-panel li {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.65rem;
+}
+
+.curriculum-standards-panel li::before {
+    color: var(--accent-color);
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-size: 0.75rem;
+    font-weight: 900;
+    margin-top: 0.35rem;
 }
 
 /* ============================================
@@ -1197,6 +1314,19 @@ html {
    Mobile Styles - Main Layout
    ============================================ */
 @media (max-width: 768px) {
+    .curriculum-standards-card {
+        grid-template-columns: 1fr;
+        padding: 1.35rem;
+    }
+
+    .curriculum-standards-copy .section-kicker {
+        text-align: center;
+    }
+
+    .curriculum-actions {
+        justify-content: center;
+    }
+
     .nav-menu {
         position: fixed;
         top: 100%;
@@ -1953,6 +2083,93 @@ html {
     line-height: 1.7;
 }
 
+.history-photo-feature {
+    align-items: center;
+    background: #fffdf7;
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-sm);
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1.1fr);
+    margin-bottom: 3rem;
+    padding: 1.5rem;
+}
+
+.history-feature-card,
+.history-archive figure {
+    margin: 0;
+}
+
+.history-feature-card img,
+.history-archive img {
+    display: block;
+    width: 100%;
+}
+
+.history-feature-card img {
+    aspect-ratio: 16 / 10;
+    border-radius: 0.6rem;
+    object-fit: cover;
+}
+
+.history-feature-card figcaption,
+.history-archive figcaption {
+    color: var(--text-secondary);
+    font-size: 0.84rem;
+    font-weight: 700;
+    line-height: 1.35;
+    margin-top: 0.65rem;
+    text-align: center;
+}
+
+.history-feature-copy h3,
+.history-archive h3 {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    color: var(--primary-color);
+    font-size: 1.65rem;
+    margin-bottom: 0.75rem;
+}
+
+.history-feature-copy p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.history-feature-copy p:last-child {
+    margin-bottom: 0;
+}
+
+.history-archive {
+    margin-bottom: 3rem;
+}
+
+.history-archive h3 {
+    text-align: center;
+}
+
+.history-archive-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.history-archive figure {
+    background: #fffdf7;
+    border: 1px solid var(--border-light);
+    border-radius: 0.65rem;
+    box-shadow: var(--shadow-sm);
+    padding: 0.75rem;
+}
+
+.history-archive img {
+    aspect-ratio: 4 / 3;
+    border-radius: 0.45rem;
+    object-fit: cover;
+    object-position: center;
+}
+
 /* ============================================
    Principal Page Styles
    ============================================ */
@@ -2278,6 +2495,16 @@ html {
     flex-shrink: 0;
 }
 
+.staff-photo {
+    width: 5rem;
+    height: 5rem;
+    border: 3px solid var(--accent-color);
+    border-radius: 50%;
+    flex-shrink: 0;
+    object-fit: cover;
+    object-position: top center;
+}
+
 .staff-details h4 {
     font-family: 'Cormorant Garamond', 'Georgia', serif;
     font-size: 1.5rem;
@@ -2561,6 +2788,28 @@ html {
     font-weight: 600;
     color: var(--secondary-color);
     margin-bottom: 0.2rem;
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+.method-link {
+    display: inline-block;
+    line-height: 1.3;
+    text-decoration: none;
+}
+
+.method-link:hover {
+    text-decoration: underline;
+}
+
+.tel-link {
+    color: inherit;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+}
+
+.tel-link:hover {
+    text-decoration: underline;
 }
 
 .method-secondary {
@@ -3176,6 +3425,14 @@ input[type="checkbox"]:checked + .checkbox-custom:after {
         grid-template-columns: 1fr;
     }
 
+    .history-photo-feature {
+        grid-template-columns: 1fr;
+    }
+
+    .history-archive-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .excellence-grid,
     .departments-grid {
         grid-template-columns: 1fr;
@@ -3594,14 +3851,20 @@ body {
 
 .school-life-panel:nth-child(2) {
     background:
-        linear-gradient(180deg, rgba(140, 35, 50, 0.08), rgba(104, 24, 39, 0.88)),
-        url("https://catholicschoolsnc.com/sites/default/files/building/st-ann-school-fayetteville.jpg") center / cover;
+        linear-gradient(180deg, rgba(22, 34, 56, 0.05), rgba(22, 34, 56, 0.72)),
+        url("photos/St_Ann_Inside.jpg") center / cover;
 }
 
 .school-life-panel:nth-child(3) {
     background:
         linear-gradient(180deg, rgba(37, 52, 79, 0.08), rgba(37, 52, 79, 0.9)),
-        url("https://catholicschoolsnc.com/sites/default/files/building/st-ann-school-fayetteville.jpg") center / cover;
+        url("photos/St-Ann-Fayetteville.jpg") center / cover;
+}
+
+.school-life-panel-parish {
+    background:
+        linear-gradient(180deg, rgba(37, 52, 79, 0.04), rgba(18, 28, 47, 0.84)),
+        url("photos/Church.jpg") center / cover;
 }
 
 .school-life-panel::before {
@@ -4008,6 +4271,24 @@ body {
     font-size: 0.9rem;
 }
 
+.testimonial-sources {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin: 1.25rem auto 0;
+    max-width: 720px;
+    text-align: center;
+}
+
+.testimonial-sources a {
+    color: var(--primary-color);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.testimonial-sources a:hover {
+    text-decoration: underline;
+}
+
 .at-a-glance {
     background: var(--primary-color);
     color: #fffdf7;
@@ -4332,6 +4613,24 @@ body {
 }
 
 @media (max-width: 480px) {
+    .announcement-card.featured .announcement-content {
+        padding-top: 4.75rem;
+    }
+
+    .history-photo-feature {
+        padding: 1rem;
+    }
+
+    .history-archive-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .announcement-badge {
+        left: 1rem;
+        right: 1rem;
+        max-width: none;
+    }
+
     .nav-brand .logo {
         font-size: 1.08rem;
     }
@@ -4389,8 +4688,8 @@ body {
 
 .navbar > .nav-container {
     display: grid;
-    grid-template-columns: minmax(235px, 0.82fr) minmax(520px, 1.6fr) auto;
-    gap: clamp(0.75rem, 1.5vw, 1.5rem);
+    grid-template-columns: minmax(190px, 0.68fr) minmax(680px, 1.9fr) max-content;
+    gap: clamp(0.35rem, 0.8vw, 0.9rem);
     min-height: 5.2rem;
 }
 
@@ -4422,7 +4721,7 @@ body {
 
 .nav-list {
     align-items: center;
-    gap: 0.22rem;
+    gap: 0.08rem;
     justify-content: center;
     width: 100%;
 }
@@ -4433,10 +4732,10 @@ body {
     font-size: 0.78rem;
     font-weight: 800;
     gap: 0.36rem;
-    letter-spacing: 0.055em;
+    letter-spacing: 0.025em;
     line-height: 1;
     min-height: 2.35rem;
-    padding: 0.72rem 0.7rem;
+    padding: 0.68rem 0.46rem;
     white-space: nowrap;
 }
 
@@ -4459,6 +4758,7 @@ body {
 .nav-actions {
     justify-content: flex-end;
     min-width: max-content;
+    gap: 0.5rem;
 }
 
 .translate-widget {
@@ -4485,7 +4785,7 @@ body {
     color: #fffdf7;
     font-size: 0.78rem;
     min-height: 2.45rem;
-    padding: 0.65rem 0.82rem;
+    padding: 0.65rem 0.68rem;
     white-space: nowrap;
 }
 
@@ -4537,8 +4837,8 @@ body {
 
 @media (max-width: 1240px) {
     .navbar > .nav-container {
-        grid-template-columns: minmax(220px, auto) 1fr auto;
-        gap: 0.65rem;
+        grid-template-columns: minmax(170px, 0.55fr) minmax(610px, 1.9fr) max-content;
+        gap: 0.35rem;
     }
 
     .brand-logo {
@@ -4547,13 +4847,14 @@ body {
     }
 
     .nav-brand .logo {
-        font-size: 1.12rem;
+        font-size: 1rem;
     }
 
     .nav-link {
-        font-size: 0.7rem;
-        padding-left: 0.48rem;
-        padding-right: 0.48rem;
+        font-size: 0.66rem;
+        letter-spacing: 0.01em;
+        padding-left: 0.34rem;
+        padding-right: 0.34rem;
     }
 
     .translate-widget > i {
@@ -4561,7 +4862,13 @@ body {
     }
 
     .gtranslate_wrapper {
-        min-width: 3.1rem;
+        min-width: 2.8rem;
+    }
+
+    .gtranslate_wrapper select,
+    .gtranslate_wrapper .gt_selector {
+        max-width: 2.8rem;
+        width: 2.8rem;
     }
 
     .btn-secondary {
@@ -4574,6 +4881,17 @@ body {
     .navbar > .nav-container {
         grid-template-columns: 1fr auto;
         min-height: 4.8rem;
+    }
+
+    .nav-brand .logo span {
+        max-width: 22rem;
+    }
+
+    .nav-link {
+        font-size: 0.76rem;
+        letter-spacing: 0.025em;
+        padding-left: 0.7rem;
+        padding-right: 0.7rem;
     }
 
     .nav-menu {
@@ -4665,5 +4983,294 @@ body {
 
     .hero-content {
         min-height: calc(100svh - 8.35rem);
+    }
+}
+
+/* ============================================
+   Site-wide mobile hardening
+   ============================================ */
+html,
+body {
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+img,
+svg,
+video,
+canvas,
+iframe {
+    max-width: 100%;
+}
+
+img,
+video {
+    height: auto;
+}
+
+table {
+    max-width: 100%;
+}
+
+pre,
+code {
+    max-width: 100%;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.main-content,
+.sidebar,
+.content-grid,
+.support-main,
+.support-sidebar,
+.footer-section,
+.nav-brand,
+.nav-menu,
+.nav-actions,
+.announcement-card,
+.program-card,
+.highlight-card,
+.sidebar-card,
+.support-card,
+.support-sidebar-card {
+    min-width: 0;
+}
+
+@media (max-width: 900px) {
+    .content-grid,
+    .contact-content,
+    .contact-grid,
+    .calendar-layout,
+    .tuition-layout,
+    .care-layout,
+    .activities-layout,
+    .athletics-layout,
+    .safe-env-layout,
+    .checklist-layout,
+    .scholarship-layout,
+    .newsletter-layout,
+    .longleaf-layout,
+    .support-layout,
+    .uniforms-layout,
+    .saysomething-layout,
+    .year-layout {
+        grid-template-columns: 1fr !important;
+    }
+
+    .sidebar,
+    .ath-sidebar,
+    .support-sidebar,
+    .cal-sidebar,
+    .newsletter-sidebar,
+    .longleaf-sidebar {
+        position: static !important;
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 768px) {
+    html,
+    body {
+        overflow-x: hidden;
+    }
+
+    .container,
+    .nav-container {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .page-hero,
+    .mission-content,
+    .support-section,
+    .athletics-section,
+    .calendar-section,
+    .tuition-section,
+    .activities-section,
+    .safe-env-section,
+    .checklist-section,
+    .newsletter-section,
+    .uniforms-section,
+    .fundraising-content {
+        overflow-x: hidden;
+    }
+
+    .page-hero-title,
+    .hero-title,
+    h1 {
+        overflow-wrap: anywhere;
+    }
+
+    .page-hero-content {
+        max-width: 100% !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .breadcrumb {
+        flex-wrap: wrap;
+        row-gap: 0.35rem;
+    }
+
+    .support-card,
+    .support-sidebar-card,
+    .ath-block,
+    .sidebar-card,
+    .mission-card,
+    .contact-card,
+    .tuition-block,
+    .care-block,
+    .activity-block,
+    .calendar-card,
+    .checklist-block,
+    .safe-env-block,
+    .newsletter-card,
+    .uniforms-block {
+        max-width: 100%;
+    }
+
+    .support-actions,
+    .cta-actions,
+    .hero-actions,
+    .curriculum-actions,
+    .announcement-meta,
+    .contact-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .support-action,
+    .donate-primary-link,
+    .btn-primary,
+    .btn-secondary,
+    .btn-outline,
+    .btn-outline-white,
+    .btn-soft {
+        justify-content: center;
+        max-width: none;
+        white-space: normal;
+        width: 100%;
+    }
+
+    .footer .contact-info p,
+    .sidebar-card .contact-info p,
+    .support-contact-list p,
+    .support-contact-list a {
+        align-items: flex-start;
+        overflow-wrap: anywhere;
+        text-align: left;
+    }
+
+    table,
+    .fee-table,
+    .rate-table,
+    .training-table,
+    .deadline-table {
+        display: block !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        width: 100% !important;
+    }
+
+    table th,
+    table td,
+    .fee-table th,
+    .fee-table td,
+    .rate-table th,
+    .rate-table td,
+    .training-table th,
+    .training-table td,
+    .deadline-table th,
+    .deadline-table td {
+        white-space: normal !important;
+    }
+
+    .cal-grid,
+    .cal-weekdays {
+        min-width: 0;
+    }
+
+    .cal-cell {
+        min-width: 0;
+    }
+}
+
+@media (max-width: 560px) {
+    .footer-brand .logo,
+    .nav-brand .logo {
+        min-width: 0;
+    }
+
+    .footer-brand .logo span,
+    .nav-brand .logo span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .utility-bar .nav-container {
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .utility-location,
+    .utility-links {
+        min-width: 0;
+    }
+
+    .utility-location span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .page-hero-title {
+        font-size: clamp(2.1rem, 12vw, 3rem) !important;
+        line-height: 1.05;
+    }
+
+    .page-hero-subtitle {
+        font-size: 1rem !important;
+    }
+
+    .support-card,
+    .support-sidebar-card,
+    .ath-block,
+    .sidebar-card {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+}
+
+@media (max-width: 640px) {
+    .support-grid,
+    .alumni-form-grid,
+    .feature-grid,
+    .stat-row,
+    .rate-grid,
+    .plan-grid,
+    .hours-grid,
+    .rates-grid,
+    .includes-grid,
+    .policy-grid,
+    .activity-grid,
+    .season-grid,
+    .contact-row,
+    .three-steps,
+    .warning-grid,
+    .stat-grid,
+    .requirements-grid,
+    .order-grid,
+    .gallery-grid,
+    .memory-grid,
+    .faculty-modal-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .faculty-modal-body {
+        padding: 1rem !important;
+    }
+
+    .faculty-modal-header {
+        padding: 1rem !important;
     }
 }

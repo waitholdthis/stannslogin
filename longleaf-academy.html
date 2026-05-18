@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Longleaf Academy - St. Ann Catholic School | Fayetteville, NC</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    /* ── Page layout ─────────────────────────────────────────── */
+    .longleaf-section {
+        padding: 4rem 0 5rem;
+        background: var(--background);
+    }
+
+    .longleaf-layout {
+        display: grid;
+        grid-template-columns: 1fr 280px;
+        gap: 2rem;
+        align-items: start;
+    }
+
+    /* ── Shared block styles ─────────────────────────────────── */
+    .ll-block {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.75rem;
+        padding: 1.75rem 2rem;
+        margin-bottom: 1.5rem;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .ll-block-header {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.85rem;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .ll-block-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-size: 1rem;
+        flex-shrink: 0;
+    }
+
+    .ll-block h2 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin: 0;
+    }
+
+    /* ── Intro hero ──────────────────────────────────────────── */
+    .ll-hero {
+        background: linear-gradient(135deg, var(--primary-color) 0%, #2d3f6e 100%);
+        border-radius: 0.75rem;
+        padding: 2.25rem 2rem;
+        margin-bottom: 1.5rem;
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        box-shadow: var(--shadow-md);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .ll-hero::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--gradient-gold);
+    }
+
+    .ll-hero-icon {
+        width: 4.5rem;
+        height: 4.5rem;
+        background: rgba(201,168,76,0.2);
+        border: 2px solid rgba(201,168,76,0.45);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-size: 1.75rem;
+        flex-shrink: 0;
+    }
+
+    .ll-hero-divider {
+        width: 1px;
+        height: 5rem;
+        background: rgba(255,255,255,0.2);
+        flex-shrink: 0;
+    }
+
+    .ll-hero-text h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.45rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 0.5rem;
+    }
+
+    .ll-hero-text p {
+        font-size: 0.9rem;
+        color: rgba(255,255,255,0.78);
+        line-height: 1.65;
+        margin: 0;
+    }
+
+    /* ── New tool announcement banner ───────────────────────── */
+    .new-tool-banner {
+        background: rgba(201,168,76,0.1);
+        border: 1px solid rgba(201,168,76,0.4);
+        border-left: 4px solid var(--accent-color);
+        border-radius: 0 0.5rem 0.5rem 0;
+        padding: 1rem 1.25rem;
+        display: flex;
+        gap: 0.9rem;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+    }
+
+    .new-tool-banner i {
+        color: var(--accent-color);
+        font-size: 1.15rem;
+        flex-shrink: 0;
+        margin-top: 1px;
+    }
+
+    .new-tool-banner div h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.3rem;
+    }
+
+    .new-tool-banner div p {
+        font-size: 0.88rem;
+        color: var(--text-secondary);
+        margin: 0;
+        line-height: 1.55;
+    }
+
+    /* ── Feature grid ────────────────────────────────────────── */
+    .feature-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-top: 0.5rem;
+    }
+
+    .feature-card {
+        background: var(--background-light);
+        border: 1px solid var(--border-light);
+        border-radius: 0.65rem;
+        padding: 1.1rem 1.25rem;
+    }
+
+    .feature-card-icon {
+        width: 2rem;
+        height: 2rem;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-size: 0.85rem;
+        margin-bottom: 0.65rem;
+    }
+
+    .feature-card h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.3rem;
+    }
+
+    .feature-card p {
+        font-size: 0.84rem;
+        color: var(--text-secondary);
+        line-height: 1.55;
+        margin: 0;
+    }
+
+    /* ── Subject chips ───────────────────────────────────────── */
+    .subject-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        margin-top: 1rem;
+    }
+
+    .subject-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: rgba(26,39,68,0.07);
+        border: 1px solid rgba(26,39,68,0.15);
+        color: var(--primary-color);
+        font-size: 0.85rem;
+        font-weight: 600;
+        padding: 0.35rem 0.85rem;
+        border-radius: 2rem;
+    }
+
+    .subject-chip i {
+        color: var(--accent-color);
+        font-size: 0.8rem;
+    }
+
+    /* ── Stat cards ──────────────────────────────────────────── */
+    .stat-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .stat-card {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.75rem;
+        padding: 1.25rem 1rem;
+        text-align: center;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .stat-card-value {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 2.1rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        line-height: 1;
+        margin-bottom: 0.3rem;
+    }
+
+    .stat-card-value span {
+        color: var(--accent-color);
+    }
+
+    .stat-card-label {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        font-weight: 500;
+        line-height: 1.35;
+    }
+
+    /* ── FAQ-style items ─────────────────────────────────────── */
+    .faq-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .faq-item {
+        padding: 1.1rem 1.25rem;
+        background: var(--background-light);
+        border: 1px solid var(--border-light);
+        border-left: 3px solid var(--accent-color);
+        border-radius: 0 0.5rem 0.5rem 0;
+    }
+
+    .faq-item h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.4rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .faq-item h3 i {
+        color: var(--accent-color);
+        font-size: 0.9rem;
+    }
+
+    .faq-item p {
+        font-size: 0.88rem;
+        color: var(--text-secondary);
+        line-height: 1.65;
+        margin: 0;
+    }
+
+    /* ── Info banner ─────────────────────────────────────────── */
+    .info-banner {
+        background: rgba(26,39,68,0.05);
+        border: 1px solid rgba(26,39,68,0.15);
+        border-left: 4px solid var(--primary-color);
+        border-radius: 0 0.5rem 0.5rem 0;
+        padding: 1rem 1.1rem;
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+        margin-top: 1.25rem;
+    }
+
+    .info-banner i {
+        color: var(--primary-color);
+        font-size: 1rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .info-banner p {
+        font-size: 0.88rem;
+        color: var(--text-secondary);
+        margin: 0;
+        line-height: 1.55;
+    }
+
+    .info-banner a {
+        color: var(--primary-color);
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .info-banner a:hover { text-decoration: underline; }
+
+    /* ── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 900px) {
+        .longleaf-layout { grid-template-columns: 1fr; }
+        .stat-row { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 640px) {
+        .ll-block { padding: 1.25rem; }
+        .ll-hero { flex-direction: column; gap: 1rem; }
+        .ll-hero-divider { display: none; }
+        .feature-grid { grid-template-columns: 1fr; }
+        .stat-row { grid-template-columns: 1fr; }
+    }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="utility-bar">
+            <div class="nav-container">
+                <div class="utility-location">
+                    <i class="fas fa-location-dot"></i>
+                    <span>365 N Cool Spring Street, Fayetteville, NC</span>
+                </div>
+                <div class="utility-links">
+                    <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+                    <a href="calendar.html"><i class="fas fa-calendar-days"></i> Calendar</a>
+                    <a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener"><i class="fas fa-pencil-alt"></i> Apply</a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <div class="logo">
+                        <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                        <a href="index.html" style="text-decoration: none; color: inherit;">
+                            <span>St. Ann Catholic School</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="mission.html" class="nav-link">About <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="mission.html">Mission &amp; Vision</a></li>
+                                <li><a href="history.html">Our History</a></li>
+                                <li><a href="alumni.html">Alumni</a></li>
+                                <li><a href="principal.html">Our Principal</a></li>
+                                <li><a href="faculty.html">Our Faculty</a></li>
+                                <li><a href="parish.html">Parish Connection</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="index.html#programs" class="nav-link">Academics <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.html#programs">Curriculum</a></li>
+                                <li><a href="index.html#programs">Pre-K through 8th Grade</a></li>
+                                <li><a href="index.html#programs">Art, Music, STEM &amp; Band</a></li>
+                                <li><a href="index.html#programs">Spanish Program</a></li>
+                                <li><a href="index.html#programs">Physical Education</a></li>
+                                <li><a href="calendar.html">Academic Calendar</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="contact.html" class="nav-link">Admissions <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener">Rolling Admissions</a></li>
+                                <li><a href="tuition.html">Tuition Information</a></li>
+                                <li><a href="uniforms.html">School Uniforms</a></li>
+                                <li><a href="opportunity-scholarship.html">Scholarship Opportunities</a></li>
+                                <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                                <li><a href="application-checklist.html">Application Checklist</a></li>
+                                <li><a href="contact.html">Schedule a Tour</a></li>
+                                <li><a href="history.html">Military Families Welcome</a></li>
+                                <li><a href="supply-lists.html">School Supply Lists</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="newsletter.html" class="nav-link active">Parents <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="newsletter.html">Newsletter</a></li>
+                                <li><a href="calendar.html">Calendar</a></li>
+                                <li><a href="uniforms.html">Uniforms</a></li>
+                                <li><a href="before-after-care.html">Before/After Care</a></li>
+                                <li><a href="fundraising-opportunities.html">Fundraising Opportunities</a></li>
+                                <li><a href="safe-environment.html">Safe Environment</a></li>
+                                <li><a href="longleaf-academy.html">Longleaf Academy</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/Community-Opportunities" target="_blank" rel="noopener">Community Opportunities</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="activities.html" class="nav-link">Students <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="activities.html">Activities</a></li>
+                                <li><a href="athletics.html">Athletics</a></li>
+                                <li><a href="handbook-lunch.html">Handbook &amp; Lunch Ordering</a></li>
+                                <li><a href="year-in-review-2025-2026.html">Year in Review 2025-2026</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/School-Events" target="_blank" rel="noopener">School Events</a></li>
+                                <li><a href="say-something.html">Say Something</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="parish.html" class="nav-link">Community</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="support-us.html" class="nav-link">Support Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-actions">
+                    <div class="translate-widget" aria-label="Translate this site">
+                        <i class="fas fa-language"></i>
+                        <div class="gtranslate_wrapper"></div>
+                    </div>
+                    <button class="btn-secondary" onclick="openPortal()">
+                        <i class="fas fa-user"></i> Portal Login
+                    </button>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="page-hero-background">
+                <div class="page-hero-overlay"></div>
+            </div>
+            <div class="container">
+                <div class="page-hero-content">
+                    <h1 class="page-hero-title">Longleaf Academy</h1>
+                    <p class="page-hero-subtitle">A New Learning Resource Now Available to St. Ann Students</p>
+                    <nav class="breadcrumb">
+                        <a href="index.html">Home</a> <span>/</span>
+                        <span>Longleaf Academy</span>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <section class="longleaf-section">
+            <div class="container">
+                <div class="longleaf-layout">
+
+                    <!-- ── Main content ──────────────────────── -->
+                    <div class="longleaf-main">
+
+                        <div class="section-kicker">Student Academic Resource — Now Available</div>
+                        <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.75rem;font-weight:700;color:var(--primary-color);margin:0.35rem 0 1.25rem;">Resources, Collaboration, &amp; Academic Excellence</h2>
+
+                        <!-- New tool announcement -->
+                        <div class="new-tool-banner">
+                            <i class="fas fa-star"></i>
+                            <div>
+                                <h3>New Tool for St. Ann Students</h3>
+                                <p>
+                                    St. Ann Catholic School is pleased to make Longleaf Academy available as a specialized
+                                    academic support resource for our students. This program is designed to help students
+                                    who learn differently reach their full academic potential through proven, research-based
+                                    instruction.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Intro hero -->
+                        <div class="ll-hero">
+                            <div class="ll-hero-icon">
+                                <i class="fas fa-book-open-reader"></i>
+                            </div>
+                            <div class="ll-hero-divider"></div>
+                            <div class="ll-hero-text">
+                                <h3>Empowering Every Learner</h3>
+                                <p>
+                                    Founded in 2009 and operating as an exclusive resource program since 2016,
+                                    Longleaf Academy partners with area private schools — including St. Ann — to provide
+                                    specialized instruction for students with dyslexia and language-based learning differences.
+                                    Their mission: to empower children to become self-sufficient, intrinsic learners equipped
+                                    to achieve academically.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- At-a-glance stats -->
+                        <div class="stat-row">
+                            <div class="stat-card">
+                                <div class="stat-card-value"><span>4</span>:1</div>
+                                <div class="stat-card-label">Student-to-teacher ratio for individualized instruction</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-card-value">70<span>+</span></div>
+                                <div class="stat-card-label">Years behind the Orton-Gillingham research method</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-card-value"><span>5</span></div>
+                                <div class="stat-card-label">Credentialed OG teachers &amp; coaches on staff</div>
+                            </div>
+                        </div>
+
+                        <!-- What is Longleaf Academy -->
+                        <div class="ll-block">
+                            <div class="ll-block-header">
+                                <div class="ll-block-icon"><i class="fas fa-circle-info"></i></div>
+                                <h2>What Is Longleaf Academy?</h2>
+                            </div>
+                            <p style="font-size:0.92rem;color:var(--text-secondary);line-height:1.7;margin-bottom:1rem;">
+                                Longleaf Academy is a non-profit educational resource program that specializes in
+                                teaching students with <strong>dyslexia and language-based learning disabilities</strong>.
+                                Rather than operating as a standalone school, Longleaf functions as a collaborative
+                                partner with private schools — working alongside St. Ann to extend the quality of support
+                                available to students who need it most.
+                            </p>
+                            <p style="font-size:0.92rem;color:var(--text-secondary);line-height:1.7;margin-bottom:1rem;">
+                                Their approach uses <strong>research-based curriculum</strong> that is multi-sensory,
+                                scientifically sound, systematic, and cumulative. Instruction engages visual, auditory,
+                                and kinesthetic-tactile pathways simultaneously — meeting students where they are and
+                                building lasting skills over time.
+                            </p>
+
+                            <div class="subject-chips">
+                                <span class="subject-chip"><i class="fas fa-book"></i> Reading</span>
+                                <span class="subject-chip"><i class="fas fa-pencil"></i> Writing</span>
+                                <span class="subject-chip"><i class="fas fa-spell-check"></i> Spelling</span>
+                                <span class="subject-chip"><i class="fas fa-calculator"></i> Math</span>
+                            </div>
+                        </div>
+
+                        <!-- How it works -->
+                        <div class="ll-block">
+                            <div class="ll-block-header">
+                                <div class="ll-block-icon"><i class="fas fa-gears"></i></div>
+                                <h2>How It Works</h2>
+                            </div>
+                            <div class="feature-grid">
+                                <div class="feature-card">
+                                    <div class="feature-card-icon"><i class="fas fa-brain"></i></div>
+                                    <h3>Orton-Gillingham Approach</h3>
+                                    <p>
+                                        The gold standard for dyslexia instruction — a structured, multi-sensory method
+                                        backed by over 70 years of research and used by top specialists worldwide.
+                                    </p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-card-icon"><i class="fas fa-user-graduate"></i></div>
+                                    <h3>Individualized Instruction</h3>
+                                    <p>
+                                        A 4:1 student-to-teacher ratio ensures every student receives targeted,
+                                        personalized attention tailored to their specific learning profile.
+                                    </p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-card-icon"><i class="fas fa-hands-holding-child"></i></div>
+                                    <h3>Multi-Sensory Learning</h3>
+                                    <p>
+                                        Instruction simultaneously engages visual, auditory, and kinesthetic-tactile
+                                        neurological pathways to reinforce learning at every level.
+                                    </p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-card-icon"><i class="fas fa-handshake"></i></div>
+                                    <h3>School Partnership Model</h3>
+                                    <p>
+                                        Longleaf collaborates directly with private schools like St. Ann to extend
+                                        specialized support without requiring students to change schools.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ / Common Questions -->
+                        <div class="ll-block">
+                            <div class="ll-block-header">
+                                <div class="ll-block-icon"><i class="fas fa-circle-question"></i></div>
+                                <h2>Frequently Asked Questions</h2>
+                            </div>
+                            <div class="faq-list">
+                                <div class="faq-item">
+                                    <h3><i class="fas fa-user-check"></i> Who is this program for?</h3>
+                                    <p>
+                                        Longleaf Academy is designed for students with dyslexia and language-based
+                                        learning differences who need specialized, structured literacy and math instruction.
+                                        If your child struggles with reading, writing, spelling, or math in ways that don't
+                                        respond to traditional classroom approaches, Longleaf may be a strong fit.
+                                    </p>
+                                </div>
+                                <div class="faq-item">
+                                    <h3><i class="fas fa-school"></i> Does my child have to leave St. Ann to use it?</h3>
+                                    <p>
+                                        No. Longleaf Academy operates as a collaborative resource partner with St. Ann.
+                                        Students continue their enrollment here while accessing specialized instruction
+                                        through Longleaf's program.
+                                    </p>
+                                </div>
+                                <div class="faq-item">
+                                    <h3><i class="fas fa-dollar-sign"></i> Is financial assistance available?</h3>
+                                    <p>
+                                        Yes. Longleaf Academy offers tuition assistance for eligible families.
+                                        Contact Longleaf directly to learn more about available aid and the application process.
+                                    </p>
+                                </div>
+                                <div class="faq-item">
+                                    <h3><i class="fas fa-sun"></i> Is there a summer program?</h3>
+                                    <p>
+                                        Yes. Longleaf Academy offers a Summer Academy for students who want to continue
+                                        building skills over the summer months. Contact Longleaf for current summer
+                                        session dates and availability.
+                                    </p>
+                                </div>
+                                <div class="faq-item">
+                                    <h3><i class="fas fa-chalkboard-user"></i> Who teaches the program?</h3>
+                                    <p>
+                                        Longleaf has five credentialed Orton-Gillingham teachers and coaches on staff,
+                                        including founder Jill Dejak, a Fellow of Record in the Orton-Gillingham approach.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="info-banner">
+                                <i class="fas fa-arrow-up-right-from-square"></i>
+                                <p>
+                                    For the most current information on enrollment, scheduling, and tuition assistance,
+                                    visit <a href="https://longleafacademy.org/" target="_blank" rel="noopener">longleafacademy.org</a>
+                                    or contact Longleaf Academy directly.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- ── Sidebar ───────────────────────────── -->
+                    <div class="sidebar">
+
+                        <div class="sidebar-card">
+                            <h3>Access Longleaf Academy</h3>
+                            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1rem;">
+                                Visit the Longleaf Academy website to learn more, create an account, or upload documents through their student portal.
+                            </p>
+                            <a href="https://longleafacademy.org/" target="_blank" rel="noopener"
+                               class="btn-primary sidebar-btn"
+                               style="text-decoration:none;display:inline-flex;margin-bottom:0.65rem;">
+                                <i class="fas fa-arrow-up-right-from-square"></i> Visit Longleaf Academy
+                            </a>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Contact Longleaf Academy</h3>
+                            <div class="contact-info">
+                                <p><i class="fas fa-phone"></i> (910) 315-8978</p>
+                                <p><i class="fas fa-envelope"></i> readforlife2009@gmail.com</p>
+                            </div>
+                            <a href="https://www.facebook.com/longleafacademy/" target="_blank" rel="noopener"
+                               class="btn-primary sidebar-btn"
+                               style="text-decoration:none;display:inline-flex;margin-top:1rem;background:var(--background-light);color:var(--primary-color);border:1px solid var(--border-color);">
+                                <i class="fab fa-facebook"></i> Facebook Page
+                            </a>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Program Highlights</h3>
+                            <ul class="quick-info-list">
+                                <li>
+                                    <i class="fas fa-users" style="color:var(--accent-color);"></i>
+                                    <div>
+                                        <strong>4:1 Student Ratio</strong><br>
+                                        <span style="font-size:0.82rem;color:var(--text-secondary);">Individualized, focused instruction</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-certificate" style="color:var(--accent-color);"></i>
+                                    <div>
+                                        <strong>Orton-Gillingham Method</strong><br>
+                                        <span style="font-size:0.82rem;color:var(--text-secondary);">70+ years of research-backed results</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-sun" style="color:var(--accent-color);"></i>
+                                    <div>
+                                        <strong>Summer Academy</strong><br>
+                                        <span style="font-size:0.82rem;color:var(--text-secondary);">Year-round learning support</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-hand-holding-dollar" style="color:var(--accent-color);"></i>
+                                    <div>
+                                        <strong>Tuition Assistance</strong><br>
+                                        <span style="font-size:0.82rem;color:var(--text-secondary);">Financial aid available for families</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Questions?</h3>
+                            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:0.75rem;">
+                                Talk to our school office to learn how Longleaf Academy can support your child at St. Ann.
+                            </p>
+                            <div class="contact-info">
+                                <p><a href="tel:+19104833216" class="tel-link"><i class="fas fa-phone"></i> (910) 483-3216</a></p>
+                                <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                            </div>
+                            <a href="contact.html" class="btn-primary sidebar-btn" style="text-decoration:none;display:inline-flex;margin-top:1rem;">
+                                <i class="fas fa-paper-plane"></i> Contact St. Ann
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                            <span>St. Ann Catholic School</span>
+                        </div>
+                        <p>Providing quality Catholic education to the Fayetteville and Cape Fear region since 1956. The first all-inclusive school in North Carolina.</p>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="mission.html">About Us</a></li>
+                        <li><a href="index.html#programs">Academics</a></li>
+                        <li><a href="tuition.html">Tuition</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="openPortal()">Student Portal</a></li>
+                        <li><a href="newsletter.html">Newsletter</a></li>
+                        <li><a href="calendar.html">Calendar</a></li>
+                        <li><a href="supply-lists.html">Supply Lists</a></li>
+                        <li><a href="uniforms.html">Uniforms</a></li>
+                        <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                        <li><a href="activities.html">Activities</a></li>
+                        <li><a href="say-something.html">Say Something</a></li>
+                        <li><a href="parish.html">Parish</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/St.AnnCatholicSchoolFayettevilleNC" target="_blank" rel="noopener" class="social-link" aria-label="St. Ann Catholic School on Facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                    <div class="contact-info">
+                        <p><a href="tel:+19104833216" class="tel-link"><i class="fas fa-phone"></i> (910) 483-3216</a></p>
+                        <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 365 N Cool Spring Street, Fayetteville, NC 28301</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 St. Ann Catholic School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.gtranslateSettings = {
+            default_language: "en",
+            languages: ["en", "es"],
+            wrapper_selector: ".gtranslate_wrapper",
+            switcher_horizontal_position: "inline"
+        };
+    </script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
+    <script src="script.js"></script>
+</body>
+</html>

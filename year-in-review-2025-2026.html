@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year in Review 2025-2026 - St. Ann Catholic School | Fayetteville, NC</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    .review-section {
+        padding: 4rem 0 5rem;
+        background: var(--background);
+    }
+
+    .review-layout {
+        display: grid;
+        grid-template-columns: 1fr 280px;
+        gap: 2rem;
+        align-items: start;
+    }
+
+    .review-intro,
+    .review-block,
+    .review-sidebar-card {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.75rem;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .review-intro {
+        padding: 1.75rem 2rem;
+        margin-bottom: 1.5rem;
+        display: flex;
+        gap: 1.2rem;
+        align-items: flex-start;
+    }
+
+    .review-intro-icon,
+    .timeline-icon {
+        width: 3rem;
+        height: 3rem;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .review-intro h2,
+    .review-block h2,
+    .review-sidebar-card h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        color: var(--primary-color);
+        font-weight: 700;
+    }
+
+    .review-intro h2 {
+        font-size: 1.55rem;
+        margin-bottom: 0.45rem;
+    }
+
+    .review-intro p,
+    .review-block p,
+    .timeline-card p,
+    .photo-card p,
+    .review-sidebar-card p {
+        color: var(--text-secondary);
+        margin: 0;
+    }
+
+    .review-block {
+        padding: 1.75rem 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .review-block-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        align-items: flex-end;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.85rem;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .review-block h2 {
+        font-size: 1.45rem;
+        margin: 0;
+    }
+
+    .review-kicker {
+        color: var(--secondary-color);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    .timeline-list {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .timeline-card {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 1rem;
+        padding: 1rem;
+        background: var(--background-light);
+        border: 1px solid var(--border-light);
+        border-radius: 0.65rem;
+    }
+
+    .timeline-icon {
+        width: 2.6rem;
+        height: 2.6rem;
+        border-radius: 0.55rem;
+        font-size: 0.95rem;
+    }
+
+    .timeline-card h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        color: var(--primary-color);
+        font-size: 1.12rem;
+        margin: 0 0 0.25rem;
+    }
+
+    .timeline-season {
+        display: inline-flex;
+        color: var(--secondary-color);
+        font-size: 0.8rem;
+        font-weight: 700;
+        margin-bottom: 0.4rem;
+    }
+
+    .photo-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
+    .photo-card {
+        background: var(--background-light);
+        border: 1px solid var(--border-light);
+        border-radius: 0.65rem;
+        overflow: hidden;
+    }
+
+    .photo-frame {
+        aspect-ratio: 4 / 3;
+        background: linear-gradient(145deg, rgba(26,39,68,0.1), rgba(201,168,76,0.22));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary-color);
+        font-size: 2rem;
+    }
+
+    .photo-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .photo-card-body {
+        padding: 1rem;
+    }
+
+    .photo-card h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        color: var(--primary-color);
+        font-size: 1.05rem;
+        margin: 0 0 0.25rem;
+    }
+
+    .review-sidebar {
+        position: sticky;
+        top: 8rem;
+    }
+
+    .review-sidebar-card {
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+    }
+
+    .review-sidebar-card h3 {
+        font-size: 1.15rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .review-link-list {
+        display: grid;
+        gap: 0.65rem;
+    }
+
+    .review-link-list a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .review-link-list a:hover {
+        color: var(--secondary-color);
+    }
+
+    @media (max-width: 900px) {
+        .review-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .review-sidebar {
+            position: static;
+        }
+    }
+
+    @media (max-width: 720px) {
+        .review-intro,
+        .timeline-card {
+            grid-template-columns: 1fr;
+            display: block;
+        }
+
+        .review-intro-icon,
+        .timeline-icon {
+            margin-bottom: 0.75rem;
+        }
+
+        .review-block-header {
+            display: block;
+        }
+
+        .photo-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="utility-bar">
+            <div class="nav-container">
+                <div class="utility-location">
+                    <i class="fas fa-location-dot"></i>
+                    <span>365 N Cool Spring Street, Fayetteville, NC</span>
+                </div>
+                <div class="utility-links">
+                    <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+                    <a href="calendar.html"><i class="fas fa-calendar-days"></i> Calendar</a>
+                    <a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener"><i class="fas fa-pencil-alt"></i> Apply</a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <div class="logo">
+                        <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                        <a href="index.html" style="text-decoration: none; color: inherit;">
+                            <span>St. Ann Catholic School</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="mission.html" class="nav-link">About <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="mission.html">Mission &amp; Vision</a></li>
+                                <li><a href="history.html">Our History</a></li>
+                                <li><a href="alumni.html">Alumni</a></li>
+                                <li><a href="principal.html">Our Principal</a></li>
+                                <li><a href="faculty.html">Our Faculty</a></li>
+                                <li><a href="parish.html">Parish Connection</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="index.html#programs" class="nav-link">Academics <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.html#programs">Curriculum</a></li>
+                                <li><a href="index.html#programs">Pre-K through 8th Grade</a></li>
+                                <li><a href="index.html#programs">Art, Music, STEM &amp; Band</a></li>
+                                <li><a href="index.html#programs">Spanish Program</a></li>
+                                <li><a href="index.html#programs">Physical Education</a></li>
+                                <li><a href="calendar.html">Academic Calendar</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="contact.html" class="nav-link">Admissions <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener">Rolling Admissions</a></li>
+                                <li><a href="tuition.html">Tuition Information</a></li>
+                                <li><a href="uniforms.html">School Uniforms</a></li>
+                                <li><a href="opportunity-scholarship.html">Scholarship Opportunities</a></li>
+                                <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                                <li><a href="application-checklist.html">Application Checklist</a></li>
+                                <li><a href="contact.html">Schedule a Tour</a></li>
+                                <li><a href="history.html">Military Families Welcome</a></li>
+                                <li><a href="supply-lists.html">School Supply Lists</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="newsletter.html" class="nav-link">Parents <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="newsletter.html">Newsletter</a></li>
+                                <li><a href="calendar.html">Calendar</a></li>
+                                <li><a href="uniforms.html">Uniforms</a></li>
+                                <li><a href="before-after-care.html">Before/After Care</a></li>
+                                <li><a href="fundraising-opportunities.html">Fundraising Opportunities</a></li>
+                                <li><a href="safe-environment.html">Safe Environment</a></li>
+                                <li><a href="longleaf-academy.html">Longleaf Academy</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/Community-Opportunities" target="_blank" rel="noopener">Community Opportunities</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="activities.html" class="nav-link active">Students <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="activities.html">Activities</a></li>
+                                <li><a href="athletics.html">Athletics</a></li>
+                                <li><a href="handbook-lunch.html">Handbook &amp; Lunch Ordering</a></li>
+                                <li><a href="year-in-review-2025-2026.html">Year in Review 2025-2026</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/School-Events" target="_blank" rel="noopener">School Events</a></li>
+                                <li><a href="say-something.html">Say Something</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="parish.html" class="nav-link">Community</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="support-us.html" class="nav-link">Support Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-actions">
+                    <div class="translate-widget" aria-label="Translate this site">
+                        <i class="fas fa-language"></i>
+                        <div class="gtranslate_wrapper"></div>
+                    </div>
+                    <button class="btn-secondary" onclick="openPortal()">
+                        <i class="fas fa-user"></i> Portal Login
+                    </button>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="page-hero-background">
+                <div class="page-hero-overlay"></div>
+            </div>
+            <div class="container">
+                <div class="page-hero-content">
+                    <h1 class="page-hero-title">Year in Review 2025-2026</h1>
+                    <p class="page-hero-subtitle">Photos, milestones, and memories from the school year</p>
+                    <nav class="breadcrumb">
+                        <a href="index.html">Home</a> <span>/</span>
+                        <a href="activities.html">Students</a> <span>/</span>
+                        <span>Year in Review 2025-2026</span>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <section class="review-section">
+            <div class="container">
+                <div class="review-layout">
+                    <div class="review-main">
+                        <div class="review-intro">
+                            <div class="review-intro-icon">
+                                <i class="fas fa-camera-retro"></i>
+                            </div>
+                            <div>
+                                <div class="review-kicker">School Year Memories</div>
+                                <h2>A Living Look Back</h2>
+                                <p>
+                                    This page is a home for the photos, celebrations, service moments, student
+                                    activities, and classroom memories that shape the 2025-2026 school year at
+                                    St. Ann Catholic School.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="review-block" id="events">
+                            <div class="review-block-header">
+                                <div>
+                                    <div class="review-kicker">Event Highlights</div>
+                                    <h2>Moments From the Year</h2>
+                                </div>
+                            </div>
+
+                            <div class="timeline-list">
+                                <article class="timeline-card">
+                                    <div class="timeline-icon">
+                                        <i class="fas fa-school"></i>
+                                    </div>
+                                    <div>
+                                        <span class="timeline-season">Fall 2025</span>
+                                        <h3>Back to School</h3>
+                                        <p>First-day photos, classroom welcomes, family gatherings, and early-year traditions can be added here.</p>
+                                    </div>
+                                </article>
+
+                                <article class="timeline-card">
+                                    <div class="timeline-icon">
+                                        <i class="fas fa-cross"></i>
+                                    </div>
+                                    <div>
+                                        <span class="timeline-season">Throughout the Year</span>
+                                        <h3>Faith, Mass, and Service</h3>
+                                        <p>Use this section for school Masses, prayer services, service projects, and parish-connected moments.</p>
+                                    </div>
+                                </article>
+
+                                <article class="timeline-card">
+                                    <div class="timeline-icon">
+                                        <i class="fas fa-book-open-reader"></i>
+                                    </div>
+                                    <div>
+                                        <span class="timeline-season">2025-2026</span>
+                                        <h3>Classroom Learning</h3>
+                                        <p>Feature classroom projects, STEM activities, presentations, field trips, and academic achievements.</p>
+                                    </div>
+                                </article>
+
+                                <article class="timeline-card">
+                                    <div class="timeline-icon">
+                                        <i class="fas fa-palette"></i>
+                                    </div>
+                                    <div>
+                                        <span class="timeline-season">2025-2026</span>
+                                        <h3>Arts, Activities, and Student Life</h3>
+                                        <p>Add music, art, clubs, competitions, student leadership, and special campus celebrations.</p>
+                                    </div>
+                                </article>
+
+                                <article class="timeline-card">
+                                    <div class="timeline-icon">
+                                        <i class="fas fa-trophy"></i>
+                                    </div>
+                                    <div>
+                                        <span class="timeline-season">2025-2026</span>
+                                        <h3>Athletics and School Spirit</h3>
+                                        <p>Include team photos, game-day memories, sports recognition, pep moments, and student encouragement.</p>
+                                    </div>
+                                </article>
+
+                                <article class="timeline-card">
+                                    <div class="timeline-icon">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div>
+                                        <span class="timeline-season">Spring 2026</span>
+                                        <h3>End-of-Year Celebrations</h3>
+                                        <p>Close the year with awards, promotion events, graduation memories, and final classroom celebrations.</p>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+
+                        <div class="review-block" id="photos">
+                            <div class="review-block-header">
+                                <div>
+                                    <div class="review-kicker">Photo Gallery</div>
+                                    <h2>Pictures From 2025-2026</h2>
+                                </div>
+                            </div>
+
+                            <div class="photo-grid">
+                                <article class="photo-card">
+                                    <div class="photo-frame">
+                                        <i class="fas fa-image"></i>
+                                    </div>
+                                    <div class="photo-card-body">
+                                        <h3>School Year Photo</h3>
+                                        <p>Caption and date can be added here.</p>
+                                    </div>
+                                </article>
+
+                                <article class="photo-card">
+                                    <div class="photo-frame">
+                                        <i class="fas fa-image"></i>
+                                    </div>
+                                    <div class="photo-card-body">
+                                        <h3>Classroom Moment</h3>
+                                        <p>Use this space for learning highlights.</p>
+                                    </div>
+                                </article>
+
+                                <article class="photo-card">
+                                    <div class="photo-frame">
+                                        <i class="fas fa-image"></i>
+                                    </div>
+                                    <div class="photo-card-body">
+                                        <h3>Student Celebration</h3>
+                                        <p>Add a short note about the event.</p>
+                                    </div>
+                                </article>
+                            </div>
+
+                            <!-- To add a real photo, replace the icon inside .photo-frame with:
+                            <img src="photos/example-file.jpg" alt="Short description of the event">
+                            -->
+                        </div>
+                    </div>
+
+                    <aside class="review-sidebar" aria-label="Year in Review links">
+                        <div class="review-sidebar-card">
+                            <h3>Browse This Page</h3>
+                            <div class="review-link-list">
+                                <a href="#events"><i class="fas fa-list"></i> Event Highlights</a>
+                                <a href="#photos"><i class="fas fa-images"></i> Photo Gallery</a>
+                            </div>
+                        </div>
+
+                        <div class="review-sidebar-card">
+                            <h3>Student Links</h3>
+                            <div class="review-link-list">
+                                <a href="activities.html"><i class="fas fa-star"></i> Activities</a>
+                                <a href="athletics.html"><i class="fas fa-trophy"></i> Athletics</a>
+                                <a href="handbook-lunch.html"><i class="fas fa-utensils"></i> Handbook &amp; Lunch</a>
+                                <a href="say-something.html"><i class="fas fa-shield-heart"></i> Say Something</a>
+                            </div>
+                        </div>
+
+                        <div class="review-sidebar-card">
+                            <h3>Share a Memory</h3>
+                            <p>Families can contact the school office with photos or event details to include in this year-end collection.</p>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                            <span>St. Ann Catholic School</span>
+                        </div>
+                        <p>Providing quality Catholic education to the Fayetteville and Cape Fear region since 1956. The first all-inclusive school in North Carolina.</p>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="mission.html">Mission &amp; Vision</a></li>
+                        <li><a href="history.html">Our History</a></li>
+                        <li><a href="principal.html">Our Principal</a></li>
+                        <li><a href="faculty.html">Our Faculty</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Student Life</h4>
+                    <ul class="footer-links">
+                        <li><a href="activities.html">Activities</a></li>
+                        <li><a href="athletics.html">Athletics</a></li>
+                        <li><a href="handbook-lunch.html">Handbook &amp; Lunch</a></li>
+                        <li><a href="year-in-review-2025-2026.html">Year in Review</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/St.AnnCatholicSchoolFayettevilleNC" target="_blank" rel="noopener" class="social-link" aria-label="St. Ann Catholic School on Facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                    <div class="contact-info">
+                        <p><a href="tel:+19104833216" class="tel-link"><i class="fas fa-phone"></i> (910) 483-3216</a></p>
+                        <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 365 N Cool Spring Street, Fayetteville, NC 28301</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 St. Ann Catholic School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.gtranslateSettings = {
+            default_language: "en",
+            languages: ["en", "es"],
+            wrapper_selector: ".gtranslate_wrapper",
+            switcher_horizontal_position: "inline"
+        };
+    </script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
+    <script src="script.js"></script>
+</body>
+</html>

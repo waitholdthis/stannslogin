@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Environment - St. Ann Catholic School | Fayetteville, NC</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    /* ── Page layout ─────────────────────────────────────────── */
+    .safe-env-section {
+        padding: 4rem 0 5rem;
+        background: var(--background);
+    }
+
+    .safe-env-layout {
+        display: grid;
+        grid-template-columns: 1fr 280px;
+        gap: 2rem;
+        align-items: start;
+    }
+
+    /* ── Shared block styles ─────────────────────────────────── */
+    .se-block {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.75rem;
+        padding: 1.75rem 2rem;
+        margin-bottom: 1.5rem;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .se-block-header {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.85rem;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .se-block-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-size: 1rem;
+        flex-shrink: 0;
+    }
+
+    .se-block h2 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin: 0;
+    }
+
+    /* ── Intro hero card ─────────────────────────────────────── */
+    .se-hero {
+        background: linear-gradient(135deg, var(--primary-color) 0%, #2d3f6e 100%);
+        border-radius: 0.75rem;
+        padding: 2.25rem 2rem;
+        margin-bottom: 1.5rem;
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        box-shadow: var(--shadow-md);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .se-hero::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--gradient-gold);
+    }
+
+    .se-hero-icon {
+        width: 4.5rem;
+        height: 4.5rem;
+        background: rgba(201,168,76,0.2);
+        border: 2px solid rgba(201,168,76,0.45);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-size: 1.75rem;
+        flex-shrink: 0;
+    }
+
+    .se-hero-divider {
+        width: 1px;
+        height: 5rem;
+        background: rgba(255,255,255,0.2);
+        flex-shrink: 0;
+    }
+
+    .se-hero-text h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.45rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 0.5rem;
+    }
+
+    .se-hero-text p {
+        font-size: 0.9rem;
+        color: rgba(255,255,255,0.78);
+        line-height: 1.65;
+        margin: 0;
+    }
+
+    /* ── Alert / report banner ───────────────────────────────── */
+    .report-banner {
+        background: rgba(123,45,58,0.07);
+        border: 1px solid rgba(123,45,58,0.25);
+        border-left: 4px solid var(--secondary-color);
+        border-radius: 0 0.5rem 0.5rem 0;
+        padding: 1rem 1.25rem;
+        display: flex;
+        gap: 0.9rem;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+    }
+
+    .report-banner i {
+        color: var(--secondary-color);
+        font-size: 1.15rem;
+        flex-shrink: 0;
+        margin-top: 1px;
+    }
+
+    .report-banner div h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--secondary-color);
+        margin-bottom: 0.3rem;
+    }
+
+    .report-banner div p {
+        font-size: 0.88rem;
+        color: var(--text-secondary);
+        margin: 0;
+        line-height: 1.55;
+    }
+
+    .report-banner div a {
+        color: var(--secondary-color);
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .report-banner div a:hover { text-decoration: underline; }
+
+    /* ── Resource link list ──────────────────────────────────── */
+    .resource-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .resource-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .resource-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .resource-item-icon {
+        width: 2.1rem;
+        height: 2.1rem;
+        background: rgba(201,168,76,0.12);
+        border: 1px solid rgba(201,168,76,0.3);
+        border-radius: 0.4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-size: 0.85rem;
+        flex-shrink: 0;
+        margin-top: 1px;
+    }
+
+    .resource-item-content h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.2rem;
+    }
+
+    .resource-item-content p {
+        font-size: 0.86rem;
+        color: var(--text-secondary);
+        margin: 0;
+        line-height: 1.5;
+    }
+
+    .resource-item-content a {
+        color: var(--primary-color);
+        font-weight: 600;
+        text-decoration: none;
+        font-size: 0.86rem;
+    }
+
+    .resource-item-content a:hover { text-decoration: underline; }
+
+    /* ── Training sessions table ─────────────────────────────── */
+    .training-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.88rem;
+    }
+
+    .training-table th {
+        text-align: left;
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        padding: 0.55rem 0.85rem;
+        border-bottom: 2px solid var(--border-color);
+        background: var(--background-light);
+    }
+
+    .training-table td {
+        padding: 0.7rem 0.85rem;
+        border-bottom: 1px solid var(--border-light);
+        color: var(--text-secondary);
+        vertical-align: middle;
+    }
+
+    .training-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .training-table td:first-child {
+        font-weight: 600;
+        color: var(--text-primary);
+        white-space: nowrap;
+    }
+
+    .format-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.72rem;
+        font-weight: 700;
+        border-radius: 2rem;
+        padding: 0.15rem 0.6rem;
+        white-space: nowrap;
+    }
+
+    .badge-online {
+        background: rgba(26,39,68,0.1);
+        color: var(--primary-color);
+    }
+
+    .badge-inperson {
+        background: rgba(201,168,76,0.18);
+        color: #7a5a10;
+    }
+
+    .badge-spanish {
+        background: rgba(123,45,58,0.1);
+        color: var(--secondary-color);
+    }
+
+    /* ── Info banner ─────────────────────────────────────────── */
+    .info-banner {
+        background: rgba(26,39,68,0.05);
+        border: 1px solid rgba(26,39,68,0.15);
+        border-left: 4px solid var(--primary-color);
+        border-radius: 0 0.5rem 0.5rem 0;
+        padding: 1rem 1.1rem;
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+        margin-top: 1.25rem;
+    }
+
+    .info-banner i {
+        color: var(--primary-color);
+        font-size: 1rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .info-banner p {
+        font-size: 0.88rem;
+        color: var(--text-secondary);
+        margin: 0;
+        line-height: 1.55;
+    }
+
+    .info-banner a {
+        color: var(--primary-color);
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .info-banner a:hover { text-decoration: underline; }
+
+    /* ── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 900px) {
+        .safe-env-layout { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+        .se-block { padding: 1.25rem; }
+        .se-hero { flex-direction: column; gap: 1rem; }
+        .se-hero-divider { display: none; }
+        .training-table { font-size: 0.82rem; }
+        .training-table th, .training-table td { padding: 0.55rem 0.5rem; }
+    }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="utility-bar">
+            <div class="nav-container">
+                <div class="utility-location">
+                    <i class="fas fa-location-dot"></i>
+                    <span>365 N Cool Spring Street, Fayetteville, NC</span>
+                </div>
+                <div class="utility-links">
+                    <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+                    <a href="calendar.html"><i class="fas fa-calendar-days"></i> Calendar</a>
+                    <a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener"><i class="fas fa-pencil-alt"></i> Apply</a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <div class="logo">
+                        <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                        <a href="index.html" style="text-decoration: none; color: inherit;">
+                            <span>St. Ann Catholic School</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="mission.html" class="nav-link">About <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="mission.html">Mission &amp; Vision</a></li>
+                                <li><a href="history.html">Our History</a></li>
+                                <li><a href="alumni.html">Alumni</a></li>
+                                <li><a href="principal.html">Our Principal</a></li>
+                                <li><a href="faculty.html">Our Faculty</a></li>
+                                <li><a href="parish.html">Parish Connection</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="index.html#programs" class="nav-link">Academics <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.html#programs">Curriculum</a></li>
+                                <li><a href="index.html#programs">Pre-K through 8th Grade</a></li>
+                                <li><a href="index.html#programs">Art, Music, STEM &amp; Band</a></li>
+                                <li><a href="index.html#programs">Spanish Program</a></li>
+                                <li><a href="index.html#programs">Physical Education</a></li>
+                                <li><a href="calendar.html">Academic Calendar</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="contact.html" class="nav-link">Admissions <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://secure.gradelink.com/1994/enrollment" target="_blank" rel="noopener">Rolling Admissions</a></li>
+                                <li><a href="tuition.html">Tuition Information</a></li>
+                                <li><a href="uniforms.html">School Uniforms</a></li>
+                                <li><a href="opportunity-scholarship.html">Scholarship Opportunities</a></li>
+                                <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                                <li><a href="application-checklist.html">Application Checklist</a></li>
+                                <li><a href="contact.html">Schedule a Tour</a></li>
+                                <li><a href="history.html">Military Families Welcome</a></li>
+                                <li><a href="supply-lists.html">School Supply Lists</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="newsletter.html" class="nav-link active">Parents <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="newsletter.html">Newsletter</a></li>
+                                <li><a href="calendar.html">Calendar</a></li>
+                                <li><a href="uniforms.html">Uniforms</a></li>
+                                <li><a href="before-after-care.html">Before/After Care</a></li>
+                                <li><a href="fundraising-opportunities.html">Fundraising Opportunities</a></li>
+                                <li><a href="safe-environment.html">Safe Environment</a></li>
+                                <li><a href="longleaf-academy.html">Longleaf Academy</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/Community-Opportunities" target="_blank" rel="noopener">Community Opportunities</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="activities.html" class="nav-link">Students <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="activities.html">Activities</a></li>
+                                <li><a href="athletics.html">Athletics</a></li>
+                                <li><a href="handbook-lunch.html">Handbook &amp; Lunch Ordering</a></li>
+                                <li><a href="year-in-review-2025-2026.html">Year in Review 2025-2026</a></li>
+                                <li><a href="https://www.stanncatholicschool.net/School-Events" target="_blank" rel="noopener">School Events</a></li>
+                                <li><a href="say-something.html">Say Something</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="parish.html" class="nav-link">Community</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="support-us.html" class="nav-link">Support Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-actions">
+                    <div class="translate-widget" aria-label="Translate this site">
+                        <i class="fas fa-language"></i>
+                        <div class="gtranslate_wrapper"></div>
+                    </div>
+                    <button class="btn-secondary" onclick="openPortal()">
+                        <i class="fas fa-user"></i> Portal Login
+                    </button>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="page-hero-background">
+                <div class="page-hero-overlay"></div>
+            </div>
+            <div class="container">
+                <div class="page-hero-content">
+                    <h1 class="page-hero-title">Safe Environment</h1>
+                    <p class="page-hero-subtitle">Child &amp; Youth Protection at St. Ann Catholic School</p>
+                    <nav class="breadcrumb">
+                        <a href="index.html">Home</a> <span>/</span>
+                        <span>Safe Environment</span>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <section class="safe-env-section">
+            <div class="container">
+                <div class="safe-env-layout">
+
+                    <!-- ── Main content ──────────────────────── -->
+                    <div class="safe-env-main">
+
+                        <div class="section-kicker">Diocese of Raleigh — Office of Child &amp; Youth Protection</div>
+                        <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.75rem;font-weight:700;color:var(--primary-color);margin:0.35rem 0 1.25rem;">Our Commitment to Child Safety</h2>
+
+                        <!-- Intro hero -->
+                        <div class="se-hero">
+                            <div class="se-hero-icon">
+                                <i class="fas fa-shield-heart"></i>
+                            </div>
+                            <div class="se-hero-divider"></div>
+                            <div class="se-hero-text">
+                                <h3>Promise to Protect. Pledge to Heal.</h3>
+                                <p>
+                                    St. Ann Catholic School is committed to providing a safe environment for every child
+                                    in our community. We follow the Diocese of Raleigh's Safe Environment Program,
+                                    which requires all clergy, employees, and volunteers working with children to
+                                    complete background screening and certified safe environment training.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Report abuse banner -->
+                        <div class="report-banner">
+                            <i class="fas fa-triangle-exclamation"></i>
+                            <div>
+                                <h3>To Report Suspected Abuse</h3>
+                                <p>
+                                    If you suspect a child is being abused or neglected, contact NC Child Protective Services at
+                                    <strong>(919) 527-6380</strong>, or call the 24-hour hotline at <strong>1-800-422-4453</strong>.
+                                    To report concerns about clergy or church personnel, visit the
+                                    <a href="https://dioceseofraleigh.org/child-and-youth-protection" target="_blank" rel="noopener">Diocese of Raleigh Child &amp; Youth Protection page</a>.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Training section -->
+                        <div class="se-block">
+                            <div class="se-block-header">
+                                <div class="se-block-icon"><i class="fas fa-chalkboard-user"></i></div>
+                                <h2>Safe Environment Training</h2>
+                            </div>
+
+                            <p style="font-size:0.92rem;color:var(--text-secondary);line-height:1.65;margin-bottom:1.25rem;">
+                                The Diocese of Raleigh Office of Child and Youth Protection hosts regular trainings
+                                on recognizing and reporting child abuse and neglect. These sessions are
+                                <strong>mandatory for all clergy, employees, and those working with children</strong>
+                                in diocesan programs, including school volunteers.
+                            </p>
+
+                            <table class="training-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Location</th>
+                                        <th>Format</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>May 19, 2026</td>
+                                        <td>7:00 PM</td>
+                                        <td>Online</td>
+                                        <td><span class="format-badge badge-online"><i class="fas fa-laptop"></i> Webinar</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>May 20, 2026</td>
+                                        <td>7:00 PM</td>
+                                        <td>Online</td>
+                                        <td><span class="format-badge badge-spanish"><i class="fas fa-language"></i> Spanish Webinar</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>June 7, 2026</td>
+                                        <td>6:00 PM</td>
+                                        <td>St. Stephen The First Martyr, Sanford</td>
+                                        <td><span class="format-badge badge-inperson"><i class="fas fa-location-dot"></i> In-Person</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>June 9, 2026</td>
+                                        <td>6:00 PM</td>
+                                        <td>St. Thomas More, Chapel Hill</td>
+                                        <td><span class="format-badge badge-inperson"><i class="fas fa-location-dot"></i> In-Person</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>June 12, 2026</td>
+                                        <td>6:00 PM</td>
+                                        <td>St. Stephen The First Martyr, Sanford</td>
+                                        <td><span class="format-badge badge-spanish"><i class="fas fa-language"></i> Spanish In-Person</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>June 16, 2026</td>
+                                        <td>7:00 PM</td>
+                                        <td>Online</td>
+                                        <td><span class="format-badge badge-online"><i class="fas fa-laptop"></i> Webinar</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>June 17, 2026</td>
+                                        <td>7:00 PM</td>
+                                        <td>Online</td>
+                                        <td><span class="format-badge badge-spanish"><i class="fas fa-language"></i> Spanish Webinar</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>July 8, 2026</td>
+                                        <td>6:00 PM</td>
+                                        <td>St. Thomas More, Chapel Hill</td>
+                                        <td><span class="format-badge badge-inperson"><i class="fas fa-location-dot"></i> In-Person</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>July 11, 2026</td>
+                                        <td>1:00 PM</td>
+                                        <td>St. Thomas More, Chapel Hill</td>
+                                        <td><span class="format-badge badge-spanish"><i class="fas fa-language"></i> Spanish In-Person</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>August 8, 2026</td>
+                                        <td>1:00 PM</td>
+                                        <td>St. Thomas More, Chapel Hill</td>
+                                        <td><span class="format-badge badge-spanish"><i class="fas fa-language"></i> Spanish In-Person</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="info-banner">
+                                <i class="fas fa-calendar-plus"></i>
+                                <p>
+                                    Additional sessions may be added throughout the year. View the full and up-to-date schedule on the
+                                    <a href="https://dioceseofraleigh.org/events/Safe%20Environment%20Training" target="_blank" rel="noopener">Diocese of Raleigh training calendar</a>.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Team Tools & Resources -->
+                        <div class="se-block">
+                            <div class="se-block-header">
+                                <div class="se-block-icon"><i class="fas fa-folder-open"></i></div>
+                                <h2>Safe Environment Resources</h2>
+                            </div>
+                            <p style="font-size:0.92rem;color:var(--text-secondary);line-height:1.65;margin-bottom:1.25rem;">
+                                The following resources are provided by the Diocese of Raleigh Office of Child and Youth Protection
+                                for families, school staff, and parish Safe Environment Teams.
+                            </p>
+
+                            <div class="resource-list">
+
+                                <div class="resource-item">
+                                    <div class="resource-item-icon"><i class="fas fa-tasks"></i></div>
+                                    <div class="resource-item-content">
+                                        <h3>Safe Environment Team Tools</h3>
+                                        <p>
+                                            Forms, planning documents, volunteer applications, and compliance tools for parish and school Safe Environment Teams.
+                                        </p>
+                                        <a href="https://dioceseofraleigh.org/child-and-youth-protection/safe-environment-team-tools" target="_blank" rel="noopener">
+                                            dioceseofraleigh.org &rarr; Safe Environment Team Tools
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="resource-item">
+                                    <div class="resource-item-icon"><i class="fas fa-file-lines"></i></div>
+                                    <div class="resource-item-content">
+                                        <h3>2026 Annual Report Form</h3>
+                                        <p>Due June 5, 2026. Required for parish and school Safe Environment compliance reporting to the Diocese.</p>
+                                        <a href="https://dioceseofraleigh.org/child-and-youth-protection/safe-environment-team-tools" target="_blank" rel="noopener">
+                                            Access form via Diocese Team Tools page
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="resource-item">
+                                    <div class="resource-item-icon"><i class="fas fa-user-check"></i></div>
+                                    <div class="resource-item-content">
+                                        <h3>Volunteer Applications (Level A, B, C)</h3>
+                                        <p>Required for all volunteers working with children. Available in English and Spanish through the Diocese.</p>
+                                        <a href="https://dioceseofraleigh.org/child-and-youth-protection/safe-environment-team-tools" target="_blank" rel="noopener">
+                                            Download volunteer applications
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="resource-item">
+                                    <div class="resource-item-icon"><i class="fas fa-fingerprint"></i></div>
+                                    <div class="resource-item-content">
+                                        <h3>Background Checks &amp; Screening</h3>
+                                        <p>
+                                            All employees and volunteers must complete criminal background screening per Diocesan policy.
+                                            See the Diocese's Screening and Criminal Background Checks documentation for details.
+                                        </p>
+                                        <a href="https://dioceseofraleigh.org/child-and-youth-protection/safe-environment-team-tools" target="_blank" rel="noopener">
+                                            Screening documentation
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="resource-item">
+                                    <div class="resource-item-icon"><i class="fas fa-book-open"></i></div>
+                                    <div class="resource-item-content">
+                                        <h3>Code of Conduct for Church Personnel</h3>
+                                        <p>
+                                            The Diocese of Raleigh Code of Conduct outlines behavioral expectations for all
+                                            clergy, employees, and volunteers in contact with minors.
+                                        </p>
+                                        <a href="https://dioceseofraleigh.org/child-and-youth-protection/safe-environment-team-tools" target="_blank" rel="noopener">
+                                            Read the Code of Conduct
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="resource-item">
+                                    <div class="resource-item-icon"><i class="fas fa-shield-halved"></i></div>
+                                    <div class="resource-item-content">
+                                        <h3>USCCB Charter for the Protection of Children</h3>
+                                        <p>
+                                            The US Conference of Catholic Bishops' Charter for Protection of Children and Young People,
+                                            which guides safe environment policy throughout the Diocese.
+                                        </p>
+                                        <a href="https://dioceseofraleigh.org/child-and-youth-protection/safe-environment-team-tools" target="_blank" rel="noopener">
+                                            View USCCB Charter documentation
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- ── Sidebar ───────────────────────────── -->
+                    <div class="sidebar">
+
+                        <div class="sidebar-card" style="border-left: 3px solid var(--secondary-color);">
+                            <h3 style="color:var(--secondary-color);">Report Suspected Abuse</h3>
+                            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:0.75rem;">
+                                If a child is in immediate danger, call <strong>911</strong>.
+                                To report abuse or neglect:
+                            </p>
+                            <div class="contact-info" style="margin-bottom:0.85rem;">
+                                <p><i class="fas fa-phone" style="color:var(--secondary-color);"></i> <strong>NC CPS: (919) 527-6380</strong></p>
+                                <p><i class="fas fa-phone" style="color:var(--secondary-color);"></i> <strong>Hotline: 1-800-422-4453</strong></p>
+                            </div>
+                            <a href="https://dioceseofraleigh.org/child-and-youth-protection" target="_blank" rel="noopener"
+                               class="btn-primary sidebar-btn"
+                               style="text-decoration:none;display:inline-flex;background:var(--secondary-color);border-color:var(--secondary-color);">
+                                <i class="fas fa-flag"></i> Diocese Report Page
+                            </a>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Register for Training</h3>
+                            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1rem;">
+                                Required for all staff, clergy, and volunteers working with children. Sessions are available online and in-person throughout the year.
+                            </p>
+                            <a href="https://dioceseofraleigh.org/events/Safe%20Environment%20Training" target="_blank" rel="noopener"
+                               class="btn-primary sidebar-btn"
+                               style="text-decoration:none;display:inline-flex;margin-bottom:0.65rem;">
+                                <i class="fas fa-chalkboard-user"></i> View All Sessions
+                            </a>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Diocese Contact</h3>
+                            <p style="font-size:0.85rem;font-weight:600;color:var(--primary-color);margin-bottom:0.1rem;">Office of Child &amp; Youth Protection</p>
+                            <p style="font-size:0.82rem;color:var(--text-secondary);margin-bottom:0.85rem;">Diocese of Raleigh</p>
+                            <div class="contact-info">
+                                <p><i class="fas fa-phone"></i> (984) 900-3408</p>
+                                <p><i class="fas fa-envelope"></i> SET.support@raldioc.org</p>
+                            </div>
+                            <p style="font-size:0.82rem;color:var(--text-secondary);margin-top:0.75rem;line-height:1.5;">
+                                Director: Dr. John Pendergrass<br>
+                                Coordinator: Deacon Ramon Ferrer
+                            </p>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Diocesan Resources</h3>
+                            <ul class="quick-info-list">
+                                <li>
+                                    <i class="fas fa-shield-heart"></i>
+                                    <div>
+                                        <a href="https://dioceseofraleigh.org/child-and-youth-protection/safe-environment-team-tools" target="_blank" rel="noopener"
+                                           style="color:var(--primary-color);font-weight:600;text-decoration:none;font-size:0.9rem;">Team Tools &amp; Forms</a><br>
+                                        <span style="font-size:0.82rem;color:var(--text-secondary);">Applications, reports, compliance docs</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-calendar-days"></i>
+                                    <div>
+                                        <a href="https://dioceseofraleigh.org/events/Safe%20Environment%20Training" target="_blank" rel="noopener"
+                                           style="color:var(--primary-color);font-weight:600;text-decoration:none;font-size:0.9rem;">Training Schedule</a><br>
+                                        <span style="font-size:0.82rem;color:var(--text-secondary);">Online &amp; in-person sessions</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-hand-holding-heart"></i>
+                                    <div>
+                                        <a href="https://dioceseofraleigh.org/child-and-youth-protection" target="_blank" rel="noopener"
+                                           style="color:var(--primary-color);font-weight:600;text-decoration:none;font-size:0.9rem;">Child &amp; Youth Protection</a><br>
+                                        <span style="font-size:0.82rem;color:var(--text-secondary);">Full Diocese CYP overview</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <img src="photos/St_Ann_Logo_clean.png" alt="St. Ann Catholic School logo" class="brand-logo">
+                            <span>St. Ann Catholic School</span>
+                        </div>
+                        <p>Providing quality Catholic education to the Fayetteville and Cape Fear region since 1956. The first all-inclusive school in North Carolina.</p>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="mission.html">About Us</a></li>
+                        <li><a href="index.html#programs">Academics</a></li>
+                        <li><a href="tuition.html">Tuition</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="openPortal()">Student Portal</a></li>
+                        <li><a href="newsletter.html">Newsletter</a></li>
+                        <li><a href="calendar.html">Calendar</a></li>
+                        <li><a href="supply-lists.html">Supply Lists</a></li>
+                        <li><a href="uniforms.html">Uniforms</a></li>
+                        <li><a href="before-after-care.html">Before &amp; After Care</a></li>
+                        <li><a href="activities.html">Activities</a></li>
+                        <li><a href="say-something.html">Say Something</a></li>
+                        <li><a href="parish.html">Parish</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/St.AnnCatholicSchoolFayettevilleNC" target="_blank" rel="noopener" class="social-link" aria-label="St. Ann Catholic School on Facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                    <div class="contact-info">
+                        <p><a href="tel:+19104833216" class="tel-link"><i class="fas fa-phone"></i> (910) 483-3216</a></p>
+                        <p><i class="fas fa-envelope"></i> schooladmin@mysacs.org</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 365 N Cool Spring Street, Fayetteville, NC 28301</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 St. Ann Catholic School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.gtranslateSettings = {
+            default_language: "en",
+            languages: ["en", "es"],
+            wrapper_selector: ".gtranslate_wrapper",
+            switcher_horizontal_position: "inline"
+        };
+    </script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
+    <script src="script.js"></script>
+</body>
+</html>
