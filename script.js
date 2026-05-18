@@ -2,7 +2,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const navMenu = document.getElementById('nav-menu');
-    const navLinks = document.querySelectorAll('.nav-link');
     const dropdowns = document.querySelectorAll('.dropdown');
 
     function compactGTranslate() {
@@ -67,31 +66,44 @@ document.addEventListener('DOMContentLoaded', function() {
     mobileMenuToggle.setAttribute('aria-controls', 'nav-menu');
 
     // Mobile menu toggle functionality
-    mobileMenuToggle.addEventListener('click', function() {
+    mobileMenuToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
         const isOpen = navMenu.classList.toggle('active');
         mobileMenuToggle.classList.toggle('active', isOpen);
         document.body.classList.toggle('menu-open', isOpen);
         mobileMenuToggle.setAttribute('aria-expanded', String(isOpen));
     });
 
-    // Close mobile menu when clicking on a link
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            if (window.innerWidth <= 768 && link.closest('.dropdown')) {
-                e.preventDefault();
-                link.closest('.dropdown').classList.toggle('active');
-                return;
-            }
+    navMenu.addEventListener('click', function(e) {
+        const clickedLink = e.target.closest('a');
+        if (!clickedLink) return;
 
-            if (navMenu.classList.contains('active')) {
-                closeMobileMenu();
-            }
-        });
+        const dropdown = clickedLink.closest('.dropdown');
+        const isDropdownToggle = dropdown && clickedLink.classList.contains('nav-link');
+
+        if (window.innerWidth <= 768 && isDropdownToggle) {
+            e.preventDefault();
+            e.stopPropagation();
+            dropdowns.forEach(item => {
+                if (item !== dropdown) item.classList.remove('active');
+            });
+            dropdown.classList.toggle('active');
+            return;
+        }
+
+        if (window.innerWidth <= 768 && navMenu.classList.contains('active')) {
+            closeMobileMenu();
+        }
     });
 
     // Close dropdowns when clicking outside
     document.addEventListener('click', function(e) {
-        if (!e.target.closest('.dropdown')) {
+        if (!e.target.closest('.nav-menu') && !e.target.closest('.mobile-menu-toggle')) {
+            if (window.innerWidth <= 768 && navMenu.classList.contains('active')) {
+                closeMobileMenu();
+            }
+
             dropdowns.forEach(dropdown => {
                 dropdown.classList.remove('active');
             });

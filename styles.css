@@ -5082,6 +5082,7 @@ code {
         left: 0;
         max-height: calc(100svh - 6.5rem);
         overflow-y: auto;
+        pointer-events: none;
         right: 0;
         top: 6.5rem;
         transform: translateY(-0.75rem);
@@ -5089,6 +5090,7 @@ code {
     }
 
     .nav-menu.active {
+        pointer-events: auto;
         transform: translateY(0);
     }
 
