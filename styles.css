@@ -2575,6 +2575,17 @@ html {
     margin-bottom: 3rem;
 }
 
+.parish-title-link {
+    color: inherit;
+    text-decoration-color: var(--accent-color);
+    text-decoration-thickness: 0.12em;
+    text-underline-offset: 0.18em;
+}
+
+.parish-title-link:hover {
+    color: var(--secondary-color);
+}
+
 .faith-activities-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
