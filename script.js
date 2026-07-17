@@ -222,69 +222,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Portal login functionality
     window.openPortal = function() {
-        // Create modal overlay
-        const modalOverlay = document.createElement('div');
-        modalOverlay.className = 'modal-overlay';
-        modalOverlay.innerHTML = `
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Portal Login</h2>
-                    <button class="modal-close" onclick="closePortal()">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="portal-options">
-                        <div class="portal-option">
-                            <div class="portal-icon">
-                                <i class="fas fa-graduation-cap"></i>
-                            </div>
-                            <h3>Student Portal</h3>
-                            <p>Access grades, assignments, attendance, and student resources</p>
-                            <div class="portal-action">
-                                <button class="btn-primary" onclick="window.open('https://www.renweb.com/logins/loginstudentparent.aspx', '_blank')">Student Login</button>
-                            </div>
-                        </div>
-                        <div class="portal-option">
-                            <div class="portal-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <h3>Parent Portal</h3>
-                            <p>View your child's progress, communicate with teachers, and stay updated on school activities</p>
-                            <div class="portal-action">
-                                <button class="btn-primary" onclick="window.open('https://www.renweb.com/logins/loginstudentparent.aspx', '_blank')">Parent Login</button>
-                            </div>
-                        </div>
-                        <div class="portal-option">
-                            <div class="portal-icon">
-                                <i class="fas fa-chalkboard-teacher"></i>
-                            </div>
-                            <h3>Staff Portal</h3>
-                            <p>Access gradebook, attendance, and administrative resources</p>
-                            <div class="portal-action">
-                                <button class="btn-primary" onclick="window.open('https://www.renweb.com/logins/loginstaff.aspx', '_blank')">Staff Login</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-
-        document.body.appendChild(modalOverlay);
-        document.body.classList.add('modal-open');
-
-        // Close modal when clicking overlay
-        modalOverlay.addEventListener('click', function(e) {
-            if (e.target === modalOverlay) {
-                closePortal();
-            }
-        });
-    };
-
-    window.closePortal = function() {
-        const modalOverlay = document.querySelector('.modal-overlay');
-        if (modalOverlay) {
-            modalOverlay.remove();
-            document.body.classList.remove('modal-open');
-        }
+        window.open('https://factsmgt.com/login/#usa', '_blank', 'noopener');
     };
 
     window.openDirections = function() {
@@ -396,11 +334,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Keyboard navigation support
     document.addEventListener('keydown', function(e) {
-        // Escape key closes modals
-        if (e.key === 'Escape') {
-            closePortal();
-        }
-        
         // Enter key on buttons
         if (e.key === 'Enter' && e.target.tagName === 'BUTTON') {
             e.target.click();
