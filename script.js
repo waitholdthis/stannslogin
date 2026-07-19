@@ -8,6 +8,21 @@ document.addEventListener('DOMContentLoaded', function() {
         document.head.appendChild(favicon);
     }
 
+    if (!document.querySelector('.tootie-design-credit')) {
+        const credit = document.createElement('p');
+        credit.className = 'tootie-design-credit';
+        credit.innerHTML = 'Designed By <a href="https://church.tootiedesigns.com/" target="_blank" rel="noopener">Tootie Designs LLC</a>';
+        const footerBottom = document.querySelector('.footer-bottom');
+        if (footerBottom) {
+            footerBottom.appendChild(credit);
+        } else {
+            const creditBar = document.createElement('div');
+            creditBar.className = 'standalone-design-credit';
+            creditBar.appendChild(credit);
+            document.body.appendChild(creditBar);
+        }
+    }
+
     const removedAcademicItems = new Set([
         'Art, Music, STEM & Band',
         'Spanish Program',

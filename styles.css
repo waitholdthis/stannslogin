@@ -1328,6 +1328,30 @@ html {
     font-size: 0.9rem;
 }
 
+.tootie-design-credit {
+    margin: 0.35rem 0 0;
+    font-size: 0.78rem;
+    color: inherit;
+}
+
+.tootie-design-credit a {
+    color: var(--accent-color);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.tootie-design-credit a:hover,
+.tootie-design-credit a:focus-visible {
+    text-decoration: underline;
+}
+
+.standalone-design-credit {
+    padding: 1rem 1.25rem;
+    text-align: center;
+    color: rgba(255,255,255,0.75);
+    background: var(--primary-color);
+}
+
 /* ============================================
    Mobile Styles - Main Layout
    ============================================ */
