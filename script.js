@@ -1,5 +1,21 @@
 // Mobile menu toggle
 document.addEventListener('DOMContentLoaded', function() {
+    const removedAcademicItems = new Set([
+        'Art, Music, STEM & Band',
+        'Spanish Program',
+        'Physical Education'
+    ]);
+    document.querySelectorAll('.dropdown-menu a').forEach(function(link) {
+        if (removedAcademicItems.has(link.textContent.trim())) {
+            link.closest('li')?.remove();
+        }
+    });
+
+    document.querySelectorAll('a[href="https://www.stanncatholicschool.net/School-Events"]').forEach(function(link) {
+        link.href = window.location.pathname.includes('/photos/') ? '../calendar.html#school-events' : 'calendar.html#school-events';
+        link.removeAttribute('target');
+        link.removeAttribute('rel');
+    });
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const navMenu = document.getElementById('nav-menu');
     const dropdowns = document.querySelectorAll('.dropdown');
