@@ -338,6 +338,44 @@
         padding: 1rem 0;
     }
 
+    .school-events-panel {
+        margin-top: 2.25rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border-color);
+        scroll-margin-top: 7rem;
+    }
+
+    .school-events-panel h3 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.45rem;
+        color: var(--primary-color);
+        margin: 0 0 0.35rem;
+    }
+
+    .school-events-panel > p {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        margin: 0 0 1rem;
+    }
+
+    .past-event-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        margin-bottom: 0.75rem;
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.5rem;
+    }
+
+    .past-event-card h4 { margin: 0 0 0.2rem; color: var(--primary-color); }
+    .past-event-card p { margin: 0; color: var(--text-light); font-size: 0.82rem; }
+    .past-event-photos { display:inline-flex;align-items:center;gap:0.4rem;padding:0.55rem 0.8rem;border-radius:0.4rem;background:var(--secondary-color);color:white;text-decoration:none;font-size:0.8rem;font-weight:700;white-space:nowrap; }
+
+    @media (max-width: 560px) { .past-event-card { align-items:flex-start; flex-direction:column; } }
+
     /* ── Sidebar cards ───────────────────────────────────────── */
     .cal-upcoming-item {
         display: flex;
@@ -615,6 +653,12 @@
                         <!-- Month event list -->
                         <h3 class="cal-list-heading">Events This Month</h3>
                         <div class="cal-month-list" id="cal-month-list"></div>
+
+                        <section class="school-events-panel" id="school-events">
+                            <h3>Past Events &amp; Photos</h3>
+                            <p>When photos are available after an event, the gallery link will appear here.</p>
+                            <div id="cal-past-events"></div>
+                        </section>
                     </div>
 
                     <!-- ── Sidebar ───────────────────────────── -->
@@ -625,17 +669,17 @@
                             <div id="cal-upcoming"></div>
                         </div>
 
-                        <div class="sidebar-card">
-                            <h3>How to Update This Calendar</h3>
+                        <div class="sidebar-card" style="display:none" aria-hidden="true">
+                            <h3>Staff Calendar Editor</h3>
                             <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:0.75rem;">
-                                Events are stored in <strong>calendar-data.js</strong>. Open that file in any text editor and add a line to the <code>CALENDAR_EVENTS</code> array:
+                                Add, edit, and remove events with the visual staff content manager. No code is required.
                             </p>
-                            <pre style="background:var(--background-light);border:1px solid var(--border-color);border-radius:0.375rem;padding:0.75rem;font-size:0.75rem;line-height:1.6;overflow-x:auto;white-space:pre-wrap;">{ date: "2026-02-14",
+                            <pre style="display:none">{ date: "2026-02-14",
   title: "Valentine's Party",
   type: "special" },</pre>
-                            <p style="font-size:0.82rem;color:var(--text-light);margin-top:0.6rem;">
+                            <p style="font-size:0.82rem;color:var(--text-light);margin-top:0.6rem;"><a href="#" class="btn btn-primary" tabindex="-1"><i class="fas fa-pen-to-square"></i> Open Content Manager</a><span style="display:none">
                                 Save the file and reload the page — the calendar updates automatically.
-                            </p>
+                            </span></p>
                         </div>
 
                         <div class="sidebar-card">
@@ -930,6 +974,25 @@
             }).join('');
         }
 
+        function renderPastEvents() {
+            var past = CALENDAR_EVENTS
+                .filter(function (ev) { return ev.date < todayKey; })
+                .sort(function (a, b) { return a.date > b.date ? -1 : 1; })
+                .slice(0, 12);
+            var el = document.getElementById('cal-past-events');
+            if (!past.length) {
+                el.innerHTML = '<p class="cal-no-events">Past events will appear here.</p>';
+                return;
+            }
+            el.innerHTML = past.map(function (ev) {
+                var parts = ev.date.split('-');
+                var d = new Date(+parts[0], +parts[1] - 1, +parts[2]);
+                var date = MONTH_NAMES[d.getMonth()] + ' ' + +parts[2] + ', ' + parts[0];
+                var photos = ev.photoLink ? '<a class="past-event-photos" href="' + ev.photoLink + '" target="_blank" rel="noopener"><i class="fas fa-images"></i> View photos</a>' : '<span style="font-size:0.8rem;color:var(--text-light);">Photos coming soon</span>';
+                return '<article class="past-event-card"><div><h4>' + ev.title + '</h4><p>' + date + '</p></div>' + photos + '</article>';
+            }).join('');
+        }
+
         // ── Navigation ───────────────────────────────────────────
         document.getElementById('cal-prev').addEventListener('click', function () {
             curMonth--;
@@ -952,6 +1015,7 @@
         // ── Init ─────────────────────────────────────────────────
         renderCalendar(curYear, curMonth);
         renderUpcoming();
+        renderPastEvents();
     }());
     </script>
 </body>

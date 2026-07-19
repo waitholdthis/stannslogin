@@ -1,5 +1,45 @@
 // Mobile menu toggle
 document.addEventListener('DOMContentLoaded', function() {
+    const removedAcademicItems = new Set([
+        'Art, Music, STEM & Band',
+        'Spanish Program',
+        'Physical Education'
+    ]);
+    document.querySelectorAll('.dropdown-menu a').forEach(function(link) {
+        if (removedAcademicItems.has(link.textContent.trim())) {
+            link.closest('li')?.remove();
+        }
+    });
+
+    document.querySelectorAll('a[href="https://www.stanncatholicschool.net/Community-Opportunities"]').forEach(function(link) {
+        link.href = window.location.pathname.includes('/photos/') ? '../community-opportunities.html' : 'community-opportunities.html';
+        link.removeAttribute('target');
+        link.removeAttribute('rel');
+    });
+
+    document.querySelectorAll('.dropdown-menu').forEach(function(menu) {
+        const communityLinks = Array.from(menu.querySelectorAll('a')).filter(function(link) {
+            return link.textContent.trim() === 'Community Opportunities';
+        });
+        communityLinks.slice(1).forEach(function(link) { link.closest('li')?.remove(); });
+        const newsletterLink = Array.from(menu.querySelectorAll('a')).find(function(link) {
+            return link.textContent.trim() === 'Newsletter';
+        });
+        if (newsletterLink && !Array.from(menu.querySelectorAll('a')).some(function(link) { return link.textContent.trim() === 'Community Opportunities'; })) {
+            const item = document.createElement('li');
+            const link = document.createElement('a');
+            link.href = window.location.pathname.includes('/photos/') ? '../community-opportunities.html' : 'community-opportunities.html';
+            link.textContent = 'Community Opportunities';
+            item.appendChild(link);
+            newsletterLink.closest('li').insertAdjacentElement('afterend', item);
+        }
+    });
+
+    document.querySelectorAll('a[href="https://www.stanncatholicschool.net/School-Events"]').forEach(function(link) {
+        link.href = window.location.pathname.includes('/photos/') ? '../calendar.html#school-events' : 'calendar.html#school-events';
+        link.removeAttribute('target');
+        link.removeAttribute('rel');
+    });
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const navMenu = document.getElementById('nav-menu');
     const dropdowns = document.querySelectorAll('.dropdown');

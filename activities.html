@@ -112,7 +112,7 @@
     .activity-advisor {
         display: flex;
         align-items: center;
-        gap: 0.45rem;
+        gap: 0.75rem;
         font-size: 0.8rem;
         color: var(--text-light);
         font-weight: 500;
@@ -124,6 +124,55 @@
     .activity-advisor i {
         color: var(--accent-color);
         font-size: 0.75rem;
+    }
+
+    .activity-advisor-photo,
+    .activity-advisor-placeholder {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 50%;
+        flex: 0 0 3.5rem;
+        border: 2px solid rgba(201,168,76,0.45);
+        box-shadow: 0 2px 8px rgba(26,39,68,0.12);
+    }
+
+    .activity-advisor-photo {
+        object-fit: cover;
+        object-position: center top;
+        background: var(--background-light);
+    }
+
+    .activity-advisor-placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(145deg, #eef0f4, #dfe3e9);
+        color: var(--primary-color);
+    }
+
+    .activity-advisor-placeholder i {
+        color: var(--primary-color);
+        font-size: 1.15rem;
+    }
+
+    .activity-advisor-copy {
+        display: flex;
+        flex-direction: column;
+        gap: 0.05rem;
+        line-height: 1.3;
+    }
+
+    .activity-advisor-copy span {
+        color: var(--text-light);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+    }
+
+    .activity-advisor-copy strong {
+        color: var(--primary-color);
+        font-size: 0.88rem;
     }
 
     /* ── Faith activities span full width ────────────────────── */
@@ -270,6 +319,7 @@
                             <a href="newsletter.html" class="nav-link">Parents <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="newsletter.html">Newsletter</a></li>
+                                <li><a href="community-opportunities.html">Community Opportunities</a></li>
 
                                 <li><a href="calendar.html">Calendar</a></li>
                                 <li><a href="uniforms.html">Uniforms</a></li>
@@ -277,7 +327,6 @@
                                 <li><a href="fundraising-opportunities.html">Fundraising Opportunities</a></li>
                                 <li><a href="safe-environment.html">Safe Environment</a></li>
                                 <li><a href="longleaf-academy.html">Longleaf Academy</a></li>
-                                <li><a href="https://www.stanncatholicschool.net/Community-Opportunities" target="_blank" rel="noopener">Community Opportunities</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -384,7 +433,8 @@
                                     of the Catholic faith.
                                 </p>
                                 <div class="activity-advisor">
-                                    <i class="fas fa-user"></i> Organized by Deacon Gary
+                                    <div class="activity-advisor-placeholder" role="img" aria-label="Photo placeholder for Deacon Gary"><i class="fas fa-user" aria-hidden="true"></i></div>
+                                    <div class="activity-advisor-copy"><span>Activity leader</span><strong>Deacon Gary</strong></div>
                                 </div>
                             </div>
 
@@ -406,7 +456,8 @@
                                     love of music and faith.
                                 </p>
                                 <div class="activity-advisor">
-                                    <i class="fas fa-user"></i> Advisor: Ms. Attaway
+                                    <div class="activity-advisor-placeholder" role="img" aria-label="Photo placeholder for Ms. Attaway"><i class="fas fa-user" aria-hidden="true"></i></div>
+                                    <div class="activity-advisor-copy"><span>Advisor</span><strong>Ms. Attaway</strong></div>
                                 </div>
                             </div>
                         </div>
@@ -436,7 +487,8 @@
                                     the band teacher.
                                 </p>
                                 <div class="activity-advisor">
-                                    <i class="fas fa-user"></i> Organized by Mrs. Carter
+                                    <img src="photos/faculty/sharona-carter.jpg" class="activity-advisor-photo" alt="Mrs. Sharona Carter" loading="lazy">
+                                    <div class="activity-advisor-copy"><span>Activity leader</span><strong>Mrs. Carter</strong></div>
                                 </div>
                             </div>
 
@@ -458,7 +510,8 @@
                                     and the wider Fayetteville community.
                                 </p>
                                 <div class="activity-advisor">
-                                    <i class="fas fa-user"></i> Organized by Mrs. Carter
+                                    <img src="photos/faculty/sharona-carter.jpg" class="activity-advisor-photo" alt="Mrs. Sharona Carter" loading="lazy">
+                                    <div class="activity-advisor-copy"><span>Activity leader</span><strong>Mrs. Carter</strong></div>
                                 </div>
                             </div>
                         </div>
@@ -488,7 +541,8 @@
                                     that promotes a love of literature.
                                 </p>
                                 <div class="activity-advisor">
-                                    <i class="fas fa-user"></i> Coach: Mrs. Coughlin
+                                    <img src="photos/faculty/erin-coughlin.jpg" class="activity-advisor-photo" alt="Mrs. Erin Coughlin" loading="lazy">
+                                    <div class="activity-advisor-copy"><span>Coach</span><strong>Mrs. Coughlin</strong></div>
                                 </div>
                             </div>
 
@@ -510,7 +564,8 @@
                                     and initiate meaningful school projects.
                                 </p>
                                 <div class="activity-advisor">
-                                    <i class="fas fa-user"></i> Faculty Advisor: Mrs. Desjardin
+                                    <img src="photos/faculty/katie-desjardin.jpg" class="activity-advisor-photo" alt="Mrs. Katie Desjardin" loading="lazy">
+                                    <div class="activity-advisor-copy"><span>Faculty advisor</span><strong>Mrs. Desjardin</strong></div>
                                 </div>
                             </div>
 
@@ -532,7 +587,8 @@
                                     community.
                                 </p>
                                 <div class="activity-advisor">
-                                    <i class="fas fa-calendar"></i> Held annually in December
+                                    <div class="activity-advisor-placeholder" role="img" aria-label="Activity coordinator photo placeholder"><i class="fas fa-user" aria-hidden="true"></i></div>
+                                    <div class="activity-advisor-copy"><span>Coordinator</span><strong>To be announced</strong><small>Held annually in December</small></div>
                                 </div>
                             </div>
                         </div>
