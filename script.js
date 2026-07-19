@@ -1,5 +1,13 @@
 // Mobile menu toggle
 document.addEventListener('DOMContentLoaded', function() {
+    if (!document.querySelector('link[rel~="icon"]')) {
+        const favicon = document.createElement('link');
+        favicon.rel = 'icon';
+        favicon.type = 'image/png';
+        favicon.href = window.location.pathname.includes('/photos/') ? '../photos/St_Ann_Logo_clean.png' : 'photos/St_Ann_Logo_clean.png';
+        document.head.appendChild(favicon);
+    }
+
     const removedAcademicItems = new Set([
         'Art, Music, STEM & Band',
         'Spanish Program',
