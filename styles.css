@@ -2626,6 +2626,18 @@ html {
     margin-bottom: 3rem;
 }
 
+.parish-heading-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.parish-heading-row h2 {
+    margin-bottom: 0;
+}
+
 .parish-title-link {
     color: inherit;
     text-decoration-color: var(--accent-color);
@@ -2635,6 +2647,23 @@ html {
 
 .parish-title-link:hover {
     color: var(--secondary-color);
+}
+
+.parish-visit-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--secondary-color);
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.parish-visit-link:hover,
+.parish-visit-link:focus-visible {
+    color: var(--primary-color);
+    transform: translateX(3px);
 }
 
 .faith-activities-grid {
